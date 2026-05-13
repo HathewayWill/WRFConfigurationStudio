@@ -1,0 +1,11 @@
+{
+  "name": "WRF Config Studio",
+  "version": "v1.0.0",
+  "repositoryNameRecommendation": "wrf-config-studio",
+  "description": "Browser-based WRF domain, namelist, and registry configuration tool.",
+  "legacyName": "WRF Domain Wizard",
+  "legacyLineage": "V3.1.0 beta full-catalog touch/trackpad docs-fixed build",
+  "generated": "2026-05-04T23:20:07Z",
+  "channel": "mainline",
+  "feature": "ARW Technical Note scientific context for namelist editor"
+}

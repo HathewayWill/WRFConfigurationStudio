@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>WRF Config Studio v1.0.0</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="WRF Config Studio is a browser-based WRF domain, namelist, and registry configuration tool" />
+    <meta name="keywords" content="WRF,WPS,WRF Config Studio,namelist,WRFDA,OBSPROC" />
+    <meta name="author" content="Jiří Richter; NOAA/FSL WRF SI GUI contributors; WRF Config Studio contributors" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="vendor/css/leaflet.css" />
+    <link rel="stylesheet" href="vendor/css/all.min.css" />
+    <link rel="stylesheet" href="vendor/css/leaflet-sidebar.min.css" />
+    <link rel="stylesheet" href="vendor/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="vendor/css/bootstrap-select.min.css" />
+    
+    <link rel="stylesheet" href="styles/wrf-domain-wizard.css?1731901564350" />
+    <link rel="stylesheet" href="styles/wps-tools.css" />
+
+    <link rel="icon" href="img/globe_32x32.png" />
+
+    
+</head>
+<body>
+
+    <div id="map">
+
+        <div id="sidebar" class="leaflet-sidebar collapsed">
+            <!-- Nav tabs -->
+            <div class="leaflet-sidebar-tabs">
+                <ul role="tablist"> <!-- top aligned tabs -->
+                    <li title="WRF domains"><a href="#domains" role="tab"><i class="fas fa-vector-square"></i></a></li>
+                    
+                    <li title="Geographic files"><a href="#geographic-files" role="tab"><i class="fas fa-map-marked-alt"></i></a></li>
+                    <li title="WRF Config Studio settings"><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
+                    <li title="About WRF Config Studio"><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
+                </ul>
+        
+                <ul role="tablist"> <!-- bottom aligned tabs -->
+                </ul>
+            </div>
+        
+            <!-- Tab panes -->
+            <div class="leaflet-sidebar-content">
+                <div class="leaflet-sidebar-pane" id="about">
+    <h1 class="leaflet-sidebar-header">
+        About
+        <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+    </h1>
+    <p>
+        WRF Config Studio is a browser-based configuration environment for designing WRF domains, editing <code>namelist.wps</code> and <code>namelist.input</code>, and exploring WRF, WRFDA, OBSPROC, and Registry metadata.
+    </p>
+    <p class="small text-muted">
+        v1.0.0 uses online map tiles only. Run the package through the included local server helper, then open the local address in a browser. If online map tiles are unavailable, the map background may not render until the network connection or selected tile provider is available.
+    </p>
+
+    
+    <div class="about-dedication mt-3 pt-3 border-top">
+        <h5>Credits, Dedication, and Original Project</h5>
+        <p>
+            This application is built upon the original <strong>WRF Domain Wizard</strong> developed by
+            <a href="https://github.com/JiriRichter" target="_blank">Jiří Richter</a>.
+        </p>
+        <p>
+            His work provided the foundation and first-generation implementation that made this tool possible.
+        </p>
+        <p>
+            WRF Config Studio also acknowledges the earlier <strong>NOAA Forecast Systems Laboratory / Forecast Systems Laboratory (FSL) WRF Standard Initialization GUI</strong> work by Paula T. McCaslin, John R. Smart, Brent Shaw, and Brian D. Jamison.
+            That NOAA/FSL GUI helped users define and localize WRF grids, prepare static surface characteristics, process initial and lateral boundary-condition data, and create display graphics.
+        </p>
+        <p>
+            The NOAA/FSL work demonstrated many of the graphical workflow ideas that later WRF domain tools built upon, including map-based domain selection, projection controls, grid-value editing, validation feedback, workflow panels, and user guidance.
+            This earlier work is part of the technical lineage that helped inspire the original WRF Domain Wizard and, through it, WRF Config Studio.
+        </p>
+        <p>
+            <strong>Historical NOAA/FSL GUI reference:</strong>
+            <a href="docs/references/WRF_GUI_original_source_69852.pdf" target="_blank" rel="noopener noreferrer">A Graphical User Interface to Prepare the Standard Initialization for WRF</a>
+        </p>
+        <p>
+            Jiří Richter passed away in 2026 at the age of 51 following a climbing accident on Mount Rainier.
+        </p>
+        <p>
+            This project is dedicated to his contributions to the WRF community and to the tools that continue to support researchers and forecasters worldwide.
+        </p>
+            <p>
+            <strong>Original project:</strong>
+            <a href="https://github.com/JiriRichter/WRFDomainWizard" target="_blank">https://github.com/JiriRichter/WRFDomainWizard</a>
+        </p>
+    </div>
+
+
+    
+    <div class="mt-3 pt-3 border-top">
+        <h5>Local WRF Test Cases</h5>
+        <p>
+            Bundled local reference files from the WRF <code>test/</code> and <code>doc/</code> trees are included in this package.
+        </p>
+        <ul>
+            <li><a href="examples/doc/README.test_cases" target="_blank">README.test_cases</a></li>
+            <li><a href="examples/test/em_real/" target="_blank">test/em_real/</a></li>
+            <li><a href="examples/test/em_les/" target="_blank">test/em_les/</a></li>
+            <li><a href="examples/test/em_fire/" target="_blank">test/em_fire/</a></li>
+            <li><a href="examples/test/em_scm_xy/" target="_blank">test/em_scm_xy/</a></li>
+            <li><a href="examples/test/em_tropical_cyclone/" target="_blank">test/em_tropical_cyclone/</a></li>
+        </ul>
+    </div>
+
+<div class="font-weight-bold mt-1">Usefull Links:</div>
+
+    <div class="list-group">
+        <a href="https://github.com/your-org/wrf-config-studio" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action list-group-item-primary"><i class="fab fa-github mr-1"></i>GitHub Source Repository</a>
+        <a href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/index.html" target="_blank" class="list-group-item list-group-item-action">WRF User's Guide</a>
+        <a href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wps.html#wps-namelist-variables" target="_blank" class="list-group-item list-group-item-action">WPS Namelist Variables</a>
+        <a href="https://www2.mmm.ucar.edu/wrf/users/namelist_best_prac_wps.html" target="_blank" class="list-group-item list-group-item-action">Best Practices: namelist.wps</a>
+        <a href="https://www2.mmm.ucar.edu/wrf/users/namelist_best_prac_wrf.html" target="_blank" class="list-group-item list-group-item-action">Best Practices: namelist.input</a>
+        <a href="docs/references/v4_technote.pdf" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">ARW Technical Note v4</a>
+        <div class="list-group-item small text-muted">ARW scientific-context metadata is included for namelist editor help. It is reference-only and does not enforce choices.</div>
+    </div>
+</div>
+                <div class="leaflet-sidebar-pane" id="domains">
+    <h1 class="leaflet-sidebar-header">Domains <span class="badge badge-light align-middle" style="font-size:0.55em; vertical-align: middle;" data-wrf-version-text>v1.0.0</span><span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+    <div class="wps-top-buttons">
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="button-wps-new"><i class="far fa-object-group"></i></i>New</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="button-wps-open"><i class="fas fa-folder-open"></i>Open</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="button-namelist-input"><i class="fas fa-sliders-h"></i>namelist.input</button>
+        <input id="file-open" type="file" style="display: none;" />
+    </div>
+
+    <div id="container-wps-form" style="display: none">
+        <form id="wps-form" class="needs-validation" novalidate>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains" title="A character string set to either 'ARW' or 'NMM' that tells the WPS which dynamical core the input data are being prepared for.">wrf_core</span>
+                </div>
+                <input name="wrf_core" type="text" class="form-control" value="ARW" disabled>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains" title="Projection of the simulation domain">map_proj</span>
+                </div>
+                <select name="map_proj" class="form-control" aria-describedby="basic-addon1">
+                    <option value="lambert" data-title="The Lambert conformal projection is well-suited for mid-latitude domains">lambert</option>
+                    <option value="mercator" data-title="The Mercator projection is good for low-latitude domains or domains with predominantly west-east extent">mercator</option>
+                    <option value="polar" data-title="The polar stereographic projection is best suited for high-latitude WRF domains">polar</option>
+                    <option value="lat-lon" data-title="The cylindrical equidistant projection is required for global simulations, although in its rotated aspect (i.e., when pole_lat, pole_lon, and stand_lon are changed from their default values) it can also be well-suited for regional domains anywhere on the earth's surface">lat-lon</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains-2" title="A real value specifying the latitude part of a (latitude, longitude) location whose (i,j) location in the simulation domain is known. For ARW, ref_lat gives the latitude of the center-point of the coarse domain by default (i.e., when ref_x and ref_y are not specified). For NMM, ref_lat always gives the latitude to which the origin is rotated.">ref_lat</span>
+                    <span class="input-group-text all-domains-2" title="A real value specifying the longitude part of a (latitude, longitude) location whose (i, j) location in the simulation domain is known. For ARW, ref_lon gives the longitude of the center-point of the coarse domain by default (i.e., when ref_x and ref_y are not specified). For NMM, ref_lon always gives the longitude to which the origin is rotated. For both ARW and NMM, west longitudes are negative, and the value of ref_lon should be in the range [-180, 180].">ref_lon</span>
+                </div>
+                <input name="ref_lat" type="number" class="form-control" aria-describedby="basic-addon1" required min="-180" max="180" step="0.001">
+                <input name="ref_lon" type="number" class="form-control" aria-describedby="basic-addon1" required min="-180" max="180" step="0.001">
+                <div class="invalid-feedback">Select value between -180 and 180</div>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains" title="A real value specifying, for ARW, the first true latitude for the Lambert conformal projection, or the only true latitude for the Mercator and polar stereographic projections. For NMM, truelat1 is ignored.">truelat1</span>
+                </div>
+                <input name="truelat1" type="number" class="form-control" aria-describedby="basic-addon1" required min="-180" max="180" step="0.001">
+                <div class="invalid-feedback">Select value between -180 and 180</div>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains" title="A real value specifying, for ARW, the second true latitude for the Lambert conformal conic projection. For all other projections, truelat2 is ignored.">truelat2</span>
+                </div>
+                <input name="truelat2" type="number" class="form-control" required min="-180" max="180" step="0.001">
+                <div class="invalid-feedback">Select value between -180 and 180</div>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains" title="A real value specifying, for ARW, the longitude that is parallel with the y-axis in the Lambert conformal and polar stereographic projections. For the regular latitude-longitude projection, this value gives the rotation about the earth's geographic poles. For NMM, stand_lon is ignored.">stand_lon</span>
+                </div>
+                <input name="stand_lon" type="number" class="form-control" required min="-180" max="180" step="0.001">
+                <div class="input-group-append">
+                    <button id="stan-lon-plus" type="button" class="btn btn-light" title="Rotate lambert grid left by 5 degrees"><i class="fas fa-undo"></i></button>
+                    <button id="stan-lon-minus" type="button" class="btn btn-light" title="Rotate lambert grid right by 5 degrees"><i class="fas fa-undo" style="transform:scaleX(-1)"></i></button>
+                </div>
+                <div class="invalid-feedback">Select value between -180 and 180</div>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text all-domains-2" title="For the latitude-longitude projection for ARW, the latitude of the North Pole with respect to the computational latitude-longitude grid in which -90.0 degrees latitude is at the bottom of a global domain, 90.0 degrees latitude is at the top, and 180.0 degrees longitude is at the center.">pole_lat</span>
+                    <span class="input-group-text all-domains-2" title="For the latitude-longitude projection for ARW, the longitude of the North Pole with respect to the computational lat/lon grid in which -90.0 degrees latitude is at the bottom of a global domain, 90.0 degrees latitude is at the top, and 180.0 degrees longitude is at the center.">pole_lon</span>
+                </div>
+                <input name="pole_lat" type="number" class="form-control" aria-describedby="basic-addon1" min="-180" max="180" step="0.001" value="90.000">
+                <input name="pole_lon" type="number" class="form-control" aria-describedby="basic-addon1" min="-180" max="180" step="0.001" value="0">
+                <div class="invalid-feedback">Select value between -180 and 180</div>
+            </div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" title="A real value specifying the grid distance in the x-direction where the map scale factor is 1. For ARW, the grid distance is in meters for the 'polar', 'lambert', and 'mercator' projection, and in degrees longitude for the 'lat-lon' projection; for NMM, the grid distance is in degrees longitude.">dx</span>
+                    <span class="input-group-text" title="A real value specifying the nominal grid distance in the y-direction where the map scale factor is 1. For ARW, the grid distance is in meters for the 'polar', 'lambert', and 'mercator' projection, and in degrees latitude for the 'lat-lon' projection; for NMM, the grid distance is in degrees latitude.">dy</span>
+                </div>
+                <input name="dx" type="number" class="form-control" aria-describedby="basic-addon1" required min="1">
+                <input name="dy" type="number" class="form-control" aria-describedby="basic-addon1" required min="1" disabled>
+                <div class="input-group-append">
+                    <button id="div-3" type="button" class="btn btn-light" title="Divide by 3"><i class="fas fa-divide"></i></button>
+                    <button id="div-2" type="button" class="btn btn-light" title="Divide by 2" style="font-size:smaller;"><i class="fas fa-divide"></i></button>
+                    <button id="mul-2" type="button" class="btn btn-light" title="Multiply by 2" style="font-size:smaller;"><i class="fas fa-times"></i></button>
+                    <button id="mul-3" type="button" class="btn btn-light" title="Multiply by 3"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div id="grid-error" class="invalid-feedback">Select value higher than 100</div>
+            <div id="grids-header" class="btn-toolbar justify-content-between border-bottom align-items-end mt-2">
+                <h5>Grids</h5>
+                <div>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button data-action="add-moad" type="button" class="btn btn-light" title="Add parent grid">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                        <button data-action="remove-moad" type="button" class="btn btn-light" title="Remove grid and make its nest the top most grid">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="grids">
+                <div id="grid_template" class="container-grid" style="display: none">
+                    <div class="btn-toolbar justify-content-between align-items-end grid-header" role="toolbar">
+                        <div>
+                            <label class="grid-label">d01</label>
+                        </div>
+                        <div>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button data-action="remove-nest" type="button" class="btn btn-light" title="Remove nest and its nests">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <button data-action="add-nest" type="button" class="btn btn-light" title="Add nest">
+                                    <i class="far fa-plus-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 139px" title="The nesting ratio relative to the domain's parent">parent_grid_ratio</span>
+                        </div>
+                        <input name="parent_grid_ratio" type="number" class="form-control" required min="1" max="10" />
+                        <div data-val-for="parent_grid_ratio" class="invalid-feedback">Select value between 1 and 10</div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 100px" title="The x-coordinate of the lower-left corner of the nest in the parent unstaggered grid. For the coarsest domain, a value of 1 should be specified.">i_parent_start</span>
+                            <span class="input-group-text" style="width: 40px" title="The y-coordinate of the lower-left corner of the nest in the parent unstaggered grid. For the coarsest domain, a value of 1 should be specified.">j</span>
+                        </div>
+                        <input name="i_parent_start" type="number" class="form-control" required min="1" />
+                        <input name="j_parent_start" type="number" class="form-control" required min="1" />
+                        <div data-val-for="i_parent_start" class="invalid-feedback"></div>
+                        <div data-val-for="j_parent_start" class="invalid-feedback"></div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="width: 70px" title="Nest's full west-east dimension. For nested domains, e_we must be one greater than an integer multiple of the nest's parent_grid_ratio (i.e., e_we = n*parent_grid_ratio+1 for some positive integer n).">e_we</span>
+                            <span class="input-group-text" style="width: 70px" title="Nest's full south-north dimension. For nested domains, e_sn must be one greater than an integer multiple of the nest's parent_grid_ratio (i.e., e_sn = n*parent_grid_ratio+1 for some positive integer n).">e_sn</span>
+                        </div>
+                        <input name="e_we" type="number" class="form-control" required min="10" />
+                        <input name="e_sn" type="number" class="form-control" required min="10" />
+                        <div data-val-for="e_we" class="invalid-feedback"></div>
+                        <div data-val-for="e_sn" class="invalid-feedback"></div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1" style="width: 139px" title="A corresponding resolution or list of resolutions separated by + symbols of source data to be used when interpolating static terrestrial data to the nest's grid.">geog_data_res</span>
+                        </div>
+                        <span class="d-inline-block form-control" data-name="geog_data_res"></span>
+                        <div class="input-group-append">
+                            <button data-action="geog-data-res-edit" class="btn btn-light" type="button" title="Edit geog_data_res"><i class="fas fa-edit"></i></button>
+                        </div>
+                    </div>
+                    <table class="table-grid-corners" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>corners (lat,lon)</th>
+                                <th>W</th>
+                                <th>E</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>N</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>S</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="leaflet-sidebar-pane-bottom">
+                <button id="update-domain" type="button" class="btn btn-primary btn-sm" title="Recompute domain geometry from the current settings." data-native-tooltip="true">Update</button>
+                <button type="button" class="btn btn-sm btn-primary" id="button-wps-save" title="Open the namelist.wps export dialog." data-native-tooltip="true"><i class="fas fa-save mr-1"></i>Save namelist.wps</button>
+                <button id="reset-domain" type="button" class="btn btn-secondary btn-sm" title="Restore the current editor to its last loaded state." data-native-tooltip="true">Reset</button>
+                <button id="save-png" type="button" class="btn btn-info btn-sm" title="Capture an image of current map view"><i class="fas fa-camera"></i></button>
+</div>
+        </form>
+    </div>
+</div>
+
+                <div class="leaflet-sidebar-pane" id="geographic-files">
+    <h1 class="leaflet-sidebar-header">
+        Geographic Files
+        <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+    </h1>
+    <div class="alert alert-sm alert-info mt-2" role="alert">
+        <p>
+        Use this tab to display geographic features from various data files. 
+        This is meant to aid in designing WRF domains based on the locations of the displayed features. 
+        </p>
+        <p>
+        The tool currently supports GeoJSON, KMZ, KML, GPX, and WPT file formats. If additional file format is needed, please, submit a feature request on the project <a href="https://github.com/your-org/wrf-config-studio/issues" target="_blank">GitHub issues page</a>.
+        </p>
+    </div>
+    <div class="mt-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="button-geographic-file-remove"><i class="fas fa-trash-alt mr-1"></i>Remove All</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="button-geographic-file-add"><i class="fas fa-folder-open mr-1"></i>Add File</button>
+        <input id="input-geographic-file" type="file" style="display: none;" />
+    </div>
+    <div id="geographic-file-layers" class="mt-2">
+    </div>
+</div>
+                <div class="leaflet-sidebar-pane" id="settings">
+    <h1 class="leaflet-sidebar-header">
+        Settings
+        <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+    </h1>
+    <div class="my-2">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="showGraticule">
+            <label class="form-check-label" for="showGraticule">Show Graticule</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="showGeographicLines">
+            <label class="form-check-label" for="showGeographicLines">Show Georaphic Lines</label>
+        </div>
+        <div class="form-group mt-2">
+            <label class="mb-0" for="minGridDistanceMeters">Min DX/DY in Meters</label>
+            <input class="form-control form-control-sm" type="number" value="" name="minGridDistanceMeters">
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" name="allowDifferentDxDy">
+            <label class="form-check-label" for="showGeographicLines">Allow different DX and DY values</label>
+        </div>
+    </div>
+    <div class="leaflet-sidebar-pane-bottom">
+        <button id="reset-settings" type="button" class="btn btn-danger btn-sm" title="Restore the editor settings to their default values">Reset</button>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="message-box-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-circle text-danger"></i>
+                    <span class="ml-1"></span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="message-box-text"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" title="Close this dialog" data-native-tooltip="true">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="message-box-dialog-templates" style="display: none;">
+    <div template="global-error">
+        <div class="global-error">
+            <p>
+                The WRF domain wizard encountered an unexpected error. To help improve this tool, please, create an <a href="https://github.com/your-org/wrf-config-studio/issues" target="_blank">issue on GitHub</a> using the form below.
+            </p>
+            <form class="needs-validation" novalidate>
+                <div class="form-group">
+                    <h6>Error:</h6>
+                    <textarea name="error-details" class="form-control" readonly></textarea>
+                </div>
+                <div class="form-group">
+                    <h6>[Required] Repro Steps:</h6>
+                    <textarea name="repro-steps" class="form-control" required placeholder="Steps to reproduce the issue" minlength="10"></textarea>
+                    <div class="invalid-feedback">
+                        Please provide steps to reproduce the issue.
+                    </div>
+                </div>
+            </form>
+            <a id="create-github-issue" class="btn btn-primary my-2" href="#" role="button" target="_blank">Create Issue</a>
+        </div>
+    </div>
+</div>
+    <div id="geog-data-res-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header justify-content-between">
+                <div>
+                    <h5 id="geog-title" class="modal-title">geog_data_res</h5>
+                </div>
+                <div style="display:flex">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text all-domains">WRF version</span>
+                        </div>
+                        <select class="form-control"></select>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body" style="position: center">
+                <input id="geog-data-res" type="text" class="form-control form-control-sm mb-2" disabled value="default" />
+                <table class="geog-categories">
+                    <thead><tr><th>Category</th><th>Value</th><th>Default</th><th>Filename</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <div>
+                    <i class="fas fa-folder-open mr-1"></i><a href="http://www2.mmm.ucar.edu/wrf/src/wps_files/" target="_blank">http://www2.mmm.ucar.edu/wrf/src/wps_files/</a>
+                </div>
+                <div>
+                    <button id="button-geog-save" type="button" class="btn btn-primary btn-sm" data-dismiss="modal" title="Save the selected geog_data_res value." data-native-tooltip="true">Save</button>
+                    <button id="button-geog-reset" type="button" class="btn btn-primary btn-sm">Reset</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" title="Close this dialog" data-native-tooltip="true">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="wps-save-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">namelist.wps</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="position: center">
+                <textarea class="form-control resize-none font-namelist"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="button-download-wps" type="button" class="btn btn-primary btn-sm" data-dismiss="modal"><i class="fas fa-download mr-1"></i>Download</button>
+                <button id="button-copy-wps" type="button" class="btn btn-primary btn-sm" title="Copy the current text output to the clipboard" data-native-tooltip="true"><i class="fas fa-copy mr-1"></i>Copy</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" title="Close this dialog" data-native-tooltip="true">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="capture-image-dialog" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body d-flex">
+                <div class="m-auto">Capturing image <i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+
+            </div>
+</div>
+    </div>
+</div>
+
+
+    <div id="namelist-input-save-dialog" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title mb-0" id="namelist-input-save-title">namelist.input</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="namelist-input-save-text" class="form-control resize-none font-namelist" readonly spellcheck="false" style="min-height: 58vh;"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button id="button-download-namelist-input" type="button" class="btn btn-primary btn-sm" title="Download the current namelist.input text" data-native-tooltip="true"><i class="fas fa-download mr-1"></i>Download</button>
+                    <button id="button-copy-namelist-input-save" type="button" class="btn btn-primary btn-sm" title="Copy the current namelist.input text to the clipboard" data-native-tooltip="true"><i class="fas fa-copy mr-1"></i>Copy</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="namelist-input-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document" style="max-width: 94vw;">
+            <div class="modal-content">
+                <div class="modal-header align-items-start">
+                    <div>
+                        <h4 class="modal-title mb-1">namelist.input</h4>
+                        <div class="small text-muted">Hybrid registry and metadata-driven editor · <span data-wrf-version-text>v1.0.0</span></div>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="namelist-input-dialog-tabs" role="tablist">
+                        <li class="nav-item"><button class="nav-link active" id="tab-namelist-input-editor" data-toggle="tab" data-target="#pane-namelist-input-editor" type="button">Editor</button></li>
+                        <li class="nav-item"><button class="nav-link" id="tab-namelist-input-text" data-toggle="tab" data-target="#pane-namelist-input-text" type="button">Text</button></li>
+                        <li class="nav-item"><button class="nav-link" id="tab-namelist-input-info" data-toggle="tab" data-target="#pane-namelist-input-info" type="button">Documentation</button></li>
+                    </ul>
+                    <div class="tab-content border border-top-0 p-3" id="namelist-input-dialog-tab-content">
+                        <div class="tab-pane fade show active" id="pane-namelist-input-editor" role="tabpanel">
+                            <div class="namelist-input-toolbar mb-3">
+                                <div class="d-flex flex-wrap align-items-center mb-2">
+                                    <input type="search" id="namelist-input-search" class="form-control form-control-sm mr-2" placeholder="Search variables or descriptions" style="max-width: 320px;">
+                                    <select id="namelist-input-group-jump" class="form-control form-control-sm mr-2" style="max-width: 220px;"><option value="">Jump to group</option></select>
+                                    <select id="namelist-input-variable-jump" class="form-control form-control-sm mr-2" style="max-width: 220px;"><option value="">Jump to variable</option></select>
+                                    <button id="button-namelist-input-expand-all" type="button" class="btn btn-sm btn-outline-secondary mr-2">Expand all</button>
+                                    <button id="button-namelist-input-collapse-all" type="button" class="btn btn-sm btn-outline-secondary mr-2">Collapse all</button>
+                                    <button id="button-namelist-input-enable-visible" type="button" class="btn btn-sm btn-outline-secondary mr-2">Enable visible</button>
+                                    <button id="button-namelist-input-disable-visible" type="button" class="btn btn-sm btn-outline-secondary mr-2">Disable visible</button>
+                                </div>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <div class="form-check form-check-inline mr-3">
+                                        <input class="form-check-input" type="checkbox" id="namelist-input-hide-unset-groups">
+                                        <label class="form-check-label small" for="namelist-input-hide-unset-groups">Hide empty groups</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mr-3">
+                                        <input class="form-check-input" type="checkbox" id="namelist-input-hide-unset-vars">
+                                        <label class="form-check-label small" for="namelist-input-hide-unset-vars">Hide unset variables</label>
+                                    </div>
+                                    <input type="checkbox" id="namelist-input-show-compatibility" style="display:none;">
+                                    <span id="namelist-input-summary" class="small text-muted"></span>
+                                </div>
+                            </div>
+                            <div class="namelist-input-scroll-dock" aria-label="namelist.input editor scroll controls">
+                                <button id="button-namelist-input-scroll-top" type="button" class="namelist-input-scroll-fab" title="Return to top" aria-label="Return to top" data-native-tooltip="true"><i class="fas fa-arrow-up"></i></button>
+                                <button id="button-namelist-input-scroll-bottom" type="button" class="namelist-input-scroll-fab" title="Jump to bottom" aria-label="Jump to bottom" data-native-tooltip="true"><i class="fas fa-arrow-down"></i></button>
+                            </div>
+                            <div id="namelist-input-container" class="namelist-input-editor"></div>
+                        </div>
+                        <div class="tab-pane fade" id="pane-namelist-input-text" role="tabpanel">
+                            <div class="small text-muted mb-2">Preview shows <code>namelist.input</code>. WRFDA groups remain here; OBSPROC <code>&amp;obsproc_record*</code> groups export separately as <code>namelist.obsproc</code>.</div>
+                            <textarea class="form-control font-namelist resize-none" readonly style="min-height: 65vh;"></textarea>
+                        </div>
+                        <div class="tab-pane fade" id="pane-namelist-input-info" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-4 mb-3">
+                                    <div class="list-group">
+                                        <a href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">WRF Users Guide: namelist variables</a>
+                                        <a href="https://github.com/wrf-model/WRF/tree/master/Registry" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">WRF Registry files</a>
+                                        <a href="https://github.com/wrf-model/WRF/blob/master/run/README.namelist" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">run/README.namelist</a>
+                                        <a href="https://www2.mmm.ucar.edu/wrf/users/namelist_best_prac_wps.html" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">WRF Best Practices (WPS)</a>
+                                        <a href="https://www2.mmm.ucar.edu/wrf/users/namelist_best_prac_wrf.html" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">WRF Best Practices (WRF)</a>
+                                        <a href="docs/references/v4_technote.pdf" target="_blank" rel="noopener noreferrer" class="list-group-item list-group-item-action">ARW Technical Note v4: Scientific Context</a>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <div id="namelist-input-doc-panel" class="border rounded p-3 bg-light">
+                                        <div class="text-muted">Select a variable in the editor to see merged documentation, defaults, sources, and option metadata here.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer flex-wrap">
+                    <button id="button-save-namelist-input" type="button" class="btn btn-primary btn-sm" title="Open the namelist.input export dialog. WRFDA groups remain in namelist.input." data-native-tooltip="true"><i class="far fa-save"></i><span class="ml-1">Save namelist.input</span></button>
+                    <button id="button-save-namelist-obsproc" type="button" class="btn btn-outline-primary btn-sm" title="Open the namelist.obsproc export dialog. OBSPROC groups are saved separately as &record* groups." data-native-tooltip="true"><i class="far fa-save"></i><span class="ml-1">Save namelist.obsproc</span></button>
+                    <button id="button-save-all-namelists" type="button" class="btn btn-outline-primary btn-sm" title="Download namelist.input and namelist.obsproc as separate files." data-native-tooltip="true"><i class="fas fa-download"></i><span class="ml-1">Save both</span></button>
+                    <button id="button-copy-namelist-input" type="button" class="btn btn-primary btn-sm" title="Copy the current namelist.input text to the clipboard" data-native-tooltip="true"><i class="fas fa-copy"></i><span class="ml-1">Copy namelist.input</span></button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" title="Close this dialog" data-native-tooltip="true">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/js/jquery.min.js"></script>
+    <script src="vendor/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/js/spin.umd.js"></script>
+    <script src="vendor/js/immediate.min.js"></script>
+    <script src="vendor/js/proj4.js"></script>
+    <script src="vendor/js/leaflet.js"></script>
+    <script src="vendor/js/leaflet.spin.min.js"></script>
+    <script src="vendor/js/leaflet-sidebar.min.js"></script>
+    <script src="vendor/js/leaflet-providers.js"></script>
+    <script src="vendor/js/Blob.js"></script>
+    <script src="vendor/js/FileSaver.min.js"></script>
+    <script src="vendor/js/html-to-image.js"></script>
+    <script src="vendor/js/leaflet.textpath.js"></script>
+    <script src="vendor/js/moment.min.js"></script>
+    <script src="vendor/js/moment-timezone-with-data.min.js"></script>
+    <script src="vendor/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendor/js/bootstrap-select.min.js"></script>
+
+    <script src="src/core/browser-compat.js"></script>
+    <script src="src/core/app-version.js"></script>
+    <script src="src/core/wrf-domain-wizard.js"></script>
+    <script src="src/namelist/namelist-input-data.js"></script>
+    <script src="src/namelist/row_highlight.js"></script>
+    <script src="src/namelist/namelist-runtime-engine.js"></script>
+    <script src="src/namelist/namelist-input-editor.js"></script>
+    <script src="src/tools/wps-tools.js"></script>
+    <script>
+        WRF.enableGlobalErrorHandler();
+        var wizard = new WRF.DomainWizard({
+            div: $('div#map'),
+            jsonBaseUrl: 'data/raw',
+            sampleBaseUrl: 'examples/test'
+        });
+    </script>
+</body>
+</html>
