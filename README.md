@@ -4,6 +4,8 @@ A browser-based configuration environment for designing **WRF** domains, editing
 
 This project is the rebranded continuation of the WRF Domain Wizard web build. The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation.
 
+### Citation for publications
+
 ## What v1.0.0 includes
 
 - Interactive WRF domain creation and editing
@@ -79,8 +81,9 @@ The historical reference PDF is included in `docs/references/WRF_GUI_original_so
 
 ## License
 
-Add the final project license here before public GitHub release.
+[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE)
 
+## Citation for publications
 
 ## Online-only map mode
 
