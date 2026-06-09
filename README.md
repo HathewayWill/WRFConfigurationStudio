@@ -77,16 +77,6 @@ WRF Config Studio also acknowledges the earlier NOAA Forecast Systems Laboratory
 
 The historical reference PDF is included in `docs/references/WRF_GUI_original_source_69852.pdf`.
 
-## Original project credit
-
-This application is built upon the original WRF Domain Wizard developed by Jiří Richter.
-
-Original project:
-
-```text
-https://github.com/JiriRichter/WRFDomainWizard
-```
-
 ## License
 
 Add the final project license here before public GitHub release.
