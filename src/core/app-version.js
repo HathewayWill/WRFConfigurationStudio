@@ -5,7 +5,7 @@
 (function (root) {
   'use strict';
 
-  root.WRF_CONFIG_STUDIO_APP_NAME = 'WRF Config Studio';
+  root.WRF_CONFIG_STUDIO_APP_NAME = 'WRF Configuration Studio';
   root.WRF_CONFIG_STUDIO_VERSION = 'v1.0.0';
   root.WRF_CONFIG_STUDIO_VERSION_TEXT = 'v1.0.0';
 
