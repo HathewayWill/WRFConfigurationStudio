@@ -31874,7 +31874,7 @@
       position: 'topright'
     });
 
-    var initialBaseLayer = persistentLayersControl.getCurrentLayer() || openStreetMapLayer;
+    var initialBaseLayer = esriWorldStreetLayer;
 
     // initialize map object
     var map = L.map(settings['div'][0], {
