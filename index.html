@@ -22,6 +22,42 @@
 
     <link rel="icon" href="img/globe_32x32.png" />
 
+    <style>
+        .wrf-map-bottom-toolbar {
+            position: fixed;
+            left: 50%;
+            bottom: 12px;
+            transform: translateX(-50%);
+            z-index: 4901;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            max-width: calc(100vw - 24px);
+            flex-wrap: wrap;
+            pointer-events: auto;
+        }
+        .wrf-map-bottom-toolbar .btn {
+            box-shadow: 0 0.35rem 0.8rem rgba(0, 0, 0, 0.25);
+        }
+        .wrf-map-bottom-toolbar .wrf-ui-error-log-fixed-button,
+        #wrf-map-bottom-toolbar #wrf-show-ui-error-log {
+            position: static;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            transform: none;
+            z-index: auto;
+        }
+        @media (max-width: 900px) {
+            .wrf-map-bottom-toolbar {
+                left: 12px;
+                right: 12px;
+                transform: none;
+            }
+        }
+    </style>
+
     
 </head>
 <body>
@@ -298,11 +334,13 @@
             </div>
             <div class="leaflet-sidebar-pane-bottom">
                 <button id="update-domain" type="button" class="btn btn-primary btn-sm" title="Recompute domain geometry from the current settings." data-native-tooltip="true">Update</button>
-                <button type="button" class="btn btn-sm btn-primary" id="button-wps-save" title="Open the namelist.wps export dialog." data-native-tooltip="true"><i class="fas fa-save mr-1"></i>Save namelist.wps</button>
-                <button id="reset-domain" type="button" class="btn btn-secondary btn-sm" title="Restore the current editor to its last loaded state." data-native-tooltip="true">Reset</button>
-                <button id="save-png" type="button" class="btn btn-info btn-sm" title="Capture an image of current map view"><i class="fas fa-camera"></i></button>
 </div>
         </form>
+    </div>
+    <div id="wrf-map-bottom-toolbar" class="wrf-map-bottom-toolbar" aria-label="Map action toolbar">
+        <button type="button" class="btn btn-sm btn-primary" id="button-wps-save" title="Open the namelist.wps export dialog." data-native-tooltip="true"><i class="fas fa-save mr-1"></i>Save namelist.wps</button>
+        <button id="reset-domain" type="button" class="btn btn-secondary btn-sm" title="Restore the current editor to its last loaded state." data-native-tooltip="true">Reset</button>
+        <button id="save-png" type="button" class="btn btn-info btn-sm" title="Capture an image of current map view" data-native-tooltip="true"><i class="fas fa-camera"></i></button>
     </div>
 </div>
 
@@ -616,6 +654,22 @@
             jsonBaseUrl: 'data/raw',
             sampleBaseUrl: 'examples/test'
         });
+        (function () {
+            function moveUiErrorLogButton() {
+                var toolbar = document.getElementById('wrf-map-bottom-toolbar');
+                var button = document.getElementById('wrf-show-ui-error-log');
+                if (!toolbar || !button || button.parentNode === toolbar) {
+                    return;
+                }
+                toolbar.appendChild(button);
+            }
+            document.addEventListener('DOMContentLoaded', moveUiErrorLogButton);
+            window.setTimeout(moveUiErrorLogButton, 600);
+            window.setTimeout(moveUiErrorLogButton, 1200);
+            if (window.MutationObserver) {
+                new MutationObserver(moveUiErrorLogButton).observe(document.body, { childList: true, subtree: true });
+            }
+        })();
     </script>
 </body>
 </html>
