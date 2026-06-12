@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="vendor/css/leaflet-sidebar.min.css" />
     <link rel="stylesheet" href="vendor/css/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="vendor/css/bootstrap-select.min.css" />
-    
+
     <link rel="stylesheet" href="styles/wrf-domain-wizard.css?1731901564350" />
     <link rel="stylesheet" href="styles/wps-tools.css" />
 
@@ -58,7 +58,7 @@
         }
     </style>
 
-    
+
 </head>
 <body>
 
@@ -69,16 +69,16 @@
             <div class="leaflet-sidebar-tabs">
                 <ul role="tablist"> <!-- top aligned tabs -->
                     <li title="WRF domains"><a href="#domains" role="tab"><i class="fas fa-vector-square"></i></a></li>
-                    
+
                     <li title="Geographic files"><a href="#geographic-files" role="tab"><i class="fas fa-map-marked-alt"></i></a></li>
                     <li title="WRF Configuration Studio settings"><a href="#settings" role="tab"><i class="fas fa-cog"></i></a></li>
                     <li title="About WRF Configuration Studio"><a href="#about" role="tab"><i class="fas fa-info-circle"></i></a></li>
                 </ul>
-        
+
                 <ul role="tablist"> <!-- bottom aligned tabs -->
                 </ul>
             </div>
-        
+
             <!-- Tab panes -->
             <div class="leaflet-sidebar-content">
                 <div class="leaflet-sidebar-pane" id="about">
@@ -93,7 +93,7 @@
         v1.0.0 uses online map tiles only. Run the package through the included local server helper, then open the local address in a browser. If online map tiles are unavailable, the map background may not render until the network connection or selected tile provider is available.
     </p>
 
-    
+
     <div class="about-dedication mt-3 pt-3 border-top">
         <h5>Credits, Dedication, and Original Project</h5>
         <p>
@@ -128,7 +128,7 @@
     </div>
 
 
-    
+
     <div class="mt-3 pt-3 border-top">
         <h5>Local WRF Test Cases</h5>
         <p>
@@ -333,14 +333,15 @@
                 </div>
             </div>
             <div class="leaflet-sidebar-pane-bottom">
-                <button id="update-domain" type="button" class="btn btn-primary btn-sm" title="Recompute domain geometry from the current settings." data-native-tooltip="true">Update</button>
+</div>
+
+<div id="wrf-map-bottom-toolbar" class="wrf-map-bottom-toolbar" aria-label="Map action toolbar">
+    <button id="update-domain" type="button" class="btn btn-primary btn-sm" title="Recompute domain geometry from the current settings." data-native-tooltip="true">Update</button>
+    <button type="button" class="btn btn-sm btn-primary" id="button-wps-save" title="Open the namelist.wps export dialog." data-native-tooltip="true"><i class="fas fa-save mr-1"></i>Save namelist.wps</button>
+    <button id="reset-domain" type="button" class="btn btn-secondary btn-sm" title="Restore the current editor to its last loaded state." data-native-tooltip="true">Reset</button>
+    <button id="save-png" type="button" class="btn btn-info btn-sm" title="Capture an image of current map view" data-native-tooltip="true"><i class="fas fa-camera"></i></button>
 </div>
         </form>
-    </div>
-    <div id="wrf-map-bottom-toolbar" class="wrf-map-bottom-toolbar" aria-label="Map action toolbar">
-        <button type="button" class="btn btn-sm btn-primary" id="button-wps-save" title="Open the namelist.wps export dialog." data-native-tooltip="true"><i class="fas fa-save mr-1"></i>Save namelist.wps</button>
-        <button id="reset-domain" type="button" class="btn btn-secondary btn-sm" title="Restore the current editor to its last loaded state." data-native-tooltip="true">Reset</button>
-        <button id="save-png" type="button" class="btn btn-info btn-sm" title="Capture an image of current map view" data-native-tooltip="true"><i class="fas fa-camera"></i></button>
     </div>
 </div>
 
@@ -351,8 +352,8 @@
     </h1>
     <div class="alert alert-sm alert-info mt-2" role="alert">
         <p>
-        Use this tab to display geographic features from various data files. 
-        This is meant to aid in designing WRF domains based on the locations of the displayed features. 
+        Use this tab to display geographic features from various data files.
+        This is meant to aid in designing WRF domains based on the locations of the displayed features.
         </p>
         <p>
         The tool currently supports GeoJSON, KMZ, KML, GPX, and WPT file formats. If additional file format is needed, please, submit a feature request on the project <a href="https://github.com/your-org/wrf-config-studio/issues" target="_blank">GitHub issues page</a>.
@@ -655,19 +656,29 @@
             sampleBaseUrl: 'examples/test'
         });
         (function () {
-            function moveUiErrorLogButton() {
+            function moveBottomToolbarButtons() {
                 var toolbar = document.getElementById('wrf-map-bottom-toolbar');
-                var button = document.getElementById('wrf-show-ui-error-log');
-                if (!toolbar || !button || button.parentNode === toolbar) {
+                if (!toolbar) {
                     return;
                 }
-                toolbar.appendChild(button);
+
+                var updateButton = document.getElementById('tools-update-domain') || document.getElementById('update-domain');
+                if (updateButton && updateButton.parentNode !== toolbar) {
+                    toolbar.insertBefore(updateButton, toolbar.firstChild);
+                }
+
+                var errorLogButton = document.getElementById('wrf-show-ui-error-log');
+                if (errorLogButton && errorLogButton.parentNode !== toolbar) {
+                    toolbar.appendChild(errorLogButton);
+                }
             }
-            document.addEventListener('DOMContentLoaded', moveUiErrorLogButton);
-            window.setTimeout(moveUiErrorLogButton, 600);
-            window.setTimeout(moveUiErrorLogButton, 1200);
+            document.addEventListener('DOMContentLoaded', moveBottomToolbarButtons);
+            window.setTimeout(moveBottomToolbarButtons, 0);
+            window.setTimeout(moveBottomToolbarButtons, 300);
+            window.setTimeout(moveBottomToolbarButtons, 600);
+            window.setTimeout(moveBottomToolbarButtons, 1200);
             if (window.MutationObserver) {
-                new MutationObserver(moveUiErrorLogButton).observe(document.body, { childList: true, subtree: true });
+                new MutationObserver(moveBottomToolbarButtons).observe(document.body, { childList: true, subtree: true });
             }
         })();
     </script>
