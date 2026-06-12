@@ -129,7 +129,7 @@ The historical reference PDF is included in `docs/references/WRF_GUI_original_so
 
 ## License
 
-[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE)
+[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE) GPL-3.0 License
 
 ## Citation for publications
 
