@@ -488,12 +488,17 @@
       });
     }
 
-    const updateBtn = q('#update-domain');
+    const updateBtn = q('#tools-update-domain') || q('#update-domain');
     if (updateBtn) {
       updateBtn.title = 'Apply manual changes made in the form to the domain.';
       updateBtn.setAttribute('data-native-tooltip', 'true');
+      const bottomToolbar = q('#wrf-map-bottom-toolbar');
       const actionsRow = q('.wps-tools-actions-row', panel);
-      if (actionsRow && !q('#tools-update-domain', panel)) {
+      if (bottomToolbar) {
+        updateBtn.classList.remove('btn-outline-primary');
+        updateBtn.classList.add('btn-primary');
+        bottomToolbar.insertBefore(updateBtn, bottomToolbar.firstChild);
+      } else if (actionsRow && !q('#tools-update-domain', panel)) {
         updateBtn.id = 'tools-update-domain';
         updateBtn.classList.remove('btn-primary');
         updateBtn.classList.add('btn-outline-primary');
