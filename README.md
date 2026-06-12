@@ -135,11 +135,8 @@ The historical reference PDF is included in `docs/references/WRF_GUI_original_so
 
 ## Online-only map mode
 
-This v1.0.0 build uses online tile providers only for the map background. The previous bundled offline vector map fallback has been removed.
-
+This v1.0.0 build uses online tile providers only for the map background.
 
 ## v1.0.0 ARW context note
 
-This package is the v1.0.0 mainline build.
-
-This build adds ARW Technical Note v4 scientific-context metadata to the namelist editor. This is reference-only and does not alter export behavior.
+This package is the v1.0.0 mainline build and uses the WRF 4.7.1 registry for configuration settings
