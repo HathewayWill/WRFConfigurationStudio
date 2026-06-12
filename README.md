@@ -72,6 +72,54 @@ wrf-config-studio
 
 Legacy/internal code names may still reference WRF Domain Wizard where needed for compatibility or historical attribution.
 
+## Folder Tree
+
+```text
+└── WRFConfigurationStudio-main/
+    ├── data/
+    │   ├── raw/
+    │   ├── registry/
+    │   └── runtime/
+    ├── docs/
+    │   ├── archive/
+    │   ├── images/
+    │   │   └── user-guide/
+    │   ├── print/
+    │   └── references/
+    ├── examples/
+    │   ├── doc/
+    │   └── test/
+    │       ├── em_b_wave/
+    │       ├── em_convrad/
+    │       ├── em_esmf_exp/
+    │       ├── em_fire/
+    │       ├── em_grav2d_x/
+    │       ├── em_heldsuarez/
+    │       ├── em_hill2d_x/
+    │       │   └── extras/
+    │       ├── em_les/
+    │       ├── em_quarter_ss/
+    │       ├── em_real/
+    │       ├── em_scm_xy/
+    │       ├── em_seabreeze2d_x/
+    │       ├── em_squall2d_x/
+    │       ├── em_squall2d_y/
+    │       └── em_tropical_cyclone/
+    ├── images/
+    ├── img/
+    ├── src/
+    │   ├── core/
+    │   ├── namelist/
+    │   ├── shared/
+    │   ├── tools/
+    │   └── wps/
+    ├── styles/
+    └── vendor/
+        ├── css/
+        │   └── images/
+        ├── js/
+        └── webfonts/
+```
 
 ## NOAA/FSL WRF SI GUI lineage
 
