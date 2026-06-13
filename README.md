@@ -140,3 +140,8 @@ This v1.0.0 build uses online tile providers only for the map background.
 ## v1.0.0 ARW context note
 
 This package is the v1.0.0 mainline build and uses the WRF 4.7.1 registry for configuration settings
+
+
+
+
+<a href='https://mapmyvisitors.com/web/1c5d0'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=500&t=tt&d=MQhYoa3dqHKn__1fbkfKyN4JddYCLARtWhmyUaa6iXg&co=2d78ad&ct=ffffff'/></a>
