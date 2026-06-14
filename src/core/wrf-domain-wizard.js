@@ -25982,7 +25982,7 @@
       weight: 2,
       color: '#FF0000',
       fillColor: '#FF0000',
-      fillOpacity: 0.2,
+      fillOpacity: 0.06,
       className: 'wrf-domain-grid'
     },
     // domain object containing grid
@@ -26063,7 +26063,7 @@
         weight: this.options.weight,
         color: this.options.color,
         fillColor: this.options.fillColor,
-        fillOpacity: Math.max(0, (this.options.fillOpacity || 0.2) * 0.65),
+        fillOpacity: Math.max(0, (this.options.fillOpacity || 0.06) * 0.65),
         className: 'wrf-domain-grid wrf-domain-grid-world-copy'
       };
     },
@@ -28559,11 +28559,17 @@
 
     // map projection dropdown change
     selectMapProj.on('change', function (e) {
+      var map_proj = selectMapProj.val();
       if (domain != null) {
         configFieldsForProjection();
+        configureDxDyFields(map_proj);
+        if (!form[0].checkValidity() || !domain.grid.gridPanel.validate()) {
+          form.addClass('was-validated');
+          updateSelectMapProjTitle();
+          return;
+        }
         setGridValues();
       } else {
-        var map_proj = selectMapProj.val();
         configureDxDyFields(map_proj);
         initializeDxDyFields(map_proj);
       }
