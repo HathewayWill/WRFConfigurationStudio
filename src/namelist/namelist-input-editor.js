@@ -1202,14 +1202,14 @@
     style.id = 'namelist-input-search-highlight-style';
     style.textContent = [
       '.namelist-input-variable.namelist-input-search-hit {',
-      '  background-color: #fff3cd !important;',
-      '  border: 1px solid #ffc107 !important;',
-      '  box-shadow: 0 0 0 0.12rem rgba(255, 193, 7, 0.35) !important;',
+      '  background-color: #dbeafe !important;',
+      '  border: 1px solid #60a5fa !important;',
+      '  box-shadow: 0 0 0 0.12rem rgba(96, 165, 250, 0.38) !important;',
       '}',
       '.namelist-input-variable.namelist-input-search-active {',
-      '  background-color: #ffe8a1 !important;',
-      '  border: 2px solid #fd7e14 !important;',
-      '  box-shadow: 0 0 0 0.18rem rgba(253, 126, 20, 0.40) !important;',
+      '  background-color: #ede9fe !important;',
+      '  border: 2px solid #8b5cf6 !important;',
+      '  box-shadow: 0 0 0 0.18rem rgba(139, 92, 246, 0.42) !important;',
       '}'
     ].join('\n');
 
