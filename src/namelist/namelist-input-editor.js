@@ -947,6 +947,11 @@
     }
     this.bindCompatibilityPanelEvents();
 
+    this.$container.off('wheel.namelistNumberWheelGuard')
+      .on('wheel.namelistNumberWheelGuard', 'input[type="number"]', function () {
+        if (document.activeElement === this) this.blur();
+      });
+
     var self = this;
     this.$container.find('.namelist-input-variable').each(function () {
       var row = $(this);
