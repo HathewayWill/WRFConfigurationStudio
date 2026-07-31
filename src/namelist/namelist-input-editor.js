@@ -478,7 +478,8 @@
     this.$saveDialogCopy = $('#button-copy-namelist-input-save');
     this.hideEmptyGroups = false;
     this.hideUnsetVars = false;
-    this.showCompatibility = false;
+    this.showCompatibility = true;
+    this.targetWrfVersion = '4.8.0+';
     this._returnToEditorAfterSaveDialog = false;
     this._saveDialogQueued = false;
     this._savedModalSnapshot = null;
@@ -515,6 +516,8 @@
     this.$varJump.on('change', function () { self.jumpToVariable($(this).val()); });
     this.$exampleCase.on('change', function () { self.populateExampleProfileOptions($(this).val()); });
     this.$applyExample.on('click', function () { self.applySelectedExampleProfile(); });
+    this.$hideEmptyGroups.prop('checked', this.hideEmptyGroups);
+    this.$hideUnsetVars.prop('checked', this.hideUnsetVars);
     this.$hideEmptyGroups.on('change', function () { self.hideEmptyGroups = this.checked; self.render(); });
     this.$hideUnsetVars.on('change', function () { self.hideUnsetVars = this.checked; self.render(); });
     this.$showCompatibility.closest('.form-check').hide();
@@ -665,7 +668,7 @@
 
     if (condensed && condensed.groups) {
       this.catalog = { groups: condensed.groups || {} };
-      this.compatibility = condensed.compatibility || { rules: [] };
+      this.compatibility = await $.getJSON(runtimeBase + '/namelist.input.compatibility.validated.json').catch(function () { return condensed.compatibility || { rules: [] }; });
       this.semantics = condensed.semantics || { _meta: {}, shared: {}, fields: {}, recommendations: {} };
       this.performStartupSeeding(this.detectMaxDom());
       this.populateJumps();
@@ -711,7 +714,7 @@
     }
     this.semantics = semantics || { _meta: {}, shared: {}, fields: {}, recommendations: {} };
     this.catalog = buildMergedCatalog(payloads[0], payloads[1], payloads[2], payloads[3], payloads[4], payloads[5], payloads[6], sourcePriority, semantics);
-    this.compatibility = payloads[7] || { rules: [] };
+    this.compatibility = await $.getJSON(runtimeBase + '/namelist.input.compatibility.validated.json').catch(function () { return payloads[7] || { rules: [] }; });
     this.performStartupSeeding(this.detectMaxDom());
     this.populateJumps();
   };
@@ -880,15 +883,84 @@
   };
 
   HybridNamelistInputEditor.prototype.getCompatibilityIssues = function () {
-    return [];
+    var factory = global.NamelistCompatibilityEngine && global.NamelistCompatibilityEngine.create;
+    if (!factory || !this.catalog) return [];
+    var engine = factory({
+      catalog: this.catalog,
+      compatibility: this.compatibility || { rules: [] },
+      state: this.state,
+      targetWrfVersion: this.targetWrfVersion || '4.8.0+'
+    });
+    return engine.getIssues();
   };
 
   HybridNamelistInputEditor.prototype.getIssuesForField = function (field) {
-    return [];
+    if (!field || !field.key) return [];
+    return this.getCompatibilityIssues().filter(function (issue) {
+      return issue.fieldKeys && issue.fieldKeys.indexOf(field.key) !== -1;
+    });
   };
 
   HybridNamelistInputEditor.prototype.applyCompatibilityFix = function (issueId) {
     return;
+  };
+
+  HybridNamelistInputEditor.prototype.renderEngineIssuesHtml = function (engineIssues) {
+    if (!engineIssues || !engineIssues.length) return '';
+    var html = '<div class="namelist-input-variable-compatibility namelist-input-engine-compatibility small">';
+    engineIssues.forEach(function (issue) {
+      var badge = issue.type === 'error' ? 'danger' : (issue.type === 'warning' ? 'warning' : 'info');
+      html += '<div><span class="badge badge-' + badge + ' mr-1">' + esc(issue.type) + '</span>' + esc(issue.message);
+      if (issue.fixable) html += ' <button type="button" class="btn btn-sm btn-outline-primary py-0 namelist-input-apply-fix" data-issue-id="' + esc(issue.id) + '">' + esc(issue.fixLabel || 'Apply fix') + '</button>';
+      html += '</div>';
+    });
+    html += '</div>';
+    return html;
+  };
+
+  HybridNamelistInputEditor.prototype.bindCompatibilityPanelEvents = function () {
+    var self = this;
+    this.$container.find('.namelist-input-target-wrf-version').off('change.namelistcompat').on('change.namelistcompat', function () {
+      self.targetWrfVersion = $(this).val() || '4.8.0+';
+      self.render();
+      self.updateText();
+    });
+  };
+
+  HybridNamelistInputEditor.prototype.refreshCompatibilityDisplay = function () {
+    if (!this.catalog || !this.$container || !this.$container.length) return;
+
+    var issues = this.getCompatibilityIssues();
+    var issueMap = {};
+    issues.forEach(function (issue) {
+      (issue.fieldKeys || []).forEach(function (key) {
+        issueMap[key] = issueMap[key] || [];
+        issueMap[key].push(issue);
+      });
+    });
+
+    var panel = this.$container.find('.namelist-input-compatibility-panel').first();
+    if (panel.length) {
+      panel.replaceWith(this.renderCompatibilityPanel());
+    } else {
+      this.$container.prepend(this.renderCompatibilityPanel());
+    }
+    this.bindCompatibilityPanelEvents();
+
+    var self = this;
+    this.$container.find('.namelist-input-variable').each(function () {
+      var row = $(this);
+      var key = row.data('key');
+      var rowIssues = issueMap[key] || [];
+
+      row.removeClass('compatibility-bad compatibility-maybe');
+      row.find('.namelist-input-engine-compatibility').remove();
+
+      if (rowIssues.some(function (issue) { return issue.type === 'error'; })) row.addClass('compatibility-bad');
+      else if (rowIssues.some(function (issue) { return issue.type === 'warning'; })) row.addClass('compatibility-maybe');
+
+      if (rowIssues.length) row.append(self.renderEngineIssuesHtml(rowIssues));
+    });
   };
 
   HybridNamelistInputEditor.prototype.markFieldUserEdited = function (key) {
@@ -917,7 +989,33 @@
   };
 
   HybridNamelistInputEditor.prototype.renderCompatibilityPanel = function () {
-    return '';
+    var issues = this.getCompatibilityIssues();
+    var errors = issues.filter(function (issue) { return issue.type === 'error'; }).length;
+    var warnings = issues.filter(function (issue) { return issue.type === 'warning'; }).length;
+    var validRules = (this.compatibility.rules || []).filter(function (rule) {
+      var status = String(rule.validationStatus || '').toLowerCase();
+      return status === 'valid' || status === 'validated';
+    }).length;
+    var needsReview = (this.compatibility.rules || []).filter(function (rule) {
+      return String(rule.validationStatus || '').toLowerCase() === 'needs_review';
+    }).length;
+
+    var panelClass = errors ? 'alert-danger' : (warnings ? 'alert-warning' : 'alert-success');
+    var html = '<div class="alert ' + panelClass + ' py-2 namelist-input-compatibility-panel">';
+    html += '<div class="d-flex flex-wrap align-items-center">';
+    html += '<strong class="mr-2">Compatibility:</strong>';
+    html += '<span class="badge badge-danger mr-1">' + errors + ' errors</span>';
+    html += '<span class="badge badge-warning mr-3">' + warnings + ' warnings</span>';
+    html += '<label class="small mb-0 mr-2" for="namelist-input-target-wrf-version">Target WRF</label>';
+    html += '<select id="namelist-input-target-wrf-version" class="custom-select custom-select-sm namelist-input-target-wrf-version mr-3" style="width:auto">';
+    html += '<option value="4.8.0+"' + ((this.targetWrfVersion || '4.8.0+') === '4.8.0+' ? ' selected' : '') + '>4.8.0+</option>';
+    html += '<option value="4.7.1"' + (this.targetWrfVersion === '4.7.1' ? ' selected' : '') + '>4.7.1</option>';
+    html += '</select>';
+    html += '<span class="small text-muted">Enforcing ' + validRules + ' validated rules. ';
+    html += needsReview + ' need review. Registry-backed version checks are enforced first.</span>';
+    html += '</div>';
+    html += '</div>';
+    return html;
   };
 
   HybridNamelistInputEditor.prototype.applyWpsMasteredDomainValues = function () {
@@ -1478,16 +1576,7 @@
     if (compat.messages.length) {
       html += '<div class="namelist-input-variable-compatibility small text-muted">' + esc(compat.messages.join(' | ')) + '</div>';
     }
-    if (engineIssues.length) {
-      html += '<div class="namelist-input-variable-compatibility small">';
-      engineIssues.forEach(function (issue) {
-        var badge = issue.type === 'error' ? 'danger' : (issue.type === 'warning' ? 'warning' : 'info');
-        html += '<div><span class="badge badge-' + badge + ' mr-1">' + esc(issue.type) + '</span>' + esc(issue.message);
-        if (issue.fixable) html += ' <button type="button" class="btn btn-sm btn-outline-primary py-0 namelist-input-apply-fix" data-issue-id="' + esc(issue.id) + '">' + esc(issue.fixLabel || 'Apply fix') + '</button>';
-        html += '</div>';
-      });
-      html += '</div>';
-    }
+    html += this.renderEngineIssuesHtml(engineIssues);
     html += '</div>';
     return html;
   };
@@ -1551,6 +1640,7 @@
       var key = $(this).data('subsection-key');
       if (key) self.state.subsectionExpanded[key] = $(this).prop('open');
     });
+    this.bindCompatibilityPanelEvents();
     this.$container.find('.namelist-input-toggle').off('change').on('change', function () {
       var key = $(this).data('key');
       self.state.enabled[key] = this.checked;
@@ -1567,6 +1657,7 @@
       self.state.enabled[key] = true;
       self.markFieldUserEdited(key);
       self.updateText();
+      self.refreshCompatibilityDisplay();
     });
     this.$container.find('.namelist-input-field-array').off('change input').on('change input', function () {
       var key = $(this).data('key');
@@ -1575,6 +1666,7 @@
       self.state.enabled[key] = true;
       self.markFieldUserEdited(key);
       self.updateText();
+      self.refreshCompatibilityDisplay();
     });
     this.$container.find('.namelist-input-variable-name').off('click').on('click', function () {
       self.state.selectedKey = $(this).data('key');

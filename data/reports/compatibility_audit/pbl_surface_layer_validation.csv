@@ -1,0 +1,13 @@
+id,pbl_value,rule_sf_sfclay_values,validation_status,validation_notes,source_excerpt
+PBL-1,1,1,needs_review,"Matches namelist_variables page, but PBL physics page table also lists 1,91.",bl_pbl_physics=1 only works with sf_sfclay_physics=1
+PBL-2,2,2,valid,Matches current namelist_variables page.,bl_pbl_physics=2 only works with sf_sfclay_physics=2
+PBL-4,4,4,valid,Matches current namelist_variables page.,bl_pbl_physics=4 only works with sf_sfclay_physics=4
+PBL-5,5,"1,2,5",needs_review,"Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.","bl_pbl_physics=5 only works with sf_sfclay_physics=1,2,5"
+PBL-6,6,5,needs_review,"Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.",bl_pbl_physics=6 only works with sf_sfclay_physics=5
+PBL-7,7,"1,7",needs_review,"Matches namelist_variables page, but PBL physics page table also lists 1,7,91.","bl_pbl_physics=7 only works with sf_sfclay_physics=1,7"
+PBL-8,8,"1,2",valid,Matches current namelist_variables page.,"bl_pbl_physics=8 only works with sf_sfclay_physics=1,2"
+PBL-9,9,"1,2",valid,Matches current namelist_variables page.,"bl_pbl_physics=9 only works with sf_sfclay_physics=1,2"
+PBL-10,10,10,valid,Matches current namelist_variables page.,bl_pbl_physics=10 only works with sf_sfclay_physics=10
+PBL-12,12,1,valid,Matches current namelist_variables page.,bl_pbl_physics=12 only works with sf_sfclay_physics=1
+PBL-16,16,"1,5,91",valid,Matches current namelist_variables page.,"bl_pbl_physics=16 only works with sf_sfclay_physics=1,5,91"
+LES-PBL,0,,needs_review,Rule has ; namelist_variables page has None; PBL table has None.,"LES PBL settings: bl_pbl_physics=0, isfflx=1, sf_sfclay_physics any except 0, sf_surface_physics any except 0, diff_opt=2, km_opt=2 or 3"
