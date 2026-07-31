@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "notes": "Expanded validated compatibility coverage from Registry and Users Guide candidate mining.",
+    "notes": "Expanded validated compatibility coverage with Users Guide batch 2 rules.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 75,
+    "ruleCount": 83,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
       "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
-    "variableCount": 90,
+    "variableCount": 87,
     "lastReviewedDate": "2026-07-31"
   },
   "rules": [
@@ -1077,7 +1077,7 @@
       "validationUrl": ""
     },
     {
-      "category": "Cumulus Option",
+      "category": "Shallow Cumulus",
       "id": "ISHALLOW",
       "notes": null,
       "requirements": [
@@ -1085,7 +1085,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "cu_physics only works with 3, 5",
+          "raw": "cu_physics must be 3 or 5",
           "values": [
             "3",
             "5"
@@ -1093,8 +1093,8 @@
           "variable": "cu_physics"
         }
       ],
-      "requirementsRaw": "cu_physics only works with 3, 5",
-      "sourceExcerpt": "ishallow=1 only works with cu_physics=3 or 5",
+      "requirementsRaw": "cu_physics must be 3 or 5",
+      "sourceExcerpt": "ishallow only works with cu_physics=3 or 5",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -1104,10 +1104,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "ishallow",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Shallow Cumulus \u2194 PBL",
@@ -1176,7 +1180,7 @@
       "validationUrl": ""
     },
     {
-      "category": "Cumulus Option",
+      "category": "Cumulus Diagnostics",
       "id": "KF-EDRATES",
       "notes": null,
       "requirements": [
@@ -1184,7 +1188,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "cu_physics only works with 1, 11, 99",
+          "raw": "cu_physics must be 1, 11, or 99",
           "values": [
             "1",
             "11",
@@ -1193,8 +1197,8 @@
           "variable": "cu_physics"
         }
       ],
-      "requirementsRaw": "cu_physics only works with 1, 11, 99",
-      "sourceExcerpt": "kf_edrates=1 only works with cu_physics=1,11,99",
+      "requirementsRaw": "cu_physics must be 1, 11, or 99",
+      "sourceExcerpt": "kf_edrates only works with cu_physics=1,11,99",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -1204,10 +1208,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "kf_edrates",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Cumulus Option",
@@ -2817,6 +2825,301 @@
         "4.8.0",
         "4.8.1-dev"
       ]
+    },
+    {
+      "category": "Land Surface",
+      "id": "IFSNOW",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 1",
+      "sourceExcerpt": "ifsnow only works with sf_surface_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "ifsnow",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Surface Layer",
+      "id": "SHALWATER-Z0",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be 1",
+      "sourceExcerpt": "shalwater_z0 only works with sf_sfclay_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "shalwater_z0",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Land Surface",
+      "id": "MOSAIC-LU",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be 3",
+          "values": [
+            "3"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 3",
+      "sourceExcerpt": "mosaic_lu only works with RUC LSM, sf_surface_physics=3",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "mosaic_lu",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Land Surface",
+      "id": "MOSAIC-SOIL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be 3",
+          "values": [
+            "3"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 3",
+      "sourceExcerpt": "mosaic_soil only works with RUC LSM, sf_surface_physics=3",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "mosaic_soil",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Cumulus \u2194 Radiation",
+      "id": "CU-RAD-FEEDBACK",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 1,3,5,10,11,93,99",
+          "values": [
+            "1",
+            "3",
+            "5",
+            "10",
+            "11",
+            "93",
+            "99"
+          ],
+          "variable": "cu_physics"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "if using cu_physics=3,5,93, cu_diag should be set to 1",
+          "values": [],
+          "variable": "cu_diag"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 1,3,5,10,11,93,99 | if using cu_physics=3,5,93, cu_diag should be set to 1",
+      "sourceExcerpt": "cu_rad_feedback only works with cu_physics=1,3,5,10,11,93,99; if using cu_physics=3,5,93 must set cu_diag=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "truthy",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_rad_feedback",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Dynamics / Diffusion",
+      "id": "MIX-UPPER-BOUND",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "km_opt must be 2 or 3",
+          "values": [
+            "2",
+            "3"
+          ],
+          "variable": "km_opt"
+        }
+      ],
+      "requirementsRaw": "km_opt must be 2 or 3",
+      "sourceExcerpt": "mix_upper_bound only works with km_opt=2,3",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "non_zero",
+        "values": []
+      },
+      "triggerGroup": "dynamics",
+      "triggerVariable": "mix_upper_bound",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Dynamics / Diffusion",
+      "id": "TKE-DRAG-COEFFICIENT",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "diff_opt must be 2",
+          "values": [
+            "2"
+          ],
+          "variable": "diff_opt"
+        }
+      ],
+      "requirementsRaw": "diff_opt must be 2",
+      "sourceExcerpt": "tke_drag_coefficient only works with diff_opt=2",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "non_zero",
+        "values": []
+      },
+      "triggerGroup": "dynamics",
+      "triggerVariable": "tke_drag_coefficient",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-ACC-DT",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "noah_mp",
+          "mode": "one_of",
+          "raw": "noahmp_output must be 3",
+          "values": [
+            "3"
+          ],
+          "variable": "noahmp_output"
+        }
+      ],
+      "requirementsRaw": "noahmp_output must be 3",
+      "sourceExcerpt": "noahmp_acc_dt only works with noahmp_output=3",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "non_zero",
+        "values": []
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "noahmp_acc_dt",
+      "validationNotes": "Promoted from next-batch Users Guide compatibility review.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     }
   ],
   "variableIndex": {
@@ -2865,7 +3168,8 @@
         20,
         51,
         54,
-        55
+        55,
+        76
       ],
       "summary": null,
       "triggerRules": []
@@ -2876,7 +3180,10 @@
         13,
         19,
         21,
-        54
+        54,
+        75,
+        77,
+        78
       ],
       "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4",
       "triggerRules": [
@@ -2933,15 +3240,6 @@
       "summary": null,
       "triggerRules": []
     },
-    "wrfinput_extra": {
-      "group": null,
-      "requirementRules": [
-        16,
-        17
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
     "distributed_ahe_opt": {
       "group": "physics",
       "requirementRules": [],
@@ -2957,14 +3255,6 @@
       "triggerRules": [
         18
       ]
-    },
-    "geogrid_extra": {
-      "group": null,
-      "requirementRules": [
-        18
-      ],
-      "summary": null,
-      "triggerRules": []
     },
     "seaice_threshold": {
       "group": "physics",
@@ -3004,17 +3294,6 @@
       "group": "noah_mp",
       "requirementRules": [
         22
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "geogrid_tbl": {
-      "group": null,
-      "requirementRules": [
-        22,
-        23,
-        24,
-        25
       ],
       "summary": null,
       "triggerRules": []
@@ -3069,10 +3348,10 @@
         38,
         39,
         40,
-        42,
         66,
         67,
-        68
+        68,
+        79
       ],
       "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4",
       "triggerRules": [
@@ -3147,7 +3426,8 @@
       "requirementRules": [],
       "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1",
       "triggerRules": [
-        35
+        35,
+        79
       ]
     },
     "maxiens": {
@@ -3209,14 +3489,6 @@
       "triggerRules": [
         44
       ]
-    },
-    "dx": {
-      "group": "domains",
-      "requirementRules": [
-        42
-      ],
-      "summary": null,
-      "triggerRules": []
     },
     "iccg_method": {
       "group": "physics",
@@ -3306,7 +3578,8 @@
       "requirementRules": [
         52,
         53,
-        54
+        54,
+        80
       ],
       "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91",
       "triggerRules": [
@@ -3319,7 +3592,8 @@
         51,
         52,
         53,
-        54
+        54,
+        81
       ],
       "summary": null,
       "triggerRules": []
@@ -3413,14 +3687,6 @@
         58
       ]
     },
-    "bdy_inname": {
-      "group": "time_control",
-      "requirementRules": [
-        58
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
     "nested": {
       "group": "bdy_control",
       "requirementRules": [],
@@ -3428,15 +3694,6 @@
       "triggerRules": [
         59
       ]
-    },
-    "domain_role": {
-      "group": null,
-      "requirementRules": [
-        59,
-        60
-      ],
-      "summary": null,
-      "triggerRules": []
     },
     "specified": {
       "group": "bdy_control",
@@ -3454,30 +3711,6 @@
         61
       ]
     },
-    "metgrid_NUM_LAND_CAT": {
-      "group": null,
-      "requirementRules": [
-        61
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "MODIS": {
-      "group": null,
-      "requirementRules": [
-        61
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "USGS": {
-      "group": null,
-      "requirementRules": [
-        61
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
     "input_from_hires": {
       "group": "time_control",
       "requirementRules": [],
@@ -3485,22 +3718,6 @@
       "triggerRules": [
         62
       ]
-    },
-    "compile_env": {
-      "group": null,
-      "requirementRules": [
-        62
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "geog_data_res": {
-      "group": null,
-      "requirementRules": [
-        62
-      ],
-      "summary": null,
-      "triggerRules": []
     },
     "rsmas_data_path": {
       "group": "time_control",
@@ -3634,6 +3851,70 @@
       "group": "physics",
       "requirementRules": [
         74
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "ifsnow": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        75
+      ]
+    },
+    "shalwater_z0": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        76
+      ]
+    },
+    "mosaic_lu": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        77
+      ]
+    },
+    "mosaic_soil": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        78
+      ]
+    },
+    "mix_upper_bound": {
+      "group": "dynamics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        80
+      ]
+    },
+    "tke_drag_coefficient": {
+      "group": "dynamics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        81
+      ]
+    },
+    "noahmp_acc_dt": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        82
+      ]
+    },
+    "noahmp_output": {
+      "group": "noah_mp",
+      "requirementRules": [
+        82
       ],
       "summary": null,
       "triggerRules": []

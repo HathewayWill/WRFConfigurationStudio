@@ -33,6 +33,14 @@
 
     if (mode === 'active') return true;
     if (mode === 'set' || mode === 'required') return value !== undefined && value !== null && String(value).trim() !== '';
+    if (mode === 'non_zero') {
+      if (value === undefined || value === null) return false;
+      var raw = String(value).trim().toLowerCase();
+      if (!raw || raw === '.false.' || raw === 'false') return false;
+      var numeric = Number(raw.replace(/[dD]/, 'e'));
+      if (!isNaN(numeric)) return numeric !== 0;
+      return raw !== '0' && raw !== '0.0';
+    }
     if (mode === 'truthy') return value === true || norm(value) === '.true.' || norm(value) === '1';
     if (mode === 'falsy') return value === false || norm(value) === '.false.' || norm(value) === '0';
 
