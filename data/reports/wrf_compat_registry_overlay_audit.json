@@ -1,0 +1,2240 @@
+{
+  "baselineOnlyLegacy": [
+    "chem.bioemdt",
+    "chem.cam_mp_mam_cpled",
+    "chem.chemdt",
+    "chem.gsfcgce_gocart_coupling",
+    "chem.gsfcrad_gocart_coupling",
+    "chem.n_cg",
+    "chem.n_ic",
+    "chem.photdt",
+    "domains.corral_dist",
+    "domains.eta_levels",
+    "domains.move_cd_x",
+    "domains.move_cd_y",
+    "domains.move_id",
+    "domains.move_interval",
+    "domains.num_moves",
+    "domains.sr_x",
+    "domains.sr_y",
+    "domains.track_level",
+    "domains.trop_horiz_press_diff",
+    "dynamics.dyn_opt",
+    "dynamics.non-hydrostatic",
+    "dynamics.use_baseparm_fr_nml",
+    "fdda.fgdt",
+    "fdda.fgdtzero",
+    "fire.ifire",
+    "namelist_adios2.adios2_blosc_compressor",
+    "namelist_adios2.adios2_compression_enable",
+    "namelist_adios2.adios2_numaggregators",
+    "noah_mp.opt_run",
+    "perturbation.check_ad",
+    "perturbation.check_tl",
+    "physics.03input",
+    "physics.bl_mynn_tkebudget",
+    "physics.bldt",
+    "physics.bucket_j",
+    "physics.ccnty",
+    "physics.cudt",
+    "physics.force_read_thompson",
+    "physics.gsmdt",
+    "physics.haildt",
+    "physics.icloud",
+    "physics.ifsnow",
+    "physics.isfflx",
+    "physics.mindeepfreq",
+    "physics.minshallowfreq",
+    "physics.nssl_rho_ghl",
+    "physics.num_traj",
+    "physics.numbins",
+    "physics.ocean_levels",
+    "physics.omdt",
+    "physics.rbinsize",
+    "physics.thbinsize",
+    "physics.write_thompson_mp38table",
+    "physics.write_thompson_tables",
+    "physics.wtddt",
+    "scm.scm_soilt_force",
+    "stoch.iseed_skebs",
+    "time_control.auxhist2_interval",
+    "time_control.auxhist2_outname",
+    "time_control.auxinput11_end_h",
+    "time_control.auxinput11_interval",
+    "time_control.auxinput4_inname",
+    "time_control.auxinput4_interval",
+    "time_control.frames_per_auxhist2",
+    "time_control.gmt",
+    "time_control.ignore_iofields_warning",
+    "time_control.io_form_auxhist2",
+    "time_control.io_form_auxinput1",
+    "time_control.io_form_auxinput12",
+    "time_control.io_form_auxinput2",
+    "time_control.io_form_auxinput4",
+    "time_control.iofields_filename",
+    "time_control.julday",
+    "time_control.julyr",
+    "time_control.ncd_nofill",
+    "time_control.nwp_diagnostics",
+    "time_control.output_diagnostics",
+    "time_control.override_restart_intervals",
+    "wrf_cmaq.direct_sw_feedback",
+    "wrf_cmaq.feedback_restart",
+    "wrf_cmaq.met_file_tstep",
+    "wrf_cmaq.wrf_cmaq_freq",
+    "wrf_cmaq.wrf_cmaq_option"
+  ],
+  "changedShared": [
+    {
+      "key": "bdy_control.real_data_init_type",
+      "new": {
+        "comments": [
+          "real_data_init_type",
+          "REAL DATA INITIALIZATION OPTIONS: 1=SI, 2=MM5, 3=GENERIC",
+          "PRE-PROCESSOR TYPES"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer real_data_init_type     namelist,bdy_control\t\t1                 1    irh   \"real_data_init_type\"   \"REAL DATA INITIALIZATION OPTIONS: 1=SI, 2=MM5, 3=GENERIC\" \"PRE-PROCESSOR TYPES\"",
+      "old": {
+        "comments": [
+          "REAL DATA INITIALIZATION OPTIONS: 1=SI, 2=MM5, 3=GENERIC",
+          "real_data_init_type",
+          "PRE-PROCESSOR TYPES"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "chem.du_at_grnd",
+      "new": {
+        "comments": [
+          "O3 at ground",
+          "o3 Dobson units"
+        ],
+        "defaultValue": 300.0,
+        "entries": "1",
+        "io": "rh",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real      du_at_grnd      namelist,chem     1                  300.     rh     \"O3 at ground\"          \"O3 at ground\"                     \"o3 Dobson units\"",
+      "old": {
+        "comments": [
+          "O3 at ground",
+          "O3 at ground",
+          "o3 Dobson units"
+        ],
+        "defaultValue": 300.0,
+        "entries": "1",
+        "io": "rh",
+        "type": "real"
+      }
+    },
+    {
+      "key": "chem.fixed_ubc_inname",
+      "new": {
+        "comments": [
+          "name of ubc infile"
+        ],
+        "defaultValue": "",
+        "entries": "1",
+        "io": "h",
+        "type": "character"
+      },
+      "newRaw": "rconfig   character   fixed_ubc_inname    namelist,chem          1              \" \"      h    \"name of ubc infile\"  \"\"      \"\"",
+      "old": {
+        "comments": [
+          "name of ubc infile"
+        ],
+        "defaultValue": " ",
+        "entries": "1",
+        "io": "h",
+        "type": "character"
+      }
+    },
+    {
+      "key": "domains.blend_width",
+      "new": {
+        "comments": [
+          "blend_width",
+          "width of cg fg terrain blended zone"
+        ],
+        "defaultValue": 5,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer blend_width             namelist,domains\t1    5       h     \"blend_width\"  \"width of cg fg terrain blended zone\"      \"\"",
+      "old": {
+        "comments": [
+          "width of cg fg terrain blended zone",
+          "blend_width"
+        ],
+        "defaultValue": 5,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.dx",
+      "new": {
+        "comments": [
+          "dx",
+          "X HORIZONTAL RESOLUTION",
+          "METERS"
+        ],
+        "defaultValue": 200.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    dx                      namelist,domains     max_domains    200     h     \"dx\"        \"X HORIZONTAL RESOLUTION\"   \"METERS\"",
+      "old": {
+        "comments": [
+          "METERS",
+          "X HORIZONTAL RESOLUTION",
+          "dx"
+        ],
+        "defaultValue": 200.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "domains.dy",
+      "new": {
+        "comments": [
+          "dy",
+          "Y HORIZONTAL RESOLUTION",
+          "METERS"
+        ],
+        "defaultValue": 200.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    dy                      namelist,domains   \tmax_domains    200     h     \"dy\"        \"Y HORIZONTAL RESOLUTION\"   \"METERS\"",
+      "old": {
+        "comments": [
+          "METERS",
+          "dy",
+          "Y HORIZONTAL RESOLUTION"
+        ],
+        "defaultValue": 200.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "domains.force_sfc_in_vinterp",
+      "new": {
+        "comments": [
+          "force_sfc_in_vinterp",
+          "number of eta levels forced to use sfc in vert interp"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer force_sfc_in_vinterp    namelist,domains\t1              0       irh    \"force_sfc_in_vinterp\"   \"number of eta levels forced to use sfc in vert interp\"      \"\"",
+      "old": {
+        "comments": [
+          "number of eta levels forced to use sfc in vert interp",
+          "force_sfc_in_vinterp"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.ideal_init_method",
+      "new": {
+        "comments": [
+          "ideal_init_method",
+          "inside start_em: 1=alb from phb, 2=alb from t_init"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer ideal_init_method       namelist,domains\t1              1       irh    \"ideal_init_method\" \"inside start_em: 1=alb from phb, 2=alb from t_init\" \" \"",
+      "old": {
+        "comments": [
+          "ideal_init_method",
+          "inside start_em: 1=alb from phb, 2=alb from t_init",
+          " "
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.interp_type",
+      "new": {
+        "comments": [
+          "interp_type"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer interp_type             namelist,domains\t1              1       irh    \"interp_type\"                \"\"      \"\"",
+      "old": {
+        "comments": [
+          "1=interp in pressure, 2=interp in LOG pressure",
+          "interp_type"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.lagrange_order",
+      "new": {
+        "comments": [
+          "lagrange_order",
+          "1=linear, 2=quadratic vertical interpolation"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer lagrange_order          namelist,domains\t1              1       irh    \"lagrange_order\"   \"1=linear, 2=quadratic vertical interpolation\"      \"\"",
+      "old": {
+        "comments": [
+          "1=linear, 2=quadratic vertical interpolation, 9=cubic spline",
+          "1=linear, 2=quadratic vertical interpolation",
+          "lagrange_order"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.max_dz",
+      "new": {
+        "comments": [
+          "max_dz",
+          "maximum thickness limit for eta calc",
+          "m"
+        ],
+        "defaultValue": 1000.0,
+        "entries": "1",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real      max_dz          namelist,domains    1               1000.  -     \"max_dz\"   \"maximum thickness limit for eta calc\" \"m\"",
+      "old": {
+        "comments": [
+          "max_dz",
+          "maximum thickness limit for eta calc",
+          "m"
+        ],
+        "defaultValue": 1000.0,
+        "entries": "1",
+        "io": null,
+        "type": "real"
+      }
+    },
+    {
+      "key": "domains.shw",
+      "new": {
+        "comments": [
+          "stencil_half_width",
+          "HORIZONTAL INTERPOLATION STENCIL HALF-WIDTH",
+          "GRID POINTS"
+        ],
+        "defaultValue": 2,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer shw                     namelist,domains\tmax_domains    2       h     \"stencil_half_width\"   \"HORIZONTAL INTERPOLATION STENCIL HALF-WIDTH\"  \"GRID POINTS\"",
+      "old": {
+        "comments": [
+          "HORIZONTAL INTERPOLATION STENCIL HALF-WIDTH",
+          "GRID POINTS",
+          "stencil_half_width"
+        ],
+        "defaultValue": 2,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.time_step",
+      "new": {
+        "comments": [
+          "time_step"
+        ],
+        "defaultValue": "-",
+        "entries": "1",
+        "io": "ih",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer time_step               namelist,domains\t1             -       ih   \"time_step\"",
+      "old": {
+        "comments": [
+          "time_step"
+        ],
+        "defaultValue": null,
+        "entries": "1",
+        "io": "ih",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "domains.zap_close_levels",
+      "new": {
+        "comments": [
+          "zap_close_levels",
+          "delta p where level is removed in vert interp",
+          "Pa"
+        ],
+        "defaultValue": 500.0,
+        "entries": "1",
+        "io": "irh",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    zap_close_levels        namelist,domains\t1              500     irh    \"zap_close_levels\"   \"delta p where level is removed in vert interp\"      \"Pa\"",
+      "old": {
+        "comments": [
+          "Pa",
+          "delta p where level is removed in vert interp",
+          "zap_close_levels"
+        ],
+        "defaultValue": 500.0,
+        "entries": "1",
+        "io": "irh",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.base_lapse",
+      "new": {
+        "comments": [
+          "base_lapse",
+          "Base state temperature difference between base pres and 1/e of atm depth - do not change, real only",
+          "K"
+        ],
+        "defaultValue": 50.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    base_lapse              namelist,dynamics\t1              50.     h    \"base_lapse\" \"Base state temperature difference between base pres and 1/e of atm depth - do not change, real only\"      \"K\"",
+      "old": {
+        "comments": [
+          "Base state temperature difference between base pres and 1/e of atm depth - do not change, real only",
+          "base_lapse",
+          "K"
+        ],
+        "defaultValue": 50.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.base_lapse_strat",
+      "new": {
+        "comments": [
+          "base_lapse_strat,",
+          "Base state lapse rate ( dT / d(lnP) ) in stratosphere, std atm = -11 K/(ln delta p)",
+          "K"
+        ],
+        "defaultValue": -11.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    base_lapse_strat        namelist,dynamics     1             -11.     h    \"base_lapse_strat\", \"Base state lapse rate ( dT / d(lnP) ) in stratosphere, std atm = -11 K/(ln delta p)\" \"K\"",
+      "old": {
+        "comments": [
+          "base_lapse_strat",
+          ",",
+          "Base state lapse rate ( dT / d(lnP) ) in stratosphere, std atm = -11 K/(ln delta p)",
+          "K"
+        ],
+        "defaultValue": -11.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.base_pres",
+      "new": {
+        "comments": [
+          "base_pres",
+          "Base state pressure - do not change (10^5 Pa), real only",
+          "Pa"
+        ],
+        "defaultValue": 100000.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    base_pres               namelist,dynamics\t1          100000.     h    \"base_pres\"  \"Base state pressure - do not change (10^5 Pa), real only\"      \"Pa\"",
+      "old": {
+        "comments": [
+          "Pa",
+          "Base state pressure - do not change (10^5 Pa), real only",
+          "base_pres"
+        ],
+        "defaultValue": 100000.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.base_temp",
+      "new": {
+        "comments": [
+          "base_temp",
+          "Base state sea level temperature, real only",
+          "K"
+        ],
+        "defaultValue": 290.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    base_temp               namelist,dynamics\t1             290.     h    \"base_temp\"  \"Base state sea level temperature, real only\"      \"K\"",
+      "old": {
+        "comments": [
+          "base_temp",
+          "K",
+          "Base state sea level temperature, real only"
+        ],
+        "defaultValue": 290.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.tke_drag_coefficient",
+      "new": {
+        "comments": [
+          "tke_drag_coefficient"
+        ],
+        "defaultValue": 0.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    tke_drag_coefficient      namelist,dynamics\tmax_domains    0.      h    \"tke_drag_coefficient\"       \"\"      \"\"",
+      "old": {
+        "comments": [
+          "tke_drag_coefficient",
+          "dimensionless"
+        ],
+        "defaultValue": 0.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.tke_heat_flux",
+      "new": {
+        "comments": [
+          "tke_heat_flux"
+        ],
+        "defaultValue": 0.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    tke_heat_flux           namelist,dynamics\tmax_domains    0.      h    \"tke_heat_flux\"              \"\"      \"\"",
+      "old": {
+        "comments": [
+          "tke_heat_flux",
+          "K m s-1"
+        ],
+        "defaultValue": 0.0,
+        "entries": "max_domains",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "dynamics.use_q_diabatic",
+      "new": {
+        "comments": [
+          "use_q_diabatic",
+          "account for q diabatic terms in advection"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer use_q_diabatic          namelist,dynamics     1              0       rh    \"use_q_diabatic\" \"account for q diabatic terms in advection \"     \"\"",
+      "old": {
+        "comments": [
+          "use_q_diabatic",
+          "account for q diabatic terms in advection "
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "fire.fmoist_dt",
+      "new": {
+        "comments": [
+          "fmoist_dt",
+          "moisture model time step",
+          "s"
+        ],
+        "defaultValue": 600.0,
+        "entries": "max_domains",
+        "io": "hr",
+        "type": "real"
+      },
+      "newRaw": "rconfig real      fmoist_dt         namelist,fire  max_domains    600     hr   \"fmoist_dt  \"    \"moisture model time step\" \"s\"",
+      "old": {
+        "comments": [
+          "fmoist_dt  ",
+          "moisture model time step",
+          "s"
+        ],
+        "defaultValue": 600.0,
+        "entries": "max_domains",
+        "io": "hr",
+        "type": "real"
+      }
+    },
+    {
+      "key": "grib2.forecast_proc_id",
+      "new": {
+        "comments": [
+          "forecast_proc_id",
+          "Analysis and forecast processing id for grib2"
+        ],
+        "defaultValue": 255,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer forecast_proc_id        namelist,grib2 \t        1     255    rh    \"forecast_proc_id\"      \"Analysis and forecast processing id for grib2\"  \"\"",
+      "old": {
+        "comments": [
+          "Analysis and forecast processing id for grib2",
+          "forecast_proc_id"
+        ],
+        "defaultValue": 255,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "grib2.production_status",
+      "new": {
+        "comments": [
+          "production_status",
+          "Background processing id for grib2"
+        ],
+        "defaultValue": 255,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer production_status       namelist,grib2 \t        1     255    rh    \"production_status\"     \"Background processing id for grib2\"  \"\"",
+      "old": {
+        "comments": [
+          "Background processing id for grib2",
+          "production_status"
+        ],
+        "defaultValue": 255,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "noah_mp.opt_alb",
+      "new": {
+        "comments": [
+          "opt_alb",
+          "snow surface albedo (1->BATS; 2->CLASS; 3->SNICAR)"
+        ],
+        "defaultValue": 2,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer opt_alb     namelist,noah_mp      1           2         h    \"opt_alb\"  \"snow surface albedo (1->BATS; 2->CLASS; 3->SNICAR)\"   \"\"",
+      "old": {
+        "comments": [
+          "opt_alb",
+          "snow surface albedo (1->BATS; 2->CLASS)"
+        ],
+        "defaultValue": 2,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "perturbation.jcdfi_diag",
+      "new": {
+        "comments": [
+          "jcdfi_diag",
+          "JcDFI diag. on/off"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer jcdfi_diag                namelist,perturbation  1  1        -   \"jcdfi_diag\"  \"JcDFI diag. on/off\"      \"\"",
+      "old": {
+        "comments": [
+          "JcDFI diag. on/off",
+          "jcdfi_diag"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "perturbation.jcdfi_use",
+      "new": {
+        "comments": [
+          "jcdfi_use",
+          "JcDFI on/off"
+        ],
+        "defaultValue": false,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      },
+      "newRaw": "rconfig   logical jcdfi_use                 namelist,perturbation  1  .false.  -   \"jcdfi_use\"   \"JcDFI on/off\"      \"\"",
+      "old": {
+        "comments": [
+          "JcDFI on/off",
+          "jcdfi_use"
+        ],
+        "defaultValue": false,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      }
+    },
+    {
+      "key": "perturbation.trajectory_io",
+      "new": {
+        "comments": [
+          "0:disk IO;1:memory IO"
+        ],
+        "defaultValue": true,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      },
+      "newRaw": "rconfig   logical trajectory_io             namelist,perturbation  1  .true.   -  \"0:disk IO;1:memory IO\"   \"\"  \"\"",
+      "old": {
+        "comments": [
+          "false: disk IO; true: memory IO",
+          "0:disk IO;1:memory IO"
+        ],
+        "defaultValue": true,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      }
+    },
+    {
+      "key": "physics.bl_mynn_cloudmix",
+      "new": {
+        "comments": [
+          "bl_mynn_cloudmix",
+          "0:off,1:activate mixing of all cloud mass species"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     bl_mynn_cloudmix    namelist,physics      max_domains    1       irh      \"bl_mynn_cloudmix\"              \"0:off,1:activate mixing of all cloud mass species\"     \"\"",
+      "old": {
+        "comments": [
+          "bl_mynn_cloudmix",
+          "0:off,1:activate mixing of all cloud species"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.bl_mynn_edmf",
+      "new": {
+        "comments": [
+          "bl_mynn_edmf",
+          "0:off,1:activate implicit mass-flux,2:activate explicit mass-flux in mynn"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     bl_mynn_edmf        namelist,physics      max_domains    1       irh      \"bl_mynn_edmf\"                  \"0:off,1:activate implicit mass-flux,2:activate explicit mass-flux in mynn\"                    \"\"",
+      "old": {
+        "comments": [
+          "bl_mynn_edmf",
+          "0:off,1:activate mass-flux in mynn"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.bl_mynn_mixlength",
+      "new": {
+        "comments": [
+          "bl_mynn_mixlength",
+          "0:original,1:operational,2:new blending&cloud mix length"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     bl_mynn_mixlength   namelist,physics      1              1       irh      \"bl_mynn_mixlength\"             \"0:original,1:operational,2:new blending&cloud mix length\" \"\"",
+      "old": {
+        "comments": [
+          "bl_mynn_mixlength",
+          "0:original,1:RAP/HRRR,2:new blending&cloud mix length"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.bl_mynn_mixscalars",
+      "new": {
+        "comments": [
+          "bl_mynn_mixscalars",
+          "0:off,1:activate mixing of additional scalars in MYNN"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     bl_mynn_mixscalars  namelist,physics      max_domains    0       irh      \"bl_mynn_mixscalars\"            \"0:off,1:activate mixing of additional scalars in MYNN\"      \"\"",
+      "old": {
+        "comments": [
+          "bl_mynn_mixscalars",
+          "0:off,1:activate mixing of scalars (qnx, qnxfa) in MYNN"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.bucket_J",
+      "new": {
+        "comments": [
+          "bucket_J",
+          "bucket reset value for energy accumulations -1: inactive"
+        ],
+        "defaultValue": -1.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    bucket_J                namelist,physics      1             -1.      h     \"bucket_J\"  \"bucket reset value for energy accumulations -1: inactive\"   \"\"",
+      "old": {
+        "comments": [
+          "bucket_J",
+          "Alias of bucket_j"
+        ],
+        "defaultValue": -1.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.co2tf",
+      "new": {
+        "comments": [
+          "GFDL radiation co2 flag"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer co2tf                   namelist,physics\t1            0         -    \"GFDL radiation co2 flag\"  \"\"   \"\"",
+      "old": {
+        "comments": [
+          "co2tf",
+          "GFDL radiation co2 flag"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.megan_factors_file",
+      "new": {
+        "comments": [
+          "Megan2.1 emission factors"
+        ],
+        "defaultValue": "",
+        "entries": "1",
+        "io": "-",
+        "type": "character"
+      },
+      "newRaw": "rconfig   character  megan_factors_file   namelist,physics              1      \" \"        -     \"Megan2.1 emission factors\" \"\" \"\"",
+      "old": {
+        "comments": [
+          "Megan2.1 emission factors"
+        ],
+        "defaultValue": " ",
+        "entries": "1",
+        "io": "-",
+        "type": "character"
+      }
+    },
+    {
+      "key": "physics.megan_specifier",
+      "new": {
+        "comments": [
+          "map from Megan2.1 to WRF species"
+        ],
+        "defaultValue": "",
+        "entries": "max_mgnspc",
+        "io": "-",
+        "type": "character"
+      },
+      "newRaw": "rconfig   character  megan_specifier      namelist,physics     max_mgnspc      \" \"        -     \"map from Megan2.1 to WRF species\" \"\" \"\"",
+      "old": {
+        "comments": [
+          "map from Megan2.1 to WRF species"
+        ],
+        "defaultValue": " ",
+        "entries": "max_mgnspc",
+        "io": "-",
+        "type": "character"
+      }
+    },
+    {
+      "key": "physics.minDeepFreq",
+      "new": {
+        "comments": [
+          "Minimum frequency required for deep convection"
+        ],
+        "defaultValue": 1.0,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real minDeepFreq                namelist,physics      max_domains    1  -     \"Minimum frequency required for deep convection\"",
+      "old": {
+        "comments": [
+          "minDeepFreq",
+          "minimum frequency required before deep convection is allowed (0.333)"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.minShallowFreq",
+      "new": {
+        "comments": [
+          "Minimum frequency required for shallow convection"
+        ],
+        "defaultValue": 1.0,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real minShallowFreq             namelist,physics      max_domains    1  -     \"Minimum frequency required for shallow convection\"",
+      "old": {
+        "comments": [
+          "minShallowFreq",
+          "minimum frequency required before shallow convection is allowed (1.0e-2)"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.morr_rimed_ice",
+      "new": {
+        "comments": [
+          "morr_rimed_ice",
+          "Hail/Graupel switch for Morrison Scheme (options 10 and 40), 1:hail, 0:graupel"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer morr_rimed_ice          namelist,physics      1              1       rh    \"morr_rimed_ice \"          \"Hail/Graupel switch for Morrison Scheme (options 10 and 40), 1:hail, 0:graupel\"                                        \"\"",
+      "old": {
+        "comments": [
+          "morr_rimed_ice ",
+          "Hail/Graupel switch for Morrison Scheme (options 10 and 40), 1:hail, 0:graupel"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.mp_zero_out",
+      "new": {
+        "comments": [
+          "mp_zero_out",
+          "microphysics fields set to zero  0=no action taken, 1=all fields but Qv, 2=all fields including Qv",
+          "flag"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer mp_zero_out             namelist,physics\t1             0       -      \"mp_zero_out\"  \"microphysics fields set to zero  0=no action taken, 1=all fields but Qv, 2=all fields including Qv\"      \"flag\"",
+      "old": {
+        "comments": [
+          "flag",
+          "microphysics fields set to zero  0=no action taken, 1=all fields but Qv, 2=all fields including Qv",
+          "mp_zero_out"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.mp_zero_out_thresh",
+      "new": {
+        "comments": [
+          "mp_zero_out_thresh",
+          "minimum threshold for non-Qv moist fields, below are set to zero",
+          "kg/kg"
+        ],
+        "defaultValue": 1e-08,
+        "entries": "1",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real mp_zero_out_thresh         namelist,physics\t1          1.e-8      -      \"mp_zero_out_thresh\"  \"minimum threshold for non-Qv moist fields, below are set to zero\"  \"kg/kg\"",
+      "old": {
+        "comments": [
+          "minimum threshold for non-Qv moist fields, below are set to zero",
+          "mp_zero_out_thresh",
+          "kg/kg"
+        ],
+        "defaultValue": 1e-08,
+        "entries": "1",
+        "io": "-",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.nssl_hail_on",
+      "new": {
+        "comments": [
+          "NSSL Hail flag"
+        ],
+        "defaultValue": -1,
+        "entries": "1",
+        "io": "rh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer  nssl_hail_on           namelist,physics      1            -1       rh       \"NSSL Hail flag\"  \"\"      \"\"",
+      "old": {
+        "comments": [
+          "NSSL Hail flag"
+        ],
+        "defaultValue": -1,
+        "entries": "max_domains",
+        "io": "rh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.num_snow_layers",
+      "new": {
+        "comments": [
+          "num_snow_layers",
+          "number of snow layer noahmp"
+        ],
+        "defaultValue": 3,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer num_snow_layers         namelist,physics\t1             3       irh    \"num_snow_layers\"               \"number of snow layer noahmp\"      \"\"",
+      "old": {
+        "comments": [
+          "num_snow_layers"
+        ],
+        "defaultValue": 3,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.num_snso_layers",
+      "new": {
+        "comments": [
+          "num_snso_layers",
+          "number of snow & soil layers noahmp"
+        ],
+        "defaultValue": 7,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer num_snso_layers         namelist,physics\t1             7       irh    \"num_snso_layers\"               \"number of snow & soil layers noahmp\"      \"\"",
+      "old": {
+        "comments": [
+          "num_snso_layers"
+        ],
+        "defaultValue": 7,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.physics_suite",
+      "new": {
+        "comments": [
+          "Physics suite selection",
+          "physics suite to use for all domains: CONUS, tropical, or none",
+          "character string"
+        ],
+        "defaultValue": null,
+        "entries": "1",
+        "io": "rh",
+        "type": "character"
+      },
+      "newRaw": "rconfig   character  physics_suite        namelist,physics      1           \"none\" rh \"Physics suite selection\" \"physics suite to use for all domains: CONUS, tropical, or none\" \"character string\"",
+      "old": {
+        "comments": [
+          "Physics suite selection",
+          "physics suite to use for all domains: CONUS, tropical, or none",
+          "character string"
+        ],
+        "defaultValue": "none",
+        "entries": "1",
+        "io": "rh",
+        "type": "character"
+      }
+    },
+    {
+      "key": "physics.seaice_threshold",
+      "new": {
+        "comments": [
+          "seaice_threshold",
+          "tsk below which which water points are set to sea ice for slab scheme",
+          "K"
+        ],
+        "defaultValue": 100.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real    seaice_threshold        namelist,physics\t1            100       h    \"seaice_threshold\"  \"tsk below which which water points are set to sea ice for slab scheme\"   \"K\"",
+      "old": {
+        "comments": [
+          "tsk below which which water points are set to sea ice for slab scheme",
+          "seaice_threshold",
+          "K"
+        ],
+        "defaultValue": 100.0,
+        "entries": "1",
+        "io": "h",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.shcu_aerosols_opt",
+      "new": {
+        "comments": [
+          "aerosols in shcu:  0=none, 2=prognostic"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer shcu_aerosols_opt       namelist,physics      max_domains    0  -     \"aerosols in shcu:  0=none, 2=prognostic \"  \"\"",
+      "old": {
+        "comments": [
+          "aerosols in shcu:  0=none, 2=prognostic "
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.sst_update",
+      "new": {
+        "comments": [
+          "sst_update",
+          "update sst from wrflowinp file  0=no, 1=yes"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer sst_update              namelist,physics\t1            0         h    \"sst_update\"  \"update sst from wrflowinp file  0=no, 1=yes\"   \"\"",
+      "old": {
+        "comments": [
+          "update sst from wrflowinp file  0=no, 1=yes",
+          "sst_update"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "h",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.surface_input_source",
+      "new": {
+        "comments": [
+          "surface_input_source",
+          "1=static (fractional), 2=time dependent (dominant), 3=hybrid (not yet implemented)"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer surface_input_source    namelist,physics\t1             1       irh    \"surface_input_source\"          \"1=static (fractional), 2=time dependent (dominant), 3=hybrid (not yet implemented)\"      \"\"",
+      "old": {
+        "comments": [
+          "1=static (fractional), 2=time dependent (dominant), 3=dominant cateogry from metgrid",
+          "1=static (fractional), 2=time dependent (dominant), 3=hybrid (not yet implemented)",
+          "surface_input_source"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "physics.thBinSize",
+      "new": {
+        "comments": [
+          "bin size of theta bins of PDF"
+        ],
+        "defaultValue": 1.0,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real thBinSize                  namelist,physics      max_domains    1  -     \"bin size of theta bins of PDF\"",
+      "old": {
+        "comments": [
+          "thBinSize",
+          "bin size of potential temperature perturbation increment (0.01 K)"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "-",
+        "type": "real"
+      }
+    },
+    {
+      "key": "physics.wif_fire_emit",
+      "new": {
+        "comments": [
+          "wif_fire_emit",
+          "Activate biomass burning emissionsu in Thompson-MP-Aero"
+        ],
+        "defaultValue": false,
+        "entries": "1",
+        "io": "irh",
+        "type": "logical"
+      },
+      "newRaw": "rconfig   logical wif_fire_emit           namelist,physics      1              .false. irh   \"wif_fire_emit\"  \"Activate biomass burning emissionsu in Thompson-MP-Aero\"  \" \"",
+      "old": {
+        "comments": [
+          "wif_fire_emit",
+          "Activate biomass burning emissionsu in Thompson-MP-Aero",
+          " "
+        ],
+        "defaultValue": false,
+        "entries": "1",
+        "io": "irh",
+        "type": "logical"
+      }
+    },
+    {
+      "key": "physics.wif_fire_inj",
+      "new": {
+        "comments": [
+          "wif_fire_inj",
+          "Vertically distribute biomass burning emissions in Thompson-MP-Aero"
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer wif_fire_inj            namelist,physics      max_domains    1       irh   \"wif_fire_inj\"   \"Vertically distribute biomass burning emissions in Thompson-MP-Aero\"  \" \"",
+      "old": {
+        "comments": [
+          "wif_fire_inj",
+          "Vertically distribute biomass burning emissions in Thompson-MP-Aero",
+          " "
+        ],
+        "defaultValue": 1,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.iseed_rand_pert",
+      "new": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT"
+        ],
+        "defaultValue": 17,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     iseed_rand_pert         namelist,stoch      1                    17  - \"ISEED_RAND_PERT\"       \"RANDOM SEED FOR RAND_PERT \"  \"\"",
+      "old": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT "
+        ],
+        "defaultValue": 17,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.iseed_spp_conv",
+      "new": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT"
+        ],
+        "defaultValue": 171,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     iseed_spp_conv         namelist,stoch      1                   171  - \"ISEED_RAND_PERT\"       \"RANDOM SEED FOR RAND_PERT \"  \"\"",
+      "old": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT "
+        ],
+        "defaultValue": 171,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.iseed_spp_lsm",
+      "new": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT"
+        ],
+        "defaultValue": 317,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     iseed_spp_lsm         namelist,stoch      1                   317  - \"ISEED_RAND_PERT\"       \"RANDOM SEED FOR RAND_PERT \"  \"\"",
+      "old": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT "
+        ],
+        "defaultValue": 317,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.iseed_spp_pbl",
+      "new": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT"
+        ],
+        "defaultValue": 217,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     iseed_spp_pbl         namelist,stoch      1                   217  - \"ISEED_RAND_PERT\"       \"RANDOM SEED FOR RAND_PERT \"  \"\"",
+      "old": {
+        "comments": [
+          "ISEED_RAND_PERT",
+          "RANDOM SEED FOR RAND_PERT "
+        ],
+        "defaultValue": 217,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.iseed_sppt",
+      "new": {
+        "comments": [
+          "ISEED_SPPT",
+          "RANDOM SEED FOR SPPT"
+        ],
+        "defaultValue": 53,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     iseed_sppt              namelist,stoch      1                     53  - \"ISEED_SPPT\"            \"RANDOM SEED FOR SPPT \"  \"\"",
+      "old": {
+        "comments": [
+          "ISEED_SPPT",
+          "RANDOM SEED FOR SPPT "
+        ],
+        "defaultValue": 53,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.nens",
+      "new": {
+        "comments": [
+          "random number seed for ensemble members"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer     nens                namelist,stoch      1        1         - \"random number seed for ensemble members \"    \"\"   \"\"",
+      "old": {
+        "comments": [
+          "random number seed for ensemble members "
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "stoch.rexponent_t",
+      "new": {
+        "comments": [
+          "spectral slope of forcing for theta"
+        ],
+        "defaultValue": -1.83,
+        "entries": "1",
+        "io": "-",
+        "type": "real"
+      },
+      "newRaw": "rconfig   real        rexponent_t         namelist,stoch      1             -1.83      - \"spectral slope of forcing for theta \"    \"\" \"\"",
+      "old": {
+        "comments": [
+          "spectral slope of forcing for theta "
+        ],
+        "defaultValue": -1.83,
+        "entries": "1",
+        "io": "-",
+        "type": "real"
+      }
+    },
+    {
+      "key": "time_control.end_day",
+      "new": {
+        "comments": [
+          "end_day",
+          "2 DIGIT DAY OF THE MONTH OF END OF MODEL, 1-31",
+          "DAYS"
+        ],
+        "defaultValue": 14,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer end_day                 namelist,time_control\t\tmax_domains      14    irh   \"end_day\"               \"2 DIGIT DAY OF THE MONTH OF END OF MODEL, 1-31\" \"DAYS\"",
+      "old": {
+        "comments": [
+          "2 DIGIT DAY OF THE MONTH OF END OF MODEL, 1-31",
+          "DAYS",
+          "end_day"
+        ],
+        "defaultValue": 14,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.end_minute",
+      "new": {
+        "comments": [
+          "end_minute",
+          "2 DIGIT MINUTE OF THE HOUR OF END OF MODEL, 0-59",
+          "MINUTES"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer end_minute              namelist,time_control\t\tmax_domains      00    irh   \"end_minute\"            \"2 DIGIT MINUTE OF THE HOUR OF END OF MODEL, 0-59\" \"MINUTES\"",
+      "old": {
+        "comments": [
+          "end_minute",
+          "MINUTES",
+          "2 DIGIT MINUTE OF THE HOUR OF END OF MODEL, 0-59"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.end_second",
+      "new": {
+        "comments": [
+          "end_second",
+          "2 DIGIT SECOND OF THE MINUTE OF END OF MODEL, 0-59",
+          "SECONDS"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer end_second              namelist,time_control\t\tmax_domains      00    irh   \"end_second\"            \"2 DIGIT SECOND OF THE MINUTE OF END OF MODEL, 0-59\" \"SECONDS\"",
+      "old": {
+        "comments": [
+          "2 DIGIT SECOND OF THE MINUTE OF END OF MODEL, 0-59",
+          "end_second",
+          "SECONDS"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.end_year",
+      "new": {
+        "comments": [
+          "end_year",
+          "4 DIGIT YEAR OF END OF MODEL",
+          "YEARS"
+        ],
+        "defaultValue": 1993,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer end_year                namelist,time_control\t\tmax_domains    1993    irh   \"end_year\"              \"4 DIGIT YEAR OF END OF MODEL\" \"YEARS\"",
+      "old": {
+        "comments": [
+          "end_year",
+          "YEARS",
+          "4 DIGIT YEAR OF END OF MODEL"
+        ],
+        "defaultValue": 1993,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.run_days",
+      "new": {
+        "comments": [
+          "run_days",
+          "NUMBER OF DAYS TO RUN"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer run_days                namelist,time_control\t\t1             0       irh   \"run_days\"              \"NUMBER OF DAYS TO RUN\"",
+      "old": {
+        "comments": [
+          "NUMBER OF DAYS TO RUN",
+          "run_days"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.run_minutes",
+      "new": {
+        "comments": [
+          "run_minutes",
+          "NUMBER OF MINUTES TO RUN"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer run_minutes             namelist,time_control\t\t1             0       irh   \"run_minutes\"           \"NUMBER OF MINUTES TO RUN\"",
+      "old": {
+        "comments": [
+          "NUMBER OF MINUTES TO RUN",
+          "run_minutes"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.run_seconds",
+      "new": {
+        "comments": [
+          "run_seconds",
+          "NUMBER OF SECONDS TO RUN"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer run_seconds             namelist,time_control\t\t1             0       irh   \"run_seconds\"           \"NUMBER OF SECONDS TO RUN\"",
+      "old": {
+        "comments": [
+          "NUMBER OF SECONDS TO RUN",
+          "run_seconds"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.start_hour",
+      "new": {
+        "comments": [
+          "start_hour",
+          "2 DIGIT HOUR OF THE DAY OF START OF MODEL, 0-23",
+          "HOURS"
+        ],
+        "defaultValue": 12,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer start_hour              namelist,time_control\t\tmax_domains      12    irh   \"start_hour\"            \"2 DIGIT HOUR OF THE DAY OF START OF MODEL, 0-23\" \"HOURS\"",
+      "old": {
+        "comments": [
+          "start_hour",
+          "HOURS",
+          "2 DIGIT HOUR OF THE DAY OF START OF MODEL, 0-23"
+        ],
+        "defaultValue": 12,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.start_minute",
+      "new": {
+        "comments": [
+          "start_minute",
+          "2 DIGIT MINUTE OF THE HOUR OF START OF MODEL, 0-59",
+          "MINUTES"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer start_minute            namelist,time_control\t\tmax_domains      00    irh   \"start_minute\"          \"2 DIGIT MINUTE OF THE HOUR OF START OF MODEL, 0-59\" \"MINUTES\"",
+      "old": {
+        "comments": [
+          "MINUTES",
+          "2 DIGIT MINUTE OF THE HOUR OF START OF MODEL, 0-59",
+          "start_minute"
+        ],
+        "defaultValue": 0,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "time_control.start_year",
+      "new": {
+        "comments": [
+          "start_year",
+          "4 DIGIT YEAR OF START OF MODEL",
+          "YEARS"
+        ],
+        "defaultValue": 1993,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer start_year              namelist,time_control \tmax_domains    1993    irh   \"start_year\"            \"4 DIGIT YEAR OF START OF MODEL\" \"YEARS\"",
+      "old": {
+        "comments": [
+          "start_year",
+          "YEARS",
+          "4 DIGIT YEAR OF START OF MODEL"
+        ],
+        "defaultValue": 1993,
+        "entries": "max_domains",
+        "io": "irh",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "wrfvar14.thinning",
+      "new": {
+        "comments": [
+          "thinning"
+        ],
+        "defaultValue": true,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      },
+      "newRaw": "rconfig   logical   thinning                namelist,wrfvar14  1  .true.   - \"thinning \"               \"\"  \"\"",
+      "old": {
+        "comments": [
+          "thinning "
+        ],
+        "defaultValue": true,
+        "entries": "1",
+        "io": "-",
+        "type": "logical"
+      }
+    },
+    {
+      "key": "wrfvar19.pseudo_var",
+      "new": {
+        "comments": [
+          "pseudo_var"
+        ],
+        "defaultValue": true,
+        "entries": "1",
+        "io": "-",
+        "type": "character"
+      },
+      "newRaw": "rconfig   character pseudo_var              namelist,wrfvar19  1  \"t\"                        -  \"pseudo_var\"         \"\"  \"\"",
+      "old": {
+        "comments": [
+          "pseudo_var"
+        ],
+        "defaultValue": "t",
+        "entries": "1",
+        "io": "-",
+        "type": "character"
+      }
+    },
+    {
+      "key": "wrfvarchem.chem_cv_options",
+      "new": {
+        "comments": [
+          "chem_cv_options",
+          "0:off, 10:gocart, 20:mosaic 108:racm_soa_vbs"
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer   chem_cv_options         namelist,wrfvarchem  1  0        - \"chem_cv_options\"          \"0:off, 10:gocart, 20:mosaic 108:racm_soa_vbs \"  \"\"",
+      "old": {
+        "comments": [
+          "chem_cv_options",
+          "0:off, 10:gocart, 20:mosaic 108:racm_soa_vbs "
+        ],
+        "defaultValue": 0,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    },
+    {
+      "key": "wrfvarchem.chemicda_opt",
+      "new": {
+        "comments": [
+          "chemicda_opt"
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      },
+      "newRaw": "rconfig   integer   chemicda_opt            namelist,wrfvarchem  1  1        - \"chemicda_opt\"             \" \"   \" \"",
+      "old": {
+        "comments": [
+          "chemicda_opt",
+          " ",
+          " "
+        ],
+        "defaultValue": 1,
+        "entries": "1",
+        "io": "-",
+        "type": "integer"
+      }
+    }
+  ],
+  "metadata": {
+    "baseline": {
+      "intendedBaseline": "WRF 4.7.1 stable catalog",
+      "path": "data/raw/namelist.input.registry.wrf_compat.baseline.json"
+    },
+    "counts": {
+      "baselineOnlyLegacy": 83,
+      "baselineVariables": 1782,
+      "changedShared": 73,
+      "newIn48x": 108,
+      "overlayVariables": 1807,
+      "parsedRconfigVariables": 1807,
+      "sourceFiles": 42
+    },
+    "generated_at": "2026-07-31T04:44:34.641433+00:00",
+    "source": {
+      "registryDir": "data/raw/wrf/4.8.1-dev/Registry",
+      "sourceBranch": "release-v4.8.1",
+      "versionLabel": "4.8.1-dev"
+    },
+    "title": "WRF 4.8.1-dev namelist.input Registry overlay"
+  },
+  "newIn48x": [
+    "chem.BIOEMDT",
+    "chem.CAM_MP_MAM_cpled",
+    "chem.CHEMDT",
+    "chem.N_CG",
+    "chem.N_IC",
+    "chem.PHOTDT",
+    "cordex.convxtrm_diag",
+    "cordex.fogvars",
+    "cordex.fogvisibility_diag",
+    "cordex.hhursrng",
+    "cordex.htasrng",
+    "cordex.latdbg",
+    "cordex.lhursrng",
+    "cordex.londbg",
+    "cordex.ltasrng",
+    "cordex.nhhursrng",
+    "cordex.nhtashursrng",
+    "cordex.nhtasrng",
+    "cordex.nlhursrng",
+    "cordex.nltashursrng",
+    "cordex.nltasrng",
+    "cordex.nwbdsrng",
+    "cordex.nwbdswssrng",
+    "cordex.nwssrng",
+    "cordex.output_cordex",
+    "cordex.output_wb",
+    "cordex.potevp_diag",
+    "cordex.psl_diag",
+    "cordex.psmooth",
+    "cordex.ptarget",
+    "cordex.timedbg",
+    "cordex.wbdsrng",
+    "cordex.wgsts_wbdswsstres",
+    "cordex.wsgs_diag",
+    "cordex.wssrng",
+    "cordex.wsz100_diag",
+    "cordex.z100m_wind",
+    "cordex.z50m",
+    "cordex.zmlagen_diag",
+    "cordex.zmlagen_dqv",
+    "cordex.zmlagen_dtheta",
+    "dynamics.gwd_dx_factor",
+    "dynamics.gwd_if_nonhyd",
+    "fdda.FGDT",
+    "fdda.FGDTZERO",
+    "noah_mp.opt_compact",
+    "noah_mp.opt_runsrf",
+    "noah_mp.opt_runsub",
+    "noah_mp.opt_scf",
+    "noah_mp.opt_tksno",
+    "noah_mp.opt_wetland",
+    "noah_mp.snicar_aerosol_readtable",
+    "noah_mp.snicar_bandnumber_opt",
+    "noah_mp.snicar_dustoptics_opt",
+    "noah_mp.snicar_rtsolver_opt",
+    "noah_mp.snicar_snowbc_intmix",
+    "noah_mp.snicar_snowdust_intmix",
+    "noah_mp.snicar_snowoptics_opt",
+    "noah_mp.snicar_snowshape_opt",
+    "noah_mp.snicar_solarspec_opt",
+    "noah_mp.snicar_use_aerosol",
+    "noah_mp.snicar_use_oc",
+    "perturbation.check_AD",
+    "perturbation.check_TL",
+    "physics.BLDT",
+    "physics.CCNTY",
+    "physics.CUDT",
+    "physics.GSMDT",
+    "physics.HAILDT",
+    "physics.ICLOUD",
+    "physics.IFSNOW",
+    "physics.ISFFLX",
+    "physics.OMDT",
+    "physics.WTDDT",
+    "physics.bl_mynn_edmf_dd",
+    "physics.bl_mynn_ess",
+    "physics.bl_mynn_mixaerosols",
+    "physics.bl_mynn_mixnumcon",
+    "physics.coul_neg",
+    "physics.coul_neu",
+    "physics.coul_pos",
+    "physics.default_soiltype",
+    "physics.dyn_lightning_option",
+    "physics.j_neg",
+    "physics.j_neu",
+    "physics.j_pos",
+    "physics.kim_tofd",
+    "physics.nssl_ssat_output",
+    "physics.numBins",
+    "physics.num_light_periods",
+    "physics.num_radn_layers",
+    "physics.rBinSize",
+    "physics.sf_mynn_sfcflux_land",
+    "physics.sf_mynn_sfcflux_water",
+    "physics.shinhong_ke_dissipation",
+    "physics.shinhong_nonlocal_flux",
+    "physics.shinhong_scu_mixing",
+    "physics.tempo_aerosolaware",
+    "physics.tempo_hailaware",
+    "physics.tofd_factor",
+    "physics.windfarm_induction",
+    "scm.scm_soilT_force",
+    "stoch.ISEED_SKEBS",
+    "time_control.GMT",
+    "time_control.JULDAY",
+    "time_control.JULYR",
+    "time_control.iau",
+    "time_control.iau_time_window_sec"
+  ],
+  "releaseNoteTargetAudit": [
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "dyn_lightning_option",
+      "overlayHits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.dyn_lightning_option",
+          "raw": "rconfig   integer dyn_lightning_option          namelist,physics         max_domains    0       rh    \"dynlight\"            \"Dynamic Lightning Scheme option, 1: on\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/registry.dyn_light"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "tempo_aerosolaware",
+      "overlayHits": [
+        {
+          "defaultValue": 0,
+          "entries": "1",
+          "key": "physics.tempo_aerosolaware",
+          "raw": "rconfig   integer  tempo_aerosolaware     namelist,physics      1             0       rh       \"TEMPO aerosol-aware flag\"  \"\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "tempo_hailaware",
+      "overlayHits": [
+        {
+          "defaultValue": 0,
+          "entries": "1",
+          "key": "physics.tempo_hailaware",
+          "raw": "rconfig   integer  tempo_hailaware        namelist,physics      1             0       rh       \"TEMPO hail-aware flag\"  \"\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "shinhong_scu_mixing",
+      "overlayHits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.shinhong_scu_mixing",
+          "raw": "rconfig   logical     shinhong_scu_mixing namelist,physics      max_domains    .false.  rh      \"shinhong_scu_mixing\"           \"strato-cumulus(scu ) downdraft mixing for shinhong pbl\"     \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "shinhong_nonlocal_flux",
+      "overlayHits": [
+        {
+          "defaultValue": true,
+          "entries": "max_domains",
+          "key": "physics.shinhong_nonlocal_flux",
+          "raw": "rconfig   logical     shinhong_nonlocal_flux namelist,physics      max_domains    .true.  rh      \"shinhong_nonlocal_flux\"     \".false.:counter-gradient (ysu), .true.:shinhong-LES type nonlocal flux\"     \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "shinhong_ke_dissipation",
+      "overlayHits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.shinhong_ke_dissipation",
+          "raw": "rconfig   logical     shinhong_ke_dissipation namelist,physics      max_domains    .false.  rh      \"shinhong_ke_dissipation\"     \"additional heating due to kinetic energy dissipation\"     \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "bl_mynn_mixaerosols",
+      "overlayHits": [
+        {
+          "defaultValue": 1,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixaerosols",
+          "raw": "rconfig   integer     bl_mynn_mixaerosols namelist,physics      max_domains    1       irh      \"bl_mynn_mixaerosols\"           \"0:off,1:activate mixing of aerosols (qnifa, qnwfa) in MYNN\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "bl_mynn_mixnumcon",
+      "overlayHits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixnumcon",
+          "raw": "rconfig   integer     bl_mynn_mixnumcon   namelist,physics      max_domains    0       irh      \"bl_mynn_mixnumcon\"             \"0:off,1:activate mixing of number concentrations (qnc, qni) in MYNN\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixscalars",
+          "sources": [
+            "Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ],
+      "inBaseline471": true,
+      "inOverlay48x": true,
+      "name": "bl_mynn_mixscalars",
+      "overlayHits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixscalars",
+          "raw": "rconfig   integer     bl_mynn_mixscalars  namelist,physics      max_domains    0       irh      \"bl_mynn_mixscalars\"            \"0:off,1:activate mixing of additional scalars in MYNN\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "kim_tofd",
+      "overlayHits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.kim_tofd",
+          "raw": "rconfig   logical kim_tofd                namelist,physics      max_domains   .false.  rh    \"kim_tofd\"   \"turbulent form drag (tofd) option for kim gravity wave drag\"   \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "gwd_dx_factor",
+      "overlayHits": [
+        {
+          "defaultValue": 2.0,
+          "entries": "max_domains",
+          "key": "dynamics.gwd_dx_factor",
+          "raw": "rconfig   real    gwd_dx_factor           namelist,dynamics     max_domains    2.   rh    \"gwd_dx_factor\" \"effective grid factor for kim gravity wave drag\"   \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "real"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "gwd_if_nonhyd",
+      "overlayHits": [
+        {
+          "defaultValue": true,
+          "entries": "max_domains",
+          "key": "dynamics.gwd_if_nonhyd",
+          "raw": "rconfig   logical gwd_if_nonhyd           namelist,dynamics     max_domains   .true.  rh   \"gwd_if_nonhyd\" \"non_hydrostatic option for kim gravity wave drag\"   \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical"
+        }
+      ]
+    },
+    {
+      "baselineHits": [],
+      "inBaseline471": false,
+      "inOverlay48x": true,
+      "name": "windfarm_induction",
+      "overlayHits": [
+        {
+          "defaultValue": 1,
+          "entries": "1",
+          "key": "physics.windfarm_induction",
+          "raw": "rconfig   integer     windfarm_induction  namelist,physics      1              1       rh       \"Fitch axial induction correction\"        \"\"      \"\"",
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer"
+        }
+      ]
+    }
+  ]
+}

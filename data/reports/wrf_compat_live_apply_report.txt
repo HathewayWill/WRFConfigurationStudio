@@ -1,0 +1,72 @@
+WRF 4.7.1 + 4.8.x live catalog apply report
+================================================================
+generated: 2026-07-31T04:51:37.635812+00:00
+backup_dir: data/reports/backups/before_wrf_471_48x_apply_20260731T045137Z
+
+Counts
+================================================================
+baselineVariablesCanonical: 1778
+caseDuplicateKeysResolved: 31
+caseRemappedSharedVariables: 27
+changedSharedVariablesCanonical: 74
+groupCount: 47
+legacy471OnlyVariablesCanonical: 52
+mergedVariablesCanonical: 1859
+new48xVariablesCanonical: 81
+overlayVariablesCanonical: 1807
+sharedVariablesCanonical: 1726
+unchangedSharedVariablesCanonical: 1652
+
+Target audit: raw registry
+================================================================
+physics.dyn_lightning_option: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_aerosolaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_hailaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_scu_mixing: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_nonlocal_flux: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_ke_dissipation: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixaerosols: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixnumcon: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixscalars: FOUND default=0 type=integer status=active presentIn=['4.7.1', '4.8.1-dev']
+physics.kim_tofd: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_dx_factor: FOUND default=2.0 type=real status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_if_nonhyd: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.windfarm_induction: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_land: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_water: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+
+Target audit: runtime input catalog
+================================================================
+physics.dyn_lightning_option: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_aerosolaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_hailaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_scu_mixing: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_nonlocal_flux: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_ke_dissipation: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixaerosols: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixnumcon: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixscalars: FOUND default=0 type=integer status=active presentIn=['4.7.1', '4.8.1-dev']
+physics.kim_tofd: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_dx_factor: FOUND default=2.0 type=real status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_if_nonhyd: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.windfarm_induction: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_land: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_water: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+
+Target audit: JS bundle registry
+================================================================
+physics.dyn_lightning_option: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_aerosolaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.tempo_hailaware: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_scu_mixing: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_nonlocal_flux: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.shinhong_ke_dissipation: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixaerosols: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixnumcon: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.bl_mynn_mixscalars: FOUND default=0 type=integer status=active presentIn=['4.7.1', '4.8.1-dev']
+physics.kim_tofd: FOUND default=False type=logical status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_dx_factor: FOUND default=2.0 type=real status=new_48x presentIn=['4.8.1-dev']
+dynamics.gwd_if_nonhyd: FOUND default=True type=logical status=new_48x presentIn=['4.8.1-dev']
+physics.windfarm_induction: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_land: FOUND default=0 type=integer status=new_48x presentIn=['4.8.1-dev']
+physics.sf_mynn_sfcflux_water: FOUND default=1 type=integer status=new_48x presentIn=['4.8.1-dev']

@@ -1,233 +1,214 @@
 {
-  "version": "V3.1.0-beta-full-catalog-merged-fixes",
   "groups": [
     {
-      "group": "physics",
-      "count": 278
+      "count": 14,
+      "group": "afwa"
     },
     {
-      "group": "fire",
-      "count": 164
+      "count": 22,
+      "group": "bdy_control"
     },
     {
-      "group": "domains",
-      "count": 131
+      "count": 118,
+      "group": "chem"
     },
     {
-      "group": "fdda",
-      "count": 126
+      "count": 35,
+      "group": "cordex"
     },
     {
-      "group": "chem",
-      "count": 118
+      "count": 19,
+      "group": "dfi_control"
     },
     {
-      "group": "time_control",
-      "count": 118
+      "count": 14,
+      "group": "diags"
     },
     {
-      "group": "unknown",
-      "count": 114
+      "count": 132,
+      "group": "domains"
     },
     {
-      "group": "stoch",
-      "count": 96
+      "count": 91,
+      "group": "dynamics"
     },
     {
-      "group": "dynamics",
-      "count": 87
+      "count": 126,
+      "group": "fdda"
     },
     {
-      "group": "wrfvar4",
-      "count": 82
+      "count": 164,
+      "group": "fire"
     },
     {
-      "group": "wrfvar14",
-      "count": 67
+      "count": 4,
+      "group": "grib2"
     },
     {
-      "group": "wrfvar5",
-      "count": 64
+      "count": 1,
+      "group": "ideal"
     },
     {
-      "group": "wrfvar7",
-      "count": 35
+      "count": 3,
+      "group": "namelist_adios2"
     },
     {
-      "group": "wrfvar1",
-      "count": 30
+      "count": 41,
+      "group": "noah_mp"
     },
     {
-      "group": "scm",
-      "count": 25
+      "count": 17,
+      "group": "obs_opt"
     },
     {
-      "group": "noah_mp",
-      "count": 24
+      "count": 24,
+      "group": "perturbation"
     },
     {
-      "group": "perturbation",
-      "count": 24
+      "count": 306,
+      "group": "physics"
     },
     {
-      "group": "wrfvar13",
-      "count": 24
+      "count": 5,
+      "group": "pio_control"
     },
     {
-      "group": "bdy_control",
-      "count": 22
+      "count": 17,
+      "group": "radar_da"
     },
     {
-      "group": "wrfvar2",
-      "count": 20
+      "count": 25,
+      "group": "scm"
     },
     {
-      "group": "dfi_control",
-      "count": 19
+      "count": 96,
+      "group": "stoch"
     },
     {
-      "group": "wrfvar11",
-      "count": 19
+      "count": 9,
+      "group": "tc"
     },
     {
-      "group": "wrfvar12",
-      "count": 18
+      "count": 129,
+      "group": "time_control"
     },
     {
-      "group": "obs_opt",
-      "count": 17
+      "count": 5,
+      "group": "wrf_cmaq"
     },
     {
-      "group": "radar_da",
-      "count": 17
+      "count": 30,
+      "group": "wrfvar1"
     },
     {
-      "group": "wrfvar9",
-      "count": 15
+      "count": 6,
+      "group": "wrfvar10"
     },
     {
-      "group": "afwa",
-      "count": 14
+      "count": 19,
+      "group": "wrfvar11"
     },
     {
-      "group": "diags",
-      "count": 14
+      "count": 18,
+      "group": "wrfvar12"
     },
     {
-      "group": "wrfvar16",
-      "count": 14
+      "count": 24,
+      "group": "wrfvar13"
     },
     {
-      "group": "wrfvar6",
-      "count": 14
+      "count": 67,
+      "group": "wrfvar14"
     },
     {
-      "group": "tc",
-      "count": 9
+      "count": 8,
+      "group": "wrfvar15"
     },
     {
-      "group": "wrfvar15",
-      "count": 8
+      "count": 14,
+      "group": "wrfvar16"
     },
     {
-      "group": "wrfvarchem",
-      "count": 8
+      "count": 4,
+      "group": "wrfvar17"
     },
     {
-      "group": "wrfvar10",
-      "count": 6
+      "count": 1,
+      "group": "wrfvar18"
     },
     {
-      "group": "pio_control",
-      "count": 5
+      "count": 1,
+      "group": "wrfvar19"
     },
     {
-      "group": "wrf_cmaq",
-      "count": 5
+      "count": 20,
+      "group": "wrfvar2"
     },
     {
-      "group": "wrfvar8",
-      "count": 5
+      "count": 1,
+      "group": "wrfvar20"
     },
     {
-      "group": "grib2",
-      "count": 4
+      "count": 1,
+      "group": "wrfvar21"
     },
     {
-      "group": "wrfvar17",
-      "count": 4
+      "count": 1,
+      "group": "wrfvar22"
     },
     {
-      "group": "wrfvar3",
-      "count": 4
+      "count": 4,
+      "group": "wrfvar3"
     },
     {
-      "group": "namelist_adios2",
-      "count": 3
+      "count": 82,
+      "group": "wrfvar4"
     },
     {
-      "group": "ideal",
-      "count": 1
+      "count": 64,
+      "group": "wrfvar5"
     },
     {
-      "group": "wrfvar18",
-      "count": 1
+      "count": 14,
+      "group": "wrfvar6"
     },
     {
-      "group": "wrfvar19",
-      "count": 1
+      "count": 35,
+      "group": "wrfvar7"
     },
     {
-      "group": "wrfvar20",
-      "count": 1
+      "count": 5,
+      "group": "wrfvar8"
     },
     {
-      "group": "wrfvar21",
-      "count": 1
+      "count": 15,
+      "group": "wrfvar9"
     },
     {
-      "group": "wrfvar22",
-      "count": 1
-    },
-    {
-      "group": "obsproc_record1",
-      "count": 3
-    },
-    {
-      "group": "obsproc_record2",
-      "count": 3
-    },
-    {
-      "group": "obsproc_record3",
-      "count": 2
-    },
-    {
-      "group": "obsproc_record4",
-      "count": 9
-    },
-    {
-      "group": "obsproc_record5",
-      "count": 10
-    },
-    {
-      "group": "obsproc_record6",
-      "count": 6
-    },
-    {
-      "group": "obsproc_record7",
-      "count": 7
-    },
-    {
-      "group": "obsproc_record8",
-      "count": 8
-    },
-    {
-      "group": "obsproc_record9",
-      "count": 28
+      "count": 8,
+      "group": "wrfvarchem"
     }
   ],
+  "metadata": {
+    "generated": "2026-05-04T23:20:07Z",
+    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor",
+    "publicAppName": "WRF Config Studio",
+    "publicVersion": "v1.0.0",
+    "rebrandGenerated": "2026-05-01T12:49:32Z",
+    "wrfCompatibilityMerge": {
+      "baseline": "4.7.1",
+      "generated": "2026-07-31T04:51:37.417309+00:00",
+      "legacy471OnlyVariablesCanonical": 52,
+      "mergedVariablesCanonical": 1859,
+      "new48xVariablesCanonical": 81,
+      "overlay": "4.8.1-dev",
+      "policy": "Merged 4.7.1 stable options with 4.8.x options. Older 4.7.1-only options are preserved as legacy-compatible."
+    }
+  },
   "policy": {
     "compatibilityValidation": "inactive",
+    "obsprocMergedIntoMainCatalog": true,
     "requiredSaveWarnings": "active",
     "suggestions": [
       "time_step",
@@ -235,16 +216,8 @@
       "run_*",
       "cudt"
     ],
-    "userControl": "all registry variables and metadata are for user-controlled configuration and reference",
     "uiFiltering": "inactive",
-    "obsprocMergedIntoMainCatalog": true
+    "userControl": "all registry variables and metadata are for user-controlled configuration and reference"
   },
-  "metadata": {
-    "publicAppName": "WRF Config Studio",
-    "publicVersion": "v1.0.0",
-    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
-    "rebrandGenerated": "2026-05-01T12:49:32Z",
-    "generated": "2026-05-04T23:20:07Z",
-    "mainlineFeature": "ARW Technical Note scientific context for namelist editor"
-  }
+  "version": "V3.1.0-beta-full-catalog-merged-fixes"
 }

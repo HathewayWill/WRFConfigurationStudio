@@ -504,7 +504,13 @@
     $('#button-namelist-input-collapse-all').on('click', function () { self.setAllExpanded(false); });
     $('#button-namelist-input-enable-visible').on('click', function () { self.setVisibleEnabled(true); });
     $('#button-namelist-input-disable-visible').on('click', function () { self.setVisibleEnabled(false); });
-    this.$search.on('input', function () { self.render(); });
+    this.$search.on('input', function () {
+      window.clearTimeout(self._searchScrollTimer);
+      self.render();
+      self._searchScrollTimer = window.setTimeout(function () {
+        self.focusSearchResult();
+      }, 100);
+    });
     this.$groupJump.on('change', function () { self.jumpToGroup($(this).val()); });
     this.$varJump.on('change', function () { self.jumpToVariable($(this).val()); });
     this.$exampleCase.on('change', function () { self.populateExampleProfileOptions($(this).val()); });
@@ -1176,6 +1182,103 @@
     this.render();
   };
 
+
+  function normalizeSearchTermForJump(value) {
+    return $.trim(String(value == null ? '' : value).toLowerCase())
+      .replace(/[\s\-.]+/g, '_')
+      .replace(/_+/g, '_');
+  }
+
+  function selectorAttrEscapeForJump(value) {
+    return String(value == null ? '' : value)
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"');
+  }
+
+  HybridNamelistInputEditor.prototype.ensureSearchHighlightStyle = function () {
+    if (document.getElementById('namelist-input-search-highlight-style')) return;
+
+    var style = document.createElement('style');
+    style.id = 'namelist-input-search-highlight-style';
+    style.textContent = [
+      '.namelist-input-variable.namelist-input-search-hit {',
+      '  background-color: #fff3cd !important;',
+      '  border: 1px solid #ffc107 !important;',
+      '  box-shadow: 0 0 0 0.12rem rgba(255, 193, 7, 0.35) !important;',
+      '}',
+      '.namelist-input-variable.namelist-input-search-active {',
+      '  background-color: #ffe8a1 !important;',
+      '  border: 2px solid #fd7e14 !important;',
+      '  box-shadow: 0 0 0 0.18rem rgba(253, 126, 20, 0.40) !important;',
+      '}'
+    ].join('\n');
+
+    document.head.appendChild(style);
+  };
+
+  HybridNamelistInputEditor.prototype.isExactSearchResult = function (field, query) {
+    var q = normalizeSearchTermForJump(query);
+    if (!q) return false;
+
+    return normalizeSearchTermForJump(field.name) === q ||
+      normalizeSearchTermForJump(field.key) === q ||
+      normalizeSearchTermForJump(field.group + '.' + field.name) === q;
+  };
+
+  HybridNamelistInputEditor.prototype.focusSearchResult = function () {
+    var self = this;
+    var query = $.trim(this.$search.val());
+    var matches = [];
+    var exactMatches = [];
+
+    this.ensureSearchHighlightStyle();
+
+    this.$container
+      .find('.namelist-input-variable')
+      .removeClass('namelist-input-search-hit namelist-input-search-active');
+
+    if (!query) return;
+
+    Object.keys(this.catalog.groups).forEach(function (groupName) {
+      self.catalog.groups[groupName].forEach(function (field) {
+        if (!self.matchesSearch(field, query)) return;
+
+        matches.push(field.key);
+
+        if (self.isExactSearchResult(field, query)) {
+          exactMatches.push(field.key);
+        }
+      });
+    });
+
+    matches.forEach(function (key) {
+      self.$container
+        .find('.namelist-input-variable[data-key="' + selectorAttrEscapeForJump(key) + '"]')
+        .addClass('namelist-input-search-hit');
+    });
+
+    var targetKey = exactMatches[0] || matches[0];
+    if (!targetKey) return;
+
+    var $target = this.$container
+      .find('.namelist-input-variable[data-key="' + selectorAttrEscapeForJump(targetKey) + '"]')
+      .first();
+
+    if (!$target.length) return;
+
+    $target.parents('details').each(function () {
+      this.open = true;
+    });
+
+    $target
+      .removeClass('namelist-input-search-hit')
+      .addClass('namelist-input-search-active');
+
+    if ($target[0] && $target[0].scrollIntoView) {
+      $target[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   HybridNamelistInputEditor.prototype.setVisibleEnabled = function (enabled) {
     var self = this;
     var query = $.trim(this.$search.val()).toLowerCase();
@@ -1229,6 +1332,20 @@
       });
     });
     return map;
+  };
+
+  HybridNamelistInputEditor.prototype.isWrf48PlusOnlyField = function (field) {
+    var support = field && field.versionSupport ? field.versionSupport : null;
+    if (!support) return false;
+
+    if (support.status === 'new_48x') return true;
+
+    var presentIn = Array.isArray(support.presentIn) ? support.presentIn : [];
+    return presentIn.length > 0 &&
+      presentIn.indexOf('4.7.1') === -1 &&
+      presentIn.some(function (version) {
+        return /^4\.(8|9)\b/.test(String(version)) || /^([5-9]|\d{2,})\./.test(String(version));
+      });
   };
 
   HybridNamelistInputEditor.prototype.evaluateFieldCompatibility = function (field) {
@@ -1343,6 +1460,7 @@
     html += '<div class="mr-2 mt-1"><input type="checkbox" class="namelist-input-toggle" data-key="' + esc(field.key) + '" ' + (enabled ? 'checked' : '') + '></div>';
     html += '<div class="namelist-input-variable-name flex-grow-1" data-key="' + esc(field.key) + '"><strong>' + esc(field.name) + '</strong>';
     if (this.state.suggestedFields && this.state.suggestedFields[field.key]) html += ' <span class="badge badge-info">suggested</span>';
+    if (this.isWrf48PlusOnlyField(field)) html += ' <span class="badge badge-warning" title="Available in WRF 4.8.0 and newer">4.8.0+</span>';
     var arwCtxForBadges = this.getArwContextForField(field);
     if (arwCtxForBadges && arwCtxForBadges.badges && arwCtxForBadges.badges.length) {
       arwCtxForBadges.badges.slice(0, 3).forEach(function (badge) { html += ' <span class="badge badge-light">' + esc(badge) + '</span>'; });

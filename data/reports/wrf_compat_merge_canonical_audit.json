@@ -1,0 +1,921 @@
+{
+  "caseDuplicateKeysResolved": {
+    "chem.bioemdt": [
+      "chem.BIOEMDT",
+      "chem.bioemdt"
+    ],
+    "chem.cam_mp_mam_cpled": [
+      "chem.CAM_MP_MAM_cpled",
+      "chem.cam_mp_mam_cpled"
+    ],
+    "chem.chemdt": [
+      "chem.CHEMDT",
+      "chem.chemdt"
+    ],
+    "chem.n_cg": [
+      "chem.N_CG",
+      "chem.n_cg"
+    ],
+    "chem.n_ic": [
+      "chem.N_IC",
+      "chem.n_ic"
+    ],
+    "chem.photdt": [
+      "chem.PHOTDT",
+      "chem.photdt"
+    ],
+    "fdda.fgdt": [
+      "fdda.FGDT",
+      "fdda.fgdt"
+    ],
+    "fdda.fgdtzero": [
+      "fdda.FGDTZERO",
+      "fdda.fgdtzero"
+    ],
+    "perturbation.check_ad": [
+      "perturbation.check_AD",
+      "perturbation.check_ad"
+    ],
+    "perturbation.check_tl": [
+      "perturbation.check_TL",
+      "perturbation.check_tl"
+    ],
+    "physics.bldt": [
+      "physics.BLDT",
+      "physics.bldt"
+    ],
+    "physics.bucket_j": [
+      "physics.bucket_J",
+      "physics.bucket_j"
+    ],
+    "physics.ccnty": [
+      "physics.CCNTY",
+      "physics.ccnty"
+    ],
+    "physics.cudt": [
+      "physics.CUDT",
+      "physics.cudt"
+    ],
+    "physics.gsmdt": [
+      "physics.GSMDT",
+      "physics.gsmdt"
+    ],
+    "physics.haildt": [
+      "physics.HAILDT",
+      "physics.haildt"
+    ],
+    "physics.icloud": [
+      "physics.ICLOUD",
+      "physics.icloud"
+    ],
+    "physics.ifsnow": [
+      "physics.IFSNOW",
+      "physics.ifsnow"
+    ],
+    "physics.isfflx": [
+      "physics.ISFFLX",
+      "physics.isfflx"
+    ],
+    "physics.mindeepfreq": [
+      "physics.minDeepFreq",
+      "physics.mindeepfreq"
+    ],
+    "physics.minshallowfreq": [
+      "physics.minShallowFreq",
+      "physics.minshallowfreq"
+    ],
+    "physics.numbins": [
+      "physics.numBins",
+      "physics.numbins"
+    ],
+    "physics.omdt": [
+      "physics.OMDT",
+      "physics.omdt"
+    ],
+    "physics.rbinsize": [
+      "physics.rBinSize",
+      "physics.rbinsize"
+    ],
+    "physics.thbinsize": [
+      "physics.thBinSize",
+      "physics.thbinsize"
+    ],
+    "physics.wtddt": [
+      "physics.WTDDT",
+      "physics.wtddt"
+    ],
+    "scm.scm_soilt_force": [
+      "scm.scm_soilT_force",
+      "scm.scm_soilt_force"
+    ],
+    "stoch.iseed_skebs": [
+      "stoch.ISEED_SKEBS",
+      "stoch.iseed_skebs"
+    ],
+    "time_control.gmt": [
+      "time_control.GMT",
+      "time_control.gmt"
+    ],
+    "time_control.julday": [
+      "time_control.JULDAY",
+      "time_control.julday"
+    ],
+    "time_control.julyr": [
+      "time_control.JULYR",
+      "time_control.julyr"
+    ]
+  },
+  "caseRemappedSharedVariables": [
+    {
+      "baselineKey": "chem.bioemdt",
+      "canonicalKey": "chem.bioemdt",
+      "overlayKey": "chem.BIOEMDT"
+    },
+    {
+      "baselineKey": "chem.cam_mp_mam_cpled",
+      "canonicalKey": "chem.cam_mp_mam_cpled",
+      "overlayKey": "chem.CAM_MP_MAM_cpled"
+    },
+    {
+      "baselineKey": "chem.chemdt",
+      "canonicalKey": "chem.chemdt",
+      "overlayKey": "chem.CHEMDT"
+    },
+    {
+      "baselineKey": "chem.n_cg",
+      "canonicalKey": "chem.n_cg",
+      "overlayKey": "chem.N_CG"
+    },
+    {
+      "baselineKey": "chem.n_ic",
+      "canonicalKey": "chem.n_ic",
+      "overlayKey": "chem.N_IC"
+    },
+    {
+      "baselineKey": "chem.photdt",
+      "canonicalKey": "chem.photdt",
+      "overlayKey": "chem.PHOTDT"
+    },
+    {
+      "baselineKey": "fdda.fgdt",
+      "canonicalKey": "fdda.fgdt",
+      "overlayKey": "fdda.FGDT"
+    },
+    {
+      "baselineKey": "fdda.fgdtzero",
+      "canonicalKey": "fdda.fgdtzero",
+      "overlayKey": "fdda.FGDTZERO"
+    },
+    {
+      "baselineKey": "perturbation.check_ad",
+      "canonicalKey": "perturbation.check_ad",
+      "overlayKey": "perturbation.check_AD"
+    },
+    {
+      "baselineKey": "perturbation.check_tl",
+      "canonicalKey": "perturbation.check_tl",
+      "overlayKey": "perturbation.check_TL"
+    },
+    {
+      "baselineKey": "physics.bldt",
+      "canonicalKey": "physics.bldt",
+      "overlayKey": "physics.BLDT"
+    },
+    {
+      "baselineKey": "physics.ccnty",
+      "canonicalKey": "physics.ccnty",
+      "overlayKey": "physics.CCNTY"
+    },
+    {
+      "baselineKey": "physics.cudt",
+      "canonicalKey": "physics.cudt",
+      "overlayKey": "physics.CUDT"
+    },
+    {
+      "baselineKey": "physics.gsmdt",
+      "canonicalKey": "physics.gsmdt",
+      "overlayKey": "physics.GSMDT"
+    },
+    {
+      "baselineKey": "physics.haildt",
+      "canonicalKey": "physics.haildt",
+      "overlayKey": "physics.HAILDT"
+    },
+    {
+      "baselineKey": "physics.icloud",
+      "canonicalKey": "physics.icloud",
+      "overlayKey": "physics.ICLOUD"
+    },
+    {
+      "baselineKey": "physics.ifsnow",
+      "canonicalKey": "physics.ifsnow",
+      "overlayKey": "physics.IFSNOW"
+    },
+    {
+      "baselineKey": "physics.isfflx",
+      "canonicalKey": "physics.isfflx",
+      "overlayKey": "physics.ISFFLX"
+    },
+    {
+      "baselineKey": "physics.numbins",
+      "canonicalKey": "physics.numbins",
+      "overlayKey": "physics.numBins"
+    },
+    {
+      "baselineKey": "physics.omdt",
+      "canonicalKey": "physics.omdt",
+      "overlayKey": "physics.OMDT"
+    },
+    {
+      "baselineKey": "physics.rbinsize",
+      "canonicalKey": "physics.rbinsize",
+      "overlayKey": "physics.rBinSize"
+    },
+    {
+      "baselineKey": "physics.wtddt",
+      "canonicalKey": "physics.wtddt",
+      "overlayKey": "physics.WTDDT"
+    },
+    {
+      "baselineKey": "scm.scm_soilt_force",
+      "canonicalKey": "scm.scm_soilt_force",
+      "overlayKey": "scm.scm_soilT_force"
+    },
+    {
+      "baselineKey": "stoch.iseed_skebs",
+      "canonicalKey": "stoch.iseed_skebs",
+      "overlayKey": "stoch.ISEED_SKEBS"
+    },
+    {
+      "baselineKey": "time_control.gmt",
+      "canonicalKey": "time_control.gmt",
+      "overlayKey": "time_control.GMT"
+    },
+    {
+      "baselineKey": "time_control.julday",
+      "canonicalKey": "time_control.julday",
+      "overlayKey": "time_control.JULDAY"
+    },
+    {
+      "baselineKey": "time_control.julyr",
+      "canonicalKey": "time_control.julyr",
+      "overlayKey": "time_control.JULYR"
+    }
+  ],
+  "changedSharedKeysCanonical": [
+    "bdy_control.real_data_init_type",
+    "chem.du_at_grnd",
+    "chem.fixed_ubc_inname",
+    "domains.blend_width",
+    "domains.dx",
+    "domains.dy",
+    "domains.force_sfc_in_vinterp",
+    "domains.ideal_init_method",
+    "domains.interp_type",
+    "domains.lagrange_order",
+    "domains.max_dz",
+    "domains.shw",
+    "domains.time_step",
+    "domains.zap_close_levels",
+    "dynamics.base_lapse",
+    "dynamics.base_lapse_strat",
+    "dynamics.base_pres",
+    "dynamics.base_temp",
+    "dynamics.tke_drag_coefficient",
+    "dynamics.tke_heat_flux",
+    "dynamics.use_q_diabatic",
+    "fire.fmoist_dt",
+    "grib2.forecast_proc_id",
+    "grib2.production_status",
+    "noah_mp.opt_alb",
+    "perturbation.jcdfi_diag",
+    "perturbation.jcdfi_use",
+    "perturbation.trajectory_io",
+    "physics.bl_mynn_cloudmix",
+    "physics.bl_mynn_edmf",
+    "physics.bl_mynn_mixlength",
+    "physics.bl_mynn_mixscalars",
+    "physics.bucket_j",
+    "physics.co2tf",
+    "physics.megan_factors_file",
+    "physics.megan_specifier",
+    "physics.mindeepfreq",
+    "physics.minshallowfreq",
+    "physics.morr_rimed_ice",
+    "physics.mp_zero_out",
+    "physics.mp_zero_out_thresh",
+    "physics.nssl_hail_on",
+    "physics.num_snow_layers",
+    "physics.num_snso_layers",
+    "physics.physics_suite",
+    "physics.seaice_threshold",
+    "physics.shcu_aerosols_opt",
+    "physics.sst_update",
+    "physics.surface_input_source",
+    "physics.thbinsize",
+    "physics.wif_fire_emit",
+    "physics.wif_fire_inj",
+    "stoch.iseed_rand_pert",
+    "stoch.iseed_skebs",
+    "stoch.iseed_spp_conv",
+    "stoch.iseed_spp_lsm",
+    "stoch.iseed_spp_pbl",
+    "stoch.iseed_sppt",
+    "stoch.nens",
+    "stoch.rexponent_t",
+    "time_control.end_day",
+    "time_control.end_minute",
+    "time_control.end_second",
+    "time_control.end_year",
+    "time_control.run_days",
+    "time_control.run_minutes",
+    "time_control.run_seconds",
+    "time_control.start_hour",
+    "time_control.start_minute",
+    "time_control.start_year",
+    "wrfvar14.thinning",
+    "wrfvar19.pseudo_var",
+    "wrfvarchem.chem_cv_options",
+    "wrfvarchem.chemicda_opt"
+  ],
+  "legacy471OnlyKeysCanonical": [
+    "chem.gsfcgce_gocart_coupling",
+    "chem.gsfcrad_gocart_coupling",
+    "domains.corral_dist",
+    "domains.eta_levels",
+    "domains.move_cd_x",
+    "domains.move_cd_y",
+    "domains.move_id",
+    "domains.move_interval",
+    "domains.num_moves",
+    "domains.sr_x",
+    "domains.sr_y",
+    "domains.track_level",
+    "domains.trop_horiz_press_diff",
+    "dynamics.dyn_opt",
+    "dynamics.non-hydrostatic",
+    "dynamics.use_baseparm_fr_nml",
+    "fire.ifire",
+    "namelist_adios2.adios2_blosc_compressor",
+    "namelist_adios2.adios2_compression_enable",
+    "namelist_adios2.adios2_numaggregators",
+    "noah_mp.opt_run",
+    "physics.03input",
+    "physics.bl_mynn_tkebudget",
+    "physics.force_read_thompson",
+    "physics.nssl_rho_ghl",
+    "physics.num_traj",
+    "physics.ocean_levels",
+    "physics.write_thompson_mp38table",
+    "physics.write_thompson_tables",
+    "time_control.auxhist2_interval",
+    "time_control.auxhist2_outname",
+    "time_control.auxinput11_end_h",
+    "time_control.auxinput11_interval",
+    "time_control.auxinput4_inname",
+    "time_control.auxinput4_interval",
+    "time_control.frames_per_auxhist2",
+    "time_control.ignore_iofields_warning",
+    "time_control.io_form_auxhist2",
+    "time_control.io_form_auxinput1",
+    "time_control.io_form_auxinput12",
+    "time_control.io_form_auxinput2",
+    "time_control.io_form_auxinput4",
+    "time_control.iofields_filename",
+    "time_control.ncd_nofill",
+    "time_control.nwp_diagnostics",
+    "time_control.output_diagnostics",
+    "time_control.override_restart_intervals",
+    "wrf_cmaq.direct_sw_feedback",
+    "wrf_cmaq.feedback_restart",
+    "wrf_cmaq.met_file_tstep",
+    "wrf_cmaq.wrf_cmaq_freq",
+    "wrf_cmaq.wrf_cmaq_option"
+  ],
+  "metadata": {
+    "baseline": {
+      "path": "data/raw/namelist.input.registry.wrf_compat.baseline.json",
+      "version": "4.7.1"
+    },
+    "canonicalization": "Group names and variable names are lowercased for editor consistency. Original Registry spellings are retained in originalKeys.",
+    "counts": {
+      "baselineVariablesCanonical": 1778,
+      "caseDuplicateKeysResolved": 31,
+      "caseRemappedSharedVariables": 27,
+      "changedSharedVariablesCanonical": 74,
+      "groupCount": 47,
+      "legacy471OnlyVariablesCanonical": 52,
+      "mergedVariablesCanonical": 1859,
+      "new48xVariablesCanonical": 81,
+      "overlayVariablesCanonical": 1807,
+      "sharedVariablesCanonical": 1726,
+      "unchangedSharedVariablesCanonical": 1652
+    },
+    "generated_at": "2026-07-31T04:44:34.692896+00:00",
+    "mergePolicy": "Preserve WRF 4.7.1 baseline options and add WRF 4.8.x options. Shared options are merged case-insensitively.",
+    "overlay": {
+      "path": "data/raw/namelist.input.registry.wrf_compat.overlay.json",
+      "version": "4.8.1-dev"
+    },
+    "title": "Canonical merged WRF namelist.input registry catalog"
+  },
+  "new48xKeysCanonical": [
+    "cordex.convxtrm_diag",
+    "cordex.fogvars",
+    "cordex.fogvisibility_diag",
+    "cordex.hhursrng",
+    "cordex.htasrng",
+    "cordex.latdbg",
+    "cordex.lhursrng",
+    "cordex.londbg",
+    "cordex.ltasrng",
+    "cordex.nhhursrng",
+    "cordex.nhtashursrng",
+    "cordex.nhtasrng",
+    "cordex.nlhursrng",
+    "cordex.nltashursrng",
+    "cordex.nltasrng",
+    "cordex.nwbdsrng",
+    "cordex.nwbdswssrng",
+    "cordex.nwssrng",
+    "cordex.output_cordex",
+    "cordex.output_wb",
+    "cordex.potevp_diag",
+    "cordex.psl_diag",
+    "cordex.psmooth",
+    "cordex.ptarget",
+    "cordex.timedbg",
+    "cordex.wbdsrng",
+    "cordex.wgsts_wbdswsstres",
+    "cordex.wsgs_diag",
+    "cordex.wssrng",
+    "cordex.wsz100_diag",
+    "cordex.z100m_wind",
+    "cordex.z50m",
+    "cordex.zmlagen_diag",
+    "cordex.zmlagen_dqv",
+    "cordex.zmlagen_dtheta",
+    "dynamics.gwd_dx_factor",
+    "dynamics.gwd_if_nonhyd",
+    "noah_mp.opt_compact",
+    "noah_mp.opt_runsrf",
+    "noah_mp.opt_runsub",
+    "noah_mp.opt_scf",
+    "noah_mp.opt_tksno",
+    "noah_mp.opt_wetland",
+    "noah_mp.snicar_aerosol_readtable",
+    "noah_mp.snicar_bandnumber_opt",
+    "noah_mp.snicar_dustoptics_opt",
+    "noah_mp.snicar_rtsolver_opt",
+    "noah_mp.snicar_snowbc_intmix",
+    "noah_mp.snicar_snowdust_intmix",
+    "noah_mp.snicar_snowoptics_opt",
+    "noah_mp.snicar_snowshape_opt",
+    "noah_mp.snicar_solarspec_opt",
+    "noah_mp.snicar_use_aerosol",
+    "noah_mp.snicar_use_oc",
+    "physics.bl_mynn_edmf_dd",
+    "physics.bl_mynn_ess",
+    "physics.bl_mynn_mixaerosols",
+    "physics.bl_mynn_mixnumcon",
+    "physics.coul_neg",
+    "physics.coul_neu",
+    "physics.coul_pos",
+    "physics.default_soiltype",
+    "physics.dyn_lightning_option",
+    "physics.j_neg",
+    "physics.j_neu",
+    "physics.j_pos",
+    "physics.kim_tofd",
+    "physics.nssl_ssat_output",
+    "physics.num_light_periods",
+    "physics.num_radn_layers",
+    "physics.sf_mynn_sfcflux_land",
+    "physics.sf_mynn_sfcflux_water",
+    "physics.shinhong_ke_dissipation",
+    "physics.shinhong_nonlocal_flux",
+    "physics.shinhong_scu_mixing",
+    "physics.tempo_aerosolaware",
+    "physics.tempo_hailaware",
+    "physics.tofd_factor",
+    "physics.windfarm_induction",
+    "time_control.iau",
+    "time_control.iau_time_window_sec"
+  ],
+  "releaseNoteTargetAudit": [
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.dyn_lightning_option",
+          "originalKeys": [
+            "physics.dyn_lightning_option"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/registry.dyn_light"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "dyn_lightning_option"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "1",
+          "key": "physics.tempo_aerosolaware",
+          "originalKeys": [
+            "physics.tempo_aerosolaware"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "tempo_aerosolaware"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "1",
+          "key": "physics.tempo_hailaware",
+          "originalKeys": [
+            "physics.tempo_hailaware"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "tempo_hailaware"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.shinhong_scu_mixing",
+          "originalKeys": [
+            "physics.shinhong_scu_mixing"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "shinhong_scu_mixing"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": true,
+          "entries": "max_domains",
+          "key": "physics.shinhong_nonlocal_flux",
+          "originalKeys": [
+            "physics.shinhong_nonlocal_flux"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "shinhong_nonlocal_flux"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.shinhong_ke_dissipation",
+          "originalKeys": [
+            "physics.shinhong_ke_dissipation"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "shinhong_ke_dissipation"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 1,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixaerosols",
+          "originalKeys": [
+            "physics.bl_mynn_mixaerosols"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "bl_mynn_mixaerosols"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixnumcon",
+          "originalKeys": [
+            "physics.bl_mynn_mixnumcon"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "bl_mynn_mixnumcon"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.bl_mynn_mixscalars",
+          "originalKeys": [
+            "physics.bl_mynn_mixscalars"
+          ],
+          "sources": [
+            "Registry/Registry.EM_COMMON",
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "baseline471": {
+              "comments": [
+                "bl_mynn_mixscalars",
+                "0:off,1:activate mixing of scalars (qnx, qnxfa) in MYNN"
+              ],
+              "defaultValue": 0,
+              "entries": "max_domains",
+              "io": "irh",
+              "type": "integer"
+            },
+            "baselineVersion": "4.7.1",
+            "changedSinceBaseline": true,
+            "current48x": {
+              "comments": [
+                "bl_mynn_mixscalars",
+                "0:off,1:activate mixing of additional scalars in MYNN"
+              ],
+              "defaultValue": 0,
+              "entries": "max_domains",
+              "io": "irh",
+              "type": "integer"
+            },
+            "currentVersion": "4.8.1-dev",
+            "firstSeen": "4.7.1",
+            "presentIn": [
+              "4.7.1",
+              "4.8.1-dev"
+            ],
+            "status": "active"
+          }
+        }
+      ],
+      "name": "bl_mynn_mixscalars"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": false,
+          "entries": "max_domains",
+          "key": "physics.kim_tofd",
+          "originalKeys": [
+            "physics.kim_tofd"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "kim_tofd"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 2.0,
+          "entries": "max_domains",
+          "key": "dynamics.gwd_dx_factor",
+          "originalKeys": [
+            "dynamics.gwd_dx_factor"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "real",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "gwd_dx_factor"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": true,
+          "entries": "max_domains",
+          "key": "dynamics.gwd_if_nonhyd",
+          "originalKeys": [
+            "dynamics.gwd_if_nonhyd"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "logical",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "gwd_if_nonhyd"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 1,
+          "entries": "1",
+          "key": "physics.windfarm_induction",
+          "originalKeys": [
+            "physics.windfarm_induction"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "windfarm_induction"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 0,
+          "entries": "max_domains",
+          "key": "physics.sf_mynn_sfcflux_land",
+          "originalKeys": [
+            "physics.sf_mynn_sfcflux_land"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "sf_mynn_sfcflux_land"
+    },
+    {
+      "found": true,
+      "hits": [
+        {
+          "defaultValue": 1,
+          "entries": "max_domains",
+          "key": "physics.sf_mynn_sfcflux_water",
+          "originalKeys": [
+            "physics.sf_mynn_sfcflux_water"
+          ],
+          "sources": [
+            "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
+          ],
+          "type": "integer",
+          "versionSupport": {
+            "firstSeen": "4.8.1-dev",
+            "note": "Added from WRF 4.8.x Registry overlay.",
+            "presentIn": [
+              "4.8.1-dev"
+            ],
+            "status": "new_48x"
+          }
+        }
+      ],
+      "name": "sf_mynn_sfcflux_water"
+    }
+  ]
+}

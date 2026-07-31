@@ -1,0 +1,162 @@
+WRF 4.8.1-dev Registry overlay audit
+================================================
+sourceFiles: 42
+parsedRconfigVariables: 1807
+baselineVariables: 1782
+overlayVariables: 1807
+newIn48x: 108
+changedShared: 73
+baselineOnlyLegacy: 83
+
+Release-note target audit
+================================================
+dyn_lightning_option: baseline=no, overlay=yes
+  overlay physics.dyn_lightning_option default=0 type=integer entries=max_domains
+    raw: rconfig   integer dyn_lightning_option          namelist,physics         max_domains    0       rh    "dynlight"            "Dynamic Lightning Scheme option, 1: on"
+tempo_aerosolaware: baseline=no, overlay=yes
+  overlay physics.tempo_aerosolaware default=0 type=integer entries=1
+    raw: rconfig   integer  tempo_aerosolaware     namelist,physics      1             0       rh       "TEMPO aerosol-aware flag"  ""      ""
+tempo_hailaware: baseline=no, overlay=yes
+  overlay physics.tempo_hailaware default=0 type=integer entries=1
+    raw: rconfig   integer  tempo_hailaware        namelist,physics      1             0       rh       "TEMPO hail-aware flag"  ""      ""
+shinhong_scu_mixing: baseline=no, overlay=yes
+  overlay physics.shinhong_scu_mixing default=False type=logical entries=max_domains
+    raw: rconfig   logical     shinhong_scu_mixing namelist,physics      max_domains    .false.  rh      "shinhong_scu_mixing"           "strato-cumulus(scu ) downdraft mixing for shinhong pbl"     ""
+shinhong_nonlocal_flux: baseline=no, overlay=yes
+  overlay physics.shinhong_nonlocal_flux default=True type=logical entries=max_domains
+    raw: rconfig   logical     shinhong_nonlocal_flux namelist,physics      max_domains    .true.  rh      "shinhong_nonlocal_flux"     ".false.:counter-gradient (ysu), .true.:shinhong-LES type nonlocal flux"     ""
+shinhong_ke_dissipation: baseline=no, overlay=yes
+  overlay physics.shinhong_ke_dissipation default=False type=logical entries=max_domains
+    raw: rconfig   logical     shinhong_ke_dissipation namelist,physics      max_domains    .false.  rh      "shinhong_ke_dissipation"     "additional heating due to kinetic energy dissipation"     ""
+bl_mynn_mixaerosols: baseline=no, overlay=yes
+  overlay physics.bl_mynn_mixaerosols default=1 type=integer entries=max_domains
+    raw: rconfig   integer     bl_mynn_mixaerosols namelist,physics      max_domains    1       irh      "bl_mynn_mixaerosols"           "0:off,1:activate mixing of aerosols (qnifa, qnwfa) in MYNN"      ""
+bl_mynn_mixnumcon: baseline=no, overlay=yes
+  overlay physics.bl_mynn_mixnumcon default=0 type=integer entries=max_domains
+    raw: rconfig   integer     bl_mynn_mixnumcon   namelist,physics      max_domains    0       irh      "bl_mynn_mixnumcon"             "0:off,1:activate mixing of number concentrations (qnc, qni) in MYNN"      ""
+bl_mynn_mixscalars: baseline=yes, overlay=yes
+  overlay physics.bl_mynn_mixscalars default=0 type=integer entries=max_domains
+    raw: rconfig   integer     bl_mynn_mixscalars  namelist,physics      max_domains    0       irh      "bl_mynn_mixscalars"            "0:off,1:activate mixing of additional scalars in MYNN"      ""
+kim_tofd: baseline=no, overlay=yes
+  overlay physics.kim_tofd default=False type=logical entries=max_domains
+    raw: rconfig   logical kim_tofd                namelist,physics      max_domains   .false.  rh    "kim_tofd"   "turbulent form drag (tofd) option for kim gravity wave drag"   ""
+gwd_dx_factor: baseline=no, overlay=yes
+  overlay dynamics.gwd_dx_factor default=2.0 type=real entries=max_domains
+    raw: rconfig   real    gwd_dx_factor           namelist,dynamics     max_domains    2.   rh    "gwd_dx_factor" "effective grid factor for kim gravity wave drag"   ""
+gwd_if_nonhyd: baseline=no, overlay=yes
+  overlay dynamics.gwd_if_nonhyd default=True type=logical entries=max_domains
+    raw: rconfig   logical gwd_if_nonhyd           namelist,dynamics     max_domains   .true.  rh   "gwd_if_nonhyd" "non_hydrostatic option for kim gravity wave drag"   ""
+windfarm_induction: baseline=no, overlay=yes
+  overlay physics.windfarm_induction default=1 type=integer entries=1
+    raw: rconfig   integer     windfarm_induction  namelist,physics      1              1       rh       "Fitch axial induction correction"        ""      ""
+
+New 4.8.x keys
+================================================
+chem.BIOEMDT
+chem.CAM_MP_MAM_cpled
+chem.CHEMDT
+chem.N_CG
+chem.N_IC
+chem.PHOTDT
+cordex.convxtrm_diag
+cordex.fogvars
+cordex.fogvisibility_diag
+cordex.hhursrng
+cordex.htasrng
+cordex.latdbg
+cordex.lhursrng
+cordex.londbg
+cordex.ltasrng
+cordex.nhhursrng
+cordex.nhtashursrng
+cordex.nhtasrng
+cordex.nlhursrng
+cordex.nltashursrng
+cordex.nltasrng
+cordex.nwbdsrng
+cordex.nwbdswssrng
+cordex.nwssrng
+cordex.output_cordex
+cordex.output_wb
+cordex.potevp_diag
+cordex.psl_diag
+cordex.psmooth
+cordex.ptarget
+cordex.timedbg
+cordex.wbdsrng
+cordex.wgsts_wbdswsstres
+cordex.wsgs_diag
+cordex.wssrng
+cordex.wsz100_diag
+cordex.z100m_wind
+cordex.z50m
+cordex.zmlagen_diag
+cordex.zmlagen_dqv
+cordex.zmlagen_dtheta
+dynamics.gwd_dx_factor
+dynamics.gwd_if_nonhyd
+fdda.FGDT
+fdda.FGDTZERO
+noah_mp.opt_compact
+noah_mp.opt_runsrf
+noah_mp.opt_runsub
+noah_mp.opt_scf
+noah_mp.opt_tksno
+noah_mp.opt_wetland
+noah_mp.snicar_aerosol_readtable
+noah_mp.snicar_bandnumber_opt
+noah_mp.snicar_dustoptics_opt
+noah_mp.snicar_rtsolver_opt
+noah_mp.snicar_snowbc_intmix
+noah_mp.snicar_snowdust_intmix
+noah_mp.snicar_snowoptics_opt
+noah_mp.snicar_snowshape_opt
+noah_mp.snicar_solarspec_opt
+noah_mp.snicar_use_aerosol
+noah_mp.snicar_use_oc
+perturbation.check_AD
+perturbation.check_TL
+physics.BLDT
+physics.CCNTY
+physics.CUDT
+physics.GSMDT
+physics.HAILDT
+physics.ICLOUD
+physics.IFSNOW
+physics.ISFFLX
+physics.OMDT
+physics.WTDDT
+physics.bl_mynn_edmf_dd
+physics.bl_mynn_ess
+physics.bl_mynn_mixaerosols
+physics.bl_mynn_mixnumcon
+physics.coul_neg
+physics.coul_neu
+physics.coul_pos
+physics.default_soiltype
+physics.dyn_lightning_option
+physics.j_neg
+physics.j_neu
+physics.j_pos
+physics.kim_tofd
+physics.nssl_ssat_output
+physics.numBins
+physics.num_light_periods
+physics.num_radn_layers
+physics.rBinSize
+physics.sf_mynn_sfcflux_land
+physics.sf_mynn_sfcflux_water
+physics.shinhong_ke_dissipation
+physics.shinhong_nonlocal_flux
+physics.shinhong_scu_mixing
+physics.tempo_aerosolaware
+physics.tempo_hailaware
+physics.tofd_factor
+physics.windfarm_induction
+scm.scm_soilT_force
+stoch.ISEED_SKEBS
+time_control.GMT
+time_control.JULDAY
+time_control.JULYR
+time_control.iau
+time_control.iau_time_window_sec
