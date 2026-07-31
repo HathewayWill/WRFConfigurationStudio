@@ -1,16 +1,17 @@
 {
   "metadata": {
-    "notes": "Expanded curated-core compatibility coverage, fixed isftcflx parsing, and added explicit allowed-off cumulus/shallow-cumulus states.",
+    "notes": "Expanded validated compatibility coverage from Registry and Users Guide candidate mining.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 69,
+    "ruleCount": 75,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
       "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
-    "variableCount": 80
+    "variableCount": 90,
+    "lastReviewedDate": "2026-07-31"
   },
   "rules": [
     {
@@ -665,13 +666,13 @@
           "checkable": false,
           "group": null,
           "mode": "note",
-          "raw": "geogrid_extra requires extra topographic wind inputs",
+          "raw": "requires extra topographic wind input from geogrid",
           "values": [],
           "variable": "geogrid_extra"
         }
       ],
-      "requirementsRaw": "bl_pbl_physics must be 1 | geogrid_extra requires extra topographic wind inputs",
-      "sourceExcerpt": "topo_wind requires extra input from geogrid; only works with bl_pbl_physics=1",
+      "requirementsRaw": "bl_pbl_physics must be 1 | requires extra topographic wind input from geogrid",
+      "sourceExcerpt": "topo_wind requires extra input from geogrid and only works with bl_pbl_physics=1",
       "strength": "Workflow",
       "trigger": {
         "mode": "one_of",
@@ -682,10 +683,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "topo_wind",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "PBL dependency is checkable; geogrid input remains a workflow note.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Sea Ice",
@@ -716,10 +721,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "seaice_threshold",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from Users Guide candidate mining.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Sea Ice",
@@ -754,7 +763,7 @@
         }
       ],
       "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 3, 4, 5, 7, 91 | seaice_threshold must be 0",
-      "sourceExcerpt": "fractional_seaice=1 only works with sf_sfclay_physics=1,2,3,4,5,7,91; must also set seaice_threshold=0",
+      "sourceExcerpt": "fractional_seaice=1 only works with sf_sfclay_physics=1,2,3,4,5,7,91 and must also set seaice_threshold=0",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -764,10 +773,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "fractional_seaice",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from Users Guide candidate mining.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Irrigation",
@@ -923,24 +936,26 @@
       "notes": null,
       "requirements": [
         {
-          "checkable": false,
+          "checkable": true,
           "group": "noah_mp",
-          "mode": "note",
-          "raw": "opt_run only confirmed with 3",
-          "values": [],
+          "mode": "one_of",
+          "raw": "opt_run must be 3",
+          "values": [
+            "3"
+          ],
           "variable": "opt_run"
         },
         {
           "checkable": false,
           "group": null,
           "mode": "note",
-          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "raw": "geogrid should use GEOGRID.TBL.ARW.noahmp",
           "values": [],
           "variable": "geogrid_tbl"
         }
       ],
-      "requirementsRaw": "opt_run only confirmed with 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
-      "sourceExcerpt": "opt_tdrn only confirmed to work with opt_run=3; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "requirementsRaw": "opt_run must be 3 | geogrid should use GEOGRID.TBL.ARW.noahmp",
+      "sourceExcerpt": "opt_tdrn is currently only tested and works with opt_run=3",
       "strength": "Workflow",
       "trigger": {
         "mode": "one_of",
@@ -951,10 +966,16 @@
       },
       "triggerGroup": "noah_mp",
       "triggerVariable": "opt_tdrn",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Registry-backed; kept Workflow because source says currently tested and works.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
     },
     {
       "category": "Cumulus \u2194 PBL",
@@ -1587,16 +1608,27 @@
       "notes": null,
       "requirements": [
         {
-          "checkable": false,
+          "checkable": true,
           "group": "physics",
-          "mode": "note",
-          "raw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
-          "values": [],
+          "mode": "one_of",
+          "raw": "mp_physics must be one of 2, 4, 6, 7, 8, 10, 14, 16, 24, 26",
+          "values": [
+            "2",
+            "4",
+            "6",
+            "7",
+            "8",
+            "10",
+            "14",
+            "16",
+            "24",
+            "26"
+          ],
           "variable": "mp_physics"
         }
       ],
-      "requirementsRaw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
-      "sourceExcerpt": "do_radar_ref works with mp_physics=2,4,6,7,8,10,14,16,17,18,19,21,24,26,28",
+      "requirementsRaw": "mp_physics must be one of 2, 4, 6, 7, 8, 10, 14, 16, 24, 26",
+      "sourceExcerpt": "do_radar_ref=1 only works for mp_physics=2,4,6,7,8,10,14,16,24,26",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -1606,10 +1638,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "do_radar_ref",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted and corrected to current Users Guide list.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Diagnostics",
@@ -1653,7 +1689,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
+          "raw": "mp_physics must be one of 3, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 20, 21, 24, 26, 28, 50, 51, 52, 53, 55",
           "values": [
             "3",
             "4",
@@ -1663,7 +1699,11 @@
             "10",
             "14",
             "16",
+            "17",
             "18",
+            "19",
+            "20",
+            "21",
             "24",
             "26",
             "28",
@@ -1676,8 +1716,8 @@
           "variable": "mp_physics"
         }
       ],
-      "requirementsRaw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
-      "sourceExcerpt": "use_mp_re=1 only works with mp_physics=3,4,6,7,8,10,14,16,18,24,26,28,50-53,55",
+      "requirementsRaw": "mp_physics must be one of 3, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 20, 21, 24, 26, 28, 50, 51, 52, 53, 55",
+      "sourceExcerpt": "use_mp_re=1 only works with mp_physics=3,4,6,7,8,10,14,16,17-21,24,26,28,50-53,55",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -1687,10 +1727,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "use_mp_re",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted and corrected to include 17-21.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Radiation",
@@ -1736,7 +1780,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "ra_lw_physics requires 1, 4",
+          "raw": "ra_lw_physics must be 1 or 4",
           "values": [
             "1",
             "4"
@@ -1747,7 +1791,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "ra_sw_physics requires 1, 4",
+          "raw": "ra_sw_physics must be 1 or 4",
           "values": [
             "1",
             "4"
@@ -1755,19 +1799,25 @@
           "variable": "ra_sw_physics"
         }
       ],
-      "requirementsRaw": "ra_lw_physics requires 1, 4 | ra_sw_physics requires 1, 4",
-      "sourceExcerpt": "icloud only works with ra_sw/lw_physics=1 or 4",
+      "requirementsRaw": "ra_lw_physics must be 1 or 4 | ra_sw_physics must be 1 or 4",
+      "sourceExcerpt": "icloud=1 only works with ra_sw_physics and ra_lw_physics set to 1 or 4",
       "strength": "Hard",
       "trigger": {
-        "mode": "active",
-        "values": []
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
       },
       "triggerGroup": "physics",
       "triggerVariable": "icloud",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Trigger narrowed to icloud=1 to avoid disabled-option false warnings.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "Accumulation Budgets",
@@ -2097,7 +2147,7 @@
           "checkable": true,
           "group": "time_control",
           "mode": "set",
-          "raw": "auxinput4_inname requires wrflowinp_d<domain>",
+          "raw": "auxinput4_inname must be set",
           "values": [],
           "variable": "auxinput4_inname"
         },
@@ -2105,21 +2155,29 @@
           "checkable": true,
           "group": "time_control",
           "mode": "set",
-          "raw": "auxinput4_interval requires set",
+          "raw": "auxinput4_interval must be set",
           "values": [],
           "variable": "auxinput4_interval"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "auxinput4_end_h should be set when available in the namelist catalog",
+          "values": [],
+          "variable": "auxinput4_end_h"
         },
         {
           "checkable": true,
           "group": "time_control",
           "mode": "set",
-          "raw": "io_form_auxinput4 requires set",
+          "raw": "io_form_auxinput4 must be set",
           "values": [],
           "variable": "io_form_auxinput4"
         }
       ],
-      "requirementsRaw": "auxinput4_inname requires wrflowinp_d<domain> | auxinput4_interval requires set | io_form_auxinput4 requires set",
-      "sourceExcerpt": "sst_update=1 requires auxinput4_inname, auxinput4_interval, io_form_auxinput4",
+      "requirementsRaw": "auxinput4_inname must be set | auxinput4_interval must be set | auxinput4_end_h should be set when available in the namelist catalog | io_form_auxinput4 must be set",
+      "sourceExcerpt": "sst_update=1 requires auxinput4_interval, auxinput4_end_h, io_form_auxinput4, and auxinput4_inname=wrflowinp_d<domain>",
       "strength": "Workflow",
       "trigger": {
         "mode": "one_of",
@@ -2129,10 +2187,14 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sst_update",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted and expanded to include auxinput4_end_h. auxinput4_end_h is documented by the Users Guide but is not currently present in the runtime catalog, so it is kept as a workflow note.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
     },
     {
       "category": "FDDA",
@@ -2531,73 +2593,233 @@
       "validationSource": "",
       "validationStatus": "unreviewed",
       "validationUrl": ""
+    },
+    {
+      "category": "Radiation \u2194 MP",
+      "id": "PROGN-MP",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "mp_physics must be one of 10, 14, 16, 17, 18",
+          "values": [
+            "10",
+            "14",
+            "16",
+            "17",
+            "18"
+          ],
+          "variable": "mp_physics"
+        }
+      ],
+      "requirementsRaw": "mp_physics must be one of 10, 14, 16, 17, 18",
+      "sourceExcerpt": "progn=1 only works with mp_physics=10,14,16,17,18",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "progn",
+      "validationNotes": "New valid rule from Users Guide candidate mining.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide"
+      ]
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-INFDV",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "noah_mp",
+          "mode": "one_of",
+          "raw": "opt_run must be 8",
+          "values": [
+            "8"
+          ],
+          "variable": "opt_run"
+        }
+      ],
+      "requirementsRaw": "opt_run must be 8",
+      "sourceExcerpt": "opt_infdv only works with opt_run=8",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_infdv",
+      "validationNotes": "Registry-backed in WRF 4.7.1, 4.8.0, and 4.8.1-dev.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
+    },
+    {
+      "category": "Aerosol",
+      "id": "AER-AOD550-VAL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "aer_aod550_opt must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "aer_aod550_opt"
+        }
+      ],
+      "requirementsRaw": "aer_aod550_opt must be 1",
+      "sourceExcerpt": "aer_aod550_val is valid when aer_aod550_opt=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "aer_aod550_val",
+      "validationNotes": "Registry-backed valid-when rule; soft warning because value is ignored unless fixed input is selected.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
+    },
+    {
+      "category": "Aerosol",
+      "id": "AER-ANGEXP-VAL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "aer_angexp_opt must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "aer_angexp_opt"
+        }
+      ],
+      "requirementsRaw": "aer_angexp_opt must be 1",
+      "sourceExcerpt": "aer_angexp_val is valid when aer_angexp_opt=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "aer_angexp_val",
+      "validationNotes": "Registry-backed valid-when rule; soft warning because value is ignored unless fixed input is selected.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
+    },
+    {
+      "category": "Aerosol",
+      "id": "AER-SSA-VAL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "aer_ssa_opt must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "aer_ssa_opt"
+        }
+      ],
+      "requirementsRaw": "aer_ssa_opt must be 1",
+      "sourceExcerpt": "aer_ssa_val is valid when aer_ssa_opt=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "aer_ssa_val",
+      "validationNotes": "Registry-backed valid-when rule; soft warning because value is ignored unless fixed input is selected.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
+    },
+    {
+      "category": "Aerosol",
+      "id": "AER-ASY-VAL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "aer_asy_opt must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "aer_asy_opt"
+        }
+      ],
+      "requirementsRaw": "aer_asy_opt must be 1",
+      "sourceExcerpt": "aer_asy_val is valid when aer_asy_opt=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "aer_asy_val",
+      "validationNotes": "Registry-backed valid-when rule; soft warning because value is ignored unless fixed input is selected.",
+      "validationSource": "WRF Registry Registry.EM_COMMON",
+      "validationStatus": "valid",
+      "validationUrl": "data/raw/wrf/4.8.1-dev/Registry/Registry.EM_COMMON",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "4.7.1",
+        "4.8.0",
+        "4.8.1-dev"
+      ]
     }
   ],
   "variableIndex": {
-    "MODIS": {
-      "group": null,
-      "requirementRules": [
-        61
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "USGS": {
-      "group": null,
-      "requirementRules": [
-        61
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "aer_opt": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "aer_opt=3 \u21d2 mp_physics=28",
-      "triggerRules": [
-        50
-      ]
-    },
-    "auxinput11_end_h": {
-      "group": "time_control",
-      "requirementRules": [
-        57
-      ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
-      "triggerRules": []
-    },
-    "auxinput11_interval": {
-      "group": "time_control",
-      "requirementRules": [
-        57
-      ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
-      "triggerRules": []
-    },
-    "auxinput4_inname": {
-      "group": "time_control",
-      "requirementRules": [
-        56
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "auxinput4_interval": {
-      "group": "time_control",
-      "requirementRules": [
-        56
-      ],
-      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings.",
-      "triggerRules": []
-    },
-    "bdy_inname": {
-      "group": "time_control",
-      "requirementRules": [
-        58
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
     "bl_pbl_physics": {
       "group": "physics",
       "requirementRules": [
@@ -2625,39 +2847,212 @@
         54
       ]
     },
-    "bucket_j": {
+    "sf_sfclay_physics": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24.",
-      "triggerRules": [
-        49
-      ]
-    },
-    "compile_env": {
-      "group": null,
       "requirementRules": [
-        62
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        20,
+        51,
+        54,
+        55
       ],
       "summary": null,
       "triggerRules": []
     },
-    "convtrans_avglen_m": {
+    "sf_surface_physics": {
+      "group": "physics",
+      "requirementRules": [
+        13,
+        19,
+        21,
+        54
+      ],
+      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4",
+      "triggerRules": [
+        11,
+        12
+      ]
+    },
+    "ra_lw_physics": {
+      "group": "physics",
+      "requirementRules": [
+        12,
+        48,
+        49
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "ra_sw_physics": {
+      "group": "physics",
+      "requirementRules": [
+        12,
+        47,
+        48,
+        49
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "sf_urban_physics": {
+      "group": "physics",
+      "requirementRules": [
+        16
+      ],
+      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8",
+      "triggerRules": [
+        13,
+        14,
+        15
+      ]
+    },
+    "slucm_distributed_drag": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False",
+      "triggerRules": [
+        16
+      ]
+    },
+    "use_wudapt_lcz": {
+      "group": "physics",
+      "requirementRules": [
+        16
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "wrfinput_extra": {
+      "group": null,
+      "requirementRules": [
+        16,
+        17
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "distributed_ahe_opt": {
       "group": "physics",
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        33
+        17
       ]
     },
-    "cu_diag": {
+    "topo_wind": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1",
+      "triggerRules": [
+        18
+      ]
+    },
+    "geogrid_extra": {
+      "group": null,
+      "requirementRules": [
+        18
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "seaice_threshold": {
       "group": "physics",
       "requirementRules": [
-        35
+        20
       ],
-      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93",
+      "summary": null,
       "triggerRules": [
-        34
+        19
       ]
+    },
+    "fractional_seaice": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0",
+      "triggerRules": [
+        20
+      ]
+    },
+    "sf_surf_irr_scheme": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2",
+      "triggerRules": [
+        21
+      ]
+    },
+    "opt_pedo": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_pedo=1 \u21d2 opt_soil=3",
+      "triggerRules": [
+        22
+      ]
+    },
+    "opt_soil": {
+      "group": "noah_mp",
+      "requirementRules": [
+        22
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "geogrid_tbl": {
+      "group": null,
+      "requirementRules": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "opt_irr": {
+      "group": "noah_mp",
+      "requirementRules": [
+        24
+      ],
+      "summary": null,
+      "triggerRules": [
+        23
+      ]
+    },
+    "opt_irrm": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3",
+      "triggerRules": [
+        24
+      ]
+    },
+    "opt_tdrn": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3",
+      "triggerRules": [
+        25
+      ]
+    },
+    "opt_run": {
+      "group": "noah_mp",
+      "requirementRules": [
+        25,
+        70
+      ],
+      "summary": null,
+      "triggerRules": []
     },
     "cu_physics": {
       "group": "physics",
@@ -2686,206 +3081,15 @@
         64
       ]
     },
-    "cu_rad_feedback": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1",
-      "triggerRules": [
-        35
-      ]
-    },
-    "cugd_avedx": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "cugd_avedx=3 \u21d2 cu_physics=5",
-      "triggerRules": [
-        31
-      ]
-    },
-    "diff_opt": {
-      "group": "dynamics",
-      "requirementRules": [
-        51,
-        52,
-        53,
-        54
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "distributed_ahe_opt": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        17
-      ]
-    },
-    "do_radar_ref": {
+    "shcu_physics": {
       "group": "physics",
       "requirementRules": [
-        41,
-        45
+        27
       ],
-      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28",
+      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6",
       "triggerRules": [
-        44
-      ]
-    },
-    "domain_role": {
-      "group": null,
-      "requirementRules": [
-        59,
-        60
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "dx": {
-      "group": "domains",
-      "requirementRules": [
-        42
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "ensdim": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        40
-      ]
-    },
-    "force_use_old_data": {
-      "group": "time_control",
-      "requirementRules": [],
-      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0",
-      "triggerRules": [
-        63
-      ]
-    },
-    "fractional_seaice": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0",
-      "triggerRules": [
-        20
-      ]
-    },
-    "geog_data_res": {
-      "group": null,
-      "requirementRules": [
-        62
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "geogrid_extra": {
-      "group": null,
-      "requirementRules": [
-        18
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "geogrid_tbl": {
-      "group": null,
-      "requirementRules": [
-        22,
-        23,
-        24,
-        25
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "hybrid_opt": {
-      "group": "dynamics",
-      "requirementRules": [
-        63
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "iccg_method": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        43
-      ]
-    },
-    "iccg_prescribed_den": {
-      "group": "physics",
-      "requirementRules": [
-        43
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "iccg_prescribed_num": {
-      "group": "physics",
-      "requirementRules": [
-        43
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "icloud": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        48
-      ]
-    },
-    "input_from_hires": {
-      "group": "time_control",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        62
-      ]
-    },
-    "io_form_auxinput4": {
-      "group": "time_control",
-      "requirementRules": [
-        56
-      ],
-      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files.",
-      "triggerRules": []
-    },
-    "isfflx": {
-      "group": "physics",
-      "requirementRules": [
-        54
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "isftcflx": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1.",
-      "triggerRules": [
-        55
-      ]
-    },
-    "ishallow": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5",
-      "triggerRules": [
-        29
-      ]
-    },
-    "kf_edrates": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99",
-      "triggerRules": [
-        32
+        30,
+        65
       ]
     },
     "kfeta_trigger": {
@@ -2896,25 +3100,62 @@
         28
       ]
     },
-    "km_opt": {
-      "group": "dynamics",
-      "requirementRules": [
-        52,
-        53,
-        54
-      ],
-      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91",
+    "ishallow": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5",
       "triggerRules": [
-        51
+        29
       ]
     },
-    "lightning_option": {
+    "cugd_avedx": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "cugd_avedx=3 \u21d2 cu_physics=5",
+      "triggerRules": [
+        31
+      ]
+    },
+    "kf_edrates": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99",
+      "triggerRules": [
+        32
+      ]
+    },
+    "convtrans_avglen_m": {
       "group": "physics",
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        41,
-        42
+        33
+      ]
+    },
+    "cu_diag": {
+      "group": "physics",
+      "requirementRules": [
+        35
+      ],
+      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93",
+      "triggerRules": [
+        34
+      ]
+    },
+    "cu_rad_feedback": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1",
+      "triggerRules": [
+        35
+      ]
+    },
+    "maxiens": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        36
       ]
     },
     "maxens": {
@@ -2941,12 +3182,276 @@
         39
       ]
     },
-    "maxiens": {
+    "ensdim": {
       "group": "physics",
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        36
+        40
+      ]
+    },
+    "lightning_option": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        41,
+        42
+      ]
+    },
+    "do_radar_ref": {
+      "group": "physics",
+      "requirementRules": [
+        41,
+        45
+      ],
+      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28",
+      "triggerRules": [
+        44
+      ]
+    },
+    "dx": {
+      "group": "domains",
+      "requirementRules": [
+        42
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "iccg_method": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        43
+      ]
+    },
+    "iccg_prescribed_num": {
+      "group": "physics",
+      "requirementRules": [
+        43
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "iccg_prescribed_den": {
+      "group": "physics",
+      "requirementRules": [
+        43
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "mp_physics": {
+      "group": "physics",
+      "requirementRules": [
+        44,
+        46,
+        50,
+        69
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "nwp_diagnostics": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True",
+      "triggerRules": [
+        45
+      ]
+    },
+    "use_mp_re": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55",
+      "triggerRules": [
+        46
+      ]
+    },
+    "ra_sw_eclipse": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5",
+      "triggerRules": [
+        47
+      ]
+    },
+    "icloud": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        48
+      ]
+    },
+    "bucket_j": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24.",
+      "triggerRules": [
+        49
+      ]
+    },
+    "aer_opt": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "aer_opt=3 \u21d2 mp_physics=28",
+      "triggerRules": [
+        50
+      ]
+    },
+    "km_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        52,
+        53,
+        54
+      ],
+      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91",
+      "triggerRules": [
+        51
+      ]
+    },
+    "diff_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        51,
+        52,
+        53,
+        54
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "sfs_opt": {
+      "group": "dynamics",
+      "requirementRules": [],
+      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2",
+      "triggerRules": [
+        52,
+        53
+      ]
+    },
+    "isfflx": {
+      "group": "physics",
+      "requirementRules": [
+        54
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "isftcflx": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1.",
+      "triggerRules": [
+        55
+      ]
+    },
+    "sst_update": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        56
+      ]
+    },
+    "auxinput4_inname": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "auxinput4_interval": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings.",
+      "triggerRules": []
+    },
+    "io_form_auxinput4": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files.",
+      "triggerRules": []
+    },
+    "obs_nudge_opt": {
+      "group": "fdda",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        57
+      ]
+    },
+    "auxinput11_interval": {
+      "group": "time_control",
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
+      "triggerRules": []
+    },
+    "auxinput11_end_h": {
+      "group": "time_control",
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
+      "triggerRules": []
+    },
+    "multi_bdy_files": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        58
+      ]
+    },
+    "bdy_inname": {
+      "group": "time_control",
+      "requirementRules": [
+        58
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "nested": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": "nested=.true. is for nested domains only.",
+      "triggerRules": [
+        59
+      ]
+    },
+    "domain_role": {
+      "group": null,
+      "requirementRules": [
+        59,
+        60
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "specified": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": "specified=.true. is for the outer real-data domain only.",
+      "triggerRules": [
+        60
+      ]
+    },
+    "num_land_cat": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        61
       ]
     },
     "metgrid_NUM_LAND_CAT": {
@@ -2956,6 +3461,86 @@
       ],
       "summary": null,
       "triggerRules": []
+    },
+    "MODIS": {
+      "group": null,
+      "requirementRules": [
+        61
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "USGS": {
+      "group": null,
+      "requirementRules": [
+        61
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "input_from_hires": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        62
+      ]
+    },
+    "compile_env": {
+      "group": null,
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "geog_data_res": {
+      "group": null,
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "rsmas_data_path": {
+      "group": "time_control",
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "force_use_old_data": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0",
+      "triggerRules": [
+        63
+      ]
+    },
+    "use_theta_m": {
+      "group": "dynamics",
+      "requirementRules": [
+        63
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "hybrid_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        63
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "thBinSize": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP).",
+      "triggerRules": [
+        66
+      ]
     },
     "minDeepFreq": {
       "group": "physics",
@@ -2973,299 +3558,82 @@
         68
       ]
     },
-    "mp_physics": {
-      "group": "physics",
-      "requirementRules": [
-        44,
-        46,
-        50
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "multi_bdy_files": {
-      "group": "bdy_control",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        58
-      ]
-    },
-    "nested": {
-      "group": "bdy_control",
-      "requirementRules": [],
-      "summary": "nested=.true. is for nested domains only.",
-      "triggerRules": [
-        59
-      ]
-    },
-    "num_land_cat": {
+    "progn": {
       "group": "physics",
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        61
+        69
       ]
     },
-    "nwp_diagnostics": {
-      "group": "time_control",
-      "requirementRules": [],
-      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True",
-      "triggerRules": [
-        45
-      ]
-    },
-    "obs_nudge_opt": {
-      "group": "fdda",
-      "requirementRules": [],
-      "summary": null,
-      "triggerRules": [
-        57
-      ]
-    },
-    "opt_irr": {
-      "group": "noah_mp",
-      "requirementRules": [
-        24
-      ],
-      "summary": null,
-      "triggerRules": [
-        23
-      ]
-    },
-    "opt_irrm": {
+    "opt_infdv": {
       "group": "noah_mp",
       "requirementRules": [],
-      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3",
+      "summary": null,
       "triggerRules": [
-        24
+        70
       ]
     },
-    "opt_pedo": {
-      "group": "noah_mp",
+    "aer_aod550_val": {
+      "group": "physics",
       "requirementRules": [],
-      "summary": "opt_pedo=1 \u21d2 opt_soil=3",
+      "summary": null,
       "triggerRules": [
-        22
+        71
       ]
     },
-    "opt_run": {
-      "group": "noah_mp",
+    "aer_aod550_opt": {
+      "group": "physics",
       "requirementRules": [
-        25
+        71
       ],
       "summary": null,
       "triggerRules": []
     },
-    "opt_soil": {
-      "group": "noah_mp",
+    "aer_angexp_val": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        72
+      ]
+    },
+    "aer_angexp_opt": {
+      "group": "physics",
       "requirementRules": [
-        22
+        72
       ],
       "summary": null,
       "triggerRules": []
     },
-    "opt_tdrn": {
-      "group": "noah_mp",
+    "aer_ssa_val": {
+      "group": "physics",
       "requirementRules": [],
-      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3",
+      "summary": null,
       "triggerRules": [
-        25
+        73
       ]
     },
-    "ra_lw_physics": {
+    "aer_ssa_opt": {
       "group": "physics",
       "requirementRules": [
-        12,
-        48,
-        49
+        73
       ],
       "summary": null,
       "triggerRules": []
     },
-    "ra_sw_eclipse": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5",
-      "triggerRules": [
-        47
-      ]
-    },
-    "ra_sw_physics": {
-      "group": "physics",
-      "requirementRules": [
-        12,
-        47,
-        48,
-        49
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "rsmas_data_path": {
-      "group": "time_control",
-      "requirementRules": [
-        62
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "seaice_threshold": {
-      "group": "physics",
-      "requirementRules": [
-        20
-      ],
-      "summary": null,
-      "triggerRules": [
-        19
-      ]
-    },
-    "sf_sfclay_physics": {
-      "group": "physics",
-      "requirementRules": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        20,
-        51,
-        54,
-        55
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "sf_surf_irr_scheme": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2",
-      "triggerRules": [
-        21
-      ]
-    },
-    "sf_surface_physics": {
-      "group": "physics",
-      "requirementRules": [
-        13,
-        19,
-        21,
-        54
-      ],
-      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4",
-      "triggerRules": [
-        11,
-        12
-      ]
-    },
-    "sf_urban_physics": {
-      "group": "physics",
-      "requirementRules": [
-        16
-      ],
-      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8",
-      "triggerRules": [
-        13,
-        14,
-        15
-      ]
-    },
-    "sfs_opt": {
-      "group": "dynamics",
-      "requirementRules": [],
-      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2",
-      "triggerRules": [
-        52,
-        53
-      ]
-    },
-    "shcu_physics": {
-      "group": "physics",
-      "requirementRules": [
-        27
-      ],
-      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6",
-      "triggerRules": [
-        30,
-        65
-      ]
-    },
-    "slucm_distributed_drag": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False",
-      "triggerRules": [
-        16
-      ]
-    },
-    "specified": {
-      "group": "bdy_control",
-      "requirementRules": [],
-      "summary": "specified=.true. is for the outer real-data domain only.",
-      "triggerRules": [
-        60
-      ]
-    },
-    "sst_update": {
+    "aer_asy_val": {
       "group": "physics",
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        56
+        74
       ]
     },
-    "thBinSize": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP).",
-      "triggerRules": [
-        66
-      ]
-    },
-    "topo_wind": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1",
-      "triggerRules": [
-        18
-      ]
-    },
-    "use_mp_re": {
-      "group": "physics",
-      "requirementRules": [],
-      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55",
-      "triggerRules": [
-        46
-      ]
-    },
-    "use_theta_m": {
-      "group": "dynamics",
-      "requirementRules": [
-        63
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "use_wudapt_lcz": {
+    "aer_asy_opt": {
       "group": "physics",
       "requirementRules": [
-        16
-      ],
-      "summary": null,
-      "triggerRules": []
-    },
-    "wrfinput_extra": {
-      "group": null,
-      "requirementRules": [
-        16,
-        17
+        74
       ],
       "summary": null,
       "triggerRules": []
