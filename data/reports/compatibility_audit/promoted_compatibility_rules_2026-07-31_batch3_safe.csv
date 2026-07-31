@@ -1,0 +1,4 @@
+action,id,category,strength,trigger,requirements,sourceExcerpt
+updated,RA-SW-ECLIPSE,Radiation,Hard,physics.ra_sw_eclipse one_of 1,"ra_sw_physics must be one of 1, 2, 4, 5","ra_sw_eclipse only works with RRTMG, Goddard, old Goddard, and Dudhia radiation schemes. Existing catalog compatibility maps these to ra_sw_physics=1,2,4,5."
+updated,OBS-NUDGE,FDDA,Workflow,fdda.obs_nudge_opt one_of 1,auxinput11_interval should be set for observational nudging | auxinput11_end_h should be set for observational nudging,obs_nudge_opt=1 turns on observational nudging and must also set auxinput11_interval and auxinput11_end_h under time_control.
+added,MP-ZERO-OUT-THRESH,Microphysics,Workflow,"physics.mp_zero_out one_of 1,2",mp_zero_out_thresh should be reviewed when mp_zero_out is enabled,mp_zero_out_thresh is the critical threshold below which moisture arrays are set to zero when using mp_zero_out.

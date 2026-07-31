@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "notes": "Expanded validated compatibility coverage with Users Guide batch 2 rules.",
+    "notes": "Added safe batch 3 default-off compatibility rules.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 83,
+    "ruleCount": 84,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
       "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
-    "variableCount": 87,
+    "variableCount": 89,
     "lastReviewedDate": "2026-07-31"
   },
   "rules": [
@@ -1745,15 +1745,23 @@
       ]
     },
     {
-      "category": "Radiation",
       "id": "RA-SW-ECLIPSE",
-      "notes": null,
+      "category": "Radiation",
+      "strength": "Hard",
+      "triggerGroup": "physics",
+      "triggerVariable": "ra_sw_eclipse",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
       "requirements": [
         {
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "ra_sw_physics only works with 1, 2, 4, 5",
+          "raw": "ra_sw_physics must be one of 1, 2, 4, 5",
           "values": [
             "1",
             "2",
@@ -1763,21 +1771,18 @@
           "variable": "ra_sw_physics"
         }
       ],
-      "requirementsRaw": "ra_sw_physics only works with 1, 2, 4, 5",
-      "sourceExcerpt": "ra_sw_eclipse=1 only works with ra_sw_physics 1,2,4,5",
-      "strength": "Hard",
-      "trigger": {
-        "mode": "one_of",
-        "values": [
-          "1"
-        ]
-      },
-      "triggerGroup": "physics",
-      "triggerVariable": "ra_sw_eclipse",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "sourceExcerpt": "ra_sw_eclipse only works with RRTMG, Goddard, old Goddard, and Dudhia radiation schemes. Existing catalog compatibility maps these to ra_sw_physics=1,2,4,5.",
+      "validationNotes": "Promoted from existing unreviewed catalog rule and Users Guide text. Safe default-off trigger because ra_sw_eclipse default is 0.",
+      "notes": null,
+      "requirementsRaw": "ra_sw_physics must be one of 1, 2, 4, 5",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "catalog-compatibility-payload"
+      ]
     },
     {
       "category": "Radiation",
@@ -2205,15 +2210,23 @@
       ]
     },
     {
-      "category": "FDDA",
       "id": "OBS-NUDGE",
-      "notes": null,
+      "category": "FDDA",
+      "strength": "Workflow",
+      "triggerGroup": "fdda",
+      "triggerVariable": "obs_nudge_opt",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
       "requirements": [
         {
           "checkable": true,
           "group": "time_control",
           "mode": "set",
-          "raw": "auxinput11_interval must also set set",
+          "raw": "auxinput11_interval should be set for observational nudging",
           "values": [],
           "variable": "auxinput11_interval"
         },
@@ -2221,26 +2234,23 @@
           "checkable": true,
           "group": "time_control",
           "mode": "set",
-          "raw": "auxinput11_end_h must also set set",
+          "raw": "auxinput11_end_h should be set for observational nudging",
           "values": [],
           "variable": "auxinput11_end_h"
         }
       ],
-      "requirementsRaw": "auxinput11_interval must also set set | auxinput11_end_h must also set set",
-      "sourceExcerpt": "obs_nudge_opt=1 must also set auxinput11_interval and auxinput11_end_h",
-      "strength": "Workflow",
-      "trigger": {
-        "mode": "one_of",
-        "values": [
-          "1"
-        ]
-      },
-      "triggerGroup": "fdda",
-      "triggerVariable": "obs_nudge_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "sourceExcerpt": "obs_nudge_opt=1 turns on observational nudging and must also set auxinput11_interval and auxinput11_end_h under time_control.",
+      "validationNotes": "Promoted from existing unreviewed workflow rule and Users Guide text. Both auxinput11 fields are present in the runtime catalog.",
+      "notes": null,
+      "requirementsRaw": "auxinput11_interval should be set for observational nudging | auxinput11_end_h should be set for observational nudging",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "catalog-compatibility-payload"
+      ]
     },
     {
       "category": "Boundary Files",
@@ -3120,6 +3130,42 @@
       "validatedVersions": [
         "current-users-guide"
       ]
+    },
+    {
+      "id": "MP-ZERO-OUT-THRESH",
+      "category": "Microphysics",
+      "strength": "Workflow",
+      "triggerGroup": "physics",
+      "triggerVariable": "mp_zero_out",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "set",
+          "raw": "mp_zero_out_thresh should be reviewed when mp_zero_out is enabled",
+          "values": [],
+          "variable": "mp_zero_out_thresh"
+        }
+      ],
+      "sourceExcerpt": "mp_zero_out_thresh is the critical threshold below which moisture arrays are set to zero when using mp_zero_out.",
+      "validationNotes": "Workflow warning only. Safe default-off trigger because mp_zero_out default is 0.",
+      "notes": null,
+      "requirementsRaw": "mp_zero_out_thresh should be reviewed when mp_zero_out is enabled",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "catalog-compatibility-payload"
+      ]
     }
   ],
   "variableIndex": {
@@ -3915,6 +3961,22 @@
       "group": "noah_mp",
       "requirementRules": [
         82
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "mp_zero_out": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        83
+      ]
+    },
+    "mp_zero_out_thresh": {
+      "group": "physics",
+      "requirementRules": [
+        83
       ],
       "summary": null,
       "triggerRules": []
