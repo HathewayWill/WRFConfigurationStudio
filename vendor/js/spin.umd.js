@@ -71,7 +71,9 @@ var Spinner = /** @class */ (function () {
     };
     return Spinner;
 }());
-export { Spinner };
+window.Spinner = Spinner;
+window.spin = window.spin || {};
+window.spin.Spinner = Spinner;
 /**
  * Returns the line color from the given string or array.
  */

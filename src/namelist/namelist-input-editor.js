@@ -293,6 +293,15 @@
     return Array.isArray(value) && value.some(function (item) { return isBlankNamelistValue(item); });
   }
 
+  function isHtmlNumberSafe(value) {
+    if (value === null || value === undefined) return true;
+    if (typeof value === 'number') return isFinite(value);
+    var raw = String(value).trim();
+    if (raw === '') return true;
+    if (!/^[+-]?(?:(?:\d+\.?\d*)|(?:\.\d+))(?:[eE][+-]?\d+)?$/.test(raw)) return false;
+    return isFinite(Number(raw));
+  }
+
 
   function resolveEntries(entries, maxDom) {
     if (entries === 'max_dom' || entries === 'max_domains') return Math.max(1, maxDom || 1);
@@ -1105,8 +1114,19 @@
   HybridNamelistInputEditor.prototype.parseScalarValueForField = function (field, rawValue) {
     if (rawValue === '' || rawValue === null || rawValue === undefined) return '';
     if (field.type === 'logical') return String(rawValue).toLowerCase() === 'true' || String(rawValue).toLowerCase() === '.true.';
-    if (field.type === 'integer') return parseInt(rawValue, 10);
-    if (field.type === 'real') return parseFloat(rawValue);
+
+    var raw = String(rawValue).trim();
+
+    if (field.type === 'integer') {
+      if (/^[+-]?\d+$/.test(raw)) return parseInt(raw, 10);
+      return rawValue;
+    }
+
+    if (field.type === 'real') {
+      if (isHtmlNumberSafe(raw)) return Number(raw);
+      return rawValue;
+    }
+
     return rawValue;
   };
 
@@ -1651,9 +1671,12 @@
       html += '</select>';
       return html;
     }
-    var typeAttr = field.type === 'integer' || field.type === 'real' ? 'number' : 'text';
-    var stepAttr = field.type === 'integer' ? ' step="1"' : (field.type === 'real' ? ' step="any"' : '');
-    return '<input class="form-control form-control-sm namelist-input-field" data-key="' + esc(field.key) + '"' + dataIndex + ' type="' + typeAttr + '" value="' + esc(value == null ? '' : value) + '"' + stepAttr + '>';
+    var numericField = field.type === 'integer' || field.type === 'real';
+    var useNumberInput = numericField && isHtmlNumberSafe(value);
+    var typeAttr = useNumberInput ? 'number' : 'text';
+    var stepAttr = useNumberInput ? (field.type === 'integer' ? ' step="1"' : ' step="any"') : '';
+    var fallbackClass = numericField && !useNumberInput ? ' namelist-input-numeric-text-fallback' : '';
+    return '<input class="form-control form-control-sm namelist-input-field' + fallbackClass + '" data-key="' + esc(field.key) + '"' + dataIndex + ' type="' + typeAttr + '" value="' + esc(value == null ? '' : value) + '"' + stepAttr + '>';
   };
 
   HybridNamelistInputEditor.prototype.bindRenderedEvents = function () {
