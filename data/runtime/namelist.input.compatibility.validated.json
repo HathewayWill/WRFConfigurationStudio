@@ -11,7 +11,9 @@
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
     "variableCount": 90,
-    "lastReviewedDate": "2026-07-31"
+    "lastReviewedDate": "2026-07-31",
+    "validRuleCount": 59,
+    "lastPromotionBatch": "2026-07-31_batch4_safe_default_off"
   },
   "rules": [
     {
@@ -410,10 +412,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_surface_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Land Surface \u2194 Radiation",
@@ -456,10 +463,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_surface_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Urban",
@@ -490,10 +502,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_urban_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Urban \u2194 PBL",
@@ -524,10 +541,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_urban_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Urban \u2194 PBL",
@@ -558,10 +580,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_urban_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Urban Extra Input",
@@ -809,10 +836,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "sf_surf_irr_scheme",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Noah-MP",
@@ -1005,10 +1037,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cu_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Cumulus \u2194 Shallow",
@@ -1037,10 +1074,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cu_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Cumulus Option",
@@ -1142,10 +1184,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "shcu_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Cumulus Option",
@@ -1280,10 +1327,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cu_diag",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Cumulus \u2194 Radiation",
@@ -1529,10 +1581,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "lightning_option",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Lightning",
@@ -1683,10 +1740,15 @@
       },
       "triggerGroup": "time_control",
       "triggerVariable": "nwp_diagnostics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Radiation \u2194 MP",
@@ -1905,10 +1967,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "aer_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Dynamics",
@@ -2002,10 +2069,15 @@
       },
       "triggerGroup": "dynamics",
       "triggerVariable": "sfs_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Dynamics",
@@ -2044,10 +2116,15 @@
       },
       "triggerGroup": "dynamics",
       "triggerVariable": "sfs_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Dynamics / LES",
@@ -2146,10 +2223,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "isftcflx",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist. Promoted in batch 4 after safe default-off trigger review. The trigger default is off/zero/false, all structured trigger and requirement fields exist in the runtime catalog, and the rule remains conservative for browser enforcement.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "2026-07-31_batch4_safe_default_off"
+      ],
+      "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
       "category": "Time Control",

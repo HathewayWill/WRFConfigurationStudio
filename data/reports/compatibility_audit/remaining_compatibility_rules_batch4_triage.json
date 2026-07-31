@@ -1,0 +1,912 @@
+[
+  {
+    "id": "AER-OPT-3",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.aer_opt",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.mp_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "mp_physics only works with 28",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CONVTRANS",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.convtrans_avglen_m",
+    "trigger_mode": "one_of",
+    "trigger_default": 30.0,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CU-7-PBL",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.cu_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.bl_pbl_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "bl_pbl_physics must be one of 2, 9",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CU-DIAG",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.cu_diag",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics for use with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CU-RAD",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.cu_rad_feedback",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.cu_diag",
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 1, 3, 5, 10, 11, 93, 99 | cu_diag required if cu_physics in 3,5,93 1",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CUGD-AVEDX",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.cugd_avedx",
+    "trigger_mode": "one_of",
+    "trigger_default": 1,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 5",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "ENSDIM",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.ensdim",
+    "trigger_mode": "one_of",
+    "trigger_default": 144,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "ICCG-1",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.iccg_method",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.iccg_prescribed_den",
+      "physics.iccg_prescribed_num"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "iccg_prescribed_num must also set set | iccg_prescribed_den must also set set",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "ISFTCFLX",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.isftcflx",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be 1",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "KFETA",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.kfeta_trigger",
+    "trigger_mode": "one_of",
+    "trigger_default": 1,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 1",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "KM-5",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "dynamics.km_opt",
+    "trigger_mode": "one_of",
+    "trigger_default": -1,
+    "default_nonzero": true,
+    "requirements": [
+      "dynamics.diff_opt",
+      "physics.bl_pbl_physics",
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "diff_opt must be 2 | bl_pbl_physics must be 0 | sf_sfclay_physics must be one of 1, 5, 91",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "LIGHTNING-RADAR",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.lightning_option",
+    "trigger_mode": "active",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.do_radar_ref"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "do_radar_ref must be 1, True",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "LSM-7",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_surface_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.bl_pbl_physics",
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be 7 | bl_pbl_physics must be 7",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "LSM-8-RAD",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_surface_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.ra_lw_physics",
+      "physics.ra_sw_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "ra_lw_physics must be one of 1, 3, 4 | ra_sw_physics must be one of 1, 3, 4",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "MAXENS",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.maxens",
+    "trigger_mode": "one_of",
+    "trigger_default": 3,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "MAXENS2",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.maxens2",
+    "trigger_mode": "one_of",
+    "trigger_default": 3,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "MAXENS3",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.maxens3",
+    "trigger_mode": "one_of",
+    "trigger_default": 16,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "MAXIENS",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.maxiens",
+    "trigger_mode": "one_of",
+    "trigger_default": 1,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 3, 5, 93",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NOAHMP-IRRM",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "noah_mp.opt_irrm",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "noah_mp.opt_irr"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "opt_irr must be > 0 1, 2, 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NUM-LAND-CAT",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.num_land_cat",
+    "trigger_mode": "one_of",
+    "trigger_default": 24,
+    "default_nonzero": true,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "metgrid_NUM_LAND_CAT must match must match | MODIS default typical value 21 | USGS typical value 24",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NWPDIAG",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "time_control.nwp_diagnostics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.do_radar_ref"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "do_radar_ref must be 1, True",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SHCU-DENG",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.shcu_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.bl_pbl_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "bl_pbl_physics only works with 2, 5, 6",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SPECIFIED-D01",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "bdy_control.specified",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "domain_role for domain 1",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SURF-IRR",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_surf_irr_scheme",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_surface_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_surface_physics must be 2",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "URBAN-BEM",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_urban_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.bl_pbl_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "URBAN-BEP",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_urban_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.bl_pbl_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "URBAN-NOAH",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.sf_urban_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_surface_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_surface_physics must be 2",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CU-14-SHCU",
+    "status": "unreviewed",
+    "strength": "Soft",
+    "trigger_key": "physics.cu_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.shcu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "shcu_physics use with 4",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CU-OFF",
+    "status": "unreviewed",
+    "strength": "Soft",
+    "trigger_key": "physics.cu_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "cu_physics=0 means no cumulus parameterization and is allowed",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SFS-1",
+    "status": "unreviewed",
+    "strength": "Soft",
+    "trigger_key": "dynamics.sfs_opt",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "dynamics.diff_opt",
+      "dynamics.km_opt"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2, 3",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SFS-2",
+    "status": "unreviewed",
+    "strength": "Soft",
+    "trigger_key": "dynamics.sfs_opt",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "dynamics.diff_opt",
+      "dynamics.km_opt"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SHCU-OFF",
+    "status": "unreviewed",
+    "strength": "Soft",
+    "trigger_key": "physics.shcu_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "shcu_physics=0 means no shallow cumulus and is allowed",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "AHE-INPUT",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "physics.distributed_ahe_opt",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "wrfinput_extra requires anthropogenic heat input variables",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "LIGHTNING-11",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "physics.lightning_option",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "domains.dx",
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "dx intended range 10 km < dx < 50 km | cu_physics intended use parameterized-convection scales",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "MULTI-BDY",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "bdy_control.multi_bdy_files",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [
+      "time_control.bdy_inname"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "bdy_inname requires wrfbdy_d<domain>_<date>",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NESTED-TRUE",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "bdy_control.nested",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "domain_role must be set for nest",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NOAHMP-IRR",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "noah_mp.opt_irr",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "NOAHMP-PEDO",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "noah_mp.opt_pedo",
+    "trigger_mode": "one_of",
+    "trigger_default": 1,
+    "default_nonzero": true,
+    "requirements": [
+      "noah_mp.opt_soil"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "opt_soil must be 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "OLD-FILES",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "time_control.force_use_old_data",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [
+      "dynamics.hybrid_opt",
+      "dynamics.use_theta_m"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "use_theta_m must be 0 | hybrid_opt must be 0",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "SLUCM-DRAG",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "physics.slucm_distributed_drag",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_urban_physics",
+      "physics.use_wudapt_lcz"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_urban_physics must be 1 | use_wudapt_lcz must be off / 0 0, False | wrfinput_extra requires 3 additional urban input variables",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "WPS-HIRES",
+    "status": "unreviewed",
+    "strength": "Workflow",
+    "trigger_key": "time_control.input_from_hires",
+    "trigger_mode": "one_of",
+    "trigger_default": false,
+    "default_nonzero": false,
+    "requirements": [
+      "time_control.rsmas_data_path"
+    ],
+    "missing_requirements": [],
+    "bucket": "candidate",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "compile_env requires TERRAIN_AND_LANDUSE=1 | geog_data_res requires usgs_30s+default or matching hi-res | rsmas_data_path requires set",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "PBL-1",
+    "status": "needs_review",
+    "strength": "Hard",
+    "trigger_key": "physics.bl_pbl_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "needs manual review",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be one of 1",
+    "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,91."
+  },
+  {
+    "id": "PBL-5",
+    "status": "needs_review",
+    "strength": "Hard",
+    "trigger_key": "physics.bl_pbl_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "needs manual review",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5",
+    "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91."
+  },
+  {
+    "id": "PBL-6",
+    "status": "needs_review",
+    "strength": "Hard",
+    "trigger_key": "physics.bl_pbl_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "needs manual review",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be one of 5",
+    "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91."
+  },
+  {
+    "id": "PBL-7",
+    "status": "needs_review",
+    "strength": "Hard",
+    "trigger_key": "physics.bl_pbl_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "physics.sf_sfclay_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "needs manual review",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "sf_sfclay_physics must be one of 1, 7",
+    "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,7,91."
+  },
+  {
+    "id": "LES-PBL",
+    "status": "needs_review",
+    "strength": "Soft",
+    "trigger_key": "physics.bl_pbl_physics",
+    "trigger_mode": "one_of",
+    "trigger_default": 0,
+    "default_nonzero": false,
+    "requirements": [
+      "dynamics.diff_opt",
+      "dynamics.km_opt",
+      "physics.isfflx",
+      "physics.sf_sfclay_physics",
+      "physics.sf_surface_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "needs manual review",
+    "reasons": [],
+    "description": "",
+    "requirementsRaw": "isfflx template uses 1 | sf_sfclay_physics template uses any non-zero | sf_surface_physics template uses any non-zero | diff_opt template uses 2 | km_opt template uses 2, 3",
+    "validationNotes": "Rule has ; namelist_variables page has None; PBL table has None."
+  },
+  {
+    "id": "BUCKET-J",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.bucket_j",
+    "trigger_mode": "active",
+    "trigger_default": -1.0,
+    "default_nonzero": true,
+    "requirements": [
+      "physics.ra_lw_physics",
+      "physics.ra_sw_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "hold",
+    "reasons": [
+      "trigger has non-zero/default-active value; avoid default-page noise"
+    ],
+    "description": "",
+    "requirementsRaw": "ra_lw_physics only works with 3, 4, 14, 24 | ra_sw_physics only works with 3, 4, 14, 24",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CUP-MINDEEP",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.minDeepFreq",
+    "trigger_mode": "active",
+    "trigger_default": "",
+    "default_nonzero": false,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "hold",
+    "reasons": [
+      "trigger field missing from runtime catalog"
+    ],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 10",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CUP-MINSHALLOW",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.minShallowFreq",
+    "trigger_mode": "active",
+    "trigger_default": "",
+    "default_nonzero": false,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "hold",
+    "reasons": [
+      "trigger field missing from runtime catalog"
+    ],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 10",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  },
+  {
+    "id": "CUP-THBIN",
+    "status": "unreviewed",
+    "strength": "Hard",
+    "trigger_key": "physics.thBinSize",
+    "trigger_mode": "active",
+    "trigger_default": "",
+    "default_nonzero": false,
+    "requirements": [
+      "physics.cu_physics"
+    ],
+    "missing_requirements": [],
+    "bucket": "hold",
+    "reasons": [
+      "trigger field missing from runtime catalog"
+    ],
+    "description": "",
+    "requirementsRaw": "cu_physics only works with 10",
+    "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist."
+  }
+]
