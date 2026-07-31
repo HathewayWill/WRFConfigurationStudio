@@ -1,0 +1,11 @@
+action,id,category,strength,trigger,requirements,sourceExcerpt
+added,IFSNOW,Land Surface,Hard,physics.ifsnow one_of 1,sf_surface_physics must be 1,ifsnow only works with sf_surface_physics=1
+added,SHALWATER-Z0,Surface Layer,Hard,physics.shalwater_z0 one_of 1,sf_sfclay_physics must be 1,shalwater_z0 only works with sf_sfclay_physics=1
+added,MOSAIC-LU,Land Surface,Hard,physics.mosaic_lu one_of 1,sf_surface_physics must be 3,"mosaic_lu only works with RUC LSM, sf_surface_physics=3"
+added,MOSAIC-SOIL,Land Surface,Hard,physics.mosaic_soil one_of 1,sf_surface_physics must be 3,"mosaic_soil only works with RUC LSM, sf_surface_physics=3"
+updated,ISHALLOW,Shallow Cumulus,Hard,physics.ishallow one_of 1,cu_physics must be 3 or 5,ishallow only works with cu_physics=3 or 5
+updated,KF-EDRATES,Cumulus Diagnostics,Hard,physics.kf_edrates one_of 1,"cu_physics must be 1, 11, or 99","kf_edrates only works with cu_physics=1,11,99"
+added,CU-RAD-FEEDBACK,Cumulus ↔ Radiation,Hard,physics.cu_rad_feedback truthy ,"cu_physics must be one of 1,3,5,10,11,93,99 | if using cu_physics=3,5,93, cu_diag should be set to 1","cu_rad_feedback only works with cu_physics=1,3,5,10,11,93,99; if using cu_physics=3,5,93 must set cu_diag=1"
+added,MIX-UPPER-BOUND,Dynamics / Diffusion,Soft,dynamics.mix_upper_bound non_zero ,km_opt must be 2 or 3,"mix_upper_bound only works with km_opt=2,3"
+added,TKE-DRAG-COEFFICIENT,Dynamics / Diffusion,Soft,dynamics.tke_drag_coefficient non_zero ,diff_opt must be 2,tke_drag_coefficient only works with diff_opt=2
+added,NOAHMP-ACC-DT,Noah-MP,Soft,noah_mp.noahmp_acc_dt non_zero ,noahmp_output must be 3,noahmp_acc_dt only works with noahmp_output=3
