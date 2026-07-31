@@ -31,7 +31,8 @@
     var mode = condition.mode || 'one_of';
     var vals = condition.values || [];
 
-    if (mode === 'required') return value !== undefined && value !== null && String(value).trim() !== '';
+    if (mode === 'active') return true;
+    if (mode === 'set' || mode === 'required') return value !== undefined && value !== null && String(value).trim() !== '';
     if (mode === 'truthy') return value === true || norm(value) === '.true.' || norm(value) === '1';
     if (mode === 'falsy') return value === false || norm(value) === '.false.' || norm(value) === '0';
 
