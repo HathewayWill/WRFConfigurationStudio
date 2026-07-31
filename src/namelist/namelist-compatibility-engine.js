@@ -26,21 +26,25 @@
     return asArray(ruleValues).map(norm).indexOf(normalizedValue) !== -1;
   }
 
-  function conditionMatches(value, condition) {
+  function isNonZeroValue(value) {
+    if (value === undefined || value === null) return false;
+    var raw = String(value).trim().toLowerCase();
+    if (!raw || raw === '.false.' || raw === 'false') return false;
+    var numeric = Number(raw.replace(/[dD]/, 'e'));
+    if (!isNaN(numeric)) return numeric !== 0;
+    return raw !== '0' && raw !== '0.0';
+  }
+
+  function conditionMatches(value, condition, userEdited) {
     condition = condition || {};
     var mode = condition.mode || 'one_of';
     var vals = condition.values || [];
 
     if (mode === 'active') return true;
     if (mode === 'set' || mode === 'required') return value !== undefined && value !== null && String(value).trim() !== '';
-    if (mode === 'non_zero') {
-      if (value === undefined || value === null) return false;
-      var raw = String(value).trim().toLowerCase();
-      if (!raw || raw === '.false.' || raw === 'false') return false;
-      var numeric = Number(raw.replace(/[dD]/, 'e'));
-      if (!isNaN(numeric)) return numeric !== 0;
-      return raw !== '0' && raw !== '0.0';
-    }
+    if (mode === 'non_zero') return isNonZeroValue(value);
+    if (mode === 'user_edited') return !!userEdited;
+    if (mode === 'user_edited_non_zero') return !!userEdited && isNonZeroValue(value);
     if (mode === 'truthy') return value === true || norm(value) === '.true.' || norm(value) === '1';
     if (mode === 'falsy') return value === false || norm(value) === '.false.' || norm(value) === '0';
 
@@ -126,6 +130,10 @@
     return !!(this.state.enabled && this.state.enabled[key]);
   };
 
+  CompatibilityEngine.prototype.wasUserEdited = function (key) {
+    return !!(this.state.userEditedFields && this.state.userEditedFields[key]);
+  };
+
   CompatibilityEngine.prototype.getValue = function (key) {
     if (!this.state.values) return undefined;
     return this.state.values[key];
@@ -183,7 +191,7 @@
 
       var triggeredIndexes = [];
       triggerValues.forEach(function (value, idx) {
-        if (conditionMatches(value, rule.trigger)) triggeredIndexes.push(idx);
+        if (conditionMatches(value, rule.trigger, self.wasUserEdited(triggerKey))) triggeredIndexes.push(idx);
       });
 
       if (!triggeredIndexes.length) return;
@@ -198,7 +206,7 @@
 
         triggeredIndexes.forEach(function (idx) {
           var value = valueAt(reqValues, idx);
-          var ok = self.isEnabled(reqKey) && conditionMatches(value, req);
+          var ok = self.isEnabled(reqKey) && conditionMatches(value, req, self.wasUserEdited(reqKey));
           if (!ok) badIndexes.push(idx + 1);
         });
 

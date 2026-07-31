@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "notes": "Added safe batch 3 default-off compatibility rules.",
+    "notes": "Added user-edited soft compatibility tuning rules.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 84,
+    "ruleCount": 93,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
       "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
-    "variableCount": 89,
+    "variableCount": 90,
     "lastReviewedDate": "2026-07-31"
   },
   "rules": [
@@ -3166,6 +3166,336 @@
         "current-users-guide",
         "catalog-compatibility-payload"
       ]
+    },
+    {
+      "category": "Radiation",
+      "id": "SWRAD-SCAT-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_sw_physics must be one of 1",
+          "values": [
+            "1"
+          ],
+          "variable": "ra_sw_physics"
+        }
+      ],
+      "requirementsRaw": "ra_sw_physics must be one of 1",
+      "sourceExcerpt": "swrad_scat only works with ra_sw_physics=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "swrad_scat",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Surface Flux",
+      "id": "ISFFLX-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 5, 7, 11",
+          "values": [
+            "1",
+            "5",
+            "7",
+            "11"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 5, 7, 11",
+      "sourceExcerpt": "isfflx only works with sf_sfclay_physics=1,5,7,11",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "isfflx",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "KFETA-TRIGGER-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 1",
+          "values": [
+            "1"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 1",
+      "sourceExcerpt": "kfeta_trigger only works with cu_physics=1",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "kfeta_trigger",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Diagnostics",
+      "id": "CONVTRANS-AVGLEN-M-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "convtrans_avglen_m only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "convtrans_avglen_m",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXIENS-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "maxiens only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxiens",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "maxens only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS2-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "maxens2 only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens2",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS3-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "maxens3 only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens3",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "ENSDIM-USER",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics must be one of 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics must be one of 3, 5, 93",
+      "sourceExcerpt": "ensdim only works with cu_physics=3,5,93",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "ensdim",
+      "validationNotes": "Soft warning promoted with user_edited_non_zero so this rule only fires after the user edits the tuning/control field. This avoids default-page noise from non-zero catalog defaults.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedDate": "2026-07-31",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode"
+      ]
     }
   ],
   "variableIndex": {
@@ -3215,7 +3545,8 @@
         51,
         54,
         55,
-        76
+        76,
+        85
       ],
       "summary": null,
       "triggerRules": []
@@ -3253,7 +3584,8 @@
         12,
         47,
         48,
-        49
+        49,
+        84
       ],
       "summary": null,
       "triggerRules": []
@@ -3397,7 +3729,14 @@
         66,
         67,
         68,
-        79
+        79,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92
       ],
       "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4",
       "triggerRules": [
@@ -3422,7 +3761,8 @@
       "requirementRules": [],
       "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1",
       "triggerRules": [
-        28
+        28,
+        86
       ]
     },
     "ishallow": {
@@ -3454,7 +3794,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        33
+        33,
+        87
       ]
     },
     "cu_diag": {
@@ -3481,7 +3822,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        36
+        36,
+        88
       ]
     },
     "maxens": {
@@ -3489,7 +3831,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        37
+        37,
+        89
       ]
     },
     "maxens2": {
@@ -3497,7 +3840,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        38
+        38,
+        90
       ]
     },
     "maxens3": {
@@ -3505,7 +3849,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        39
+        39,
+        91
       ]
     },
     "ensdim": {
@@ -3513,7 +3858,8 @@
       "requirementRules": [],
       "summary": null,
       "triggerRules": [
-        40
+        40,
+        92
       ]
     },
     "lightning_option": {
@@ -3659,7 +4005,9 @@
         54
       ],
       "summary": null,
-      "triggerRules": []
+      "triggerRules": [
+        85
+      ]
     },
     "isftcflx": {
       "group": "physics",
@@ -3980,6 +4328,14 @@
       ],
       "summary": null,
       "triggerRules": []
+    },
+    "swrad_scat": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        84
+      ]
     }
   }
 }
