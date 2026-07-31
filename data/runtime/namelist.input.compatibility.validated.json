@@ -1,0 +1,3274 @@
+{
+  "metadata": {
+    "notes": "Expanded curated-core compatibility coverage, fixed isftcflx parsing, and added explicit allowed-off cumulus/shallow-cumulus states.",
+    "patched_date": "2026-04-15",
+    "patched_version": "v0.7.3",
+    "ruleCount": 69,
+    "title": "WRF namelist compatibility rules for editor",
+    "validationPolicy": {
+      "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
+      "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
+      "unreviewed": "Rules marked unreviewed should not be enforced."
+    },
+    "variableCount": 80
+  },
+  "rules": [
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-1",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1",
+      "sourceExcerpt": "bl_pbl_physics=1 only works with sf_sfclay_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,91.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "needs_review",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-2",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 2",
+          "values": [
+            "2"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 2",
+      "sourceExcerpt": "bl_pbl_physics=2 only works with sf_sfclay_physics=2",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-4",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 4",
+          "values": [
+            "4"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 4",
+      "sourceExcerpt": "bl_pbl_physics=4 only works with sf_sfclay_physics=4",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "4"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-5",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 2, 5",
+          "values": [
+            "1",
+            "2",
+            "5"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5",
+      "sourceExcerpt": "bl_pbl_physics=5 only works with sf_sfclay_physics=1,2,5",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "needs_review",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-6",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 5",
+          "values": [
+            "5"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 5",
+      "sourceExcerpt": "bl_pbl_physics=6 only works with sf_sfclay_physics=5",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "6"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "needs_review",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-7",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 7",
+          "values": [
+            "1",
+            "7"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 7",
+      "sourceExcerpt": "bl_pbl_physics=7 only works with sf_sfclay_physics=1,7",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,7,91.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "needs_review",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-8",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 2",
+          "values": [
+            "1",
+            "2"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2",
+      "sourceExcerpt": "bl_pbl_physics=8 only works with sf_sfclay_physics=1,2",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "8"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-9",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 2",
+          "values": [
+            "1",
+            "2"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2",
+      "sourceExcerpt": "bl_pbl_physics=9 only works with sf_sfclay_physics=1,2",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "9"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-10",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 10",
+          "values": [
+            "10"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 10",
+      "sourceExcerpt": "bl_pbl_physics=10 only works with sf_sfclay_physics=10",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "10"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-12",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1",
+      "sourceExcerpt": "bl_pbl_physics=12 only works with sf_sfclay_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "12"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "PBL \u2194 Surface Layer",
+      "id": "PBL-16",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 5, 91",
+          "values": [
+            "1",
+            "5",
+            "91"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 5, 91",
+      "sourceExcerpt": "bl_pbl_physics=16 only works with sf_sfclay_physics=1,5,91",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "16"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Matches current namelist_variables page.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "Land Surface",
+      "id": "LSM-7",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be 7",
+          "values": [
+            "7"
+          ],
+          "variable": "sf_sfclay_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be 7",
+          "values": [
+            "7"
+          ],
+          "variable": "bl_pbl_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be 7 | bl_pbl_physics must be 7",
+      "sourceExcerpt": "sf_surface_physics=7 Pleim-Xiu; use with Pleim-Xiu surface layer and ACM2 PBL",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_surface_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Land Surface \u2194 Radiation",
+      "id": "LSM-8-RAD",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_lw_physics must be one of 1, 3, 4",
+          "values": [
+            "1",
+            "3",
+            "4"
+          ],
+          "variable": "ra_lw_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_sw_physics must be one of 1, 3, 4",
+          "values": [
+            "1",
+            "3",
+            "4"
+          ],
+          "variable": "ra_sw_physics"
+        }
+      ],
+      "requirementsRaw": "ra_lw_physics must be one of 1, 3, 4 | ra_sw_physics must be one of 1, 3, 4",
+      "sourceExcerpt": "sf_surface_physics=8 SSiB; only works with ra_lw/sw_physics=1,3,4",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "8"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_surface_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Urban",
+      "id": "URBAN-NOAH",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be 2",
+          "values": [
+            "2"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 2",
+      "sourceExcerpt": "sf_urban_physics ... use with Noah LSM only",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_urban_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Urban \u2194 PBL",
+      "id": "URBAN-BEP",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be one of 1, 2, 8",
+          "values": [
+            "1",
+            "2",
+            "8"
+          ],
+          "variable": "bl_pbl_physics"
+        }
+      ],
+      "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+      "sourceExcerpt": "sf_urban_physics=2 only works with bl_pbl_physics=1,2,8",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_urban_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Urban \u2194 PBL",
+      "id": "URBAN-BEM",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be one of 1, 2, 8",
+          "values": [
+            "1",
+            "2",
+            "8"
+          ],
+          "variable": "bl_pbl_physics"
+        }
+      ],
+      "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+      "sourceExcerpt": "sf_urban_physics=3 only works with bl_pbl_physics=1,2,8",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_urban_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Urban Extra Input",
+      "id": "SLUCM-DRAG",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_urban_physics must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_urban_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "use_wudapt_lcz must be off / 0 0, False",
+          "values": [
+            "0",
+            "False",
+            ".false.",
+            "off"
+          ],
+          "variable": "use_wudapt_lcz"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "wrfinput_extra requires 3 additional urban input variables",
+          "values": [],
+          "variable": "wrfinput_extra"
+        }
+      ],
+      "requirementsRaw": "sf_urban_physics must be 1 | use_wudapt_lcz must be off / 0 0, False | wrfinput_extra requires 3 additional urban input variables",
+      "sourceExcerpt": "slucm_distributed_drag does not work with LCZ; only works with urban_physics=1; need additional input variables in wrfinput",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "slucm_distributed_drag",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Urban Extra Input",
+      "id": "AHE-INPUT",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "wrfinput_extra requires anthropogenic heat input variables",
+          "values": [],
+          "variable": "wrfinput_extra"
+        }
+      ],
+      "requirementsRaw": "wrfinput_extra requires anthropogenic heat input variables",
+      "sourceExcerpt": "distributed_ahe_opt requires additional input to wrfinput",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "distributed_ahe_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Topographic Wind",
+      "id": "TOPO-WIND",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "bl_pbl_physics"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geogrid_extra requires extra topographic wind inputs",
+          "values": [],
+          "variable": "geogrid_extra"
+        }
+      ],
+      "requirementsRaw": "bl_pbl_physics must be 1 | geogrid_extra requires extra topographic wind inputs",
+      "sourceExcerpt": "topo_wind requires extra input from geogrid; only works with bl_pbl_physics=1",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "topo_wind",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Sea Ice",
+      "id": "SEAICE-THRESH",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be one of 1, 2, 3, 4, 8",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "8"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be one of 1, 2, 3, 4, 8",
+      "sourceExcerpt": "seaice_threshold only works with sf_surface_physics=1,2,3,4,8",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "seaice_threshold",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Sea Ice",
+      "id": "FRAC-SEAICE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 2, 3, 4, 5, 7, 91",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "91"
+          ],
+          "variable": "sf_sfclay_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "seaice_threshold must be 0",
+          "values": [
+            "0"
+          ],
+          "variable": "seaice_threshold"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 3, 4, 5, 7, 91 | seaice_threshold must be 0",
+      "sourceExcerpt": "fractional_seaice=1 only works with sf_sfclay_physics=1,2,3,4,5,7,91; must also set seaice_threshold=0",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "fractional_seaice",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Irrigation",
+      "id": "SURF-IRR",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_surface_physics must be 2",
+          "values": [
+            "2"
+          ],
+          "variable": "sf_surface_physics"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 2",
+      "sourceExcerpt": "sf_surf_irr_scheme=1 only works with sf_surface_physics=2",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sf_surf_irr_scheme",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-PEDO",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "noah_mp",
+          "mode": "one_of",
+          "raw": "opt_soil must be 3",
+          "values": [
+            "3"
+          ],
+          "variable": "opt_soil"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "values": [],
+          "variable": "geogrid_tbl"
+        }
+      ],
+      "requirementsRaw": "opt_soil must be 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "sourceExcerpt": "opt_pedo only works when opt_soil=3; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_pedo",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-IRR",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "values": [],
+          "variable": "geogrid_tbl"
+        }
+      ],
+      "requirementsRaw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "sourceExcerpt": "opt_irr geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_irr",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-IRRM",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "noah_mp",
+          "mode": "one_of",
+          "raw": "opt_irr must be > 0 1, 2, 3",
+          "values": [
+            "1",
+            "2",
+            "3"
+          ],
+          "variable": "opt_irr"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "values": [],
+          "variable": "geogrid_tbl"
+        }
+      ],
+      "requirementsRaw": "opt_irr must be > 0 1, 2, 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "sourceExcerpt": "opt_irrm only works when opt_irr>0; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_irrm",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Noah-MP",
+      "id": "NOAHMP-TDRN",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": "noah_mp",
+          "mode": "note",
+          "raw": "opt_run only confirmed with 3",
+          "values": [],
+          "variable": "opt_run"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "values": [],
+          "variable": "geogrid_tbl"
+        }
+      ],
+      "requirementsRaw": "opt_run only confirmed with 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "sourceExcerpt": "opt_tdrn only confirmed to work with opt_run=3; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_tdrn",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus \u2194 PBL",
+      "id": "CU-7-PBL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be one of 2, 9",
+          "values": [
+            "2",
+            "9"
+          ],
+          "variable": "bl_pbl_physics"
+        }
+      ],
+      "requirementsRaw": "bl_pbl_physics must be one of 2, 9",
+      "sourceExcerpt": "cu_physics=7 only works with bl_pbl_physics=2,9",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus \u2194 Shallow",
+      "id": "CU-14-SHCU",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "shcu_physics use with 4",
+          "values": [
+            "4"
+          ],
+          "variable": "shcu_physics"
+        }
+      ],
+      "requirementsRaw": "shcu_physics use with 4",
+      "sourceExcerpt": "cu_physics=14 Scale-aware SAS; use with shcu_physics=4",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "14"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "KFETA",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 1",
+          "values": [
+            "1"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 1",
+      "sourceExcerpt": "kfeta_trigger only works with cu_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "kfeta_trigger",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "ISHALLOW",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5",
+          "values": [
+            "3",
+            "5"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5",
+      "sourceExcerpt": "ishallow=1 only works with cu_physics=3 or 5",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "ishallow",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Shallow Cumulus \u2194 PBL",
+      "id": "SHCU-DENG",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics only works with 2, 5, 6",
+          "values": [
+            "2",
+            "5",
+            "6"
+          ],
+          "variable": "bl_pbl_physics"
+        }
+      ],
+      "requirementsRaw": "bl_pbl_physics only works with 2, 5, 6",
+      "sourceExcerpt": "shcu_physics=5 only works with bl_pbl_physics=2,5,6",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "shcu_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CUGD-AVEDX",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 5",
+          "values": [
+            "5"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 5",
+      "sourceExcerpt": "cugd_avedx=3 only works with cu_physics=5",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cugd_avedx",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "KF-EDRATES",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 1, 11, 99",
+          "values": [
+            "1",
+            "11",
+            "99"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 1, 11, 99",
+      "sourceExcerpt": "kf_edrates=1 only works with cu_physics=1,11,99",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "kf_edrates",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CONVTRANS",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "convtrans_avglen_m only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "convtrans_avglen_m",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CU-DIAG",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics for use with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics for use with 3, 5, 93",
+      "sourceExcerpt": "cu_diag=1 ... when using cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_diag",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus \u2194 Radiation",
+      "id": "CU-RAD",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 1, 3, 5, 10, 11, 93, 99",
+          "values": [
+            "1",
+            "3",
+            "5",
+            "10",
+            "11",
+            "93",
+            "99"
+          ],
+          "variable": "cu_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_diag required if cu_physics in 3,5,93 1",
+          "values": [
+            "1"
+          ],
+          "variable": "cu_diag"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 1, 3, 5, 10, 11, 93, 99 | cu_diag required if cu_physics in 3,5,93 1",
+      "sourceExcerpt": "cu_rad_feedback only works with cu_physics=1,3,5,10,11,93,99; if using cu_physics=3,5,93 must set cu_diag=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_rad_feedback",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXIENS",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "maxiens only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxiens",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "maxens only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS2",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "maxens2 only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens2",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "MAXENS3",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "maxens3 only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "maxens3",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Ensemble Controls",
+      "id": "ENSDIM",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 3, 5, 93",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "sourceExcerpt": "ensdim only works with cu_physics=3,5,93",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "ensdim",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Lightning",
+      "id": "LIGHTNING-RADAR",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "do_radar_ref must be 1, True",
+          "values": [
+            "1",
+            "True"
+          ],
+          "variable": "do_radar_ref"
+        }
+      ],
+      "requirementsRaw": "do_radar_ref must be 1, True",
+      "sourceExcerpt": "lightning_option must set do_radar_ref=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "lightning_option",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Lightning",
+      "id": "LIGHTNING-11",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": "domains",
+          "mode": "note",
+          "raw": "dx intended range 10 km < dx < 50 km",
+          "values": [],
+          "variable": "dx"
+        },
+        {
+          "checkable": false,
+          "group": "physics",
+          "mode": "note",
+          "raw": "cu_physics intended use parameterized-convection scales",
+          "values": [],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "dx intended range 10 km < dx < 50 km | cu_physics intended use parameterized-convection scales",
+      "sourceExcerpt": "lightning_option=11 intended for use at 10<dx<50km with cumulus parameterization",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "11"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "lightning_option",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Lightning",
+      "id": "ICCG-1",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "set",
+          "raw": "iccg_prescribed_num must also set set",
+          "values": [],
+          "variable": "iccg_prescribed_num"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "set",
+          "raw": "iccg_prescribed_den must also set set",
+          "values": [],
+          "variable": "iccg_prescribed_den"
+        }
+      ],
+      "requirementsRaw": "iccg_prescribed_num must also set set | iccg_prescribed_den must also set set",
+      "sourceExcerpt": "iccg_method=1 must also set iccg_prescribed_num and iccg_prescribed_den",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "iccg_method",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Radar Reflectivity",
+      "id": "RADARREF-MP",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": "physics",
+          "mode": "note",
+          "raw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
+          "values": [],
+          "variable": "mp_physics"
+        }
+      ],
+      "requirementsRaw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
+      "sourceExcerpt": "do_radar_ref works with mp_physics=2,4,6,7,8,10,14,16,17,18,19,21,24,26,28",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "do_radar_ref",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Diagnostics",
+      "id": "NWPDIAG",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "do_radar_ref must be 1, True",
+          "values": [
+            "1",
+            "True"
+          ],
+          "variable": "do_radar_ref"
+        }
+      ],
+      "requirementsRaw": "do_radar_ref must be 1, True",
+      "sourceExcerpt": "nwp_diagnostics=1 and do_radar_ref=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "time_control",
+      "triggerVariable": "nwp_diagnostics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Radiation \u2194 MP",
+      "id": "USE-MP-RE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
+          "values": [
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "10",
+            "14",
+            "16",
+            "18",
+            "24",
+            "26",
+            "28",
+            "50",
+            "51",
+            "52",
+            "53",
+            "55"
+          ],
+          "variable": "mp_physics"
+        }
+      ],
+      "requirementsRaw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
+      "sourceExcerpt": "use_mp_re=1 only works with mp_physics=3,4,6,7,8,10,14,16,18,24,26,28,50-53,55",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "use_mp_re",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Radiation",
+      "id": "RA-SW-ECLIPSE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_sw_physics only works with 1, 2, 4, 5",
+          "values": [
+            "1",
+            "2",
+            "4",
+            "5"
+          ],
+          "variable": "ra_sw_physics"
+        }
+      ],
+      "requirementsRaw": "ra_sw_physics only works with 1, 2, 4, 5",
+      "sourceExcerpt": "ra_sw_eclipse=1 only works with ra_sw_physics 1,2,4,5",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "ra_sw_eclipse",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Radiation",
+      "id": "ICLOUD",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_lw_physics requires 1, 4",
+          "values": [
+            "1",
+            "4"
+          ],
+          "variable": "ra_lw_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_sw_physics requires 1, 4",
+          "values": [
+            "1",
+            "4"
+          ],
+          "variable": "ra_sw_physics"
+        }
+      ],
+      "requirementsRaw": "ra_lw_physics requires 1, 4 | ra_sw_physics requires 1, 4",
+      "sourceExcerpt": "icloud only works with ra_sw/lw_physics=1 or 4",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "icloud",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Accumulation Budgets",
+      "id": "BUCKET-J",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_lw_physics only works with 3, 4, 14, 24",
+          "values": [
+            "3",
+            "4",
+            "14",
+            "24"
+          ],
+          "variable": "ra_lw_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "ra_sw_physics only works with 3, 4, 14, 24",
+          "values": [
+            "3",
+            "4",
+            "14",
+            "24"
+          ],
+          "variable": "ra_sw_physics"
+        }
+      ],
+      "requirementsRaw": "ra_lw_physics only works with 3, 4, 14, 24 | ra_sw_physics only works with 3, 4, 14, 24",
+      "sourceExcerpt": "bucket_J only works with CAM and RRTMG radiation options (ra_lw/sw_physics = 3,4,14,24)",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bucket_j",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Aerosol \u2194 MP",
+      "id": "AER-OPT-3",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "mp_physics only works with 28",
+          "values": [
+            "28"
+          ],
+          "variable": "mp_physics"
+        }
+      ],
+      "requirementsRaw": "mp_physics only works with 28",
+      "sourceExcerpt": "aer_opt=3 only works with Thompson aerosol-aware microphysics (option 28)",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "aer_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Dynamics",
+      "id": "KM-5",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "diff_opt must be 2",
+          "values": [
+            "2"
+          ],
+          "variable": "diff_opt"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "bl_pbl_physics must be 0",
+          "values": [
+            "0"
+          ],
+          "variable": "bl_pbl_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be one of 1, 5, 91",
+          "values": [
+            "1",
+            "5",
+            "91"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "diff_opt must be 2 | bl_pbl_physics must be 0 | sf_sfclay_physics must be one of 1, 5, 91",
+      "sourceExcerpt": "km_opt=5 only works with diff_opt=2, bl_pbl_physics=0, sf_sfclay_physics=1,5,91",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "triggerGroup": "dynamics",
+      "triggerVariable": "km_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Dynamics",
+      "id": "SFS-1",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "diff_opt should be used with 2",
+          "values": [
+            "2"
+          ],
+          "variable": "diff_opt"
+        },
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "km_opt should be used with 2, 3",
+          "values": [
+            "2",
+            "3"
+          ],
+          "variable": "km_opt"
+        }
+      ],
+      "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2, 3",
+      "sourceExcerpt": "sfs_opt=1 should be used with diff_opt=2 and km_opt=2 or 3",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "dynamics",
+      "triggerVariable": "sfs_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Dynamics",
+      "id": "SFS-2",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "diff_opt should be used with 2",
+          "values": [
+            "2"
+          ],
+          "variable": "diff_opt"
+        },
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "km_opt should be used with 2",
+          "values": [
+            "2"
+          ],
+          "variable": "km_opt"
+        }
+      ],
+      "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2",
+      "sourceExcerpt": "sfs_opt=2 should be used with diff_opt=2 and km_opt=2",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "triggerGroup": "dynamics",
+      "triggerVariable": "sfs_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Dynamics / LES",
+      "id": "LES-PBL",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "isfflx template uses 1",
+          "values": [
+            "1"
+          ],
+          "variable": "isfflx"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "nonzero",
+          "raw": "sf_sfclay_physics template uses any non-zero",
+          "values": [],
+          "variable": "sf_sfclay_physics"
+        },
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "nonzero",
+          "raw": "sf_surface_physics template uses any non-zero",
+          "values": [],
+          "variable": "sf_surface_physics"
+        },
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "diff_opt template uses 2",
+          "values": [
+            "2"
+          ],
+          "variable": "diff_opt"
+        },
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "km_opt template uses 2, 3",
+          "values": [
+            "2",
+            "3"
+          ],
+          "variable": "km_opt"
+        }
+      ],
+      "requirementsRaw": "isfflx template uses 1 | sf_sfclay_physics template uses any non-zero | sf_surface_physics template uses any non-zero | diff_opt template uses 2 | km_opt template uses 2, 3",
+      "sourceExcerpt": "LES PBL settings: bl_pbl_physics=0, isfflx=1, sf_sfclay_physics any except 0, sf_surface_physics any except 0, diff_opt=2, km_opt=2 or 3",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "bl_pbl_physics",
+      "validationNotes": "Rule has ; namelist_variables page has None; PBL table has None.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "needs_review",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+    },
+    {
+      "category": "Surface Flux",
+      "id": "ISFTCFLX",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "sf_sfclay_physics must be 1",
+          "values": [
+            "1"
+          ],
+          "variable": "sf_sfclay_physics"
+        }
+      ],
+      "requirementsRaw": "sf_sfclay_physics must be 1",
+      "sourceExcerpt": "isftcflx=1,2 must be used with sf_sfclay_physics=1",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "isftcflx",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Time Control",
+      "id": "SST-UPDATE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "auxinput4_inname requires wrflowinp_d<domain>",
+          "values": [],
+          "variable": "auxinput4_inname"
+        },
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "auxinput4_interval requires set",
+          "values": [],
+          "variable": "auxinput4_interval"
+        },
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "io_form_auxinput4 requires set",
+          "values": [],
+          "variable": "io_form_auxinput4"
+        }
+      ],
+      "requirementsRaw": "auxinput4_inname requires wrflowinp_d<domain> | auxinput4_interval requires set | io_form_auxinput4 requires set",
+      "sourceExcerpt": "sst_update=1 requires auxinput4_inname, auxinput4_interval, io_form_auxinput4",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "sst_update",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "FDDA",
+      "id": "OBS-NUDGE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "auxinput11_interval must also set set",
+          "values": [],
+          "variable": "auxinput11_interval"
+        },
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "auxinput11_end_h must also set set",
+          "values": [],
+          "variable": "auxinput11_end_h"
+        }
+      ],
+      "requirementsRaw": "auxinput11_interval must also set set | auxinput11_end_h must also set set",
+      "sourceExcerpt": "obs_nudge_opt=1 must also set auxinput11_interval and auxinput11_end_h",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "triggerGroup": "fdda",
+      "triggerVariable": "obs_nudge_opt",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Boundary Files",
+      "id": "MULTI-BDY",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": "time_control",
+          "mode": "note",
+          "raw": "bdy_inname requires wrfbdy_d<domain>_<date>",
+          "values": [],
+          "variable": "bdy_inname"
+        }
+      ],
+      "requirementsRaw": "bdy_inname requires wrfbdy_d<domain>_<date>",
+      "sourceExcerpt": "multi_bdy_files=.true. with bdy_inname='wrfbdy_d<domain>_<date>'",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "bdy_control",
+      "triggerVariable": "multi_bdy_files",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Boundary Control",
+      "id": "NESTED-TRUE",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "domain role should indicate a nested domain",
+          "values": [
+            "set for nest"
+          ],
+          "variable": "domain_role"
+        }
+      ],
+      "requirementsRaw": "domain_role must be set for nest",
+      "sourceExcerpt": "nested=.true. must be set for nests",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "bdy_control",
+      "triggerVariable": "nested",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Boundary Control",
+      "id": "SPECIFIED-D01",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "domain_role for domain 1",
+          "values": [],
+          "variable": "domain_role"
+        }
+      ],
+      "requirementsRaw": "domain_role for domain 1",
+      "sourceExcerpt": "specified=.true. for outer domain in real-data cases",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "bdy_control",
+      "triggerVariable": "specified",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "WPS \u2194 WRF",
+      "id": "NUM-LAND-CAT",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "metgrid_NUM_LAND_CAT must match must match",
+          "values": [],
+          "variable": "metgrid_NUM_LAND_CAT"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "MODIS default typical value 21",
+          "values": [],
+          "variable": "MODIS"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "USGS typical value 24",
+          "values": [],
+          "variable": "USGS"
+        }
+      ],
+      "requirementsRaw": "metgrid_NUM_LAND_CAT must match must match | MODIS default typical value 21 | USGS typical value 24",
+      "sourceExcerpt": "num_land_cat must match metgrid NUM_LAND_CAT; 21 for MODIS, 24 for USGS",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "num_land_cat",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Moving Nest / Hi-Res",
+      "id": "WPS-HIRES",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "compile_env requires TERRAIN_AND_LANDUSE=1",
+          "values": [],
+          "variable": "compile_env"
+        },
+        {
+          "checkable": false,
+          "group": null,
+          "mode": "note",
+          "raw": "geog_data_res requires usgs_30s+default or matching hi-res",
+          "values": [
+            "usgs_30s+default or matching hi-res"
+          ],
+          "variable": "geog_data_res"
+        },
+        {
+          "checkable": true,
+          "group": "time_control",
+          "mode": "set",
+          "raw": "rsmas_data_path requires set",
+          "values": [],
+          "variable": "rsmas_data_path"
+        }
+      ],
+      "requirementsRaw": "compile_env requires TERRAIN_AND_LANDUSE=1 | geog_data_res requires usgs_30s+default or matching hi-res | rsmas_data_path requires set",
+      "sourceExcerpt": "input_from_hires requires TERRAIN_AND_LANDUSE=1, hi-res geog_data_res, and rsmas_data_path",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "time_control",
+      "triggerVariable": "input_from_hires",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Backward Compatibility",
+      "id": "OLD-FILES",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "use_theta_m must be 0",
+          "values": [
+            "0"
+          ],
+          "variable": "use_theta_m"
+        },
+        {
+          "checkable": true,
+          "group": "dynamics",
+          "mode": "one_of",
+          "raw": "hybrid_opt must be 0",
+          "values": [
+            "0"
+          ],
+          "variable": "hybrid_opt"
+        }
+      ],
+      "requirementsRaw": "use_theta_m must be 0 | hybrid_opt must be 0",
+      "sourceExcerpt": "To use pre-V4 wrfinput/wrfbdy, set use_theta_m=0, hybrid_opt=0, force_use_old_data=.true.",
+      "strength": "Workflow",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "triggerGroup": "time_control",
+      "triggerVariable": "force_use_old_data",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Parameterization",
+      "id": "CU-OFF",
+      "notes": "Explicitly marks off-state as allowed so the UI does not imply conflict.",
+      "requirements": [],
+      "requirementsRaw": "cu_physics=0 means no cumulus parameterization and is allowed",
+      "sourceExcerpt": "cu_physics=0 means no cumulus parameterization; turning cumulus off for a domain is allowed",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "cu_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Shallow Cumulus",
+      "id": "SHCU-OFF",
+      "notes": "Explicitly marks off-state as allowed.",
+      "requirements": [],
+      "requirementsRaw": "shcu_physics=0 means no shallow cumulus and is allowed",
+      "sourceExcerpt": "shcu_physics is an independent shallow cumulus option; 0 means off and is allowed",
+      "strength": "Soft",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "shcu_physics",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CUP-THBIN",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 10",
+          "values": [
+            "10"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 10",
+      "sourceExcerpt": "thBinSize is a CuP PDF bin-size option and only works with cu_physics=10",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "thBinSize",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CUP-MINDEEP",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 10",
+          "values": [
+            "10"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 10",
+      "sourceExcerpt": "minDeepFreq is a CuP frequency threshold option and only works with cu_physics=10",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "minDeepFreq",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    },
+    {
+      "category": "Cumulus Option",
+      "id": "CUP-MINSHALLOW",
+      "notes": null,
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "mode": "one_of",
+          "raw": "cu_physics only works with 10",
+          "values": [
+            "10"
+          ],
+          "variable": "cu_physics"
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 10",
+      "sourceExcerpt": "minShallowFreq is a CuP frequency threshold option and only works with cu_physics=10",
+      "strength": "Hard",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "triggerGroup": "physics",
+      "triggerVariable": "minShallowFreq",
+      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
+      "validationSource": "",
+      "validationStatus": "unreviewed",
+      "validationUrl": ""
+    }
+  ],
+  "variableIndex": {
+    "MODIS": {
+      "group": null,
+      "requirementRules": [
+        61
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "USGS": {
+      "group": null,
+      "requirementRules": [
+        61
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "aer_opt": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "aer_opt=3 \u21d2 mp_physics=28",
+      "triggerRules": [
+        50
+      ]
+    },
+    "auxinput11_end_h": {
+      "group": "time_control",
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
+      "triggerRules": []
+    },
+    "auxinput11_interval": {
+      "group": "time_control",
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
+      "triggerRules": []
+    },
+    "auxinput4_inname": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "auxinput4_interval": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings.",
+      "triggerRules": []
+    },
+    "bdy_inname": {
+      "group": "time_control",
+      "requirementRules": [
+        58
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "bl_pbl_physics": {
+      "group": "physics",
+      "requirementRules": [
+        11,
+        14,
+        15,
+        18,
+        26,
+        30,
+        51
+      ],
+      "summary": "bl_pbl_physics=0 \u21d2 isfflx=1; diff_opt=2; km_opt=2; km_opt=3 || bl_pbl_physics=1 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=10 \u21d2 sf_sfclay_physics=10 || bl_pbl_physics=12 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=16 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91 || bl_pbl_physics=2 \u21d2 sf_sfclay_physics=2 || bl_pbl_physics=4 \u21d2 sf_sfclay_physics=4 || bl_pbl_physics=5 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=5 || bl_pbl_physics=6 \u21d2 sf_sfclay_physics=5 || bl_pbl_physics=7 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=7 ...",
+      "triggerRules": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        54
+      ]
+    },
+    "bucket_j": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24.",
+      "triggerRules": [
+        49
+      ]
+    },
+    "compile_env": {
+      "group": null,
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "convtrans_avglen_m": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        33
+      ]
+    },
+    "cu_diag": {
+      "group": "physics",
+      "requirementRules": [
+        35
+      ],
+      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93",
+      "triggerRules": [
+        34
+      ]
+    },
+    "cu_physics": {
+      "group": "physics",
+      "requirementRules": [
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        42,
+        66,
+        67,
+        68
+      ],
+      "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4",
+      "triggerRules": [
+        26,
+        27,
+        64
+      ]
+    },
+    "cu_rad_feedback": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1",
+      "triggerRules": [
+        35
+      ]
+    },
+    "cugd_avedx": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "cugd_avedx=3 \u21d2 cu_physics=5",
+      "triggerRules": [
+        31
+      ]
+    },
+    "diff_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        51,
+        52,
+        53,
+        54
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "distributed_ahe_opt": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        17
+      ]
+    },
+    "do_radar_ref": {
+      "group": "physics",
+      "requirementRules": [
+        41,
+        45
+      ],
+      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28",
+      "triggerRules": [
+        44
+      ]
+    },
+    "domain_role": {
+      "group": null,
+      "requirementRules": [
+        59,
+        60
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "dx": {
+      "group": "domains",
+      "requirementRules": [
+        42
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "ensdim": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        40
+      ]
+    },
+    "force_use_old_data": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0",
+      "triggerRules": [
+        63
+      ]
+    },
+    "fractional_seaice": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0",
+      "triggerRules": [
+        20
+      ]
+    },
+    "geog_data_res": {
+      "group": null,
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "geogrid_extra": {
+      "group": null,
+      "requirementRules": [
+        18
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "geogrid_tbl": {
+      "group": null,
+      "requirementRules": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "hybrid_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        63
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "iccg_method": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        43
+      ]
+    },
+    "iccg_prescribed_den": {
+      "group": "physics",
+      "requirementRules": [
+        43
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "iccg_prescribed_num": {
+      "group": "physics",
+      "requirementRules": [
+        43
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "icloud": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        48
+      ]
+    },
+    "input_from_hires": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        62
+      ]
+    },
+    "io_form_auxinput4": {
+      "group": "time_control",
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files.",
+      "triggerRules": []
+    },
+    "isfflx": {
+      "group": "physics",
+      "requirementRules": [
+        54
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "isftcflx": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1.",
+      "triggerRules": [
+        55
+      ]
+    },
+    "ishallow": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5",
+      "triggerRules": [
+        29
+      ]
+    },
+    "kf_edrates": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99",
+      "triggerRules": [
+        32
+      ]
+    },
+    "kfeta_trigger": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1",
+      "triggerRules": [
+        28
+      ]
+    },
+    "km_opt": {
+      "group": "dynamics",
+      "requirementRules": [
+        52,
+        53,
+        54
+      ],
+      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91",
+      "triggerRules": [
+        51
+      ]
+    },
+    "lightning_option": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        41,
+        42
+      ]
+    },
+    "maxens": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        37
+      ]
+    },
+    "maxens2": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        38
+      ]
+    },
+    "maxens3": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        39
+      ]
+    },
+    "maxiens": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        36
+      ]
+    },
+    "metgrid_NUM_LAND_CAT": {
+      "group": null,
+      "requirementRules": [
+        61
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "minDeepFreq": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP).",
+      "triggerRules": [
+        67
+      ]
+    },
+    "minShallowFreq": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP).",
+      "triggerRules": [
+        68
+      ]
+    },
+    "mp_physics": {
+      "group": "physics",
+      "requirementRules": [
+        44,
+        46,
+        50
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "multi_bdy_files": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        58
+      ]
+    },
+    "nested": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": "nested=.true. is for nested domains only.",
+      "triggerRules": [
+        59
+      ]
+    },
+    "num_land_cat": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        61
+      ]
+    },
+    "nwp_diagnostics": {
+      "group": "time_control",
+      "requirementRules": [],
+      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True",
+      "triggerRules": [
+        45
+      ]
+    },
+    "obs_nudge_opt": {
+      "group": "fdda",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        57
+      ]
+    },
+    "opt_irr": {
+      "group": "noah_mp",
+      "requirementRules": [
+        24
+      ],
+      "summary": null,
+      "triggerRules": [
+        23
+      ]
+    },
+    "opt_irrm": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3",
+      "triggerRules": [
+        24
+      ]
+    },
+    "opt_pedo": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_pedo=1 \u21d2 opt_soil=3",
+      "triggerRules": [
+        22
+      ]
+    },
+    "opt_run": {
+      "group": "noah_mp",
+      "requirementRules": [
+        25
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "opt_soil": {
+      "group": "noah_mp",
+      "requirementRules": [
+        22
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "opt_tdrn": {
+      "group": "noah_mp",
+      "requirementRules": [],
+      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3",
+      "triggerRules": [
+        25
+      ]
+    },
+    "ra_lw_physics": {
+      "group": "physics",
+      "requirementRules": [
+        12,
+        48,
+        49
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "ra_sw_eclipse": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5",
+      "triggerRules": [
+        47
+      ]
+    },
+    "ra_sw_physics": {
+      "group": "physics",
+      "requirementRules": [
+        12,
+        47,
+        48,
+        49
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "rsmas_data_path": {
+      "group": "time_control",
+      "requirementRules": [
+        62
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "seaice_threshold": {
+      "group": "physics",
+      "requirementRules": [
+        20
+      ],
+      "summary": null,
+      "triggerRules": [
+        19
+      ]
+    },
+    "sf_sfclay_physics": {
+      "group": "physics",
+      "requirementRules": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        20,
+        51,
+        54,
+        55
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "sf_surf_irr_scheme": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2",
+      "triggerRules": [
+        21
+      ]
+    },
+    "sf_surface_physics": {
+      "group": "physics",
+      "requirementRules": [
+        13,
+        19,
+        21,
+        54
+      ],
+      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4",
+      "triggerRules": [
+        11,
+        12
+      ]
+    },
+    "sf_urban_physics": {
+      "group": "physics",
+      "requirementRules": [
+        16
+      ],
+      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8",
+      "triggerRules": [
+        13,
+        14,
+        15
+      ]
+    },
+    "sfs_opt": {
+      "group": "dynamics",
+      "requirementRules": [],
+      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2",
+      "triggerRules": [
+        52,
+        53
+      ]
+    },
+    "shcu_physics": {
+      "group": "physics",
+      "requirementRules": [
+        27
+      ],
+      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6",
+      "triggerRules": [
+        30,
+        65
+      ]
+    },
+    "slucm_distributed_drag": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False",
+      "triggerRules": [
+        16
+      ]
+    },
+    "specified": {
+      "group": "bdy_control",
+      "requirementRules": [],
+      "summary": "specified=.true. is for the outer real-data domain only.",
+      "triggerRules": [
+        60
+      ]
+    },
+    "sst_update": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": null,
+      "triggerRules": [
+        56
+      ]
+    },
+    "thBinSize": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP).",
+      "triggerRules": [
+        66
+      ]
+    },
+    "topo_wind": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1",
+      "triggerRules": [
+        18
+      ]
+    },
+    "use_mp_re": {
+      "group": "physics",
+      "requirementRules": [],
+      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55",
+      "triggerRules": [
+        46
+      ]
+    },
+    "use_theta_m": {
+      "group": "dynamics",
+      "requirementRules": [
+        63
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "use_wudapt_lcz": {
+      "group": "physics",
+      "requirementRules": [
+        16
+      ],
+      "summary": null,
+      "triggerRules": []
+    },
+    "wrfinput_extra": {
+      "group": null,
+      "requirementRules": [
+        16,
+        17
+      ],
+      "summary": null,
+      "triggerRules": []
+    }
+  }
+}
