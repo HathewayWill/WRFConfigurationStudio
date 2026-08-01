@@ -12,8 +12,8 @@
     },
     "variableCount": 90,
     "lastReviewedDate": "2026-07-31",
-    "validRuleCount": 59,
-    "lastPromotionBatch": "2026-07-31_batch4_safe_default_off"
+    "validRuleCount": 60,
+    "lastPromotionBatch": "2026-07-31_bucket_j_numeric"
   },
   "rules": [
     {
@@ -1930,15 +1930,23 @@
       "sourceExcerpt": "bucket_J only works with CAM and RRTMG radiation options (ra_lw/sw_physics = 3,4,14,24)",
       "strength": "Hard",
       "trigger": {
-        "mode": "active",
-        "values": []
+        "mode": "greater_than",
+        "values": [
+          0
+        ]
       },
       "triggerGroup": "physics",
       "triggerVariable": "bucket_j",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted after numeric comparison mode support was added. The original active trigger was unsafe because bucket_j defaults to -1, which means inactive. The rule now triggers only when bucket_j > 0, avoiding default-page noise.",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "numeric-condition-modes",
+        "2026-07-31_bucket_j_numeric"
+      ],
+      "validationBatch": "2026-07-31_bucket_j_numeric"
     },
     {
       "category": "Aerosol \u2194 MP",
