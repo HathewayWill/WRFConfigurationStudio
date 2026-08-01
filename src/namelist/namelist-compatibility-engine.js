@@ -35,6 +35,63 @@
     return raw !== '0' && raw !== '0.0';
   }
 
+  function toFiniteNumber(value) {
+    if (value === undefined || value === null || value === '') return null;
+    var numeric = Number(String(value).trim().replace(/[dD]/, 'e'));
+    if (!isFinite(numeric)) return null;
+    return numeric;
+  }
+
+  function conditionNumber(condition, index, fallback) {
+    condition = condition || {};
+    var vals = condition.values || [];
+    if (Array.isArray(vals) && vals.length > index) return toFiniteNumber(vals[index]);
+    if (index === 0 && condition.value !== undefined) return toFiniteNumber(condition.value);
+    if (index === 0 && condition.threshold !== undefined) return toFiniteNumber(condition.threshold);
+    if (index === 0 && condition.min !== undefined) return toFiniteNumber(condition.min);
+    if (index === 1 && condition.max !== undefined) return toFiniteNumber(condition.max);
+    return fallback === undefined ? null : toFiniteNumber(fallback);
+  }
+
+  function numericComparisonMatches(value, condition, mode) {
+    var numericValue = toFiniteNumber(value);
+    if (numericValue === null) return false;
+
+    if (mode === 'greater_than' || mode === 'gt') {
+      var gt = conditionNumber(condition, 0);
+      return gt !== null && numericValue > gt;
+    }
+
+    if (mode === 'greater_than_or_equal' || mode === 'gte') {
+      var gte = conditionNumber(condition, 0);
+      return gte !== null && numericValue >= gte;
+    }
+
+    if (mode === 'less_than' || mode === 'lt') {
+      var lt = conditionNumber(condition, 0);
+      return lt !== null && numericValue < lt;
+    }
+
+    if (mode === 'less_than_or_equal' || mode === 'lte') {
+      var lte = conditionNumber(condition, 0);
+      return lte !== null && numericValue <= lte;
+    }
+
+    if (mode === 'between') {
+      var minValue = conditionNumber(condition, 0);
+      var maxValue = conditionNumber(condition, 1);
+      return minValue !== null && maxValue !== null && numericValue >= minValue && numericValue <= maxValue;
+    }
+
+    if (mode === 'outside_range') {
+      var outsideMin = conditionNumber(condition, 0);
+      var outsideMax = conditionNumber(condition, 1);
+      return outsideMin !== null && outsideMax !== null && (numericValue < outsideMin || numericValue > outsideMax);
+    }
+
+    return false;
+  }
+
   function conditionMatches(value, condition, userEdited) {
     condition = condition || {};
     var mode = condition.mode || 'one_of';
@@ -47,6 +104,17 @@
     if (mode === 'user_edited_non_zero') return !!userEdited && isNonZeroValue(value);
     if (mode === 'truthy') return value === true || norm(value) === '.true.' || norm(value) === '1';
     if (mode === 'falsy') return value === false || norm(value) === '.false.' || norm(value) === '0';
+
+    if (
+      mode === 'greater_than' || mode === 'gt' ||
+      mode === 'greater_than_or_equal' || mode === 'gte' ||
+      mode === 'less_than' || mode === 'lt' ||
+      mode === 'less_than_or_equal' || mode === 'lte' ||
+      mode === 'between' ||
+      mode === 'outside_range'
+    ) {
+      return numericComparisonMatches(value, condition, mode);
+    }
 
     if (mode === 'equals' || mode === 'one_of' || mode === 'any_of') {
       return valuesMatch(value, vals);
