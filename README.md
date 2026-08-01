@@ -420,11 +420,7 @@ The original WRF Domain Wizard project by Jiří Richter remains credited in the
 
 This project is distributed under the GPL-3.0 License.
 
-See:
-
-```text
-LICENSE
-```
+[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE) GPL-3.0 License
 
 ---
 
