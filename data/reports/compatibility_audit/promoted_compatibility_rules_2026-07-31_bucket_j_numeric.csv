@@ -1,2 +1,0 @@
-id,beforeStatus,afterStatus,strength,trigger,triggerMode,triggerValues,requirementsRaw
-BUCKET-J,valid,valid,Hard,physics.bucket_j,greater_than,0,"ra_lw_physics only works with 3, 4, 14, 24 | ra_sw_physics only works with 3, 4, 14, 24"

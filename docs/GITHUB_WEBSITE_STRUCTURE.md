@@ -24,7 +24,7 @@ WRFConfigStudio-main/
 ├── README.md                  # GitHub repository landing page
 ├── .nojekyll                  # Static-site compatibility for GitHub Pages
 ├── launch_local_server.py     # Local package launcher
-├── START_LOCAL_SERVER.*       # Windows, macOS, and Linux launch helpers
+├── launch-local.*       # Windows, macOS, and Linux launch helpers
 ├── data/                      # Runtime and source catalog data
 ├── docs/                      # User-facing documentation and references
 ├── examples/                  # Bundled WRF reference/test-case material
