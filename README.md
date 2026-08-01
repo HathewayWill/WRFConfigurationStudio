@@ -458,3 +458,5 @@ tag: stable-publication-layout-20260731
 rules: 94 total, 61 valid, 28 unreviewed, 5 needs_review
 package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
 ```
+
+<a href='https://mapmyvisitors.com/web/1c5d0'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=500&t=tt&d=MQhYoa3dqHKn__1fbkfKyN4JddYCLARtWhmyUaa6iXg&co=2d78ad&ct=ffffff'/></a>
