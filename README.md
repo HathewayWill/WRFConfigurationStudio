@@ -1,147 +1,460 @@
-# 🌎 WRF Config Studio — v1.0.0
+# 🌎 WRF Configuration Studio
 
-A browser-based configuration environment for designing **WRF** domains, editing `namelist.wps` and `namelist.input`, and exploring WRF, WRFDA, OBSPROC, and Registry metadata.
+**WRF Configuration Studio** is a browser-based configuration environment for designing Weather Research and Forecasting Model domains, editing `namelist.wps` and `namelist.input`, and exploring WRF, WRFDA, OBSPROC, Registry, and compatibility-rule metadata.
 
-This project is the rebranded continuation of the WRF Domain Wizard web build. The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation.
+This README is written for the first public web release of WRF Configuration Studio.
 
-### Citation for publications
+The project continues the technical lineage of browser-based WRF domain design tools, including the WRF Domain Wizard web build. The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation. WRF Configuration Studio also acknowledges earlier NOAA Forecast Systems Laboratory WRF Standard Initialization GUI work as part of the broader history of graphical WRF configuration and initialization tools.
 
-## What v1.0.0 includes
+---
+
+## First public release checkpoint
+
+```text
+Release tag: stable-publication-layout-20260731
+Main commit: a5fc845
+Package: WRFConfigurationStudio_stable-publication-layout-20260731.zip
+Package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
+```
+
+The release package was generated from the Git tag using `git archive` and verified with `unzip -t`.
+
+---
+
+## What WRF Configuration Studio includes
 
 - Interactive WRF domain creation and editing
 - `namelist.wps` workflow support
 - Full-catalog `namelist.input` editor
 - WRFDA groups exposed as `&wrfvar*`
 - OBSPROC records exposed as `&obsproc_record1` through `&obsproc_record9`
-- Registry metadata included for reference and discovery
-- Everything visible, with no UI filtering
-- Compatibility metadata retained as reference-only
+- WRF Registry metadata for reference and discovery
+- Runtime JSON catalogs for browser-based use
+- Validated WRF namelist compatibility-rule engine
+- Version-aware compatibility checks for WRF 4.7.1 and WRF 4.8.x metadata
 - Required-field save warnings
 - Suggested starting values for `time_step`, `radt`, `run_*`, and `cudt`
-- Full 360-degree map/graticule behavior
+- 360-degree map and graticule behavior
 - Desktop touch-screen and trackpad interaction fixes
 - Desktop browser compatibility shims for Chrome, Edge, Firefox, and Safari
+- Local vendored JavaScript, CSS, and webfont dependencies
+- Raw provenance data under `data/raw/`
+- Source/reference materials under `docs/references/`
+- WRF example documentation and test-case namelists under `examples/`
+- Release validation tools under `tools/`
+
+---
+
+## Compatibility-rule engine
+
+WRF Configuration Studio includes a conservative validated compatibility-rule framework for `namelist.input`.
+
+Validated-rule state for this release:
+
+```text
+94 total compatibility rules
+61 valid/enforced rules
+28 unreviewed rules retained but not enforced
+5 needs_review rules retained but not enforced
+```
+
+Only validated rules are enforced by the browser interface. Rules marked `unreviewed` or `needs_review` are retained in the metadata for transparency and future review, but they are not enforced.
+
+This behavior is intentional. The compatibility engine prioritizes safe enforcement over aggressive rule coverage.
+
+Supported compatibility-condition modes include:
+
+```text
+active
+set
+required
+truthy
+falsy
+equals
+one_of
+any_of
+not_equals
+not_one_of
+non_zero
+user_edited
+user_edited_non_zero
+greater_than
+greater_than_or_equal
+less_than
+less_than_or_equal
+between
+outside_range
+```
+
+Example conservative rules in this release:
+
+```text
+BUCKET-J
+- Enforced only when bucket_j is greater than 0.
+- Avoids warnings on the default inactive value.
+
+CUGD-AVEDX-USER
+- Enforced only when the user edits cugd_avedx to a nonzero value.
+- Avoids default-page noise while still warning when the setting is actively used.
+```
+
+The browser interface displays the number of validated rules being enforced and separates hard errors, soft warnings, workflow guidance, and review-only metadata.
+
+---
 
 ## Quick start
 
 Use a local HTTP server rather than opening `index.html` directly.
 
+From the repository root:
+
 ```bash
-python -m http.server 8000
+python3 -m http.server 8001
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:8001
 ```
 
-Windows users may run `launch-local.bat`. macOS/Linux users may run `launch-local.sh` or `launch-local.command`.
+Convenience launchers are also provided:
+
+```text
+Windows:      launch-local.bat
+macOS:        launch-local.command
+Linux/macOS:  launch-local.sh
+```
+
+---
+
+## Validate the release
+
+From the repository root:
+
+```bash
+python3 tools/validate_release.py
+```
+
+Expected validation summary:
+
+```text
+Compatibility rules:
+  total: 94
+  statuses: Counter({'valid': 61, 'unreviewed': 28, 'needs_review': 5})
+  strengths: Counter({'Hard': 57, 'Soft': 23, 'Workflow': 14})
+Compatibility numeric condition mode tests passed.
+Release validation passed.
+```
+
+Optional JavaScript syntax checks:
+
+```bash
+node --check src/namelist/namelist-compatibility-engine.js
+node --check src/namelist/namelist-input-editor.js
+node --check tools/test_compatibility_condition_modes.js
+```
+
+---
 
 ## Supported desktop browsers
+
+Supported desktop browsers:
 
 - Windows: Chrome, Edge, Firefox
 - macOS: Safari, Chrome, Firefox
 - Linux: Chrome/Chromium, Firefox, Edge
 
-Mobile layouts are not a release target for v1.0.0.
+Mobile layouts are not a release target for this public release.
+
+---
+
+## Repository layout
+
+```text
+WRFConfigurationStudio/
+├── index.html
+├── README.md
+├── LICENSE
+├── package.json
+├── launch-local.sh
+├── launch-local.bat
+├── launch-local.command
+├── launch_local_server.py
+├── .nojekyll
+├── src/
+├── styles/
+├── vendor/
+├── images/
+├── img/
+├── data/
+│   ├── runtime/
+│   └── raw/
+│       ├── registry/
+│       └── wrf/
+├── examples/
+├── docs/
+│   ├── images/
+│   ├── references/
+│   ├── release-notes/
+│   └── user-guide/
+└── tools/
+    ├── validate_release.py
+    └── test_compatibility_condition_modes.js
+```
+
+---
+
+## Folder guide
+
+### `src/`
+
+Main browser application source code.
+
+```text
+src/core/
+src/namelist/
+src/shared/
+src/tools/
+src/wps/
+```
+
+Important files include:
+
+```text
+src/core/wrf-domain-wizard.js
+src/namelist/namelist-input-editor.js
+src/namelist/namelist-compatibility-engine.js
+src/namelist/namelist-runtime-engine.js
+```
+
+### `styles/`
+
+Project CSS files.
+
+```text
+styles/wrf-domain-wizard.css
+styles/wrf-domain-wizard.min.css
+styles/wps-tools.css
+```
+
+### `vendor/`
+
+Vendored browser dependencies used by the local/static web application.
+
+```text
+vendor/css/
+vendor/js/
+vendor/webfonts/
+```
+
+These files are included so the application can run locally without a package install step.
+
+### `data/runtime/`
+
+Browser-ready runtime JSON catalogs used by the application.
+
+Important files include:
+
+```text
+data/runtime/namelist.catalog.json
+data/runtime/namelist.input.catalog.json
+data/runtime/namelist.input.compatibility.validated.json
+data/runtime/namelist.registry.merged.v3.json
+data/runtime/namelist.registry.group_index.v3.json
+```
+
+### `data/raw/`
+
+Raw and provenance-oriented source data used to support the runtime catalogs.
+
+Important contents include:
+
+```text
+data/raw/registry/
+data/raw/wrf/
+data/raw/wrf/4.8.1-dev/
+data/raw/wrf/releases/
+```
+
+### `examples/`
+
+WRF example documentation and test-case namelists retained for reference.
+
+```text
+examples/doc/
+examples/test/
+```
+
+### `docs/`
+
+User-facing and reference documentation.
+
+Important contents include:
+
+```text
+docs/QUICK_START.md
+docs/USER_GUIDE.md
+docs/TECHNICAL_REFERENCE.md
+docs/PROJECT_LINEAGE.md
+docs/RELEASE_HISTORY.md
+docs/references/
+docs/release-notes/
+docs/user-guide/
+```
+
+### `docs/images/`
+
+User-guide screenshots and visual documentation assets.
+
+```text
+docs/images/user-guide/
+```
+
+### `docs/references/`
+
+Reference and lineage materials.
+
+Important files include:
+
+```text
+docs/references/WRF_GUI_original_source_69852.pdf
+docs/references/v4_technote.pdf
+docs/references/legacy_source_docs.zip
+```
+
+The legacy source documentation archive is retained as part of the project provenance trail.
+
+### `docs/release-notes/`
+
+Release-note snapshots and publication layout notes.
+
+```text
+docs/release-notes/PUBLICATION_LAYOUT.md
+docs/release-notes/WRF_v4.7.1_release.json
+docs/release-notes/WRF_v4.7.1_release_notes.md
+docs/release-notes/WRF_v4.8.0_release.json
+docs/release-notes/WRF_v4.8.0_release_notes.md
+```
+
+### `docs/user-guide/`
+
+User-guide publication assets.
+
+```text
+docs/user-guide/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx
+```
+
+### `tools/`
+
+Release validation tools.
+
+```text
+tools/validate_release.py
+tools/test_compatibility_condition_modes.js
+```
+
+---
 
 ## Documentation
 
-Primary GitHub website documentation:
+Primary documentation:
 
 - [Quick Start](docs/QUICK_START.md)
 - [User Guide](docs/USER_GUIDE.md)
-- [Printable DOCX User Guide](docs/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx)
 - [Technical Reference](docs/TECHNICAL_REFERENCE.md)
-- [Release History](docs/RELEASE_HISTORY.md)
 - [Project Lineage](docs/PROJECT_LINEAGE.md)
+- [Release History](docs/RELEASE_HISTORY.md)
 - [GitHub Website Structure](docs/GITHUB_WEBSITE_STRUCTURE.md)
+- [Publication Layout](docs/release-notes/PUBLICATION_LAYOUT.md)
 
-The user guide screenshots are stored in `docs/images/user-guide/`. Historical source notes and older patch documentation are preserved in `docs/archive/`.
-
-## Project identity
-
-Public app name: **WRF Config Studio**
-
-Repository name recommendation:
+User-guide images are stored in:
 
 ```text
-wrf-config-studio
+docs/images/user-guide/
 ```
 
-Legacy/internal code names may still reference WRF Domain Wizard where needed for compatibility or historical attribution.
-
-## Folder Tree
+The printable DOCX user guide is stored in:
 
 ```text
-└── WRFConfigurationStudio-main/
-    ├── data/
-    │   ├── raw/
-    │   ├── registry/
-    │   └── runtime/
-    ├── docs/
-    │   ├── archive/
-    │   ├── images/
-    │   │   └── user-guide/
-    │   ├── print/
-    │   └── references/
-    ├── examples/
-    │   ├── doc/
-    │   └── test/
-    │       ├── em_b_wave/
-    │       ├── em_convrad/
-    │       ├── em_esmf_exp/
-    │       ├── em_fire/
-    │       ├── em_grav2d_x/
-    │       ├── em_heldsuarez/
-    │       ├── em_hill2d_x/
-    │       │   └── extras/
-    │       ├── em_les/
-    │       ├── em_quarter_ss/
-    │       ├── em_real/
-    │       ├── em_scm_xy/
-    │       ├── em_seabreeze2d_x/
-    │       ├── em_squall2d_x/
-    │       ├── em_squall2d_y/
-    │       └── em_tropical_cyclone/
-    ├── images/
-    ├── img/
-    ├── src/
-    │   ├── core/
-    │   ├── namelist/
-    │   ├── shared/
-    │   ├── tools/
-    │   └── wps/
-    ├── styles/
-    └── vendor/
-        ├── css/
-        │   └── images/
-        ├── js/
-        └── webfonts/
+docs/user-guide/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx
 ```
+
+---
+
+## Publication and citation language
+
+For publications, this software can be described as:
+
+> WRF Configuration Studio is a browser-based WRF configuration environment for domain design, `namelist.wps` editing, `namelist.input` editing, and metadata-assisted WRF configuration review. The first public release includes a conservative validated compatibility-rule engine that enforces only reviewed rules while retaining uncertain or workflow-dependent rules as non-enforcing metadata.
+
+Suggested limitation statement:
+
+> The compatibility-rule system is not intended to exhaustively encode every possible WRF namelist interaction. It prioritizes safe enforcement: validated rules are active, while uncertain, workflow-dependent, or manually reviewed rules remain documented but non-enforcing until additional validation or metadata support is added.
+
+---
 
 ## NOAA/FSL WRF SI GUI lineage
 
-WRF Config Studio also acknowledges the earlier NOAA Forecast Systems Laboratory / Forecast Systems Laboratory WRF Standard Initialization GUI work by Paula T. McCaslin, John R. Smart, Brent Shaw, and Brian D. Jamison. That work demonstrated a graphical workflow for WRF domain localization, projection and grid editing, initialization setup, and user guidance, and it is part of the technical lineage behind later WRF domain tools.
+WRF Configuration Studio acknowledges the earlier NOAA Forecast Systems Laboratory / Forecast Systems Laboratory WRF Standard Initialization GUI work by Paula T. McCaslin, John R. Smart, Brent Shaw, and Brian D. Jamison.
 
-The historical reference PDF is included in `docs/references/WRF_GUI_original_source_69852.pdf`.
+That work demonstrated a graphical workflow for WRF domain localization, projection and grid editing, initialization setup, and user guidance, and it is part of the technical lineage behind later WRF domain tools.
+
+The historical reference PDF is included at:
+
+```text
+docs/references/WRF_GUI_original_source_69852.pdf
+```
+
+---
+
+## WRF Domain Wizard lineage
+
+WRF Configuration Studio continues the technical lineage of the WRF Domain Wizard web build.
+
+The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation. Legacy or internal source code names may still reference WRF Domain Wizard where needed for compatibility or historical attribution.
+
+---
 
 ## License
 
-[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE) GPL-3.0 License
+This project is distributed under the GPL-3.0 License.
 
-## Citation for publications
+See:
 
-## Online-only map mode
+```text
+LICENSE
+```
 
-This v1.0.0 build uses online tile providers only for the map background.
+---
 
-## v1.0.0 ARW context note
+## Online map mode
 
-This package is the v1.0.0 mainline build and uses the WRF 4.7.1 registry for configuration settings
+This browser build uses online tile providers for map backgrounds. The application source and runtime metadata are included locally, but map tiles require network access unless the application is configured to point to local or alternative tile services.
 
+---
 
+## Repository identity
 
+Public app name:
 
-<a href='https://mapmyvisitors.com/web/1c5d0'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=500&t=tt&d=MQhYoa3dqHKn__1fbkfKyN4JddYCLARtWhmyUaa6iXg&co=2d78ad&ct=ffffff'/></a>
+```text
+WRF Configuration Studio
+```
+
+Repository name:
+
+```text
+WRFConfigurationStudio
+```
+
+---
+
+## Release summary
+
+```text
+main: a5fc845
+tag: stable-publication-layout-20260731
+rules: 94 total, 61 valid, 28 unreviewed, 5 needs_review
+package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
+```
