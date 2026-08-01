@@ -3,7 +3,7 @@
     "notes": "Added user-edited soft compatibility tuning rules.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 93,
+    "ruleCount": 94,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
@@ -12,8 +12,8 @@
     },
     "variableCount": 90,
     "lastReviewedDate": "2026-07-31",
-    "validRuleCount": 60,
-    "lastPromotionBatch": "2026-07-31_bucket_j_numeric"
+    "validRuleCount": 61,
+    "lastPromotionBatch": "2026-07-31_cugd_avedx_user"
   },
   "rules": [
     {
@@ -3586,6 +3586,41 @@
         "current-users-guide",
         "user-edited-trigger-mode"
       ]
+    },
+    {
+      "id": "CUGD-AVEDX-USER",
+      "description": "cugd_avedx is only meaningful with Grell-Freitas cumulus physics.",
+      "strength": "Soft",
+      "triggerGroup": "physics",
+      "triggerVariable": "cugd_avedx",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "group": "physics",
+          "variable": "cu_physics",
+          "mode": "one_of",
+          "values": [
+            5
+          ]
+        }
+      ],
+      "requirementsRaw": "cu_physics only works with 5",
+      "message": "cugd_avedx is intended for use with cu_physics=5.",
+      "fix": "Set physics.cu_physics to 5, or leave cugd_avedx at its default unless you are using the Grell-Freitas cumulus option.",
+      "sourceExcerpt": "cugd_avedx compatibility note from WRF namelist variable guidance.",
+      "validationStatus": "valid",
+      "validationSource": "WRF Users Guide Namelist Variables",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validatedVersions": [
+        "current-users-guide",
+        "user-edited-trigger-mode",
+        "2026-07-31_cugd_avedx_user"
+      ],
+      "validationBatch": "2026-07-31_cugd_avedx_user",
+      "validationNotes": "Promoted as a soft user-edited rule because cugd_avedx has a nonzero default. The trigger uses user_edited_non_zero so the default page stays quiet and the warning only appears after the user edits the tuning/control field."
     }
   ],
   "variableIndex": {
