@@ -17,9 +17,9 @@ This file maps the regenerated GitHub website package. Text and source files wer
 | `.gitignore/` | 1 | root-level package files |
 | `.nojekyll/` | 1 | root-level package files |
 | `README.md/` | 1 | root-level package files |
-| `START_LOCAL_SERVER.bat/` | 1 | root-level package files |
-| `START_LOCAL_SERVER.command/` | 1 | root-level package files |
-| `START_LOCAL_SERVER.sh/` | 1 | root-level package files |
+| `launch-local.bat/` | 1 | root-level package files |
+| `launch-local.command/` | 1 | root-level package files |
+| `launch-local.sh/` | 1 | root-level package files |
 | `data/` | 60 | runtime and source metadata catalogs |
 | `docs/` | 27 | website documentation, screenshots, references, and archive |
 | `examples/` | 140 | bundled WRF examples and reference files |
@@ -27,7 +27,7 @@ This file maps the regenerated GitHub website package. Text and source files wer
 | `img/` | 2 | application icons |
 | `index.html/` | 1 | root-level package files |
 | `launch_local_server.py/` | 1 | root-level package files |
-| `package-info.json/` | 1 | root-level package files |
+| `package.json/` | 1 | root-level package files |
 | `src/` | 12 | first-party application source |
 | `styles/` | 3 | CSS styling |
 | `vendor/` | 43 | third-party browser libraries |
@@ -39,9 +39,9 @@ This file maps the regenerated GitHub website package. Text and source files wer
 | `.gitignore` | binary | 19 | `862263fa1f46c20f` | Project file preserved from source package |
 | `.nojekyll` | text | 0 | `e3b0c44298fc1c14` | GitHub Pages marker that disables Jekyll processing of static files |
 | `README.md` | text | 3665 | `cfc9440be75cee9a` | Repository landing page for GitHub and project overview |
-| `START_LOCAL_SERVER.bat` | text | 151 | `2b6821e04771bf15` | Local HTTP server launcher for local package mode |
-| `START_LOCAL_SERVER.command` | text | 194 | `20884378c115f1a1` | Local HTTP server launcher for local package mode |
-| `START_LOCAL_SERVER.sh` | text | 168 | `910aedb37fc3bfc4` | Local HTTP server launcher for local package mode |
+| `launch-local.bat` | text | 151 | `2b6821e04771bf15` | Local HTTP server launcher for local package mode |
+| `launch-local.command` | text | 194 | `20884378c115f1a1` | Local HTTP server launcher for local package mode |
+| `launch-local.sh` | text | 168 | `910aedb37fc3bfc4` | Local HTTP server launcher for local package mode |
 | `data/raw/README.md` | text | 149 | `58d8c3e23acbfb74` | Raw/source catalog material used to build runtime metadata |
 | `data/raw/geog.json` | text | 23046 | `c800632cbabd03c5` | Raw/source catalog material used to build runtime metadata |
 | `data/raw/namelist.input.compatibility.json` | text | 77411 | `e208fc99c7360b6d` | Raw/source catalog material used to build runtime metadata |
@@ -54,46 +54,46 @@ This file maps the regenerated GitHub website package. Text and source files wer
 | `data/raw/namelist.input.subsections.json` | text | 9244 | `c8136f6792c93f0e` | Raw/source catalog material used to build runtime metadata |
 | `data/raw/namelist.input.templates.json` | text | 18416 | `b9a89cbd2d11d9e9` | Raw/source catalog material used to build runtime metadata |
 | `data/raw/namelist.input.users.guide.json` | text | 132680 | `e1023ac24ddcdb2f` | Raw/source catalog material used to build runtime metadata |
-| `data/registry/Registry.CONVERT` | text | 49524 | `01909e87a6b811ec` | WRF Registry source/reference file |
-| `data/registry/Registry.EM` | text | 4724 | `2bcaf5871914ad7f` | WRF Registry source/reference file |
-| `data/registry/Registry.EM_CHEM` | text | 2697 | `d377fdaeb72052dd` | WRF Registry source/reference file |
-| `data/registry/Registry.EM_COMMON` | text | 437707 | `6f3ee02175b76487` | WRF Registry source/reference file |
-| `data/registry/Registry.EM_COMMON.var` | text | 38238 | `91b59e7a972a4d5d` | WRF Registry source/reference file |
-| `data/registry/Registry.tladj` | text | 4912 | `dcd552c11f90364c` | WRF Registry source/reference file |
-| `data/registry/Registry.wrfchemvar` | text | 688 | `aae20f1e33a84ef8` | WRF Registry source/reference file |
-| `data/registry/Registry.wrfvar` | text | 2277 | `e7d8d0f0db571fa1` | WRF Registry source/reference file |
-| `data/registry/registry.CMAQ` | text | 7702 | `b35561203e1ee083` | WRF Registry source/reference file |
-| `data/registry/registry.afwa` | text | 14061 | `ea7861b2ebe00011` | WRF Registry source/reference file |
-| `data/registry/registry.avgflx` | text | 3500 | `8027ca9397c84952` | WRF Registry source/reference file |
-| `data/registry/registry.bdy_perturb` | text | 1291 | `c6a5b889bc839a16` | WRF Registry source/reference file |
-| `data/registry/registry.cam` | text | 27245 | `19c143d4aed9e52f` | WRF Registry source/reference file |
-| `data/registry/registry.chem` | text | 625642 | `a700c510bf0a6e9e` | WRF Registry source/reference file |
-| `data/registry/registry.clm` | text | 21510 | `3ace44d2ef294578` | WRF Registry source/reference file |
-| `data/registry/registry.diags` | text | 5467 | `c0c648a5c1f15008` | WRF Registry source/reference file |
-| `data/registry/registry.dimspec` | text | 8569 | `ff5742a275176b44` | WRF Registry source/reference file |
-| `data/registry/registry.elec` | text | 5610 | `481afe9524b471f0` | WRF Registry source/reference file |
-| `data/registry/registry.em_shared_collection` | text | 820 | `4182c38d265289b6` | WRF Registry source/reference file |
-| `data/registry/registry.fire` | text | 48117 | `a4d146b593db3bb7` | WRF Registry source/reference file |
-| `data/registry/registry.hyb_coord` | text | 3926 | `1f008d5f5a3bf0e7` | WRF Registry source/reference file |
-| `data/registry/registry.iau` | text | 3879 | `9141be91350388aa` | WRF Registry source/reference file |
-| `data/registry/registry.io_boilerplate` | text | 14914 | `2b0a6877b10c6ebd` | WRF Registry source/reference file |
-| `data/registry/registry.lake` | text | 5696 | `f4897ffa57d2eae1` | WRF Registry source/reference file |
-| `data/registry/registry.les` | text | 2099 | `d36ff30559f7f2d5` | WRF Registry source/reference file |
-| `data/registry/registry.new3d_gca` | text | 7747 | `06a720c4304711f3` | WRF Registry source/reference file |
-| `data/registry/registry.new3d_wif` | text | 12153 | `a3cdbadd8c0426e5` | WRF Registry source/reference file |
-| `data/registry/registry.noahmp` | text | 38937 | `1d4c0e0dfb94d67b` | WRF Registry source/reference file |
-| `data/registry/registry.polrad` | text | 8382 | `77671d204e7cef7e` | WRF Registry source/reference file |
-| `data/registry/registry.rasm_diag` | text | 11677 | `3be086896cd8f670` | WRF Registry source/reference file |
-| `data/registry/registry.sbm` | text | 47723 | `9882f8612c30111c` | WRF Registry source/reference file |
-| `data/registry/registry.solar_fields` | text | 10049 | `40254d5deeb59d24` | WRF Registry source/reference file |
-| `data/registry/registry.ssib` | text | 9871 | `7fa144a8741211ed` | WRF Registry source/reference file |
-| `data/registry/registry.stoch` | text | 27624 | `7c781030e0dd2f6e` | WRF Registry source/reference file |
-| `data/registry/registry.tornado` | text | 4906 | `905ec558883862ac` | WRF Registry source/reference file |
-| `data/registry/registry.tracker` | text | 14280 | `a01a5c35267d9bef` | WRF Registry source/reference file |
-| `data/registry/registry.trad_fields` | text | 2141 | `f90ccd0c06bfbf00` | WRF Registry source/reference file |
-| `data/registry/registry.var` | text | 99172 | `77d16129d11abbbd` | WRF Registry source/reference file |
-| `data/registry/registry.var_chem` | text | 44215 | `8aefccc8130f7789` | WRF Registry source/reference file |
-| `data/registry/registry.wrfplus` | text | 84631 | `dcee5b3f5bc756e0` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.CONVERT` | text | 49524 | `01909e87a6b811ec` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.EM` | text | 4724 | `2bcaf5871914ad7f` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.EM_CHEM` | text | 2697 | `d377fdaeb72052dd` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.EM_COMMON` | text | 437707 | `6f3ee02175b76487` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.EM_COMMON.var` | text | 38238 | `91b59e7a972a4d5d` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.tladj` | text | 4912 | `dcd552c11f90364c` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.wrfchemvar` | text | 688 | `aae20f1e33a84ef8` | WRF Registry source/reference file |
+| `data/raw/registry/Registry.wrfvar` | text | 2277 | `e7d8d0f0db571fa1` | WRF Registry source/reference file |
+| `data/raw/registry/registry.CMAQ` | text | 7702 | `b35561203e1ee083` | WRF Registry source/reference file |
+| `data/raw/registry/registry.afwa` | text | 14061 | `ea7861b2ebe00011` | WRF Registry source/reference file |
+| `data/raw/registry/registry.avgflx` | text | 3500 | `8027ca9397c84952` | WRF Registry source/reference file |
+| `data/raw/registry/registry.bdy_perturb` | text | 1291 | `c6a5b889bc839a16` | WRF Registry source/reference file |
+| `data/raw/registry/registry.cam` | text | 27245 | `19c143d4aed9e52f` | WRF Registry source/reference file |
+| `data/raw/registry/registry.chem` | text | 625642 | `a700c510bf0a6e9e` | WRF Registry source/reference file |
+| `data/raw/registry/registry.clm` | text | 21510 | `3ace44d2ef294578` | WRF Registry source/reference file |
+| `data/raw/registry/registry.diags` | text | 5467 | `c0c648a5c1f15008` | WRF Registry source/reference file |
+| `data/raw/registry/registry.dimspec` | text | 8569 | `ff5742a275176b44` | WRF Registry source/reference file |
+| `data/raw/registry/registry.elec` | text | 5610 | `481afe9524b471f0` | WRF Registry source/reference file |
+| `data/raw/registry/registry.em_shared_collection` | text | 820 | `4182c38d265289b6` | WRF Registry source/reference file |
+| `data/raw/registry/registry.fire` | text | 48117 | `a4d146b593db3bb7` | WRF Registry source/reference file |
+| `data/raw/registry/registry.hyb_coord` | text | 3926 | `1f008d5f5a3bf0e7` | WRF Registry source/reference file |
+| `data/raw/registry/registry.iau` | text | 3879 | `9141be91350388aa` | WRF Registry source/reference file |
+| `data/raw/registry/registry.io_boilerplate` | text | 14914 | `2b0a6877b10c6ebd` | WRF Registry source/reference file |
+| `data/raw/registry/registry.lake` | text | 5696 | `f4897ffa57d2eae1` | WRF Registry source/reference file |
+| `data/raw/registry/registry.les` | text | 2099 | `d36ff30559f7f2d5` | WRF Registry source/reference file |
+| `data/raw/registry/registry.new3d_gca` | text | 7747 | `06a720c4304711f3` | WRF Registry source/reference file |
+| `data/raw/registry/registry.new3d_wif` | text | 12153 | `a3cdbadd8c0426e5` | WRF Registry source/reference file |
+| `data/raw/registry/registry.noahmp` | text | 38937 | `1d4c0e0dfb94d67b` | WRF Registry source/reference file |
+| `data/raw/registry/registry.polrad` | text | 8382 | `77671d204e7cef7e` | WRF Registry source/reference file |
+| `data/raw/registry/registry.rasm_diag` | text | 11677 | `3be086896cd8f670` | WRF Registry source/reference file |
+| `data/raw/registry/registry.sbm` | text | 47723 | `9882f8612c30111c` | WRF Registry source/reference file |
+| `data/raw/registry/registry.solar_fields` | text | 10049 | `40254d5deeb59d24` | WRF Registry source/reference file |
+| `data/raw/registry/registry.ssib` | text | 9871 | `7fa144a8741211ed` | WRF Registry source/reference file |
+| `data/raw/registry/registry.stoch` | text | 27624 | `7c781030e0dd2f6e` | WRF Registry source/reference file |
+| `data/raw/registry/registry.tornado` | text | 4906 | `905ec558883862ac` | WRF Registry source/reference file |
+| `data/raw/registry/registry.tracker` | text | 14280 | `a01a5c35267d9bef` | WRF Registry source/reference file |
+| `data/raw/registry/registry.trad_fields` | text | 2141 | `f90ccd0c06bfbf00` | WRF Registry source/reference file |
+| `data/raw/registry/registry.var` | text | 99172 | `77d16129d11abbbd` | WRF Registry source/reference file |
+| `data/raw/registry/registry.var_chem` | text | 44215 | `8aefccc8130f7789` | WRF Registry source/reference file |
+| `data/raw/registry/registry.wrfplus` | text | 84631 | `dcee5b3f5bc756e0` | WRF Registry source/reference file |
 | `data/runtime/namelist.arw_technical_note_context.json` | text | 16538 | `1ce1e490bca9af78` | Runtime JSON catalog consumed by the browser application |
 | `data/runtime/namelist.catalog.json` | text | 3071637 | `7e796cbaa76723e3` | Runtime JSON catalog consumed by the browser application |
 | `data/runtime/namelist.input.catalog.json` | text | 4089020 | `422035bc1826eb10` | Runtime JSON catalog consumed by the browser application |
@@ -274,7 +274,7 @@ This file maps the regenerated GitHub website package. Text and source files wer
 | `img/globe_32x32.png` | binary | 2838 | `b507ec4941d63cb8` | Application image asset |
 | `index.html` | text | 45659 | `5c7053016e260cc4` | GitHub Pages application entry point and browser UI shell |
 | `launch_local_server.py` | text | 2366 | `b74d133742d666b9` | Local HTTP server launcher for local package mode |
-| `package-info.json` | text | 454 | `eb38bb7471ad786c` | Package metadata |
+| `package.json` | text | 454 | `eb38bb7471ad786c` | Package metadata |
 | `src/core/app-version.js` | text | 1422 | `b7f1967e18be03b2` | First-party application JavaScript source |
 | `src/core/browser-compat.js` | text | 4881 | `0cd269223d134b26` | First-party application JavaScript source |
 | `src/core/wrf-domain-wizard.js` | text | 1306603 | `8169a5e40b17f964` | First-party application JavaScript source |

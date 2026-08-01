@@ -36,7 +36,7 @@ Then open:
 http://127.0.0.1:8000
 ```
 
-Windows users may run `START_LOCAL_SERVER.bat`. macOS/Linux users may run `START_LOCAL_SERVER.sh` or `START_LOCAL_SERVER.command`.
+Windows users may run `launch-local.bat`. macOS/Linux users may run `launch-local.sh` or `launch-local.command`.
 
 ## Supported desktop browsers
 

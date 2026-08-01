@@ -18,9 +18,9 @@ python -m http.server 8000
 Or use one of the included launch helpers:
 
 ```text
-START_LOCAL_SERVER.bat
-START_LOCAL_SERVER.sh
-START_LOCAL_SERVER.command
+launch-local.bat
+launch-local.sh
+launch-local.command
 launch_local_server.py
 ```
 

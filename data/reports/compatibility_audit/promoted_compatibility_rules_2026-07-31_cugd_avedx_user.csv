@@ -1,2 +1,0 @@
-id,action,beforeStatus,afterStatus,strength,trigger,triggerMode,requirements,requirementsRaw
-CUGD-AVEDX-USER,added,added,valid,Soft,physics.cugd_avedx,user_edited_non_zero,physics.cu_physics one_of 5,cu_physics only works with 5

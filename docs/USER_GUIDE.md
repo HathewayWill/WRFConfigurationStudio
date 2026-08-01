@@ -86,28 +86,28 @@ Local package mode is the recommended method when using the downloaded release p
 The package includes helper launchers:
 
 ```text
-START_LOCAL_SERVER.bat
-START_LOCAL_SERVER.sh
-START_LOCAL_SERVER.command
+launch-local.bat
+launch-local.sh
+launch-local.command
 launch_local_server.py
 ```
 
 On Windows, use:
 
 ```text
-START_LOCAL_SERVER.bat
+launch-local.bat
 ```
 
 On macOS or Linux, use:
 
 ```text
-START_LOCAL_SERVER.sh
+launch-local.sh
 ```
 
 or:
 
 ```text
-START_LOCAL_SERVER.command
+launch-local.command
 ```
 
 The launcher starts on port `8000` when available. If that port is already in use, the launcher uses the next available port and prints the correct local URL.
