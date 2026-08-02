@@ -179,7 +179,7 @@
     this.catalog = opts.catalog || { groups: {} };
     this.compatibility = opts.compatibility || { rules: [] };
     this.state = opts.state || { enabled: {}, values: {} };
-    this.targetWrfVersion = opts.targetWrfVersion || '4.8.0+';
+    this.targetWrfVersion = opts.targetWrfVersion || '≥ 4.8.0';
     this.fieldIndex = this.buildFieldIndex();
   }
 
@@ -221,19 +221,19 @@
           type: 'error',
           fieldKeys: [key],
           ruleId: 'version-support',
-          message: field.name + ' is available in WRF 4.8.0+ but the target version is WRF 4.7.1.',
+          message: field.name + ' is available in WRF ≥ 4.8.0 but the target version is WRF ≤ 4.7.1.',
           sourcePriority: 'Registry',
           validationStatus: 'registry_backed'
         });
       }
 
-      if (self.targetWrfVersion === '4.8.0+' && isLegacy471OnlyField(field)) {
+      if (self.targetWrfVersion === '≥ 4.8.0' && isLegacy471OnlyField(field)) {
         issues.push({
           id: 'legacy-' + key,
           type: 'warning',
           fieldKeys: [key],
           ruleId: 'version-support',
-          message: field.name + ' appears to be WRF 4.7.1-only. Confirm before using it with WRF 4.8.0+.',
+          message: field.name + ' appears to be WRF ≤ 4.7.1-only. Confirm before using it with WRF ≥ 4.8.0.',
           sourcePriority: 'Registry',
           validationStatus: 'registry_backed'
         });
