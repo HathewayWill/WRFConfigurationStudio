@@ -488,7 +488,7 @@
     this.hideEmptyGroups = false;
     this.hideUnsetVars = false;
     this.showCompatibility = true;
-    this.targetWrfVersion = '4.8.0+';
+    this.targetWrfVersion = '≥ 4.8.0';
     this._returnToEditorAfterSaveDialog = false;
     this._saveDialogQueued = false;
     this._savedModalSnapshot = null;
@@ -898,7 +898,7 @@
       catalog: this.catalog,
       compatibility: this.compatibility || { rules: [] },
       state: this.state,
-      targetWrfVersion: this.targetWrfVersion || '4.8.0+'
+      targetWrfVersion: this.targetWrfVersion || '≥ 4.8.0'
     });
     return engine.getIssues();
   };
@@ -930,7 +930,7 @@
   HybridNamelistInputEditor.prototype.bindCompatibilityPanelEvents = function () {
     var self = this;
     this.$container.find('.namelist-input-target-wrf-version').off('change.namelistcompat').on('change.namelistcompat', function () {
-      self.targetWrfVersion = $(this).val() || '4.8.0+';
+      self.targetWrfVersion = $(this).val() || '≥ 4.8.0';
       self.render();
       self.updateText();
     });
@@ -1022,8 +1022,8 @@
     html += '<span class="badge badge-warning mr-3">' + warnings + ' warnings</span>';
     html += '<label class="small mb-0 mr-2" for="namelist-input-target-wrf-version">Target WRF</label>';
     html += '<select id="namelist-input-target-wrf-version" class="custom-select custom-select-sm namelist-input-target-wrf-version mr-3" style="width:auto">';
-    html += '<option value="4.8.0+"' + ((this.targetWrfVersion || '4.8.0+') === '4.8.0+' ? ' selected' : '') + '>4.8.0+</option>';
-    html += '<option value="4.7.1"' + (this.targetWrfVersion === '4.7.1' ? ' selected' : '') + '>4.7.1</option>';
+    html += '<option value="≥ 4.8.0"' + ((this.targetWrfVersion || '≥ 4.8.0') === '≥ 4.8.0' ? ' selected' : '') + '>≥ 4.8.0</option>';
+    html += '<option value="4.7.1"' + (this.targetWrfVersion === '4.7.1' ? ' selected' : '') + '>≤ 4.7.1</option>';
     html += '</select>';
     html += '<span class="small text-muted">Enforcing ' + validRules + ' validated rules. ';
     html += needsReview + ' need review. Registry-backed version checks are enforced first.</span>';
@@ -1605,7 +1605,7 @@
     html += '<div class="mr-2 mt-1"><input type="checkbox" class="namelist-input-toggle" data-key="' + esc(field.key) + '" ' + (enabled ? 'checked' : '') + '></div>';
     html += '<div class="namelist-input-variable-name flex-grow-1" data-key="' + esc(field.key) + '"><strong>' + esc(field.name) + '</strong>';
     if (this.state.suggestedFields && this.state.suggestedFields[field.key]) html += ' <span class="badge badge-info">suggested</span>';
-    if (this.isWrf48PlusOnlyField(field)) html += ' <span class="badge badge-warning" title="Available in WRF 4.8.0 and newer">4.8.0+</span>';
+    if (this.isWrf48PlusOnlyField(field)) html += ' <span class="badge badge-warning" title="Available in WRF 4.8.0 and newer">≥ 4.8.0</span>';
     var arwCtxForBadges = this.getArwContextForField(field);
     if (arwCtxForBadges && arwCtxForBadges.badges && arwCtxForBadges.badges.length) {
       arwCtxForBadges.badges.slice(0, 3).forEach(function (badge) { html += ' <span class="badge badge-light">' + esc(badge) + '</span>'; });
