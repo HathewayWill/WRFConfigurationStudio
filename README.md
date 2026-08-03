@@ -12,8 +12,6 @@ The project continues the technical lineage of browser-based WRF domain design t
 
 ```text
 Compatibility rules: 164 total, 144 valid/enforced, 15 unreviewed, 5 needs_review
-Validated UI checkpoint: stable-namelist-description-formatting-20260802
-Package: build from the desired stable tag with git archive, then verify with unzip -t and sha256sum
 ```
 
 ---
