@@ -1609,3 +1609,6 @@ html,body,div#map,.leaflet-container{overscroll-behavior:none}div#map,div#map .l
 #namelist-input-container .namelist-input-variable-doc{padding-top:.2rem;justify-self:stretch}
 #namelist-input-container .namelist-input-variable-description,#namelist-input-container .namelist-input-variable-suggestion,#namelist-input-container .namelist-input-variable-compatibility{margin-left:0!important;max-width:58rem}
 @media (max-width:1100px){#namelist-input-container .namelist-input-variable-row{grid-template-columns:1.75rem minmax(13rem,1fr)}#namelist-input-container .namelist-input-variable-value,#namelist-input-container .namelist-input-variable-doc{grid-column:2}}
+
+/* OBSPROC-only group marker */
+.namelist-input-obsproc-only-badge{margin-left:.45rem;font-size:.72rem;vertical-align:middle;cursor:help}
