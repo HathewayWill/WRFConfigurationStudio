@@ -1626,6 +1626,473 @@
   }
 
 
+
+  function normalizeDescriptionToken(value) {
+    return String(value || '').replace(/[\s_\-]+/g, '').toLowerCase();
+  }
+
+  function splitDescriptionParts(description) {
+    var text = String(description || '').trim();
+    var parts = text.split('|').map(function (part) {
+      return part.trim();
+    }).filter(function (part) {
+      return part.length;
+    });
+
+    if (parts.length < 2) {
+      var trailingPipe = text.match(/^([^|]+)\|\s*$/);
+      if (trailingPipe) {
+        return {
+          name: trailingPipe[1].trim(),
+          summary: '',
+          units: '',
+          valueHint: ''
+        };
+      }
+
+      return {
+        name: '',
+        summary: text.replace(/\|\s*$/, '').trim(),
+        units: '',
+        valueHint: ''
+      };
+    }
+
+    var name = parts.shift();
+    var summary = parts.join(' | ').replace(/^\|\s*/, '').replace(/\|\s*$/, '').trim();
+    var units = '';
+    var valueHint = '';
+
+    if (parts.length >= 2) {
+      var last = parts[parts.length - 1].trim();
+      if (/^(seconds?|minutes?|hours?|days?|pa|hpa|k|m|km|m\/s|kg\/kg|flag|logical|logical\s+flag|integer|integer\s+flag|real|character)$/i.test(last)) {
+        units = last;
+        summary = parts.slice(0, -1).join(' | ').trim();
+      }
+    }
+
+    summary = summary.replace(/^(T\/F|true\/false)\s*:\s*/i, function (m, hint) {
+      valueHint = hint;
+      return '';
+    }).trim();
+
+    var unitPrefix = summary.match(/^(SECONDS?|MINUTES?|HOURS?|DAYS?|PA|HPA|K|M|KM)\s+(.*)$/i);
+    if (!units && unitPrefix) {
+      units = unitPrefix[1];
+      summary = unitPrefix[2].trim();
+    }
+
+    return {
+      name: name,
+      summary: summary,
+      units: units,
+      valueHint: valueHint
+    };
+  }
+
+  function optionItemFromObject(value, raw) {
+    if (raw === undefined || raw === null) return null;
+
+    if (typeof raw === 'string' || typeof raw === 'number' || typeof raw === 'boolean') {
+      return {
+        value: String(value).trim(),
+        label: String(raw).trim()
+      };
+    }
+
+    if (typeof raw !== 'object') return null;
+
+    var optionValue = raw.value !== undefined ? raw.value
+      : raw.option !== undefined ? raw.option
+      : raw.code !== undefined ? raw.code
+      : raw.id !== undefined ? raw.id
+      : raw.key !== undefined ? raw.key
+      : value;
+
+    var label = raw.label !== undefined ? raw.label
+      : raw.description !== undefined ? raw.description
+      : raw.desc !== undefined ? raw.desc
+      : raw.name !== undefined ? raw.name
+      : raw.text !== undefined ? raw.text
+      : raw.title !== undefined ? raw.title
+      : raw.meaning !== undefined ? raw.meaning
+      : '';
+
+    optionValue = String(optionValue === undefined || optionValue === null ? '' : optionValue).trim();
+    label = String(label === undefined || label === null ? '' : label).trim();
+
+    if (!optionValue && !label) return null;
+    if (!optionValue) optionValue = label;
+    if (!label) label = optionValue;
+
+    return {
+      value: optionValue,
+      label: label
+    };
+  }
+
+  function parseOptionText(optionText) {
+    var text = String(optionText || '').trim();
+    if (!text) return [];
+
+    text = text
+      .replace(/(^|[;,\s])=\s*(-?\d+(?:\.\d+)?)\s*:/g, '$1$2:')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    var options = [];
+    var optionRegex = /(?:^|[;,]\s*|\s+)(=?-?\d+(?:\.\d+)?)\s*(->|=|:)\s*([\s\S]*?)(?=(?:[;,]\s*|\s+)=?-?\d+(?:\.\d+)?\s*(?:->|=|:)\s*|$)/g;
+    var match;
+
+    while ((match = optionRegex.exec(text)) !== null) {
+      var value = String(match[1] || '').replace(/^=/, '').trim();
+      var label = String(match[3] || '').trim();
+
+      label = label.replace(/^[,;:\s]+/, '').replace(/[,;\s]+$/, '').trim();
+
+      if (value && label) {
+        options.push({
+          value: value,
+          label: label
+        });
+      }
+    }
+
+    return options;
+  }
+
+  function parseNamedValueOptionText(optionText) {
+    var text = String(optionText || '').trim();
+    if (!text) return [];
+
+    var options = [];
+    var namedValueRegex = /(?:^|[,;]\s*)([^,;=|]+?)\s*=\s*(-?\d+(?:\.\d+)?)(?:\s*\(([^)]*)\))?/g;
+    var match;
+
+    while ((match = namedValueRegex.exec(text)) !== null) {
+      var label = String(match[1] || '').trim();
+      var value = String(match[2] || '').trim();
+      var note = String(match[3] || '').trim();
+
+      label = label.replace(/^[,;:\s]+/, '').replace(/[,;:\s]+$/, '').trim();
+
+      if (note) label += ' (' + note + ')';
+
+      if (value && label) {
+        options.push({
+          value: value,
+          label: label
+        });
+      }
+    }
+
+    // Avoid converting single dependency statements like:
+    // "Valid when aer_angexp_opt=1"
+    if (options.length < 2) return [];
+
+    return options;
+  }
+
+
+  function coerceOptionItems(source) {
+    if (!source) return [];
+
+    var items = [];
+
+    if (Array.isArray(source)) {
+      source.forEach(function (raw, index) {
+        var item = null;
+
+        if (typeof raw === 'string') {
+          var parsed = parseOptionText(raw);
+          if (parsed.length) {
+            items = items.concat(parsed);
+            return;
+          }
+          item = optionItemFromObject(index, raw);
+        } else {
+          item = optionItemFromObject(index, raw);
+        }
+
+        if (item) items.push(item);
+      });
+    } else if (typeof source === 'object') {
+      Object.keys(source).forEach(function (key) {
+        if (/^(source|sources|notes|raw|description|summary|metadata)$/i.test(key)) return;
+        var item = optionItemFromObject(key, source[key]);
+        if (item) items.push(item);
+      });
+    } else if (typeof source === 'string') {
+      items = parseOptionText(source);
+    }
+
+    var seen = {};
+    items = items.filter(function (item) {
+      if (!item || !item.value || !item.label) return false;
+      var dedupeKey = item.value + '\u0000' + item.label;
+      if (seen[dedupeKey]) return false;
+      seen[dedupeKey] = true;
+      return true;
+    });
+
+    return items;
+  }
+
+  function hasUsefulOptionLabels(items) {
+    if (!items || !items.length) return false;
+
+    return items.some(function (item) {
+      var value = normalizeDescriptionToken(item.value);
+      var label = normalizeDescriptionToken(item.label);
+      if (!label || label === value) return false;
+      if (/^(true|false|none|null|0|1|2|3|4|5|6|7|8|9|10)$/i.test(String(item.label).trim())) return false;
+      return true;
+    });
+  }
+
+  var SUPPLEMENTAL_NAMELIST_OPTIONS = {
+    'physics.mp_physics': [
+      { value: '0', label: 'no microphysics' },
+      { value: '1', label: 'Kessler' },
+      { value: '2', label: 'Purdue Lin' },
+      { value: '3', label: 'WSM 3-class simple ice' },
+      { value: '4', label: 'WSM 5-class' },
+      { value: '5', label: 'Ferrier / Eta' },
+      { value: '6', label: 'WSM 6-class' },
+      { value: '7', label: 'Goddard' },
+      { value: '8', label: 'Thompson' },
+      { value: '10', label: 'Morrison 2-moment' },
+      { value: '16', label: 'WDM 5-class' },
+      { value: '17', label: 'NSSL 2-moment' },
+      { value: '18', label: 'NSSL 2-moment with CCN prediction' },
+      { value: '19', label: 'NSSL 1-moment' },
+      { value: '21', label: 'NSSL 1-moment lfo' },
+      { value: '22', label: 'NSSL 2-moment lfo' },
+      { value: '24', label: 'WDM 6-class' },
+      { value: '26', label: 'WDM 7-class' },
+      { value: '28', label: 'Thompson aerosol-aware' },
+      { value: '30', label: 'HUJI spectral bin' },
+      { value: '32', label: 'Morrison 2-moment with hail' },
+      { value: '40', label: 'Morrison 2-moment with CESM aerosol' },
+      { value: '50', label: 'P3 1-category' },
+      { value: '51', label: 'P3 1-category plus ice number' },
+      { value: '52', label: 'P3 2-ice-category' },
+      { value: '55', label: 'Jensen ISHMAEL' }
+    ],
+    'physics.ra_lw_physics': [
+      { value: '0', label: 'no longwave radiation' },
+      { value: '1', label: 'RRTM' },
+      { value: '3', label: 'CAM' },
+      { value: '4', label: 'RRTMG' },
+      { value: '5', label: 'New Goddard' },
+      { value: '7', label: 'FLG' },
+      { value: '14', label: 'RRTMG-K' },
+      { value: '24', label: 'RRTMG with volcanic aerosols' },
+      { value: '31', label: 'Held-Suarez forcing' },
+      { value: '99', label: 'GFDL' }
+    ],
+    'physics.ra_sw_physics': [
+      { value: '0', label: 'no shortwave radiation' },
+      { value: '1', label: 'Dudhia' },
+      { value: '2', label: 'Goddard' },
+      { value: '3', label: 'CAM' },
+      { value: '4', label: 'RRTMG' },
+      { value: '5', label: 'New Goddard' },
+      { value: '7', label: 'FLG' },
+      { value: '14', label: 'RRTMG-K' },
+      { value: '24', label: 'RRTMG with volcanic aerosols' },
+      { value: '99', label: 'GFDL' }
+    ],
+    'physics.sf_sfclay_physics': [
+      { value: '0', label: 'no surface layer' },
+      { value: '1', label: 'Revised MM5 similarity' },
+      { value: '2', label: 'Eta similarity' },
+      { value: '5', label: 'MYNN surface layer' },
+      { value: '7', label: 'Pleim-Xiu surface layer' },
+      { value: '10', label: 'TEMF surface layer' },
+      { value: '91', label: 'old MM5 similarity' }
+    ],
+    'physics.sf_surface_physics': [
+      { value: '0', label: 'no land-surface model' },
+      { value: '1', label: '5-layer thermal diffusion' },
+      { value: '2', label: 'Noah land-surface model' },
+      { value: '3', label: 'RUC land-surface model' },
+      { value: '4', label: 'Noah-MP land-surface model' },
+      { value: '5', label: 'CLM4' },
+      { value: '7', label: 'Pleim-Xiu land-surface model' },
+      { value: '8', label: 'SSiB land-surface model' }
+    ],
+    'physics.sf_urban_physics': [
+      { value: '0', label: 'no urban physics' },
+      { value: '1', label: 'single-layer UCM' },
+      { value: '2', label: 'BEP' },
+      { value: '3', label: 'BEP+BEM' }
+    ],
+    'physics.bl_pbl_physics': [
+      { value: '0', label: 'no PBL scheme' },
+      { value: '1', label: 'YSU' },
+      { value: '2', label: 'MYJ' },
+      { value: '5', label: 'MYNN 2.5-level TKE' },
+      { value: '6', label: 'MYNN 3-level TKE' },
+      { value: '7', label: 'ACM2' },
+      { value: '8', label: 'BouLac' },
+      { value: '9', label: 'UW' },
+      { value: '10', label: 'TEMF' },
+      { value: '11', label: 'Shin-Hong scale-aware' },
+      { value: '12', label: 'GBM' },
+      { value: '99', label: 'MRF' }
+    ],
+    'physics.cu_physics': [
+      { value: '0', label: 'no cumulus parameterization' },
+      { value: '1', label: 'Kain-Fritsch' },
+      { value: '2', label: 'Betts-Miller-Janjic' },
+      { value: '3', label: 'Grell-Freitas' },
+      { value: '5', label: 'Grell 3D ensemble' },
+      { value: '6', label: 'Tiedtke' },
+      { value: '10', label: 'Kain-Fritsch CuP' },
+      { value: '11', label: 'Multi-scale Kain-Fritsch' },
+      { value: '14', label: 'New Tiedtke' },
+      { value: '16', label: 'New SAS' },
+      { value: '93', label: 'Grell-Devenyi ensemble' },
+      { value: '99', label: 'old Kain-Fritsch' }
+    ]
+  };
+
+
+  function getFieldStructuredOptions(field) {
+    if (!field) return [];
+
+    if (field.key && SUPPLEMENTAL_NAMELIST_OPTIONS[field.key]) {
+      return SUPPLEMENTAL_NAMELIST_OPTIONS[field.key];
+    }
+
+    var candidates = [
+      field.options,
+      field.optionMetadata,
+      field.option_metadata,
+      field.allowedValues,
+      field.allowed_values,
+      field.choices,
+      field.choiceMetadata,
+      field.valueOptions,
+      field.value_options,
+      field.enum,
+      field.enums,
+      field.metadata && field.metadata.options,
+      field.metadata && field.metadata.allowedValues,
+      field.semantics && field.semantics.options,
+      field.semantics && field.semantics.allowedValues,
+      field.registry && field.registry.options,
+      field.registry && field.registry.allowedValues,
+      field.usersGuide && field.usersGuide.options,
+      field.usersGuide && field.usersGuide.allowedValues,
+      field.users_guide && field.users_guide.options,
+      field.users_guide && field.users_guide.allowedValues
+    ];
+
+    for (var i = 0; i < candidates.length; i++) {
+      var items = coerceOptionItems(candidates[i]);
+      if (hasUsefulOptionLabels(items)) return items;
+    }
+
+    return [];
+  }
+
+  function splitOptionDescription(description) {
+    var text = String(description || '').trim();
+    if (!text) return null;
+
+    var numericOption = text.search(/(?:^|[\s,(;])=?\s*-?\d+(?:\.\d+)?\s*(?:->|=|:)\s*\S/);
+    var namedValueOption = text.search(/(?:^|[\s,(;])[^,;|=]{1,60}\s*=\s*-?\d+(?:\.\d+)?(?:\s*\([^)]*\))?\s*[,;]/);
+
+    var firstOption = -1;
+    if (numericOption >= 0 && namedValueOption >= 0) firstOption = Math.min(numericOption, namedValueOption);
+    else if (numericOption >= 0) firstOption = numericOption;
+    else if (namedValueOption >= 0) firstOption = namedValueOption;
+
+    if (firstOption < 0) return null;
+
+    var lead = text.slice(0, firstOption).trim();
+    var optionText = text.slice(firstOption).trim();
+
+    if (optionText.charAt(0) === '(' && optionText.charAt(optionText.length - 1) === ')') {
+      optionText = optionText.slice(1, -1).trim();
+    }
+
+    lead = lead.replace(/[,\s;(:-]+$/, '').trim();
+    optionText = optionText.replace(/^[,\s;(]+/, '').trim();
+
+    var parts = splitDescriptionParts(lead);
+    var options = parseOptionText(optionText);
+    if (!options.length) options = parseNamedValueOptionText(optionText);
+
+    if (!options.length) return null;
+
+    if (options.length === 1 && lead.indexOf('|') === -1 && !/option|switch|method|flag|format/i.test(lead)) {
+      return null;
+    }
+
+    return {
+      name: parts.name,
+      summary: parts.summary,
+      units: parts.units,
+      valueHint: parts.valueHint,
+      options: options
+    };
+  }
+
+  function renderOptionListHtml(options, panel) {
+    var html = '<div class="small text-muted mb-1">Options</div>';
+    html += '<ul class="namelist-input-option-list' + (panel ? ' namelist-input-option-list-panel' : '') + '">';
+
+    options.forEach(function (option) {
+      html += '<li><span class="namelist-input-option-value">' + esc(option.value) + '</span><span class="namelist-input-option-label">' + esc(option.label) + '</span></li>';
+    });
+
+    html += '</ul>';
+    return html;
+  }
+
+  function renderDescriptionBlockHtml(field, panel) {
+    var description = getUsefulFieldDescription(field);
+    var parsed = description ? splitOptionDescription(description) : null;
+    var optionItems = parsed && parsed.options && parsed.options.length
+      ? parsed.options
+      : getFieldStructuredOptions(field);
+
+    var parts = parsed || splitDescriptionParts(description || '');
+    var hasOptions = optionItems && optionItems.length;
+
+    if (!description && !hasOptions) {
+      return panel ? '<div>No description available.</div>' : '';
+    }
+
+    var cls = panel ? '' : 'namelist-input-variable-description';
+    if (hasOptions && !panel) cls += ' namelist-input-variable-description-options';
+
+    var html = panel ? '' : '<div class="' + cls + '">';
+
+    if (parts.name) html += '<div class="font-weight-bold' + (panel ? '' : ' mb-1') + '">' + esc(parts.name) + '</div>';
+    if (parts.summary) html += '<div' + (hasOptions ? ' class="mb-1"' : '') + '>' + esc(parts.summary) + '</div>';
+    if (parts.units) html += '<div class="small text-muted mt-1">Units / type: ' + esc(parts.units) + '</div>';
+    if (parts.valueHint) html += '<div class="small text-muted mt-1">Values: ' + esc(parts.valueHint) + '</div>';
+
+    if (hasOptions) html += renderOptionListHtml(optionItems, panel);
+
+    if (!panel) html += '</div>';
+
+    return html;
+  }
+
+  function renderFieldDescriptionHtml(field) {
+    return renderDescriptionBlockHtml(field, false);
+  }
+
+  function renderPanelDescriptionHtml(field) {
+    return renderDescriptionBlockHtml(field, true);
+  }
+
+
   HybridNamelistInputEditor.prototype.renderField = function (field) {
     var enabled = !!this.state.enabled[field.key];
     var compat = this.evaluateFieldCompatibility(field);
@@ -1648,9 +2115,8 @@
     html += '<div class="small text-muted">' + esc(field.entries) + ' · ' + esc(field.type) + '</div>';
     html += '</div>';
     html += '<div class="namelist-input-variable-value">' + this.renderFieldInput(field) + '</div>';
-    html += '</div>';
-    var usefulDescription = getUsefulFieldDescription(field);
-    if (usefulDescription) html += '<div class="namelist-input-variable-description">' + esc(usefulDescription) + '</div>';
+    html += '<div class="namelist-input-variable-doc">';
+    html += renderFieldDescriptionHtml(field);
     var suggestionNote = this.getFieldSuggestionNote(field.key);
     if (suggestionNote) html += '<div class="small text-info namelist-input-variable-suggestion"><strong>Suggested:</strong> ' + esc(suggestionNote) + '</div>';
     if (field.key === 'domains.time_step' && !suggestionNote) html += '<div class="small text-muted namelist-input-variable-suggestion">Suggested starting point: time_step ≈ 6 × d01 dx_km. This is informational and user-editable.</div>';
@@ -1660,6 +2126,8 @@
       html += '<div class="namelist-input-variable-compatibility small text-muted">' + esc(compat.messages.join(' | ')) + '</div>';
     }
     html += this.renderEngineIssuesHtml(engineIssues);
+    html += '</div>';
+    html += '</div>';
     html += '</div>';
     return html;
   };
@@ -1867,8 +2335,7 @@
     var compat = this.evaluateFieldCompatibility(field);
     var html = '<h5 class="mb-1">' + esc(field.key) + '</h5>';
     html += '<div class="small text-muted mb-2">Type: ' + esc(field.type) + ' · Entries: ' + esc(field.entries) + '</div>';
-    var usefulDescriptionForPanel = getUsefulFieldDescription(field);
-    html += '<div class="mb-2"><strong>Description</strong><div>' + esc(usefulDescriptionForPanel || 'No description available.') + '</div></div>';
+    html += '<div class="mb-2"><strong>Description</strong>' + renderPanelDescriptionHtml(field) + '</div>';
     html += this.renderArwContextBlock(field);
     var defaultLabel = field.semantics && field.semantics.requiresUserValue ? 'User selection required' : formatValue(field.defaultValue);
     html += '<div class="mb-2"><strong>Default</strong><div class="font-namelist">' + esc(defaultLabel) + '</div></div>';
