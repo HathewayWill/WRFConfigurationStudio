@@ -31,7 +31,7 @@ The release package was generated from the Git tag using `git archive` and verif
 - WRF Registry metadata for reference and discovery
 - Runtime JSON catalogs for browser-based use
 - Validated WRF namelist compatibility-rule engine
-- Version-aware compatibility checks for WRF 4.7.1 and WRF 4.8.x metadata
+- Version-aware compatibility checks for WRF ≤ 4.7.1 and WRF 4.8.x metadata
 - Required-field save warnings
 - Suggested starting values for `time_step`, `radt`, `run_*`, and `cudt`
 - 360-degree map and graticule behavior
@@ -52,8 +52,8 @@ WRF Configuration Studio includes a conservative validated compatibility-rule fr
 Validated-rule state for this release:
 
 ```text
-94 total compatibility rules
-61 valid/enforced rules
+149 total compatibility rules
+116 valid/enforced rules
 28 unreviewed rules retained but not enforced
 5 needs_review rules retained but not enforced
 ```
@@ -451,7 +451,7 @@ WRFConfigurationStudio
 ```text
 main: a5fc845
 tag: stable-publication-layout-20260731
-rules: 94 total, 61 valid, 28 unreviewed, 5 needs_review
+rules: 149 total, 116 valid, 28 unreviewed, 5 needs_review
 package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
 ```
 ---

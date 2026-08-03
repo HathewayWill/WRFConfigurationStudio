@@ -39,8 +39,8 @@ print("  total:", len(rules))
 print("  statuses:", statuses)
 print("  strengths:", strengths)
 
-assert len(rules) == 94, "Expected 94 total compatibility rules"
-assert statuses["valid"] == 61, "Expected 61 valid rules"
+assert len(rules) == 149, "Expected 149 total compatibility rules"
+assert statuses["valid"] == 116, "Expected 116 valid rules"
 assert statuses["unreviewed"] == 28, "Expected 28 unreviewed rules"
 assert statuses["needs_review"] == 5, "Expected 5 needs_review rules"
 
