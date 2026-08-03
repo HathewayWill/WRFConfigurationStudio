@@ -309,6 +309,81 @@
     return isNaN(n) || n < 1 ? 1 : n;
   }
 
+  function cloneCatalogJson(value) {
+    if (!value) return value;
+    try {
+      return JSON.parse(JSON.stringify(value));
+    } catch (err) {
+      return value;
+    }
+  }
+
+  function normalizeCatalogGroupFields(groupFields) {
+    if (Array.isArray(groupFields)) return groupFields.slice();
+    if (!groupFields || typeof groupFields !== 'object') return [];
+
+    return Object.keys(groupFields).sort(function (a, b) {
+      return String(a).localeCompare(String(b));
+    }).map(function (name) {
+      return groupFields[name];
+    }).filter(function (field) {
+      return !!field;
+    });
+  }
+
+  function mergeObsprocCatalog(inputCatalog, obsprocCatalog) {
+    if (!inputCatalog || !inputCatalog.groups || !obsprocCatalog || !obsprocCatalog.groups) return inputCatalog;
+
+    var merged = cloneCatalogJson(inputCatalog) || { groups: {} };
+    merged.groups = merged.groups || {};
+
+    Object.keys(obsprocCatalog.groups).sort(function (a, b) {
+      var ai = parseInt(String(a).replace(/\D/g, ''), 10);
+      var bi = parseInt(String(b).replace(/\D/g, ''), 10);
+      if (!isNaN(ai) && !isNaN(bi) && ai !== bi) return ai - bi;
+      return String(a).localeCompare(String(b));
+    }).forEach(function (recordName) {
+      var targetGroup = /^obsproc_/i.test(recordName) ? recordName : 'obsproc_' + recordName;
+
+      var fields = normalizeCatalogGroupFields(obsprocCatalog.groups[recordName]).map(function (field) {
+        var cloned = cloneCatalogJson(field) || {};
+        var fieldName = cloned.name || cloned.variable || cloned.id || '';
+
+        if (!fieldName && cloned.key) {
+          var parts = String(cloned.key).split('.');
+          fieldName = parts[parts.length - 1];
+        }
+
+        if (!fieldName) return null;
+
+        cloned.name = fieldName;
+        cloned.group = targetGroup;
+        cloned.key = targetGroup + '.' + fieldName;
+        cloned.originalObsprocGroup = recordName;
+        cloned.originalObsprocKey = recordName + '.' + fieldName;
+        cloned.sourceFamily = cloned.sourceFamily || 'OBSPROC';
+        cloned.sources = cloned.sources && cloned.sources.length ? cloned.sources : ['namelist.obsproc.catalog'];
+        cloned.uiStatus = cloned.uiStatus || 'obsproc_catalog';
+        cloned.visibility = cloned.visibility || 'normal';
+        cloned.filterPolicy = cloned.filterPolicy || 'show';
+
+        return cloned;
+      }).filter(function (field) {
+        return !!field;
+      });
+
+      if (fields.length) merged.groups[targetGroup] = fields;
+    });
+
+    if (merged.metadata) {
+      merged.metadata.includesObsproc = true;
+      merged.metadata.obsprocGroupCount = Object.keys(obsprocCatalog.groups).length;
+    }
+
+    return merged;
+  }
+
+
   function buildMergedCatalog(registry, selectValues, usersGuide, manual, readme, inventory, subsections, sourcePriority, semantics) {
     function getSourceRule(groupName, varName) {
       return (sourcePriority || {})[fieldKey(groupName, varName)] || {};
@@ -674,6 +749,9 @@
     } else {
       condensed = await $.getJSON(runtimeBase + '/namelist.input.catalog.json').catch(function () { return null; });
     }
+
+    var obsprocCondensed = await $.getJSON(runtimeBase + '/namelist.obsproc.catalog.json').catch(function () { return null; });
+    condensed = mergeObsprocCatalog(condensed, obsprocCondensed);
 
     if (condensed && condensed.groups) {
       this.catalog = { groups: condensed.groups || {} };
