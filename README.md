@@ -8,16 +8,13 @@ The project continues the technical lineage of browser-based WRF domain design t
 
 ---
 
-## First public release checkpoint
+## Current validated release checkpoint
 
 ```text
-Release tag: stable-publication-layout-20260731
-Main commit: a5fc845
-Package: WRFConfigurationStudio_stable-publication-layout-20260731.zip
-Package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
+Compatibility rules: 164 total, 144 valid/enforced, 15 unreviewed, 5 needs_review
+Validated UI checkpoint: stable-namelist-description-formatting-20260802
+Package: build from the desired stable tag with git archive, then verify with unzip -t and sha256sum
 ```
-
-The release package was generated from the Git tag using `git archive` and verified with `unzip -t`.
 
 ---
 
@@ -54,7 +51,7 @@ Validated-rule state for this release:
 ```text
 164 total compatibility rules
 144 valid/enforced rules
-28 unreviewed rules retained but not enforced
+15 unreviewed rules retained but not enforced
 5 needs_review rules retained but not enforced
 ```
 
@@ -140,9 +137,9 @@ Expected validation summary:
 
 ```text
 Compatibility rules:
-  total: 94
-  statuses: Counter({'valid': 61, 'unreviewed': 28, 'needs_review': 5})
-  strengths: Counter({'Hard': 57, 'Soft': 23, 'Workflow': 14})
+  total: 164
+  statuses: Counter({'valid': 144, 'unreviewed': 15, 'needs_review': 5})
+  strengths: Counter({'Hard': 120, 'Soft': 24, 'Workflow': 20})
 Compatibility numeric condition mode tests passed.
 Release validation passed.
 ```
@@ -449,10 +446,9 @@ WRFConfigurationStudio
 ## Release summary
 
 ```text
-main: a5fc845
-tag: stable-publication-layout-20260731
 rules: 164 total, 144 valid, 15 unreviewed, 5 needs_review
-package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
+latest validated UI checkpoint before final package: stable-namelist-description-formatting-20260802
+package SHA256: generate after building the final release zip
 ```
 ---
 <a href='https://mapmyvisitors.com/web/1c5d0'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=500&t=tt&d=MQhYoa3dqHKn__1fbkfKyN4JddYCLARtWhmyUaa6iXg&co=2d78ad&ct=ffffff'/></a>
