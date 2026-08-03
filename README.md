@@ -53,7 +53,7 @@ Validated-rule state for this release:
 
 ```text
 164 total compatibility rules
-131 valid/enforced rules
+144 valid/enforced rules
 28 unreviewed rules retained but not enforced
 5 needs_review rules retained but not enforced
 ```
@@ -451,7 +451,7 @@ WRFConfigurationStudio
 ```text
 main: a5fc845
 tag: stable-publication-layout-20260731
-rules: 164 total, 131 valid, 28 unreviewed, 5 needs_review
+rules: 164 total, 144 valid, 15 unreviewed, 5 needs_review
 package SHA256: f4d2c104adad764b17e30434d4ffb7d5276420f428f1f68ef263860e00ea0141
 ```
 ---

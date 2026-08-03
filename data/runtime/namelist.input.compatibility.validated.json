@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "notes": "Added official WRF Users Guide high-value compatibility rule batch.",
+    "notes": "Promoted Bucket A compatibility rules from unreviewed to valid.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
     "ruleCount": 164,
@@ -12,8 +12,8 @@
     },
     "variableCount": 169,
     "lastReviewedDate": "2026-08-02",
-    "validRuleCount": 131,
-    "lastPromotionBatch": "2026-08-02_official_users_guide_high_value_rules"
+    "validRuleCount": 144,
+    "lastPromotionBatch": "2026-08-02_bucket_a_promotion"
   },
   "rules": [
     {
@@ -1104,19 +1104,23 @@
       "sourceExcerpt": "kfeta_trigger only works with cu_physics=1",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "1",
-          "2",
-          "3"
-        ]
+        "mode": "user_edited_non_zero",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "kfeta_trigger",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "kfeta_trigger is a Kain-Fritsch Eta trigger option and requires cu_physics=1.",
+      "fix": "Set physics.cu_physics=1, or leave kfeta_trigger unset/default unless using the Kain-Fritsch scheme."
     },
     {
       "category": "Shallow Cumulus",
@@ -1286,17 +1290,23 @@
       "sourceExcerpt": "convtrans_avglen_m only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "convtrans_avglen_m",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "convtrans_avglen_m is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave convtrans_avglen_m unset/default."
     },
     {
       "category": "Cumulus Option",
@@ -1407,17 +1417,23 @@
       "sourceExcerpt": "maxiens only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "maxiens",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "maxiens is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave maxiens unset/default."
     },
     {
       "category": "Cumulus Ensemble Controls",
@@ -1441,17 +1457,23 @@
       "sourceExcerpt": "maxens only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "maxens",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "maxens is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave maxens unset/default."
     },
     {
       "category": "Cumulus Ensemble Controls",
@@ -1475,17 +1497,23 @@
       "sourceExcerpt": "maxens2 only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "maxens2",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "maxens2 is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave maxens2 unset/default."
     },
     {
       "category": "Cumulus Ensemble Controls",
@@ -1509,17 +1537,23 @@
       "sourceExcerpt": "maxens3 only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "maxens3",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "maxens3 is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave maxens3 unset/default."
     },
     {
       "category": "Cumulus Ensemble Controls",
@@ -1543,17 +1577,23 @@
       "sourceExcerpt": "ensdim only works with cu_physics=3,5,93",
       "strength": "Hard",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited",
+        "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "ensdim",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "ensdim is a cumulus ensemble/control option and requires cu_physics=3, 5, or 93.",
+      "fix": "Set physics.cu_physics to 3, 5, or 93, or leave ensdim unset/default."
     },
     {
       "category": "Lightning",
@@ -1602,7 +1642,7 @@
           "checkable": true,
           "group": "physics",
           "mode": "set",
-          "raw": "iccg_prescribed_num must also set set",
+          "raw": "iccg_prescribed_num must be set",
           "values": [],
           "variable": "iccg_prescribed_num"
         },
@@ -1610,12 +1650,12 @@
           "checkable": true,
           "group": "physics",
           "mode": "set",
-          "raw": "iccg_prescribed_den must also set set",
+          "raw": "iccg_prescribed_den must be set",
           "values": [],
           "variable": "iccg_prescribed_den"
         }
       ],
-      "requirementsRaw": "iccg_prescribed_num must also set set | iccg_prescribed_den must also set set",
+      "requirementsRaw": "iccg_prescribed_num must be set | iccg_prescribed_den must be set",
       "sourceExcerpt": "iccg_method=1 must also set iccg_prescribed_num and iccg_prescribed_den",
       "strength": "Hard",
       "trigger": {
@@ -1626,10 +1666,18 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "iccg_method",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "iccg_method=1 requires iccg_prescribed_num and iccg_prescribed_den to be set.",
+      "fix": "Set iccg_prescribed_num and iccg_prescribed_den, or choose a different iccg_method."
     },
     {
       "category": "Radar Reflectivity",
@@ -1998,10 +2046,18 @@
       },
       "triggerGroup": "dynamics",
       "triggerVariable": "km_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "km_opt=5 requires diff_opt=2, bl_pbl_physics=0, and sf_sfclay_physics=1, 5, or 91.",
+      "fix": "Set diff_opt=2, bl_pbl_physics=0, and sf_sfclay_physics to 1, 5, or 91, or choose a different km_opt."
     },
     {
       "category": "Dynamics",
@@ -2524,15 +2580,26 @@
       "trigger": {
         "mode": "one_of",
         "values": [
-          "True"
+          "True",
+          ".true.",
+          "true",
+          "1"
         ]
       },
       "triggerGroup": "time_control",
       "triggerVariable": "force_use_old_data",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "force_use_old_data=.true. requires use_theta_m=0 and hybrid_opt=0 for pre-V4 wrfinput/wrfbdy compatibility.",
+      "fix": "Set dynamics.use_theta_m=0 and dynamics.hybrid_opt=0, or disable force_use_old_data."
     },
     {
       "category": "Cumulus Parameterization",
@@ -2596,15 +2663,23 @@
       "sourceExcerpt": "thBinSize is a CuP PDF bin-size option and only works with cu_physics=10",
       "strength": "Hard",
       "trigger": {
-        "mode": "active",
+        "mode": "user_edited",
         "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "thBinSize",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "thBinSize is a CuP option and requires cu_physics=10.",
+      "fix": "Set physics.cu_physics=10, or leave thBinSize unset/default."
     },
     {
       "category": "Cumulus Option",
@@ -2626,15 +2701,23 @@
       "sourceExcerpt": "minDeepFreq is a CuP frequency threshold option and only works with cu_physics=10",
       "strength": "Hard",
       "trigger": {
-        "mode": "active",
+        "mode": "user_edited",
         "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "minDeepFreq",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "minDeepFreq is a CuP option and requires cu_physics=10.",
+      "fix": "Set physics.cu_physics=10, or leave minDeepFreq unset/default."
     },
     {
       "category": "Cumulus Option",
@@ -2656,15 +2739,23 @@
       "sourceExcerpt": "minShallowFreq is a CuP frequency threshold option and only works with cu_physics=10",
       "strength": "Hard",
       "trigger": {
-        "mode": "active",
+        "mode": "user_edited",
         "values": []
       },
       "triggerGroup": "physics",
       "triggerVariable": "minShallowFreq",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted from unreviewed to valid in Bucket A. Rule is checkable with existing namelist.input variables and does not require external file inspection, domain-role inference, or compile-state detection.",
+      "validationSource": "Official WRF Users Guide namelist variables page, WRF runtime catalog, and curated compatibility review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-02_bucket_a_promotion",
+      "validatedVersions": [
+        "official-users-guide-namelist-variables",
+        "current-runtime-catalog",
+        "2026-08-02_bucket_a_promotion"
+      ],
+      "message": "minShallowFreq is a CuP option and requires cu_physics=10.",
+      "fix": "Set physics.cu_physics=10, or leave minShallowFreq unset/default."
     },
     {
       "category": "Radiation \u2194 MP",

@@ -40,8 +40,8 @@ print("  statuses:", statuses)
 print("  strengths:", strengths)
 
 assert len(rules) == 164, "Expected 164 total compatibility rules"
-assert statuses["valid"] == 131, "Expected 131 valid rules"
-assert statuses["unreviewed"] == 28, "Expected 28 unreviewed rules"
+assert statuses["valid"] == 144, "Expected 144 valid rules"
+assert statuses["unreviewed"] == 15, "Expected 15 unreviewed rules"
 assert statuses["needs_review"] == 5, "Expected 5 needs_review rules"
 
 subprocess.check_call(["node", "tools/test_compatibility_condition_modes.js"], cwd=root)
