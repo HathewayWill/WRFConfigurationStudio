@@ -1944,3 +1944,11 @@ div#map .leaflet-interactive,
     grid-column: 2;
   }
 }
+
+/* OBSPROC-only group marker */
+.namelist-input-obsproc-only-badge {
+  margin-left: 0.45rem;
+  font-size: 0.72rem;
+  vertical-align: middle;
+  cursor: help;
+}

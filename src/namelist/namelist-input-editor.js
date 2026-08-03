@@ -1313,7 +1313,7 @@
     var self = this;
     var groupHtml = '<option value="">Jump to group</option>';
     orderGroups(Object.keys(this.catalog.groups)).forEach(function (groupName) {
-      groupHtml += '<option value="' + esc(groupName) + '">&' + esc(groupName) + '</option>';
+      groupHtml += '<option value="' + esc(groupName) + '">' + esc(getGroupOptionLabelText(groupName)) + '</option>';
     });
     this.$groupJump.html(groupHtml);
     var vars = [];
@@ -1638,7 +1638,7 @@
       html += '<div class="namelist-input-group' + (CORE_GROUPS[groupName] ? ' namelist-input-group-core' : '') + '" id="nml-group-' + esc(groupName) + '">';
       html += '<div class="namelist-input-group-header">';
       html += '<button type="button" class="btn btn-link btn-sm p-0 mr-2 namelist-input-group-toggle" data-group="' + esc(groupName) + '"><i class="fas ' + (expanded ? 'fa-chevron-down' : 'fa-chevron-right') + '"></i></button>';
-      html += '<h5 class="mb-0">&' + esc(groupName) + '</h5>';
+      html += '<h5 class="mb-0">' + renderGroupLabelHtml(groupName, fields) + '</h5>';
       html += '<span class="badge badge-light ml-2">' + visibleFields.length + '</span>';
       if (CORE_GROUPS[groupName]) html += '<span class="badge badge-primary ml-2">core</span>';
       html += '</div>';
@@ -2168,6 +2168,38 @@
 
   function renderPanelDescriptionHtml(field) {
     return renderDescriptionBlockHtml(field, true);
+  }
+
+
+  function isObsprocDisplayGroup(groupName) {
+    return /^obsproc_record\d+$/i.test(String(groupName || ''));
+  }
+
+  function getGroupDisplayName(groupName) {
+    groupName = String(groupName || '');
+    if (isObsprocDisplayGroup(groupName)) {
+      return groupName.replace(/^obsproc_/i, '');
+    }
+    return groupName;
+  }
+
+  function getGroupOptionLabelText(groupName) {
+    var displayName = getGroupDisplayName(groupName);
+    if (isObsprocDisplayGroup(groupName)) {
+      return '&' + displayName + ' (obsproc only)';
+    }
+    return '&' + displayName;
+  }
+
+  function renderGroupLabelHtml(groupName, fields) {
+    var displayName = getGroupDisplayName(groupName);
+    var html = '&' + esc(displayName);
+
+    if (isObsprocDisplayGroup(groupName)) {
+      html += ' <span class="badge badge-info namelist-input-obsproc-only-badge" title="Used only for namelist.obsproc export, not namelist.input.">obsproc only</span>';
+    }
+
+    return html;
   }
 
 
