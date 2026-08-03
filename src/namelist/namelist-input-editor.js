@@ -1591,6 +1591,41 @@
     this.updateDocPanel(this.state.selectedKey);
   };
 
+
+  function getUsefulFieldDescription(field) {
+    var description = field && field.description !== undefined && field.description !== null
+      ? String(field.description).trim()
+      : '';
+
+    if (!description) return '';
+
+    var name = field && field.name !== undefined && field.name !== null
+      ? String(field.name).trim()
+      : '';
+
+    var keyName = '';
+    if (field && field.key) {
+      var parts = String(field.key).split('.');
+      keyName = parts[parts.length - 1] || '';
+    }
+
+    function normalize(value) {
+      return String(value || '').replace(/[\s_\-]+/g, '').toLowerCase();
+    }
+
+    var descNorm = normalize(description);
+    var nameNorm = normalize(name);
+    var keyNorm = normalize(keyName);
+
+    // Registry display labels sometimes appear as descriptions, for example
+    // physics.radt has description "RADT". These duplicate the variable name
+    // and can render as narrow wrapped artifacts in the row layout.
+    if (descNorm && (descNorm === nameNorm || descNorm === keyNorm)) return '';
+
+    return description;
+  }
+
+
   HybridNamelistInputEditor.prototype.renderField = function (field) {
     var enabled = !!this.state.enabled[field.key];
     var compat = this.evaluateFieldCompatibility(field);
@@ -1614,7 +1649,8 @@
     html += '</div>';
     html += '<div class="namelist-input-variable-value">' + this.renderFieldInput(field) + '</div>';
     html += '</div>';
-    html += '<div class="namelist-input-variable-description">' + esc(field.description || 'No description available.') + '</div>';
+    var usefulDescription = getUsefulFieldDescription(field);
+    if (usefulDescription) html += '<div class="namelist-input-variable-description">' + esc(usefulDescription) + '</div>';
     var suggestionNote = this.getFieldSuggestionNote(field.key);
     if (suggestionNote) html += '<div class="small text-info namelist-input-variable-suggestion"><strong>Suggested:</strong> ' + esc(suggestionNote) + '</div>';
     if (field.key === 'domains.time_step' && !suggestionNote) html += '<div class="small text-muted namelist-input-variable-suggestion">Suggested starting point: time_step ≈ 6 × d01 dx_km. This is informational and user-editable.</div>';
@@ -1831,7 +1867,8 @@
     var compat = this.evaluateFieldCompatibility(field);
     var html = '<h5 class="mb-1">' + esc(field.key) + '</h5>';
     html += '<div class="small text-muted mb-2">Type: ' + esc(field.type) + ' · Entries: ' + esc(field.entries) + '</div>';
-    html += '<div class="mb-2"><strong>Description</strong><div>' + esc(field.description || 'No description available.') + '</div></div>';
+    var usefulDescriptionForPanel = getUsefulFieldDescription(field);
+    html += '<div class="mb-2"><strong>Description</strong><div>' + esc(usefulDescriptionForPanel || 'No description available.') + '</div></div>';
     html += this.renderArwContextBlock(field);
     var defaultLabel = field.semantics && field.semantics.requiresUserValue ? 'User selection required' : formatValue(field.defaultValue);
     html += '<div class="mb-2"><strong>Default</strong><div class="font-namelist">' + esc(defaultLabel) + '</div></div>';
