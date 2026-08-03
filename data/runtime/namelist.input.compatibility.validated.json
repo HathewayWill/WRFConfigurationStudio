@@ -1,19 +1,19 @@
 {
   "metadata": {
-    "notes": "Added user-edited soft compatibility tuning rules.",
+    "notes": "Added Noah-MP and AFWA group activation compatibility rules.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 94,
+    "ruleCount": 149,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
       "redErrors": "Only rules with validationStatus=valid or validated should be enforced as errors.",
       "unreviewed": "Rules marked unreviewed should not be enforced."
     },
-    "variableCount": 90,
-    "lastReviewedDate": "2026-07-31",
-    "validRuleCount": 61,
-    "lastPromotionBatch": "2026-07-31_cugd_avedx_user"
+    "variableCount": 148,
+    "lastReviewedDate": "2026-08-02",
+    "validRuleCount": 116,
+    "lastPromotionBatch": "2026-08-02_noahmp_afwa_group_rules"
   },
   "rules": [
     {
@@ -3621,21 +3621,2046 @@
       ],
       "validationBatch": "2026-07-31_cugd_avedx_user",
       "validationNotes": "Promoted as a soft user-edited rule because cugd_avedx has a nonzero default. The trigger uses user_edited_non_zero so the default page stays quiet and the warning only appears after the user edits the tuning/control field."
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-DVEG",
+      "description": "dveg is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "dveg is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "dveg",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "dveg is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-NOAHMP-ACC-DT",
+      "description": "noahmp_acc_dt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "noahmp_acc_dt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "noahmp_acc_dt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "noahmp_acc_dt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-NOAHMP-OUTPUT",
+      "description": "noahmp_output is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "noahmp_output is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "noahmp_output",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "noahmp_output is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-ALB",
+      "description": "opt_alb is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_alb is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_alb",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_alb is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-BTR",
+      "description": "opt_btr is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_btr is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_btr",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_btr is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-COMPACT",
+      "description": "opt_compact is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_compact is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_compact",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_compact is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-CROP",
+      "description": "opt_crop is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_crop is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_crop",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_crop is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-CRS",
+      "description": "opt_crs is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_crs is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_crs",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_crs is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-FRZ",
+      "description": "opt_frz is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_frz is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_frz",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_frz is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-GLA",
+      "description": "opt_gla is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_gla is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_gla",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_gla is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-INF",
+      "description": "opt_inf is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_inf is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_inf",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_inf is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-INFDV",
+      "description": "opt_infdv is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_infdv is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_infdv",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_infdv is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-IRR",
+      "description": "opt_irr is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_irr is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_irr",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_irr is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-IRRM",
+      "description": "opt_irrm is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_irrm is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_irrm",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_irrm is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-PEDO",
+      "description": "opt_pedo is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_pedo is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_pedo",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_pedo is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-RAD",
+      "description": "opt_rad is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_rad is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_rad",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_rad is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-RSF",
+      "description": "opt_rsf is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_rsf is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_rsf",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_rsf is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-RUN",
+      "description": "opt_run is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_run is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_run",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_run is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-RUNSRF",
+      "description": "opt_runsrf is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_runsrf is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_runsrf",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_runsrf is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-RUNSUB",
+      "description": "opt_runsub is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_runsub is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_runsub",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_runsub is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-SCF",
+      "description": "opt_scf is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_scf is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_scf",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_scf is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-SFC",
+      "description": "opt_sfc is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_sfc is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_sfc",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_sfc is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-SNF",
+      "description": "opt_snf is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_snf is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_snf",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_snf is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-SOIL",
+      "description": "opt_soil is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_soil is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_soil",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_soil is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-STC",
+      "description": "opt_stc is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_stc is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_stc",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_stc is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-TBOT",
+      "description": "opt_tbot is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_tbot is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_tbot",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_tbot is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-TDRN",
+      "description": "opt_tdrn is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_tdrn is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_tdrn",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_tdrn is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-TKSNO",
+      "description": "opt_tksno is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_tksno is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_tksno",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_tksno is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-OPT-WETLAND",
+      "description": "opt_wetland is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "opt_wetland is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "opt_wetland",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "opt_wetland is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-AEROSOL-READTABLE",
+      "description": "snicar_aerosol_readtable is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_aerosol_readtable is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_aerosol_readtable",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_aerosol_readtable is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-BANDNUMBER-OPT",
+      "description": "snicar_bandnumber_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_bandnumber_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_bandnumber_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_bandnumber_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-DUSTOPTICS-OPT",
+      "description": "snicar_dustoptics_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_dustoptics_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_dustoptics_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_dustoptics_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-RTSOLVER-OPT",
+      "description": "snicar_rtsolver_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_rtsolver_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_rtsolver_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_rtsolver_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-SNOWBC-INTMIX",
+      "description": "snicar_snowbc_intmix is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_snowbc_intmix is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_snowbc_intmix",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_snowbc_intmix is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-SNOWDUST-INTMIX",
+      "description": "snicar_snowdust_intmix is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_snowdust_intmix is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_snowdust_intmix",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_snowdust_intmix is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-SNOWOPTICS-OPT",
+      "description": "snicar_snowoptics_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_snowoptics_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_snowoptics_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_snowoptics_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-SNOWSHAPE-OPT",
+      "description": "snicar_snowshape_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_snowshape_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_snowshape_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_snowshape_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-SOLARSPEC-OPT",
+      "description": "snicar_solarspec_opt is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_solarspec_opt is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_solarspec_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_solarspec_opt is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-USE-AEROSOL",
+      "description": "snicar_use_aerosol is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_use_aerosol is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_use_aerosol",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_use_aerosol is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SNICAR-USE-OC",
+      "description": "snicar_use_oc is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "snicar_use_oc is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "snicar_use_oc",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "snicar_use_oc is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "Noah-MP group activation",
+      "id": "NOAHMP-SF-SURFACE-SOILTSTEP",
+      "description": "soiltstep is in &noah_mp and requires Noah-MP land surface physics.",
+      "sourceExcerpt": "soiltstep is active in &noah_mp; Noah-MP group variables require sf_surface_physics=4.",
+      "triggerGroup": "noah_mp",
+      "triggerVariable": "soiltstep",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "physics",
+          "variable": "sf_surface_physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ],
+          "raw": "sf_surface_physics must be 4"
+        }
+      ],
+      "requirementsRaw": "sf_surface_physics must be 4",
+      "message": "soiltstep is part of &noah_mp and requires sf_surface_physics=4.",
+      "fix": "Set physics.sf_surface_physics to 4, or disable the active &noah_mp variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &noah_mp variables require the Noah-MP land surface model option sf_surface_physics=4.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-BAD-DATA-CHECK",
+      "description": "afwa_bad_data_check is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_bad_data_check is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_bad_data_check",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_bad_data_check is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-BUOY-OPT",
+      "description": "afwa_buoy_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_buoy_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_buoy_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_buoy_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-CLOUD-OPT",
+      "description": "afwa_cloud_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_cloud_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_cloud_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_cloud_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-DIAG-OPT",
+      "description": "afwa_diag_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_diag_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_diag_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_diag_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-ICING-OPT",
+      "description": "afwa_icing_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_icing_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_icing_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_icing_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-PTYPE-CCN-TMP",
+      "description": "afwa_ptype_ccn_tmp is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_ptype_ccn_tmp is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_ptype_ccn_tmp",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_ptype_ccn_tmp is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-PTYPE-OPT",
+      "description": "afwa_ptype_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_ptype_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_ptype_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_ptype_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-PTYPE-TOT-MELT",
+      "description": "afwa_ptype_tot_melt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_ptype_tot_melt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_ptype_tot_melt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_ptype_tot_melt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-RADAR-OPT",
+      "description": "afwa_radar_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_radar_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_radar_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_radar_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-SEVERE-OPT",
+      "description": "afwa_severe_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_severe_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_severe_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_severe_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-THERM-OPT",
+      "description": "afwa_therm_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_therm_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_therm_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_therm_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-TURB-OPT",
+      "description": "afwa_turb_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_turb_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_turb_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_turb_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-VIL-OPT",
+      "description": "afwa_vil_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_vil_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_vil_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_vil_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
+    },
+    {
+      "category": "AFWA diagnostic group activation",
+      "id": "AFWA-DIAG-OPT-AFWA-VIS-OPT",
+      "description": "afwa_vis_opt is in &afwa and requires AFWA diagnostics to be enabled.",
+      "sourceExcerpt": "afwa_vis_opt is active in &afwa; AFWA group variables require afwa_diag_opt=1.",
+      "triggerGroup": "afwa",
+      "triggerVariable": "afwa_vis_opt",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirements": [
+        {
+          "checkable": true,
+          "group": "afwa",
+          "variable": "afwa_diag_opt",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ],
+          "raw": "afwa_diag_opt must be 1"
+        }
+      ],
+      "requirementsRaw": "afwa_diag_opt must be 1",
+      "message": "afwa_vis_opt is part of &afwa and requires afwa_diag_opt=1.",
+      "fix": "Set afwa.afwa_diag_opt to 1, or disable the active &afwa variable.",
+      "strength": "Hard",
+      "validationStatus": "valid",
+      "validationSource": "WRF Configuration Studio group-level rule review",
+      "validationNotes": "Group-level rule: active &afwa variables require AFWA diagnostics to be enabled with afwa_diag_opt=1.",
+      "validatedVersions": [
+        "current-users-guide",
+        "current-runtime-catalog",
+        "2026-08-02_noahmp_afwa_group_rules"
+      ],
+      "validationBatch": "2026-08-02_noahmp_afwa_group_rules"
     }
   ],
   "variableIndex": {
     "bl_pbl_physics": {
       "group": "physics",
-      "requirementRules": [
-        11,
-        14,
-        15,
-        18,
-        26,
-        30,
-        51
-      ],
-      "summary": "bl_pbl_physics=0 \u21d2 isfflx=1; diff_opt=2; km_opt=2; km_opt=3 || bl_pbl_physics=1 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=10 \u21d2 sf_sfclay_physics=10 || bl_pbl_physics=12 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=16 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91 || bl_pbl_physics=2 \u21d2 sf_sfclay_physics=2 || bl_pbl_physics=4 \u21d2 sf_sfclay_physics=4 || bl_pbl_physics=5 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=5 || bl_pbl_physics=6 \u21d2 sf_sfclay_physics=5 || bl_pbl_physics=7 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=7 ...",
       "triggerRules": [
         0,
         1,
@@ -3649,10 +5674,21 @@
         9,
         10,
         54
-      ]
+      ],
+      "requirementRules": [
+        11,
+        14,
+        15,
+        18,
+        26,
+        30,
+        51
+      ],
+      "summary": "bl_pbl_physics=0 \u21d2 isfflx=1; diff_opt=2; km_opt=2; km_opt=3 || bl_pbl_physics=1 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=10 \u21d2 sf_sfclay_physics=10 || bl_pbl_physics=12 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=16 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91 || bl_pbl_physics=2 \u21d2 sf_sfclay_physics=2 || bl_pbl_physics=4 \u21d2 sf_sfclay_physics=4 || bl_pbl_physics=5 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=5 || bl_pbl_physics=6 \u21d2 sf_sfclay_physics=5 || bl_pbl_physics=7 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=7 ..."
     },
     "sf_sfclay_physics": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         0,
         1,
@@ -3673,11 +5709,14 @@
         76,
         85
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "sf_surface_physics": {
       "group": "physics",
+      "triggerRules": [
+        11,
+        12
+      ],
       "requirementRules": [
         13,
         19,
@@ -3685,26 +5724,64 @@
         54,
         75,
         77,
-        78
+        78,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
       ],
-      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4",
-      "triggerRules": [
-        11,
-        12
-      ]
+      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4"
     },
     "ra_lw_physics": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         12,
         48,
         49
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "ra_sw_physics": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         12,
         47,
@@ -3712,132 +5789,172 @@
         49,
         84
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "sf_urban_physics": {
       "group": "physics",
-      "requirementRules": [
-        16
-      ],
-      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8",
       "triggerRules": [
         13,
         14,
         15
-      ]
+      ],
+      "requirementRules": [
+        16
+      ],
+      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8"
     },
     "slucm_distributed_drag": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False",
       "triggerRules": [
         16
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False"
     },
     "use_wudapt_lcz": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         16
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
+    },
+    "wrfinput_extra": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        16,
+        17
+      ],
+      "summary": null
     },
     "distributed_ahe_opt": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         17
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "topo_wind": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1",
       "triggerRules": [
         18
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1"
+    },
+    "geogrid_extra": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        18
+      ],
+      "summary": null
     },
     "seaice_threshold": {
       "group": "physics",
+      "triggerRules": [
+        19
+      ],
       "requirementRules": [
         20
       ],
-      "summary": null,
-      "triggerRules": [
-        19
-      ]
+      "summary": null
     },
     "fractional_seaice": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0",
       "triggerRules": [
         20
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0"
     },
     "sf_surf_irr_scheme": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2",
       "triggerRules": [
         21
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2"
     },
     "opt_pedo": {
       "group": "noah_mp",
-      "requirementRules": [],
-      "summary": "opt_pedo=1 \u21d2 opt_soil=3",
       "triggerRules": [
-        22
-      ]
+        22,
+        108
+      ],
+      "requirementRules": [],
+      "summary": "opt_pedo=1 \u21d2 opt_soil=3"
     },
     "opt_soil": {
       "group": "noah_mp",
+      "triggerRules": [
+        117
+      ],
       "requirementRules": [
         22
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
+    },
+    "geogrid_tbl": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "summary": null
     },
     "opt_irr": {
       "group": "noah_mp",
+      "triggerRules": [
+        23,
+        106
+      ],
       "requirementRules": [
         24
       ],
-      "summary": null,
-      "triggerRules": [
-        23
-      ]
+      "summary": null
     },
     "opt_irrm": {
       "group": "noah_mp",
-      "requirementRules": [],
-      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3",
       "triggerRules": [
-        24
-      ]
+        24,
+        107
+      ],
+      "requirementRules": [],
+      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3"
     },
     "opt_tdrn": {
       "group": "noah_mp",
-      "requirementRules": [],
-      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3",
       "triggerRules": [
-        25
-      ]
+        25,
+        120
+      ],
+      "requirementRules": [],
+      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3"
     },
     "opt_run": {
       "group": "noah_mp",
+      "triggerRules": [
+        111
+      ],
       "requirementRules": [
         25,
         70
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "cu_physics": {
       "group": "physics",
+      "triggerRules": [
+        26,
+        27,
+        64
+      ],
       "requirementRules": [
         28,
         29,
@@ -3851,6 +5968,7 @@
         38,
         39,
         40,
+        42,
         66,
         67,
         68,
@@ -3861,250 +5979,257 @@
         89,
         90,
         91,
-        92
+        92,
+        93
       ],
-      "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4",
-      "triggerRules": [
-        26,
-        27,
-        64
-      ]
+      "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4"
     },
     "shcu_physics": {
       "group": "physics",
-      "requirementRules": [
-        27
-      ],
-      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6",
       "triggerRules": [
         30,
         65
-      ]
+      ],
+      "requirementRules": [
+        27
+      ],
+      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6"
     },
     "kfeta_trigger": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1",
       "triggerRules": [
         28,
         86
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1"
     },
     "ishallow": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5",
       "triggerRules": [
         29
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5"
     },
     "cugd_avedx": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "cugd_avedx=3 \u21d2 cu_physics=5",
       "triggerRules": [
-        31
-      ]
+        31,
+        93
+      ],
+      "requirementRules": [],
+      "summary": "cugd_avedx=3 \u21d2 cu_physics=5"
     },
     "kf_edrates": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99",
       "triggerRules": [
         32
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99"
     },
     "convtrans_avglen_m": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         33,
         87
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "cu_diag": {
       "group": "physics",
-      "requirementRules": [
-        35
-      ],
-      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93",
       "triggerRules": [
         34
-      ]
+      ],
+      "requirementRules": [
+        35,
+        79
+      ],
+      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93"
     },
     "cu_rad_feedback": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1",
       "triggerRules": [
         35,
         79
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1"
     },
     "maxiens": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         36,
         88
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "maxens": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         37,
         89
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "maxens2": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         38,
         90
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "maxens3": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         39,
         91
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "ensdim": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         40,
         92
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "lightning_option": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         41,
         42
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "do_radar_ref": {
       "group": "physics",
+      "triggerRules": [
+        44
+      ],
       "requirementRules": [
         41,
         45
       ],
-      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28",
-      "triggerRules": [
-        44
-      ]
+      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28"
+    },
+    "dx": {
+      "group": "domains",
+      "triggerRules": [],
+      "requirementRules": [
+        42
+      ],
+      "summary": null
     },
     "iccg_method": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         43
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "iccg_prescribed_num": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         43
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "iccg_prescribed_den": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         43
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "mp_physics": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         44,
         46,
         50,
         69
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "nwp_diagnostics": {
       "group": "time_control",
-      "requirementRules": [],
-      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True",
       "triggerRules": [
         45
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True"
     },
     "use_mp_re": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55",
       "triggerRules": [
         46
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55"
     },
     "ra_sw_eclipse": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5",
       "triggerRules": [
         47
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5"
     },
     "icloud": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         48
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "bucket_j": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24.",
       "triggerRules": [
         49
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24."
     },
     "aer_opt": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "aer_opt=3 \u21d2 mp_physics=28",
       "triggerRules": [
         50
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "aer_opt=3 \u21d2 mp_physics=28"
     },
     "km_opt": {
       "group": "dynamics",
+      "triggerRules": [
+        51
+      ],
       "requirementRules": [
         52,
         53,
         54,
         80
       ],
-      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91",
-      "triggerRules": [
-        51
-      ]
+      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91"
     },
     "diff_opt": {
       "group": "dynamics",
+      "triggerRules": [],
       "requirementRules": [
         51,
         52,
@@ -4112,355 +6237,806 @@
         54,
         81
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "sfs_opt": {
       "group": "dynamics",
-      "requirementRules": [],
-      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2",
       "triggerRules": [
         52,
         53
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2"
     },
     "isfflx": {
       "group": "physics",
+      "triggerRules": [
+        85
+      ],
       "requirementRules": [
         54
       ],
-      "summary": null,
-      "triggerRules": [
-        85
-      ]
+      "summary": null
     },
     "isftcflx": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1.",
       "triggerRules": [
         55
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1."
     },
     "sst_update": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         56
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "auxinput4_inname": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         56
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "auxinput4_interval": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         56
       ],
-      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings.",
-      "triggerRules": []
+      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings."
+    },
+    "auxinput4_end_h": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        56
+      ],
+      "summary": null
     },
     "io_form_auxinput4": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         56
       ],
-      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files.",
-      "triggerRules": []
+      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files."
     },
     "obs_nudge_opt": {
       "group": "fdda",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         57
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "auxinput11_interval": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         57
       ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
-      "triggerRules": []
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
     },
     "auxinput11_end_h": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         57
       ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1.",
-      "triggerRules": []
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
     },
     "multi_bdy_files": {
       "group": "bdy_control",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         58
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "bdy_inname": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        58
+      ],
+      "summary": null
     },
     "nested": {
       "group": "bdy_control",
-      "requirementRules": [],
-      "summary": "nested=.true. is for nested domains only.",
       "triggerRules": [
         59
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "nested=.true. is for nested domains only."
+    },
+    "domain_role": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        59,
+        60
+      ],
+      "summary": null
     },
     "specified": {
       "group": "bdy_control",
-      "requirementRules": [],
-      "summary": "specified=.true. is for the outer real-data domain only.",
       "triggerRules": [
         60
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "specified=.true. is for the outer real-data domain only."
     },
     "num_land_cat": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         61
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "metgrid_NUM_LAND_CAT": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
+    },
+    "MODIS": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
+    },
+    "USGS": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
     },
     "input_from_hires": {
       "group": "time_control",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         62
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "compile_env": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        62
+      ],
+      "summary": null
+    },
+    "geog_data_res": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        62
+      ],
+      "summary": null
     },
     "rsmas_data_path": {
       "group": "time_control",
+      "triggerRules": [],
       "requirementRules": [
         62
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "force_use_old_data": {
       "group": "time_control",
-      "requirementRules": [],
-      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0",
       "triggerRules": [
         63
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0"
     },
     "use_theta_m": {
       "group": "dynamics",
+      "triggerRules": [],
       "requirementRules": [
         63
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "hybrid_opt": {
       "group": "dynamics",
+      "triggerRules": [],
       "requirementRules": [
         63
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "thBinSize": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP).",
       "triggerRules": [
         66
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
     },
     "minDeepFreq": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP).",
       "triggerRules": [
         67
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
     },
     "minShallowFreq": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP).",
       "triggerRules": [
         68
-      ]
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
     },
     "progn": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         69
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "opt_infdv": {
       "group": "noah_mp",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
-        70
-      ]
+        70,
+        105
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "aer_aod550_val": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         71
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "aer_aod550_opt": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         71
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "aer_angexp_val": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         72
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "aer_angexp_opt": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         72
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "aer_ssa_val": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         73
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "aer_ssa_opt": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         73
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "aer_asy_val": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         74
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "aer_asy_opt": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         74
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "ifsnow": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         75
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "shalwater_z0": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         76
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "mosaic_lu": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         77
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "mosaic_soil": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         78
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "mix_upper_bound": {
       "group": "dynamics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         80
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "tke_drag_coefficient": {
       "group": "dynamics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         81
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "noahmp_acc_dt": {
       "group": "noah_mp",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
-        82
-      ]
+        82,
+        95
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "noahmp_output": {
       "group": "noah_mp",
+      "triggerRules": [
+        96
+      ],
       "requirementRules": [
         82
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "mp_zero_out": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         83
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
     },
     "mp_zero_out_thresh": {
       "group": "physics",
+      "triggerRules": [],
       "requirementRules": [
         83
       ],
-      "summary": null,
-      "triggerRules": []
+      "summary": null
     },
     "swrad_scat": {
       "group": "physics",
-      "requirementRules": [],
-      "summary": null,
       "triggerRules": [
         84
-      ]
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "dveg": {
+      "group": "noah_mp",
+      "triggerRules": [
+        94
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_alb": {
+      "group": "noah_mp",
+      "triggerRules": [
+        97
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_btr": {
+      "group": "noah_mp",
+      "triggerRules": [
+        98
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_compact": {
+      "group": "noah_mp",
+      "triggerRules": [
+        99
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_crop": {
+      "group": "noah_mp",
+      "triggerRules": [
+        100
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_crs": {
+      "group": "noah_mp",
+      "triggerRules": [
+        101
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_frz": {
+      "group": "noah_mp",
+      "triggerRules": [
+        102
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_gla": {
+      "group": "noah_mp",
+      "triggerRules": [
+        103
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_inf": {
+      "group": "noah_mp",
+      "triggerRules": [
+        104
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_rad": {
+      "group": "noah_mp",
+      "triggerRules": [
+        109
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_rsf": {
+      "group": "noah_mp",
+      "triggerRules": [
+        110
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_runsrf": {
+      "group": "noah_mp",
+      "triggerRules": [
+        112
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_runsub": {
+      "group": "noah_mp",
+      "triggerRules": [
+        113
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_scf": {
+      "group": "noah_mp",
+      "triggerRules": [
+        114
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_sfc": {
+      "group": "noah_mp",
+      "triggerRules": [
+        115
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_snf": {
+      "group": "noah_mp",
+      "triggerRules": [
+        116
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_stc": {
+      "group": "noah_mp",
+      "triggerRules": [
+        118
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_tbot": {
+      "group": "noah_mp",
+      "triggerRules": [
+        119
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_tksno": {
+      "group": "noah_mp",
+      "triggerRules": [
+        121
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "opt_wetland": {
+      "group": "noah_mp",
+      "triggerRules": [
+        122
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_aerosol_readtable": {
+      "group": "noah_mp",
+      "triggerRules": [
+        123
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_bandnumber_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        124
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_dustoptics_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        125
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_rtsolver_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        126
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_snowbc_intmix": {
+      "group": "noah_mp",
+      "triggerRules": [
+        127
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_snowdust_intmix": {
+      "group": "noah_mp",
+      "triggerRules": [
+        128
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_snowoptics_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        129
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_snowshape_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        130
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_solarspec_opt": {
+      "group": "noah_mp",
+      "triggerRules": [
+        131
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_use_aerosol": {
+      "group": "noah_mp",
+      "triggerRules": [
+        132
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "snicar_use_oc": {
+      "group": "noah_mp",
+      "triggerRules": [
+        133
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "soiltstep": {
+      "group": "noah_mp",
+      "triggerRules": [
+        134
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_bad_data_check": {
+      "group": "afwa",
+      "triggerRules": [
+        135
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_diag_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        138
+      ],
+      "requirementRules": [
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148
+      ],
+      "summary": null
+    },
+    "afwa_buoy_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        136
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_cloud_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        137
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_icing_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        139
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_ptype_ccn_tmp": {
+      "group": "afwa",
+      "triggerRules": [
+        140
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_ptype_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        141
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_ptype_tot_melt": {
+      "group": "afwa",
+      "triggerRules": [
+        142
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_radar_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        143
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_severe_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        144
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_therm_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        145
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_turb_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        146
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_vil_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        147
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "afwa_vis_opt": {
+      "group": "afwa",
+      "triggerRules": [
+        148
+      ],
+      "requirementRules": [],
+      "summary": null
     }
   }
 }
