@@ -264,6 +264,28 @@
 
       if (!triggeredIndexes.length) return;
 
+      if (rule.emitOnTrigger === true) {
+        issues.push({
+          id: rule.id + '-workflow',
+          type: ruleSeverity(rule),
+          strength: rule.strength || '',
+          fieldKeys: [triggerKey],
+          triggerKey: triggerKey,
+          ruleId: rule.id,
+          category: rule.category || '',
+          description: rule.description || '',
+          message: rule.message || rule.sourceExcerpt || rule.requirementsRaw || rule.description || rule.id,
+          fix: rule.fix || '',
+          requirementsRaw: rule.requirementsRaw || '',
+          sourceExcerpt: rule.sourceExcerpt || '',
+          sourcePriority: rule.sourcePriority || 'WRF Users Guide / workflow guidance',
+          validationStatus: rule.validationStatus || '',
+          validationSource: rule.validationSource || '',
+          validationUrl: rule.validationUrl || '',
+          validationNotes: rule.validationNotes || ''
+        });
+      }
+
       (rule.requirements || []).forEach(function (req) {
         if (req.checkable === false) return;
 

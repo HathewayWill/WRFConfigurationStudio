@@ -738,9 +738,37 @@
   };
 
 
+  HybridNamelistInputEditor.prototype.loadRuntimeCompatibility = async function (runtimeBase, fallback) {
+    runtimeBase = runtimeBase || (this.opts.runtimeBaseUrl || 'data/runtime');
+    fallback = fallback || this.compatibility || { rules: [] };
+
+    try {
+      var payload = await $.ajax({
+        url: runtimeBase + '/namelist.input.compatibility.validated.json',
+        dataType: 'json',
+        cache: false
+      });
+
+      if (payload && Array.isArray(payload.rules)) {
+        return payload;
+      }
+    } catch (err) {
+      if (global.console && console.warn) {
+        console.warn('Failed to load runtime compatibility rules; using fallback compatibility payload.', err);
+      }
+    }
+
+    return fallback && Array.isArray(fallback.rules) ? fallback : { rules: [] };
+  };
+
+
   HybridNamelistInputEditor.prototype._load = async function () {
-    if (this.catalog) return;
     var runtimeBase = this.opts.runtimeBaseUrl || 'data/runtime';
+
+    if (this.catalog) {
+      this.compatibility = await this.loadRuntimeCompatibility(runtimeBase, this.compatibility || { rules: [] });
+      return;
+    }
     this.arwContext = await $.getJSON(runtimeBase + '/namelist.arw_technical_note_context.json').catch(function () { return { metadata: {}, topics: {}, groups: {}, fields: {} }; });
     var condensed = null;
 
@@ -755,7 +783,7 @@
 
     if (condensed && condensed.groups) {
       this.catalog = { groups: condensed.groups || {} };
-      this.compatibility = await $.getJSON(runtimeBase + '/namelist.input.compatibility.validated.json').catch(function () { return condensed.compatibility || { rules: [] }; });
+      this.compatibility = await this.loadRuntimeCompatibility(runtimeBase, condensed.compatibility || { rules: [] });
       this.semantics = condensed.semantics || { _meta: {}, shared: {}, fields: {}, recommendations: {} };
       this.performStartupSeeding(this.detectMaxDom());
       this.populateJumps();
@@ -801,7 +829,7 @@
     }
     this.semantics = semantics || { _meta: {}, shared: {}, fields: {}, recommendations: {} };
     this.catalog = buildMergedCatalog(payloads[0], payloads[1], payloads[2], payloads[3], payloads[4], payloads[5], payloads[6], sourcePriority, semantics);
-    this.compatibility = await $.getJSON(runtimeBase + '/namelist.input.compatibility.validated.json').catch(function () { return payloads[7] || { rules: [] }; });
+    this.compatibility = await this.loadRuntimeCompatibility(runtimeBase, payloads[7] || { rules: [] });
     this.performStartupSeeding(this.detectMaxDom());
     this.populateJumps();
   };
