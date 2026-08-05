@@ -15,20 +15,18 @@
     "validRuleCount": 144,
     "lastPromotionBatch": "2026-08-02_bucket_a_promotion",
     "statusCounts": {
-      "needs_review": 5,
-      "valid": 164,
-      "unreviewed": 15
+      "valid": 184
     },
     "strengthCounts": {
-      "Hard": 126,
-      "Workflow": 34,
+      "Hard": 125,
+      "Workflow": 35,
       "Soft": 24
     },
-    "lastRuleBatch": "2026-08-03_wrfda_obsproc_workflow_rules"
+    "lastRuleBatch": "2026-08-05_remaining_compatibility_rule_validation"
   },
   "rules": [
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-1",
       "notes": null,
       "requirements": [
@@ -36,15 +34,16 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "sf_sfclay_physics must be one of 1",
+          "raw": "sf_sfclay_physics must be one of 1, 91",
           "values": [
-            "1"
+            "1",
+            "91"
           ],
           "variable": "sf_sfclay_physics"
         }
       ],
-      "requirementsRaw": "sf_sfclay_physics must be one of 1",
-      "sourceExcerpt": "bl_pbl_physics=1 only works with sf_sfclay_physics=1",
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 91",
+      "sourceExcerpt": "bl_pbl_physics=1 is constrained by the WRF PBL / surface-layer compatibility guidance; accepted sf_sfclay_physics values: 1, 91",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -54,13 +53,18 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "bl_pbl_physics",
-      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,91.",
-      "validationSource": "WRF Users Guide Namelist Variables",
-      "validationStatus": "needs_review",
-      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+      "validationNotes": "Promoted using the broader PBL physics table allowance noted during review, including sf_sfclay_physics=91 to avoid false positives.",
+      "validationSource": "WRF Users Guide Namelist Variables and PBL physics table",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-2",
       "notes": null,
       "requirements": [
@@ -92,7 +96,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-4",
       "notes": null,
       "requirements": [
@@ -124,7 +128,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-5",
       "notes": null,
       "requirements": [
@@ -132,17 +136,18 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "sf_sfclay_physics must be one of 1, 2, 5",
+          "raw": "sf_sfclay_physics must be one of 1, 2, 5, 91",
           "values": [
             "1",
             "2",
-            "5"
+            "5",
+            "91"
           ],
           "variable": "sf_sfclay_physics"
         }
       ],
-      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5",
-      "sourceExcerpt": "bl_pbl_physics=5 only works with sf_sfclay_physics=1,2,5",
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5, 91",
+      "sourceExcerpt": "bl_pbl_physics=5 is constrained by the WRF PBL / surface-layer compatibility guidance; accepted sf_sfclay_physics values: 1, 2, 5, 91",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -152,13 +157,18 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "bl_pbl_physics",
-      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.",
-      "validationSource": "WRF Users Guide Namelist Variables",
-      "validationStatus": "needs_review",
-      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+      "validationNotes": "Promoted using the broader PBL physics table allowance noted during review, including sf_sfclay_physics=91 to avoid false positives.",
+      "validationSource": "WRF Users Guide Namelist Variables and PBL physics table",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-6",
       "notes": null,
       "requirements": [
@@ -166,15 +176,18 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "sf_sfclay_physics must be one of 5",
+          "raw": "sf_sfclay_physics must be one of 1, 2, 5, 91",
           "values": [
-            "5"
+            "1",
+            "2",
+            "5",
+            "91"
           ],
           "variable": "sf_sfclay_physics"
         }
       ],
-      "requirementsRaw": "sf_sfclay_physics must be one of 5",
-      "sourceExcerpt": "bl_pbl_physics=6 only works with sf_sfclay_physics=5",
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5, 91",
+      "sourceExcerpt": "bl_pbl_physics=6 is constrained by the WRF PBL / surface-layer compatibility guidance; accepted sf_sfclay_physics values: 1, 2, 5, 91",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -184,13 +197,18 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "bl_pbl_physics",
-      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,2,5,91.",
-      "validationSource": "WRF Users Guide Namelist Variables",
-      "validationStatus": "needs_review",
-      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+      "validationNotes": "Promoted using the broader PBL physics table allowance noted during review, including sf_sfclay_physics=91 to avoid false positives.",
+      "validationSource": "WRF Users Guide Namelist Variables and PBL physics table",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-7",
       "notes": null,
       "requirements": [
@@ -198,16 +216,17 @@
           "checkable": true,
           "group": "physics",
           "mode": "one_of",
-          "raw": "sf_sfclay_physics must be one of 1, 7",
+          "raw": "sf_sfclay_physics must be one of 1, 7, 91",
           "values": [
             "1",
-            "7"
+            "7",
+            "91"
           ],
           "variable": "sf_sfclay_physics"
         }
       ],
-      "requirementsRaw": "sf_sfclay_physics must be one of 1, 7",
-      "sourceExcerpt": "bl_pbl_physics=7 only works with sf_sfclay_physics=1,7",
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 7, 91",
+      "sourceExcerpt": "bl_pbl_physics=7 is constrained by the WRF PBL / surface-layer compatibility guidance; accepted sf_sfclay_physics values: 1, 7, 91",
       "strength": "Hard",
       "trigger": {
         "mode": "one_of",
@@ -217,13 +236,18 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "bl_pbl_physics",
-      "validationNotes": "Matches namelist_variables page, but PBL physics page table also lists 1,7,91.",
-      "validationSource": "WRF Users Guide Namelist Variables",
-      "validationStatus": "needs_review",
-      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+      "validationNotes": "Promoted using the broader PBL physics table allowance noted during review, including sf_sfclay_physics=91 to avoid false positives.",
+      "validationSource": "WRF Users Guide Namelist Variables and PBL physics table",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-8",
       "notes": null,
       "requirements": [
@@ -256,7 +280,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-9",
       "notes": null,
       "requirements": [
@@ -289,7 +313,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-10",
       "notes": null,
       "requirements": [
@@ -321,7 +345,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-12",
       "notes": null,
       "requirements": [
@@ -353,7 +377,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL ↔ Surface Layer",
+      "category": "PBL \u2194 Surface Layer",
       "id": "PBL-16",
       "notes": null,
       "requirements": [
@@ -434,7 +458,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Land Surface ↔ Radiation",
+      "category": "Land Surface \u2194 Radiation",
       "id": "LSM-8-RAD",
       "notes": null,
       "requirements": [
@@ -524,7 +548,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban ↔ PBL",
+      "category": "Urban \u2194 PBL",
       "id": "URBAN-BEP",
       "notes": null,
       "requirements": [
@@ -563,7 +587,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban ↔ PBL",
+      "category": "Urban \u2194 PBL",
       "id": "URBAN-BEM",
       "notes": null,
       "requirements": [
@@ -649,10 +673,16 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "slucm_distributed_drag",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Urban Extra Input",
@@ -680,10 +710,16 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "distributed_ahe_opt",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Topographic Wind",
@@ -892,10 +928,16 @@
       },
       "triggerGroup": "noah_mp",
       "triggerVariable": "opt_pedo",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Noah-MP",
@@ -924,10 +966,16 @@
       },
       "triggerGroup": "noah_mp",
       "triggerVariable": "opt_irr",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Noah-MP",
@@ -968,10 +1016,16 @@
       },
       "triggerGroup": "noah_mp",
       "triggerVariable": "opt_irrm",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted after rule-shape review. Checkable namelist dependencies remain enforced; external workflow notes are surfaced when present.",
+      "validationSource": "README.namelist / WRF Users Guide / project rule review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Noah-MP",
@@ -1021,7 +1075,7 @@
       ]
     },
     {
-      "category": "Cumulus ↔ PBL",
+      "category": "Cumulus \u2194 PBL",
       "id": "CU-7-PBL",
       "notes": null,
       "requirements": [
@@ -1059,7 +1113,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus ↔ Shallow",
+      "category": "Cumulus \u2194 Shallow",
       "id": "CU-14-SHCU",
       "notes": null,
       "requirements": [
@@ -1171,7 +1225,7 @@
       ]
     },
     {
-      "category": "Shallow Cumulus ↔ PBL",
+      "category": "Shallow Cumulus \u2194 PBL",
       "id": "SHCU-DENG",
       "notes": null,
       "requirements": [
@@ -1236,10 +1290,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cugd_avedx",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted after rule-shape review. Checkable namelist dependencies remain enforced; external workflow notes are surfaced when present.",
+      "validationSource": "README.namelist / WRF Users Guide / project rule review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Cumulus Diagnostics",
@@ -1359,7 +1418,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus ↔ Radiation",
+      "category": "Cumulus \u2194 Radiation",
       "id": "CU-RAD",
       "notes": null,
       "requirements": [
@@ -1401,10 +1460,15 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cu_rad_feedback",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted after rule-shape review. Checkable namelist dependencies remain enforced; external workflow notes are surfaced when present.",
+      "validationSource": "README.namelist / WRF Users Guide / project rule review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Cumulus Ensemble Controls",
@@ -1639,10 +1703,16 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "lightning_option",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Lightning",
@@ -1774,7 +1844,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Radiation ↔ MP",
+      "category": "Radiation \u2194 MP",
       "id": "USE-MP-RE",
       "notes": null,
       "requirements": [
@@ -1972,7 +2042,7 @@
       "validationBatch": "2026-07-31_bucket_j_numeric"
     },
     {
-      "category": "Aerosol ↔ MP",
+      "category": "Aerosol \u2194 MP",
       "id": "AER-OPT-3",
       "notes": null,
       "requirements": [
@@ -2183,7 +2253,7 @@
         {
           "checkable": true,
           "group": "physics",
-          "mode": "nonzero",
+          "mode": "non_zero",
           "raw": "sf_sfclay_physics template uses any non-zero",
           "values": [],
           "variable": "sf_sfclay_physics"
@@ -2191,7 +2261,7 @@
         {
           "checkable": true,
           "group": "physics",
-          "mode": "nonzero",
+          "mode": "non_zero",
           "raw": "sf_surface_physics template uses any non-zero",
           "values": [],
           "variable": "sf_surface_physics"
@@ -2219,20 +2289,25 @@
         }
       ],
       "requirementsRaw": "isfflx template uses 1 | sf_sfclay_physics template uses any non-zero | sf_surface_physics template uses any non-zero | diff_opt template uses 2 | km_opt template uses 2, 3",
-      "sourceExcerpt": "LES PBL settings: bl_pbl_physics=0, isfflx=1, sf_sfclay_physics any except 0, sf_surface_physics any except 0, diff_opt=2, km_opt=2 or 3",
+      "sourceExcerpt": "LES-style PBL-off configuration uses bl_pbl_physics=0 with compatible surface-layer, surface, diffusion, and mixing settings.",
       "strength": "Soft",
       "trigger": {
-        "mode": "one_of",
+        "mode": "user_edited_one_of",
         "values": [
           "0"
         ]
       },
       "triggerGroup": "physics",
       "triggerVariable": "bl_pbl_physics",
-      "validationNotes": "Rule has ; namelist_variables page has None; PBL table has None.",
-      "validationSource": "WRF Users Guide Namelist Variables",
-      "validationStatus": "needs_review",
-      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
+      "validationNotes": "Promoted as soft LES configuration guidance. Trigger changed to user_edited_one_of so default bl_pbl_physics=0 does not create startup noise. Requirement mode spelling corrected from nonzero to non_zero.",
+      "validationSource": "WRF Users Guide Namelist Variables and LES example namelists",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Surface Flux",
@@ -2398,10 +2473,16 @@
       },
       "triggerGroup": "bdy_control",
       "triggerVariable": "multi_bdy_files",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Boundary Control",
@@ -2430,10 +2511,16 @@
       },
       "triggerGroup": "bdy_control",
       "triggerVariable": "nested",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Boundary Control",
@@ -2460,13 +2547,19 @@
       },
       "triggerGroup": "bdy_control",
       "triggerVariable": "specified",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted after rule-shape review. Checkable namelist dependencies remain enforced; external workflow notes are surfaced when present.",
+      "validationSource": "README.namelist / WRF Users Guide / project rule review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
-      "category": "WPS ↔ WRF",
+      "category": "WPS \u2194 WRF",
       "id": "NUM-LAND-CAT",
       "notes": null,
       "requirements": [
@@ -2474,7 +2567,7 @@
           "checkable": false,
           "group": null,
           "mode": "note",
-          "raw": "metgrid_NUM_LAND_CAT must match must match",
+          "raw": "metgrid_NUM_LAND_CAT must match num_land_cat",
           "values": [],
           "variable": "metgrid_NUM_LAND_CAT"
         },
@@ -2495,21 +2588,24 @@
           "variable": "USGS"
         }
       ],
-      "requirementsRaw": "metgrid_NUM_LAND_CAT must match must match | MODIS default typical value 21 | USGS typical value 24",
-      "sourceExcerpt": "num_land_cat must match metgrid NUM_LAND_CAT; 21 for MODIS, 24 for USGS",
-      "strength": "Hard",
+      "requirementsRaw": "num_land_cat should match metgrid NUM_LAND_CAT; MODIS commonly uses 21, USGS commonly uses 24",
+      "sourceExcerpt": "num_land_cat must be consistent with the land-use category count in metgrid output.",
+      "strength": "Workflow",
       "trigger": {
-        "mode": "one_of",
-        "values": [
-          "set"
-        ]
+        "mode": "user_edited"
       },
       "triggerGroup": "physics",
       "triggerVariable": "num_land_cat",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance rather than a hard error because the required comparison is against metgrid output, not another namelist value. Trigger changed from one_of ['set'] to user_edited.",
+      "validationSource": "WRF Users Guide / WPS-metgrid workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Moving Nest / Hi-Res",
@@ -2554,10 +2650,16 @@
       },
       "triggerGroup": "time_control",
       "triggerVariable": "input_from_hires",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as workflow guidance. emitOnTrigger is enabled so external-file or build-time requirements are visible even when they cannot be checked directly from namelist values.",
+      "validationSource": "README.namelist / WRF Users Guide / project workflow review",
+      "validationStatus": "valid",
+      "validationUrl": "",
+      "emitOnTrigger": true,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Backward Compatibility",
@@ -2628,10 +2730,16 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "cu_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as an allowed off-state marker. No issue is emitted because the option value is explicitly allowed.",
+      "validationSource": "WRF Users Guide Namelist Variables / Registry option semantics",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "emitOnTrigger": false,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Shallow Cumulus",
@@ -2649,10 +2757,16 @@
       },
       "triggerGroup": "physics",
       "triggerVariable": "shcu_physics",
-      "validationNotes": "Not yet validated against the current WRF Users Guide, README.namelist, Registry, or examples.namelist.",
-      "validationSource": "",
-      "validationStatus": "unreviewed",
-      "validationUrl": ""
+      "validationNotes": "Promoted as an allowed off-state marker. No issue is emitted because the option value is explicitly allowed.",
+      "validationSource": "WRF Users Guide Namelist Variables / Registry option semantics",
+      "validationStatus": "valid",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html",
+      "emitOnTrigger": false,
+      "validationBatch": "2026-08-05_remaining_compatibility_rule_validation",
+      "validatedVersions": [
+        "current-runtime-catalog",
+        "2026-08-05_remaining_compatibility_rule_validation"
+      ]
     },
     {
       "category": "Cumulus Option",
@@ -2769,7 +2883,7 @@
       "fix": "Set physics.cu_physics=10, or leave minShallowFreq unset/default."
     },
     {
-      "category": "Radiation ↔ MP",
+      "category": "Radiation \u2194 MP",
       "id": "PROGN-MP",
       "notes": null,
       "requirements": [
@@ -3137,7 +3251,7 @@
       ]
     },
     {
-      "category": "Cumulus ↔ Radiation",
+      "category": "Cumulus \u2194 Radiation",
       "id": "CU-RAD-FEEDBACK",
       "notes": null,
       "requirements": [
@@ -7398,17 +7512,14 @@
     "bdy_control.specified": [
       "SPECIFIED-D01"
     ],
-    "domains.dx": [
-      "LIGHTNING-11"
-    ],
     "domains.wif_input_opt": [
       "WIF-INPUT-MP28"
     ],
     "dynamics.diff_opt": [
       "KM-5",
-      "LES-PBL",
       "SFS-1",
       "SFS-2",
+      "LES-PBL",
       "TKE-DRAG-COEFFICIENT"
     ],
     "dynamics.do_avgflx_cugd": [
@@ -7422,10 +7533,10 @@
     ],
     "dynamics.km_opt": [
       "KM-5",
-      "LES-PBL",
-      "MIX-UPPER-BOUND",
       "SFS-1",
-      "SFS-2"
+      "SFS-2",
+      "LES-PBL",
+      "MIX-UPPER-BOUND"
     ],
     "dynamics.mix_upper_bound": [
       "MIX-UPPER-BOUND"
@@ -7502,9 +7613,9 @@
       "NOAHMP-SF-SURFACE-OPT-RSF"
     ],
     "noah_mp.opt_run": [
+      "NOAHMP-TDRN",
       "NOAHMP-INFDV",
-      "NOAHMP-SF-SURFACE-OPT-RUN",
-      "NOAHMP-TDRN"
+      "NOAHMP-SF-SURFACE-OPT-RUN"
     ],
     "noah_mp.opt_runsrf": [
       "NOAHMP-SF-SURFACE-OPT-RUNSRF"
@@ -7532,8 +7643,8 @@
       "NOAHMP-SF-SURFACE-OPT-TBOT"
     ],
     "noah_mp.opt_tdrn": [
-      "NOAHMP-SF-SURFACE-OPT-TDRN",
-      "NOAHMP-TDRN"
+      "NOAHMP-TDRN",
+      "NOAHMP-SF-SURFACE-OPT-TDRN"
     ],
     "noah_mp.opt_tksno": [
       "NOAHMP-SF-SURFACE-OPT-TKSNO"
@@ -7623,14 +7734,7 @@
       "AER-SSA-VAL"
     ],
     "physics.bl_pbl_physics": [
-      "CU-7-PBL",
-      "KM-5",
-      "LES-PBL",
-      "LSM-7",
       "PBL-1",
-      "PBL-10",
-      "PBL-12",
-      "PBL-16",
       "PBL-2",
       "PBL-4",
       "PBL-5",
@@ -7638,12 +7742,19 @@
       "PBL-7",
       "PBL-8",
       "PBL-9",
-      "PERT-MYNN-PBL",
-      "SHCU-DENG",
-      "SPP-PHYSICS-COMBINATION",
-      "TOPO-WIND",
+      "PBL-10",
+      "PBL-12",
+      "PBL-16",
+      "LSM-7",
+      "URBAN-BEP",
       "URBAN-BEM",
-      "URBAN-BEP"
+      "TOPO-WIND",
+      "CU-7-PBL",
+      "SHCU-DENG",
+      "KM-5",
+      "LES-PBL",
+      "SPP-PHYSICS-COMBINATION",
+      "PERT-MYNN-PBL"
     ],
     "physics.bucket_j": [
       "BUCKET-J"
@@ -7669,36 +7780,34 @@
       "CU-RAD"
     ],
     "physics.cu_physics": [
-      "AVGFLX-CUGD-GD",
-      "CONVTRANS",
-      "CONVTRANS-AVGLEN-M-USER",
-      "CU-14-SHCU",
       "CU-7-PBL",
-      "CU-DIAG",
-      "CU-OFF",
-      "CU-RAD",
-      "CU-RAD-FEEDBACK",
+      "CU-14-SHCU",
+      "KFETA",
+      "ISHALLOW",
       "CUGD-AVEDX",
-      "CUGD-AVEDX-USER",
+      "KF-EDRATES",
+      "CONVTRANS",
+      "CU-DIAG",
+      "CU-RAD",
+      "MAXIENS",
+      "MAXENS",
+      "MAXENS2",
+      "MAXENS3",
+      "ENSDIM",
+      "CU-OFF",
+      "CUP-THBIN",
       "CUP-MINDEEP",
       "CUP-MINSHALLOW",
-      "CUP-THBIN",
-      "ENSDIM",
-      "ENSDIM-USER",
-      "ISHALLOW",
-      "KF-EDRATES",
-      "KFETA",
+      "CU-RAD-FEEDBACK",
       "KFETA-TRIGGER-USER",
-      "LIGHTNING-11",
-      "MAXENS",
-      "MAXENS-USER",
-      "MAXENS2",
-      "MAXENS2-USER",
-      "MAXENS3",
-      "MAXENS3-USER",
-      "MAXIENS",
+      "CONVTRANS-AVGLEN-M-USER",
       "MAXIENS-USER",
-      "SPP-PHYSICS-COMBINATION"
+      "MAXENS-USER",
+      "MAXENS2-USER",
+      "MAXENS3-USER",
+      "ENSDIM-USER",
+      "SPP-PHYSICS-COMBINATION",
+      "AVGFLX-CUGD-GD"
     ],
     "physics.cu_rad_feedback": [
       "CU-RAD",
@@ -7712,9 +7821,9 @@
       "AHE-INPUT"
     ],
     "physics.do_radar_ref": [
-      "LIGHTNING-RADAR",
+      "RADARREF-MP",
       "NWPDIAG",
-      "RADARREF-MP"
+      "LIGHTNING-RADAR"
     ],
     "physics.ensdim": [
       "ENSDIM",
@@ -7743,8 +7852,8 @@
       "IFSNOW"
     ],
     "physics.isfflx": [
-      "ISFFLX-USER",
-      "LES-PBL"
+      "LES-PBL",
+      "ISFFLX-USER"
     ],
     "physics.isftcflx": [
       "ISFTCFLX"
@@ -7796,13 +7905,13 @@
       "MOSAIC-SOIL"
     ],
     "physics.mp_physics": [
-      "AER-OPT-3",
-      "PERT-THOMPSON-MP",
-      "PROGN-MP",
-      "QNA-UPDATE-MP28",
       "RADARREF-MP",
       "USE-MP-RE",
-      "WIF-INPUT-MP28"
+      "AER-OPT-3",
+      "PROGN-MP",
+      "QNA-UPDATE-MP28",
+      "WIF-INPUT-MP28",
+      "PERT-THOMPSON-MP"
     ],
     "physics.mp_zero_out": [
       "MP-ZERO-OUT-THRESH"
@@ -7824,43 +7933,34 @@
       "QNA-UPDATE-MP28"
     ],
     "physics.ra_lw_physics": [
-      "BUCKET-J",
-      "CAM-LW-RADIATION-WORKFLOW",
-      "GFDL-LW-CO2TF",
-      "GHG-INPUT-RADIATION-USER",
-      "ICLOUD",
       "LSM-8-RAD",
-      "RRTMGK-LW-COMPILE-FLAG"
+      "ICLOUD",
+      "BUCKET-J",
+      "GHG-INPUT-RADIATION-USER",
+      "CAM-LW-RADIATION-WORKFLOW",
+      "RRTMGK-LW-COMPILE-FLAG",
+      "GFDL-LW-CO2TF"
     ],
     "physics.ra_sw_eclipse": [
       "RA-SW-ECLIPSE"
     ],
     "physics.ra_sw_physics": [
-      "BUCKET-J",
-      "CAM-SW-RADIATION-WORKFLOW",
-      "GFDL-SW-CO2TF",
-      "GHG-INPUT-RADIATION-USER",
-      "ICLOUD",
       "LSM-8-RAD",
       "RA-SW-ECLIPSE",
+      "ICLOUD",
+      "BUCKET-J",
+      "SWRAD-SCAT-USER",
+      "GHG-INPUT-RADIATION-USER",
+      "CAM-SW-RADIATION-WORKFLOW",
       "RRTMGK-SW-COMPILE-FLAG",
-      "SWRAD-SCAT-USER"
+      "GFDL-SW-CO2TF"
     ],
     "physics.seaice_threshold": [
-      "FRAC-SEAICE",
-      "SEAICE-THRESH"
+      "SEAICE-THRESH",
+      "FRAC-SEAICE"
     ],
     "physics.sf_sfclay_physics": [
-      "FRAC-SEAICE",
-      "ISFFLX-USER",
-      "ISFTCFLX",
-      "KM-5",
-      "LES-PBL",
-      "LSM-7",
       "PBL-1",
-      "PBL-10",
-      "PBL-12",
-      "PBL-16",
       "PBL-2",
       "PBL-4",
       "PBL-5",
@@ -7868,16 +7968,28 @@
       "PBL-7",
       "PBL-8",
       "PBL-9",
-      "SHALWATER-Z0"
+      "PBL-10",
+      "PBL-12",
+      "PBL-16",
+      "LSM-7",
+      "FRAC-SEAICE",
+      "KM-5",
+      "LES-PBL",
+      "ISFTCFLX",
+      "SHALWATER-Z0",
+      "ISFFLX-USER"
     ],
     "physics.sf_surf_irr_scheme": [
       "SURF-IRR"
     ],
     "physics.sf_surface_physics": [
-      "IFSNOW",
-      "LES-PBL",
       "LSM-7",
       "LSM-8-RAD",
+      "URBAN-NOAH",
+      "SEAICE-THRESH",
+      "SURF-IRR",
+      "LES-PBL",
+      "IFSNOW",
       "MOSAIC-LU",
       "MOSAIC-SOIL",
       "NOAHMP-SF-SURFACE-DVEG",
@@ -7921,17 +8033,14 @@
       "NOAHMP-SF-SURFACE-SNICAR-USE-AEROSOL",
       "NOAHMP-SF-SURFACE-SNICAR-USE-OC",
       "NOAHMP-SF-SURFACE-SOILTSTEP",
-      "PERT-NOAH-LSM",
-      "SEAICE-THRESH",
       "SPP-PHYSICS-COMBINATION",
-      "SURF-IRR",
-      "URBAN-NOAH"
+      "PERT-NOAH-LSM"
     ],
     "physics.sf_urban_physics": [
-      "SLUCM-DRAG",
-      "URBAN-BEM",
+      "URBAN-NOAH",
       "URBAN-BEP",
-      "URBAN-NOAH"
+      "URBAN-BEM",
+      "SLUCM-DRAG"
     ],
     "physics.shalwater_z0": [
       "SHALWATER-Z0"
@@ -7989,9 +8098,6 @@
     "time_control.auxinput4_interval": [
       "SST-UPDATE"
     ],
-    "time_control.bdy_inname": [
-      "MULTI-BDY"
-    ],
     "time_control.force_use_old_data": [
       "OLD-FILES"
     ],
@@ -8014,8 +8120,8 @@
       "WRFDA-RADAR-RF-OPTION"
     ],
     "wrfvar4.use_radar_rf": [
-      "WRFDA-RADAR-RF-OPTION",
-      "WRFDA-RADAR-RF-REQUIRES-RADAROBS"
+      "WRFDA-RADAR-RF-REQUIRES-RADAROBS",
+      "WRFDA-RADAR-RF-OPTION"
     ],
     "wrfvar4.use_radar_rhv": [
       "WRFDA-RADAR-RHV-REQUIRES-RADAROBS"
@@ -8027,11 +8133,11 @@
       "WRFDA-RADAR-RV-REQUIRES-RADAROBS"
     ],
     "wrfvar4.use_radarobs": [
-      "WRFDA-RADAR-FILE-WORKFLOW",
+      "WRFDA-RADAR-RV-REQUIRES-RADAROBS",
       "WRFDA-RADAR-RF-REQUIRES-RADAROBS",
       "WRFDA-RADAR-RHV-REQUIRES-RADAROBS",
       "WRFDA-RADAR-RQV-REQUIRES-RADAROBS",
-      "WRFDA-RADAR-RV-REQUIRES-RADAROBS"
+      "WRFDA-RADAR-FILE-WORKFLOW"
     ],
     "wrfvar4.use_rainobs": [
       "WRFDA-RAIN-4DVAR-ONLY",
