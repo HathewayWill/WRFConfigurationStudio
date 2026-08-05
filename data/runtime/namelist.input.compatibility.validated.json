@@ -3,7 +3,7 @@
     "notes": "Promoted Bucket A compatibility rules from unreviewed to valid.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
-    "ruleCount": 164,
+    "ruleCount": 184,
     "title": "WRF namelist compatibility rules for editor",
     "validationPolicy": {
       "needsReview": "Rules marked needs_review should remain informational until source conflicts are resolved.",
@@ -13,11 +13,22 @@
     "variableCount": 169,
     "lastReviewedDate": "2026-08-02",
     "validRuleCount": 144,
-    "lastPromotionBatch": "2026-08-02_bucket_a_promotion"
+    "lastPromotionBatch": "2026-08-02_bucket_a_promotion",
+    "statusCounts": {
+      "needs_review": 5,
+      "valid": 164,
+      "unreviewed": 15
+    },
+    "strengthCounts": {
+      "Hard": 126,
+      "Workflow": 34,
+      "Soft": 24
+    },
+    "lastRuleBatch": "2026-08-03_wrfda_obsproc_workflow_rules"
   },
   "rules": [
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-1",
       "notes": null,
       "requirements": [
@@ -49,7 +60,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-2",
       "notes": null,
       "requirements": [
@@ -81,7 +92,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-4",
       "notes": null,
       "requirements": [
@@ -113,7 +124,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-5",
       "notes": null,
       "requirements": [
@@ -147,7 +158,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-6",
       "notes": null,
       "requirements": [
@@ -179,7 +190,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-7",
       "notes": null,
       "requirements": [
@@ -212,7 +223,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-8",
       "notes": null,
       "requirements": [
@@ -245,7 +256,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-9",
       "notes": null,
       "requirements": [
@@ -278,7 +289,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-10",
       "notes": null,
       "requirements": [
@@ -310,7 +321,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-12",
       "notes": null,
       "requirements": [
@@ -342,7 +353,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-16",
       "notes": null,
       "requirements": [
@@ -423,7 +434,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Land Surface \u2194 Radiation",
+      "category": "Land Surface ↔ Radiation",
       "id": "LSM-8-RAD",
       "notes": null,
       "requirements": [
@@ -513,7 +524,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban \u2194 PBL",
+      "category": "Urban ↔ PBL",
       "id": "URBAN-BEP",
       "notes": null,
       "requirements": [
@@ -552,7 +563,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban \u2194 PBL",
+      "category": "Urban ↔ PBL",
       "id": "URBAN-BEM",
       "notes": null,
       "requirements": [
@@ -1010,7 +1021,7 @@
       ]
     },
     {
-      "category": "Cumulus \u2194 PBL",
+      "category": "Cumulus ↔ PBL",
       "id": "CU-7-PBL",
       "notes": null,
       "requirements": [
@@ -1048,7 +1059,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus \u2194 Shallow",
+      "category": "Cumulus ↔ Shallow",
       "id": "CU-14-SHCU",
       "notes": null,
       "requirements": [
@@ -1160,7 +1171,7 @@
       ]
     },
     {
-      "category": "Shallow Cumulus \u2194 PBL",
+      "category": "Shallow Cumulus ↔ PBL",
       "id": "SHCU-DENG",
       "notes": null,
       "requirements": [
@@ -1348,7 +1359,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus \u2194 Radiation",
+      "category": "Cumulus ↔ Radiation",
       "id": "CU-RAD",
       "notes": null,
       "requirements": [
@@ -1763,7 +1774,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Radiation \u2194 MP",
+      "category": "Radiation ↔ MP",
       "id": "USE-MP-RE",
       "notes": null,
       "requirements": [
@@ -1961,7 +1972,7 @@
       "validationBatch": "2026-07-31_bucket_j_numeric"
     },
     {
-      "category": "Aerosol \u2194 MP",
+      "category": "Aerosol ↔ MP",
       "id": "AER-OPT-3",
       "notes": null,
       "requirements": [
@@ -2455,7 +2466,7 @@
       "validationUrl": ""
     },
     {
-      "category": "WPS \u2194 WRF",
+      "category": "WPS ↔ WRF",
       "id": "NUM-LAND-CAT",
       "notes": null,
       "requirements": [
@@ -2758,7 +2769,7 @@
       "fix": "Set physics.cu_physics=10, or leave minShallowFreq unset/default."
     },
     {
-      "category": "Radiation \u2194 MP",
+      "category": "Radiation ↔ MP",
       "id": "PROGN-MP",
       "notes": null,
       "requirements": [
@@ -3126,7 +3137,7 @@
       ]
     },
     {
-      "category": "Cumulus \u2194 Radiation",
+      "category": "Cumulus ↔ Radiation",
       "id": "CU-RAD-FEEDBACK",
       "notes": null,
       "requirements": [
@@ -6483,1583 +6494,1565 @@
         "2026-08-02_official_users_guide_high_value_rules"
       ],
       "validationBatch": "2026-08-02_official_users_guide_high_value_rules"
+    },
+    {
+      "id": "OBSPROC-INPUT-FILES",
+      "category": "OBSPROC",
+      "description": "OBSPROC needs an observation input file and an observation-error file.",
+      "strength": "Workflow",
+      "triggerGroup": "obsproc_record1",
+      "triggerVariable": "obs_gts_filename",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "raw": "obs_err_filename should be set",
+          "checkable": true,
+          "group": "obsproc_record1",
+          "variable": "obs_err_filename",
+          "mode": "set",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "obs_err_filename should be set",
+      "message": "OBSPROC needs an observation input file and an observation-error file.",
+      "fix": "Set record1.obs_gts_filename and record1.obs_err_filename before exporting namelist.obsproc.",
+      "sourceExcerpt": "OBSPROC uses namelist.obsproc plus observation and observation-error input files.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "OBSPROC-RECORD2-TIME-WINDOW",
+      "category": "OBSPROC",
+      "description": "OBSPROC record2 time_window_min, time_analysis, and time_window_max should define a valid observation time window.",
+      "strength": "Workflow",
+      "triggerGroup": "obsproc_record2",
+      "triggerVariable": "time_analysis",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "raw": "time_window_min, time_analysis, and time_window_max should form a consistent observation window",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "time_window_min, time_analysis, and time_window_max should form a consistent observation window",
+      "message": "OBSPROC record2 time_window_min, time_analysis, and time_window_max should define a valid observation time window.",
+      "fix": "Check that time_window_min <= time_analysis <= time_window_max and that all three use ccyy-mm-dd_hh:mn:ss format.",
+      "sourceExcerpt": "OBSPROC record2 defines the observation time window.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "OBSPROC-RECORD8-WRF-DOMAIN",
+      "category": "OBSPROC",
+      "description": "For WRF OBSPROC applications, record8 domain dimensions and grid spacing should be taken from wrfinput.",
+      "strength": "Workflow",
+      "triggerGroup": "obsproc_record8",
+      "triggerVariable": "nestix",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "raw": "NESTIX(1), NESTJX(1), and DIS(1) should come from wrfinput",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "NUMC(1), NESTI(1), and NESTJ(1) are always 1 for WRF applications",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "NESTIX(1), NESTJX(1), and DIS(1) should come from wrfinput | NUMC(1), NESTI(1), and NESTJ(1) are always 1 for WRF applications",
+      "message": "For WRF OBSPROC applications, record8 domain dimensions and grid spacing should be taken from wrfinput.",
+      "fix": "Set NESTIX(1), NESTJX(1), and DIS(1) from wrfinput. NUMC(1), NESTI(1), and NESTJ(1) should be 1.",
+      "sourceExcerpt": "For WRF application, record8 should be based on wrfinput domain information.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "OBSPROC-OUTPUT-FORMAT",
+      "category": "OBSPROC",
+      "description": "OBSPROC record9 output_ob_format controls PREPBUFR, ASCII, or both output types.",
+      "strength": "Workflow",
+      "triggerGroup": "obsproc_record9",
+      "triggerVariable": "output_ob_format",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "raw": "1 = PREPBUFR only; 2 = ASCII only; 3 = both PREPBUFR and ASCII",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "1 = PREPBUFR only; 2 = ASCII only; 3 = both PREPBUFR and ASCII",
+      "message": "OBSPROC record9 output_ob_format controls PREPBUFR, ASCII, or both output types.",
+      "fix": "Use output_ob_format=1 for PREPBUFR only, 2 for ASCII only, or 3 for both.",
+      "sourceExcerpt": "record9.output_ob_format supports 1 PREPBUFR, 2 ASCII, and 3 both.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "OBSPROC-4DVAR-SLOTS",
+      "category": "OBSPROC",
+      "description": "OBSPROC 4DVAR output should define time slots before and after time_analysis.",
+      "strength": "Workflow",
+      "triggerGroup": "obsproc_record9",
+      "triggerVariable": "use_for",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "4DVAR",
+          "4dvar"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "num_slots_past and num_slots_ahead define slots around time_analysis",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "num_slots_past and num_slots_ahead define slots around time_analysis",
+      "message": "OBSPROC 4DVAR output should define time slots before and after time_analysis.",
+      "fix": "For use_for='4DVAR', check record9.num_slots_past and record9.num_slots_ahead.",
+      "sourceExcerpt": "record9.use_for supports 3DVAR, FGAT, and 4DVAR; 4DVAR uses slot settings.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CV567-BE-DAT",
+      "category": "WRFDA Background Error",
+      "description": "cv_options=5, 6, or 7 expects domain-specific background-error statistics.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvar7",
+      "triggerVariable": "cv_options",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5",
+          "6",
+          "7"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "cv_options 5, 6, and 7 use GEN_BE / domain-specific background-error statistics",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "cv_options 5, 6, and 7 use GEN_BE / domain-specific background-error statistics",
+      "message": "cv_options=5, 6, or 7 expects domain-specific background-error statistics.",
+      "fix": "Generate or provide the proper be.dat file with GEN_BE before running WRFDA.",
+      "sourceExcerpt": "Background-error options CV5, CV6, and CV7 use GEN_BE-generated be.dat workflow.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CV6-BE-DAT",
+      "category": "WRFDA Background Error",
+      "description": "cv_options=6 uses CV6 multivariate background-error statistics.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvar7",
+      "triggerVariable": "cv_options",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "6"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "CV6 background-error statistics are generated with gen_be/wrapper_gen_mbe.ksh and written to be.dat",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "CV6 background-error statistics are generated with gen_be/wrapper_gen_mbe.ksh and written to be.dat",
+      "message": "cv_options=6 uses CV6 multivariate background-error statistics.",
+      "fix": "Run gen_be/wrapper_gen_mbe.ksh or otherwise provide a CV6 be.dat before running WRFDA with cv_options=6.",
+      "sourceExcerpt": "CV6 is activated by setting cv_options=6 after generating CV6 be.dat.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-RADAR-RV-REQUIRES-RADAROBS",
+      "category": "WRFDA Radar",
+      "description": "Radar velocity assimilation requires radar observation reading to be enabled.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radar_rv",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "use_radarobs must be true",
+          "checkable": true,
+          "group": "wrfvar4",
+          "variable": "use_radarobs",
+          "mode": "one_of",
+          "values": [
+            ".true.",
+            "true",
+            "True",
+            "1"
+          ]
+        }
+      ],
+      "requirementsRaw": "use_radarobs must be true",
+      "message": "Radar velocity assimilation requires radar observation reading to be enabled.",
+      "fix": "Set wrfvar4.use_radarobs=.true. or disable use_radar_rv.",
+      "sourceExcerpt": "use_radar_rv assimilates radar velocity observations and requires radar observation files to be read.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RADAR-RF-REQUIRES-RADAROBS",
+      "category": "WRFDA Radar",
+      "description": "Radar reflectivity assimilation requires radar observation reading to be enabled.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radar_rf",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "use_radarobs must be true",
+          "checkable": true,
+          "group": "wrfvar4",
+          "variable": "use_radarobs",
+          "mode": "one_of",
+          "values": [
+            ".true.",
+            "true",
+            "True",
+            "1"
+          ]
+        }
+      ],
+      "requirementsRaw": "use_radarobs must be true",
+      "message": "Radar reflectivity assimilation requires radar observation reading to be enabled.",
+      "fix": "Set wrfvar4.use_radarobs=.true. or disable use_radar_rf.",
+      "sourceExcerpt": "use_radar_rf assimilates radar reflectivity and requires radar observation files to be read.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RADAR-RF-OPTION",
+      "category": "WRFDA Radar",
+      "description": "Radar reflectivity assimilation requires a radar_rf_opt choice.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radar_rf",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "radar_rf_opt must be 1 or 2",
+          "checkable": true,
+          "group": "wrfvar4",
+          "variable": "radar_rf_opt",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2"
+          ]
+        }
+      ],
+      "requirementsRaw": "radar_rf_opt must be 1 or 2",
+      "message": "Radar reflectivity assimilation requires a radar_rf_opt choice.",
+      "fix": "Set wrfvar4.radar_rf_opt to 1 or 2.",
+      "sourceExcerpt": "radar_rf_opt should be 1 or 2 when radar reflectivity assimilation is enabled.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RADAR-RHV-REQUIRES-RADAROBS",
+      "category": "WRFDA Radar",
+      "description": "Retrieved hydrometeor radar assimilation requires radar observation reading to be enabled.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radar_rhv",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "use_radarobs must be true",
+          "checkable": true,
+          "group": "wrfvar4",
+          "variable": "use_radarobs",
+          "mode": "one_of",
+          "values": [
+            ".true.",
+            "true",
+            "True",
+            "1"
+          ]
+        }
+      ],
+      "requirementsRaw": "use_radarobs must be true",
+      "message": "Retrieved hydrometeor radar assimilation requires radar observation reading to be enabled.",
+      "fix": "Set wrfvar4.use_radarobs=.true. or disable use_radar_rhv.",
+      "sourceExcerpt": "use_radar_rhv assimilates retrieved hydrometeors from radar reflectivity and requires radar observation files to be read.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RADAR-RQV-REQUIRES-RADAROBS",
+      "category": "WRFDA Radar",
+      "description": "Radar humidity assimilation requires radar observation reading to be enabled.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radar_rqv",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "use_radarobs must be true",
+          "checkable": true,
+          "group": "wrfvar4",
+          "variable": "use_radarobs",
+          "mode": "one_of",
+          "values": [
+            ".true.",
+            "true",
+            "True",
+            "1"
+          ]
+        }
+      ],
+      "requirementsRaw": "use_radarobs must be true",
+      "message": "Radar humidity assimilation requires radar observation reading to be enabled.",
+      "fix": "Set wrfvar4.use_radarobs=.true. or disable use_radar_rqv.",
+      "sourceExcerpt": "use_radar_rqv assimilates estimated humidity from radar reflectivity and requires radar observation files to be read.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RADAR-FILE-WORKFLOW",
+      "category": "WRFDA Radar",
+      "description": "WRFDA radar observations require radar observation files in the expected naming pattern.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_radarobs",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "3DVAR uses ob.radar; 4DVAR uses ob01.radar, ob02.radar, etc.",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "3DVAR uses ob.radar; 4DVAR uses ob01.radar, ob02.radar, etc.",
+      "message": "WRFDA radar observations require radar observation files in the expected naming pattern.",
+      "fix": "Use ob.radar for 3DVAR. For 4DVAR, use ob01.radar, ob02.radar, and so on, one file per time slot.",
+      "sourceExcerpt": "Radar observations should be placed in ob.radar for 3DVAR or ob01.radar, ob02.radar, etc. for 4DVAR.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-RAIN-4DVAR-ONLY",
+      "category": "WRFDA Precipitation",
+      "description": "WRFDA precipitation assimilation is documented as a 4DVAR-only option.",
+      "strength": "Hard",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_rainobs",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "var4d must be true",
+          "checkable": true,
+          "group": "wrfvar1",
+          "variable": "var4d",
+          "mode": "one_of",
+          "values": [
+            ".true.",
+            "true",
+            "True",
+            "1"
+          ]
+        }
+      ],
+      "requirementsRaw": "var4d must be true",
+      "message": "WRFDA precipitation assimilation is documented as a 4DVAR-only option.",
+      "fix": "Set wrfvar1.var4d=.true. when use_rainobs is enabled, or disable use_rainobs.",
+      "sourceExcerpt": "var4d=true is the only supported option for precipitation assimilation.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide."
+    },
+    {
+      "id": "WRFDA-RAIN-FILE-SLOTS",
+      "category": "WRFDA Precipitation",
+      "description": "WRFDA precipitation observations must be linked by 4DVAR time slot.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvar4",
+      "triggerVariable": "use_rainobs",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "precipitation observations are linked by time slot, for example ob07.rain",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "var4d_bin_rain controls the precipitation assimilation window",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "precipitation observations are linked by time slot, for example ob07.rain | var4d_bin_rain controls the precipitation assimilation window",
+      "message": "WRFDA precipitation observations must be linked by 4DVAR time slot.",
+      "fix": "Link precipitation observation files using the expected slot names, for example ob07.rain, and check var4d_bin_rain.",
+      "sourceExcerpt": "Precipitation DA uses 4DVAR time-slot files and var4d_bin_rain.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CHEM-BUILD",
+      "category": "WRFDA-Chem",
+      "description": "WRFDA-Chem requires WRFDA to be compiled with WRF_CHEM=1.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvarchem",
+      "triggerVariable": "chem_cv_options",
+      "trigger": {
+        "mode": "greater_than",
+        "values": [
+          "0"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "compile WRFDA with WRF_CHEM=1",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "compile WRFDA with WRF_CHEM=1",
+      "message": "WRFDA-Chem requires WRFDA to be compiled with WRF_CHEM=1.",
+      "fix": "Build WRFDA with WRF_CHEM=1 before using wrfvarchem chemistry control variables.",
+      "sourceExcerpt": "WRFDA-Chem capability requires setting WRF_CHEM=1 before configuring and compiling WRFDA.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CHEM-CV-OPTIONS",
+      "category": "WRFDA-Chem",
+      "description": "chem_cv_options selects the WRFDA-Chem chemical control-variable package.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvarchem",
+      "triggerVariable": "chem_cv_options",
+      "trigger": {
+        "mode": "greater_than",
+        "values": [
+          "0"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "documented chem_cv_options values include 10, 20, and 108",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "documented chem_cv_options values include 10, 20, and 108",
+      "message": "chem_cv_options selects the WRFDA-Chem chemical control-variable package.",
+      "fix": "Use documented values such as 10 for GOCART, 20 for MOSAIC, or 108 for RACM SOA VBS.",
+      "sourceExcerpt": "chem_cv_options documents 0 off, 10 GOCART, 20 MOSAIC, and 108 RACM SOA VBS.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CHEM-OBS-TYPE",
+      "category": "WRFDA-Chem",
+      "description": "chemicda_opt selects the surface chemistry observation types to assimilate.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvarchem",
+      "triggerVariable": "chemicda_opt",
+      "trigger": {
+        "mode": "greater_than",
+        "values": [
+          "0"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "chemicda_opt selects WRFDA-Chem observation-type combinations",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "chemicda_opt selects WRFDA-Chem observation-type combinations",
+      "message": "chemicda_opt selects the surface chemistry observation types to assimilate.",
+      "fix": "Check chemicda_opt before running WRFDA-Chem; documented choices cover PM2.5, PM10, O3, CO, NO2, and SO2 combinations.",
+      "sourceExcerpt": "WRFDA-Chem assimilates surface PM2.5, PM10, O3, CO, NO2, and SO2 options.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CHEM-SURFOBS-FILE",
+      "category": "WRFDA-Chem",
+      "description": "WRFDA-Chem surface observation assimilation requires the surface chemistry observation file.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvarchem",
+      "triggerVariable": "use_chemic_surfobs",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          ".true.",
+          "true",
+          "True",
+          "1"
+        ]
+      },
+      "requirements": [
+        {
+          "raw": "use_chemic_surfobs reads ob_chemsfc.ascii",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "use_chemic_surfobs reads ob_chemsfc.ascii",
+      "message": "WRFDA-Chem surface observation assimilation requires the surface chemistry observation file.",
+      "fix": "Provide ob_chemsfc.ascii when use_chemic_surfobs is enabled.",
+      "sourceExcerpt": "use_chemic_surfobs reads chemistry surface observations from ob_chemsfc.ascii.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
+    },
+    {
+      "id": "WRFDA-CHEM-SCALING-DIMS",
+      "category": "WRFDA-Chem",
+      "description": "WRFDA-Chem scaling arrays use the 45*max_outer_iterations dimension.",
+      "strength": "Workflow",
+      "triggerGroup": "wrfvarchem",
+      "triggerVariable": "var_scaling12",
+      "trigger": {
+        "mode": "user_edited_non_zero",
+        "values": []
+      },
+      "requirements": [
+        {
+          "raw": "var_scaling12 and len_scaling12 have dimension 45*max_outer_iterations",
+          "checkable": false,
+          "group": null,
+          "variable": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "requirementsRaw": "var_scaling12 and len_scaling12 have dimension 45*max_outer_iterations",
+      "message": "WRFDA-Chem scaling arrays use the 45*max_outer_iterations dimension.",
+      "fix": "Keep var_scaling12 and len_scaling12 aligned with the documented 45*max_outer_iterations dimension.",
+      "sourceExcerpt": "var_scaling12 and len_scaling12 are dimensioned as 45*max_outer_iterations.",
+      "validationStatus": "valid",
+      "validationSource": "Official WRF Users Guide WRFDA page",
+      "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wrfda.html",
+      "validatedVersions": [
+        "current-users-guide-wrfda",
+        "current-runtime-catalog",
+        "2026-08-03_wrfda_obsproc_workflow_rules"
+      ],
+      "validationBatch": "2026-08-03_wrfda_obsproc_workflow_rules",
+      "validationNotes": "Added as a WRFDA / OBSPROC / WRFDA-Chem workflow or compatibility rule from the official WRFDA Users Guide.",
+      "emitOnTrigger": true
     }
   ],
   "variableIndex": {
-    "bl_pbl_physics": {
-      "group": "physics",
-      "triggerRules": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        53
-      ],
-      "requirementRules": [
-        11,
-        14,
-        15,
-        18,
-        26,
-        30,
-        50,
-        148,
-        160
-      ],
-      "summary": "bl_pbl_physics=0 \u21d2 isfflx=1; diff_opt=2; km_opt=2; km_opt=3 || bl_pbl_physics=1 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=10 \u21d2 sf_sfclay_physics=10 || bl_pbl_physics=12 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=16 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91 || bl_pbl_physics=2 \u21d2 sf_sfclay_physics=2 || bl_pbl_physics=4 \u21d2 sf_sfclay_physics=4 || bl_pbl_physics=5 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=5 || bl_pbl_physics=6 \u21d2 sf_sfclay_physics=5 || bl_pbl_physics=7 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=7 ..."
-    },
-    "sf_sfclay_physics": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        20,
-        50,
-        53,
-        54,
-        75,
-        84
-      ],
-      "summary": null
-    },
-    "sf_surface_physics": {
-      "group": "physics",
-      "triggerRules": [
-        11,
-        12
-      ],
-      "requirementRules": [
-        13,
-        19,
-        21,
-        53,
-        74,
-        76,
-        77,
-        93,
-        94,
-        95,
-        96,
-        97,
-        98,
-        99,
-        100,
-        101,
-        102,
-        103,
-        104,
-        105,
-        106,
-        107,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
-        117,
-        118,
-        119,
-        120,
-        121,
-        122,
-        123,
-        124,
-        125,
-        126,
-        127,
-        128,
-        129,
-        130,
-        131,
-        132,
-        133,
-        148,
-        161
-      ],
-      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4"
-    },
-    "ra_lw_physics": {
-      "group": "physics",
-      "triggerRules": [
-        154,
-        156,
-        158
-      ],
-      "requirementRules": [
-        12,
-        47,
-        48,
-        153
-      ],
-      "summary": null
-    },
-    "ra_sw_physics": {
-      "group": "physics",
-      "triggerRules": [
-        155,
-        157,
-        159
-      ],
-      "requirementRules": [
-        12,
-        46,
-        47,
-        48,
-        83,
-        153
-      ],
-      "summary": null
-    },
-    "sf_urban_physics": {
-      "group": "physics",
-      "triggerRules": [
-        13,
-        14,
-        15
-      ],
-      "requirementRules": [
-        16
-      ],
-      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8"
-    },
-    "slucm_distributed_drag": {
-      "group": "physics",
-      "triggerRules": [
-        16
-      ],
-      "requirementRules": [],
-      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False"
-    },
-    "use_wudapt_lcz": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        16
-      ],
-      "summary": null
-    },
-    "wrfinput_extra": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        16,
-        17
-      ],
-      "summary": null
-    },
-    "distributed_ahe_opt": {
-      "group": "physics",
-      "triggerRules": [
-        17
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "topo_wind": {
-      "group": "physics",
-      "triggerRules": [
-        18
-      ],
-      "requirementRules": [],
-      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1"
-    },
-    "geogrid_extra": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        18
-      ],
-      "summary": null
-    },
-    "seaice_threshold": {
-      "group": "physics",
-      "triggerRules": [
-        19
-      ],
-      "requirementRules": [
-        20
-      ],
-      "summary": null
-    },
-    "fractional_seaice": {
-      "group": "physics",
-      "triggerRules": [
-        20
-      ],
-      "requirementRules": [],
-      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0"
-    },
-    "sf_surf_irr_scheme": {
-      "group": "physics",
-      "triggerRules": [
-        21
-      ],
-      "requirementRules": [],
-      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2"
-    },
-    "opt_pedo": {
-      "group": "noah_mp",
-      "triggerRules": [
-        22,
-        107
-      ],
-      "requirementRules": [],
-      "summary": "opt_pedo=1 \u21d2 opt_soil=3"
-    },
-    "opt_soil": {
-      "group": "noah_mp",
-      "triggerRules": [
-        116
-      ],
-      "requirementRules": [
-        22
-      ],
-      "summary": null
-    },
-    "geogrid_tbl": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        22,
-        23,
-        24,
-        25
-      ],
-      "summary": null
-    },
-    "opt_irr": {
-      "group": "noah_mp",
-      "triggerRules": [
-        23,
-        105
-      ],
-      "requirementRules": [
-        24
-      ],
-      "summary": null
-    },
-    "opt_irrm": {
-      "group": "noah_mp",
-      "triggerRules": [
-        24,
-        106
-      ],
-      "requirementRules": [],
-      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3"
-    },
-    "opt_tdrn": {
-      "group": "noah_mp",
-      "triggerRules": [
-        25,
-        119
-      ],
-      "requirementRules": [],
-      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3"
-    },
-    "opt_run": {
-      "group": "noah_mp",
-      "triggerRules": [
-        110
-      ],
-      "requirementRules": [
-        25,
-        69
-      ],
-      "summary": null
-    },
-    "cu_physics": {
-      "group": "physics",
-      "triggerRules": [
-        26,
-        27,
-        63
-      ],
-      "requirementRules": [
-        28,
-        29,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        65,
-        66,
-        67,
-        78,
-        85,
-        86,
-        87,
-        88,
-        89,
-        90,
-        91,
-        92,
-        148,
-        150
-      ],
-      "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4"
-    },
-    "shcu_physics": {
-      "group": "physics",
-      "triggerRules": [
-        30,
-        64
-      ],
-      "requirementRules": [
-        27
-      ],
-      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6"
-    },
-    "kfeta_trigger": {
-      "group": "physics",
-      "triggerRules": [
-        28,
-        85
-      ],
-      "requirementRules": [],
-      "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1"
-    },
-    "ishallow": {
-      "group": "physics",
-      "triggerRules": [
-        29
-      ],
-      "requirementRules": [],
-      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5"
-    },
-    "cugd_avedx": {
-      "group": "physics",
-      "triggerRules": [
-        31,
-        92
-      ],
-      "requirementRules": [],
-      "summary": "cugd_avedx=3 \u21d2 cu_physics=5"
-    },
-    "kf_edrates": {
-      "group": "physics",
-      "triggerRules": [
-        32
-      ],
-      "requirementRules": [],
-      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99"
-    },
-    "convtrans_avglen_m": {
-      "group": "physics",
-      "triggerRules": [
-        33,
-        86
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "cu_diag": {
-      "group": "physics",
-      "triggerRules": [
-        34
-      ],
-      "requirementRules": [
-        35,
-        78
-      ],
-      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93"
-    },
-    "cu_rad_feedback": {
-      "group": "physics",
-      "triggerRules": [
-        35,
-        78
-      ],
-      "requirementRules": [],
-      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1"
-    },
-    "maxiens": {
-      "group": "physics",
-      "triggerRules": [
-        36,
-        87
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "maxens": {
-      "group": "physics",
-      "triggerRules": [
-        37,
-        88
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "maxens2": {
-      "group": "physics",
-      "triggerRules": [
-        38,
-        89
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "maxens3": {
-      "group": "physics",
-      "triggerRules": [
-        39,
-        90
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "ensdim": {
-      "group": "physics",
-      "triggerRules": [
-        40,
-        91
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "lightning_option": {
-      "group": "physics",
-      "triggerRules": [
-        41,
-        149
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "dx": {
-      "group": "domains",
-      "triggerRules": [],
-      "requirementRules": [
-        41
-      ],
-      "summary": null
-    },
-    "iccg_method": {
-      "group": "physics",
-      "triggerRules": [
-        42
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "iccg_prescribed_num": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        42
-      ],
-      "summary": null
-    },
-    "iccg_prescribed_den": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        42
-      ],
-      "summary": null
-    },
-    "do_radar_ref": {
-      "group": "physics",
-      "triggerRules": [
-        43
-      ],
-      "requirementRules": [
-        44,
-        149
-      ],
-      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28"
-    },
-    "mp_physics": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        43,
-        45,
-        49,
-        68,
-        151,
-        152,
-        162
-      ],
-      "summary": null
-    },
-    "nwp_diagnostics": {
-      "group": "time_control",
-      "triggerRules": [
-        44
-      ],
-      "requirementRules": [],
-      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True"
-    },
-    "use_mp_re": {
-      "group": "physics",
-      "triggerRules": [
-        45
-      ],
-      "requirementRules": [],
-      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55"
-    },
-    "ra_sw_eclipse": {
-      "group": "physics",
-      "triggerRules": [
-        46
-      ],
-      "requirementRules": [],
-      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5"
-    },
-    "icloud": {
-      "group": "physics",
-      "triggerRules": [
-        47
-      ],
-      "requirementRules": [
-        163
-      ],
-      "summary": null
-    },
-    "bucket_j": {
-      "group": "physics",
-      "triggerRules": [
-        48
-      ],
-      "requirementRules": [],
-      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24."
-    },
-    "aer_opt": {
-      "group": "physics",
-      "triggerRules": [
-        49
-      ],
-      "requirementRules": [],
-      "summary": "aer_opt=3 \u21d2 mp_physics=28"
-    },
-    "km_opt": {
-      "group": "dynamics",
-      "triggerRules": [
-        50
-      ],
-      "requirementRules": [
-        51,
-        52,
-        53,
-        79
-      ],
-      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91"
-    },
-    "diff_opt": {
-      "group": "dynamics",
-      "triggerRules": [],
-      "requirementRules": [
-        50,
-        51,
-        52,
-        53,
-        80
-      ],
-      "summary": null
-    },
-    "sfs_opt": {
-      "group": "dynamics",
-      "triggerRules": [
-        51,
-        52
-      ],
-      "requirementRules": [],
-      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2"
-    },
-    "isfflx": {
-      "group": "physics",
-      "triggerRules": [
-        84
-      ],
-      "requirementRules": [
-        53
-      ],
-      "summary": null
-    },
-    "isftcflx": {
-      "group": "physics",
-      "triggerRules": [
-        54
-      ],
-      "requirementRules": [],
-      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1."
-    },
-    "sst_update": {
-      "group": "physics",
-      "triggerRules": [
-        55
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "auxinput4_inname": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        55
-      ],
-      "summary": null
-    },
-    "auxinput4_interval": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        55
-      ],
-      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings."
-    },
-    "auxinput4_end_h": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        55
-      ],
-      "summary": null
-    },
-    "io_form_auxinput4": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        55
-      ],
-      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files."
-    },
-    "obs_nudge_opt": {
-      "group": "fdda",
-      "triggerRules": [
-        56
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "auxinput11_interval": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        56
-      ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
-    },
-    "auxinput11_end_h": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        56
-      ],
-      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
-    },
-    "multi_bdy_files": {
-      "group": "bdy_control",
-      "triggerRules": [
-        57
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "bdy_inname": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        57
-      ],
-      "summary": null
-    },
-    "nested": {
-      "group": "bdy_control",
-      "triggerRules": [
-        58
-      ],
-      "requirementRules": [],
-      "summary": "nested=.true. is for nested domains only."
-    },
-    "domain_role": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        58,
-        59
-      ],
-      "summary": null
-    },
-    "specified": {
-      "group": "bdy_control",
-      "triggerRules": [
-        59
-      ],
-      "requirementRules": [],
-      "summary": "specified=.true. is for the outer real-data domain only."
-    },
-    "num_land_cat": {
-      "group": "physics",
-      "triggerRules": [
-        60
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "metgrid_NUM_LAND_CAT": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        60
-      ],
-      "summary": null
-    },
-    "MODIS": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        60
-      ],
-      "summary": null
-    },
-    "USGS": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        60
-      ],
-      "summary": null
-    },
-    "input_from_hires": {
-      "group": "time_control",
-      "triggerRules": [
-        61
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "compile_env": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        61
-      ],
-      "summary": null
-    },
-    "geog_data_res": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        61
-      ],
-      "summary": null
-    },
-    "rsmas_data_path": {
-      "group": "time_control",
-      "triggerRules": [],
-      "requirementRules": [
-        61
-      ],
-      "summary": null
-    },
-    "force_use_old_data": {
-      "group": "time_control",
-      "triggerRules": [
-        62
-      ],
-      "requirementRules": [],
-      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0"
-    },
-    "use_theta_m": {
-      "group": "dynamics",
-      "triggerRules": [],
-      "requirementRules": [
-        62
-      ],
-      "summary": null
-    },
-    "hybrid_opt": {
-      "group": "dynamics",
-      "triggerRules": [],
-      "requirementRules": [
-        62
-      ],
-      "summary": null
-    },
-    "thBinSize": {
-      "group": "physics",
-      "triggerRules": [
-        65
-      ],
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP)."
-    },
-    "minDeepFreq": {
-      "group": "physics",
-      "triggerRules": [
-        66
-      ],
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP)."
-    },
-    "minShallowFreq": {
-      "group": "physics",
-      "triggerRules": [
-        67
-      ],
-      "requirementRules": [],
-      "summary": "Only works with cu_physics=10 (CuP)."
-    },
-    "progn": {
-      "group": "physics",
-      "triggerRules": [
-        68
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_infdv": {
-      "group": "noah_mp",
-      "triggerRules": [
-        69,
-        104
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "aer_aod550_val": {
-      "group": "physics",
-      "triggerRules": [
-        70
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "aer_aod550_opt": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        70
-      ],
-      "summary": null
-    },
-    "aer_angexp_val": {
-      "group": "physics",
-      "triggerRules": [
-        71
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "aer_angexp_opt": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        71
-      ],
-      "summary": null
-    },
-    "aer_ssa_val": {
-      "group": "physics",
-      "triggerRules": [
-        72
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "aer_ssa_opt": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        72
-      ],
-      "summary": null
-    },
-    "aer_asy_val": {
-      "group": "physics",
-      "triggerRules": [
-        73
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "aer_asy_opt": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        73
-      ],
-      "summary": null
-    },
-    "ifsnow": {
-      "group": "physics",
-      "triggerRules": [
-        74
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "shalwater_z0": {
-      "group": "physics",
-      "triggerRules": [
-        75
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "mosaic_lu": {
-      "group": "physics",
-      "triggerRules": [
-        76
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "mosaic_soil": {
-      "group": "physics",
-      "triggerRules": [
-        77
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "mix_upper_bound": {
-      "group": "dynamics",
-      "triggerRules": [
-        79
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "tke_drag_coefficient": {
-      "group": "dynamics",
-      "triggerRules": [
-        80
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "noahmp_acc_dt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        81,
-        94
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "noahmp_output": {
-      "group": "noah_mp",
-      "triggerRules": [
-        95
-      ],
-      "requirementRules": [
-        81
-      ],
-      "summary": null
-    },
-    "mp_zero_out": {
-      "group": "physics",
-      "triggerRules": [
-        82
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "mp_zero_out_thresh": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        82
-      ],
-      "summary": null
-    },
-    "swrad_scat": {
-      "group": "physics",
-      "triggerRules": [
-        83
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "dveg": {
-      "group": "noah_mp",
-      "triggerRules": [
-        93
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_alb": {
-      "group": "noah_mp",
-      "triggerRules": [
-        96
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_btr": {
-      "group": "noah_mp",
-      "triggerRules": [
-        97
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_compact": {
-      "group": "noah_mp",
-      "triggerRules": [
-        98
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_crop": {
-      "group": "noah_mp",
-      "triggerRules": [
-        99
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_crs": {
-      "group": "noah_mp",
-      "triggerRules": [
-        100
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_frz": {
-      "group": "noah_mp",
-      "triggerRules": [
-        101
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_gla": {
-      "group": "noah_mp",
-      "triggerRules": [
-        102
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_inf": {
-      "group": "noah_mp",
-      "triggerRules": [
-        103
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_rad": {
-      "group": "noah_mp",
-      "triggerRules": [
-        108
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_rsf": {
-      "group": "noah_mp",
-      "triggerRules": [
-        109
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_runsrf": {
-      "group": "noah_mp",
-      "triggerRules": [
-        111
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_runsub": {
-      "group": "noah_mp",
-      "triggerRules": [
-        112
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_scf": {
-      "group": "noah_mp",
-      "triggerRules": [
-        113
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_sfc": {
-      "group": "noah_mp",
-      "triggerRules": [
-        114
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_snf": {
-      "group": "noah_mp",
-      "triggerRules": [
-        115
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_stc": {
-      "group": "noah_mp",
-      "triggerRules": [
-        117
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_tbot": {
-      "group": "noah_mp",
-      "triggerRules": [
-        118
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_tksno": {
-      "group": "noah_mp",
-      "triggerRules": [
-        120
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "opt_wetland": {
-      "group": "noah_mp",
-      "triggerRules": [
-        121
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_aerosol_readtable": {
-      "group": "noah_mp",
-      "triggerRules": [
-        122
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_bandnumber_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        123
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_dustoptics_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        124
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_rtsolver_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        125
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_snowbc_intmix": {
-      "group": "noah_mp",
-      "triggerRules": [
-        126
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_snowdust_intmix": {
-      "group": "noah_mp",
-      "triggerRules": [
-        127
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_snowoptics_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        128
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_snowshape_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        129
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_solarspec_opt": {
-      "group": "noah_mp",
-      "triggerRules": [
-        130
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_use_aerosol": {
-      "group": "noah_mp",
-      "triggerRules": [
-        131
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "snicar_use_oc": {
-      "group": "noah_mp",
-      "triggerRules": [
-        132
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "soiltstep": {
-      "group": "noah_mp",
-      "triggerRules": [
-        133
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_bad_data_check": {
-      "group": "afwa",
-      "triggerRules": [
-        134
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_diag_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        137
-      ],
-      "requirementRules": [
-        134,
-        135,
-        136,
-        137,
-        138,
-        139,
-        140,
-        141,
-        142,
-        143,
-        144,
-        145,
-        146,
-        147
-      ],
-      "summary": null
-    },
-    "afwa_buoy_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        135
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_cloud_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        136
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_icing_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        138
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_ptype_ccn_tmp": {
-      "group": "afwa",
-      "triggerRules": [
-        139
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_ptype_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        140
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_ptype_tot_melt": {
-      "group": "afwa",
-      "triggerRules": [
-        141
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_radar_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        142
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_severe_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        143
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_therm_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        144
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_turb_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        145
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_vil_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        146
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "afwa_vis_opt": {
-      "group": "afwa",
-      "triggerRules": [
-        147
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "spp": {
-      "group": "stoch",
-      "triggerRules": [
-        148
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "do_avgflx_cugd": {
-      "group": "dynamics",
-      "triggerRules": [
-        150
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "do_avgflx_em": {
-      "group": "dynamics",
-      "triggerRules": [],
-      "requirementRules": [
-        150
-      ],
-      "summary": null
-    },
-    "qna_update": {
-      "group": "physics",
-      "triggerRules": [
-        151
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "wrfqnainp_d0": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        151
-      ],
-      "summary": null
-    },
-    "auxinput17_interval": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        151
-      ],
-      "summary": null
-    },
-    "io_form_auxinput17": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        151
-      ],
-      "summary": null
-    },
-    "wif_input_opt": {
-      "group": "domains",
-      "triggerRules": [
-        152
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "WIF input files": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        152
-      ],
-      "summary": null
-    },
-    "ghg_input": {
-      "group": "physics",
-      "triggerRules": [
-        153
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "levsiz": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        154,
-        155
-      ],
-      "summary": null
-    },
-    "paerlev": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        154,
-        155
-      ],
-      "summary": null
-    },
-    "cam_abs_dim1": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        154,
-        155
-      ],
-      "summary": null
-    },
-    "cam_abs_dim2": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        154,
-        155
-      ],
-      "summary": null
-    },
-    "restart_interval": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        154,
-        155
-      ],
-      "summary": null
-    },
-    "WRF compile flag": {
-      "group": null,
-      "triggerRules": [],
-      "requirementRules": [
-        156,
-        157
-      ],
-      "summary": null
-    },
-    "co2tf": {
-      "group": "physics",
-      "triggerRules": [],
-      "requirementRules": [
-        158,
-        159
-      ],
-      "summary": null
-    },
-    "pert_mynn": {
-      "group": "stoch",
-      "triggerRules": [
-        160
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "pert_noah": {
-      "group": "stoch",
-      "triggerRules": [
-        161
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "pert_thom": {
-      "group": "stoch",
-      "triggerRules": [
-        162
-      ],
-      "requirementRules": [],
-      "summary": null
-    },
-    "pert_cld3": {
-      "group": "stoch",
-      "triggerRules": [
-        163
-      ],
-      "requirementRules": [],
-      "summary": null
-    }
+    "afwa.afwa_bad_data_check": [
+      "AFWA-DIAG-OPT-AFWA-BAD-DATA-CHECK"
+    ],
+    "afwa.afwa_buoy_opt": [
+      "AFWA-DIAG-OPT-AFWA-BUOY-OPT"
+    ],
+    "afwa.afwa_cloud_opt": [
+      "AFWA-DIAG-OPT-AFWA-CLOUD-OPT"
+    ],
+    "afwa.afwa_diag_opt": [
+      "AFWA-DIAG-OPT-AFWA-BAD-DATA-CHECK",
+      "AFWA-DIAG-OPT-AFWA-BUOY-OPT",
+      "AFWA-DIAG-OPT-AFWA-CLOUD-OPT",
+      "AFWA-DIAG-OPT-AFWA-DIAG-OPT",
+      "AFWA-DIAG-OPT-AFWA-ICING-OPT",
+      "AFWA-DIAG-OPT-AFWA-PTYPE-CCN-TMP",
+      "AFWA-DIAG-OPT-AFWA-PTYPE-OPT",
+      "AFWA-DIAG-OPT-AFWA-PTYPE-TOT-MELT",
+      "AFWA-DIAG-OPT-AFWA-RADAR-OPT",
+      "AFWA-DIAG-OPT-AFWA-SEVERE-OPT",
+      "AFWA-DIAG-OPT-AFWA-THERM-OPT",
+      "AFWA-DIAG-OPT-AFWA-TURB-OPT",
+      "AFWA-DIAG-OPT-AFWA-VIL-OPT",
+      "AFWA-DIAG-OPT-AFWA-VIS-OPT"
+    ],
+    "afwa.afwa_icing_opt": [
+      "AFWA-DIAG-OPT-AFWA-ICING-OPT"
+    ],
+    "afwa.afwa_ptype_ccn_tmp": [
+      "AFWA-DIAG-OPT-AFWA-PTYPE-CCN-TMP"
+    ],
+    "afwa.afwa_ptype_opt": [
+      "AFWA-DIAG-OPT-AFWA-PTYPE-OPT"
+    ],
+    "afwa.afwa_ptype_tot_melt": [
+      "AFWA-DIAG-OPT-AFWA-PTYPE-TOT-MELT"
+    ],
+    "afwa.afwa_radar_opt": [
+      "AFWA-DIAG-OPT-AFWA-RADAR-OPT"
+    ],
+    "afwa.afwa_severe_opt": [
+      "AFWA-DIAG-OPT-AFWA-SEVERE-OPT"
+    ],
+    "afwa.afwa_therm_opt": [
+      "AFWA-DIAG-OPT-AFWA-THERM-OPT"
+    ],
+    "afwa.afwa_turb_opt": [
+      "AFWA-DIAG-OPT-AFWA-TURB-OPT"
+    ],
+    "afwa.afwa_vil_opt": [
+      "AFWA-DIAG-OPT-AFWA-VIL-OPT"
+    ],
+    "afwa.afwa_vis_opt": [
+      "AFWA-DIAG-OPT-AFWA-VIS-OPT"
+    ],
+    "bdy_control.multi_bdy_files": [
+      "MULTI-BDY"
+    ],
+    "bdy_control.nested": [
+      "NESTED-TRUE"
+    ],
+    "bdy_control.specified": [
+      "SPECIFIED-D01"
+    ],
+    "domains.dx": [
+      "LIGHTNING-11"
+    ],
+    "domains.wif_input_opt": [
+      "WIF-INPUT-MP28"
+    ],
+    "dynamics.diff_opt": [
+      "KM-5",
+      "LES-PBL",
+      "SFS-1",
+      "SFS-2",
+      "TKE-DRAG-COEFFICIENT"
+    ],
+    "dynamics.do_avgflx_cugd": [
+      "AVGFLX-CUGD-GD"
+    ],
+    "dynamics.do_avgflx_em": [
+      "AVGFLX-CUGD-GD"
+    ],
+    "dynamics.hybrid_opt": [
+      "OLD-FILES"
+    ],
+    "dynamics.km_opt": [
+      "KM-5",
+      "LES-PBL",
+      "MIX-UPPER-BOUND",
+      "SFS-1",
+      "SFS-2"
+    ],
+    "dynamics.mix_upper_bound": [
+      "MIX-UPPER-BOUND"
+    ],
+    "dynamics.sfs_opt": [
+      "SFS-1",
+      "SFS-2"
+    ],
+    "dynamics.tke_drag_coefficient": [
+      "TKE-DRAG-COEFFICIENT"
+    ],
+    "dynamics.use_theta_m": [
+      "OLD-FILES"
+    ],
+    "fdda.obs_nudge_opt": [
+      "OBS-NUDGE"
+    ],
+    "noah_mp.dveg": [
+      "NOAHMP-SF-SURFACE-DVEG"
+    ],
+    "noah_mp.noahmp_acc_dt": [
+      "NOAHMP-ACC-DT",
+      "NOAHMP-SF-SURFACE-NOAHMP-ACC-DT"
+    ],
+    "noah_mp.noahmp_output": [
+      "NOAHMP-ACC-DT",
+      "NOAHMP-SF-SURFACE-NOAHMP-OUTPUT"
+    ],
+    "noah_mp.opt_alb": [
+      "NOAHMP-SF-SURFACE-OPT-ALB"
+    ],
+    "noah_mp.opt_btr": [
+      "NOAHMP-SF-SURFACE-OPT-BTR"
+    ],
+    "noah_mp.opt_compact": [
+      "NOAHMP-SF-SURFACE-OPT-COMPACT"
+    ],
+    "noah_mp.opt_crop": [
+      "NOAHMP-SF-SURFACE-OPT-CROP"
+    ],
+    "noah_mp.opt_crs": [
+      "NOAHMP-SF-SURFACE-OPT-CRS"
+    ],
+    "noah_mp.opt_frz": [
+      "NOAHMP-SF-SURFACE-OPT-FRZ"
+    ],
+    "noah_mp.opt_gla": [
+      "NOAHMP-SF-SURFACE-OPT-GLA"
+    ],
+    "noah_mp.opt_inf": [
+      "NOAHMP-SF-SURFACE-OPT-INF"
+    ],
+    "noah_mp.opt_infdv": [
+      "NOAHMP-INFDV",
+      "NOAHMP-SF-SURFACE-OPT-INFDV"
+    ],
+    "noah_mp.opt_irr": [
+      "NOAHMP-IRR",
+      "NOAHMP-IRRM",
+      "NOAHMP-SF-SURFACE-OPT-IRR"
+    ],
+    "noah_mp.opt_irrm": [
+      "NOAHMP-IRRM",
+      "NOAHMP-SF-SURFACE-OPT-IRRM"
+    ],
+    "noah_mp.opt_pedo": [
+      "NOAHMP-PEDO",
+      "NOAHMP-SF-SURFACE-OPT-PEDO"
+    ],
+    "noah_mp.opt_rad": [
+      "NOAHMP-SF-SURFACE-OPT-RAD"
+    ],
+    "noah_mp.opt_rsf": [
+      "NOAHMP-SF-SURFACE-OPT-RSF"
+    ],
+    "noah_mp.opt_run": [
+      "NOAHMP-INFDV",
+      "NOAHMP-SF-SURFACE-OPT-RUN",
+      "NOAHMP-TDRN"
+    ],
+    "noah_mp.opt_runsrf": [
+      "NOAHMP-SF-SURFACE-OPT-RUNSRF"
+    ],
+    "noah_mp.opt_runsub": [
+      "NOAHMP-SF-SURFACE-OPT-RUNSUB"
+    ],
+    "noah_mp.opt_scf": [
+      "NOAHMP-SF-SURFACE-OPT-SCF"
+    ],
+    "noah_mp.opt_sfc": [
+      "NOAHMP-SF-SURFACE-OPT-SFC"
+    ],
+    "noah_mp.opt_snf": [
+      "NOAHMP-SF-SURFACE-OPT-SNF"
+    ],
+    "noah_mp.opt_soil": [
+      "NOAHMP-PEDO",
+      "NOAHMP-SF-SURFACE-OPT-SOIL"
+    ],
+    "noah_mp.opt_stc": [
+      "NOAHMP-SF-SURFACE-OPT-STC"
+    ],
+    "noah_mp.opt_tbot": [
+      "NOAHMP-SF-SURFACE-OPT-TBOT"
+    ],
+    "noah_mp.opt_tdrn": [
+      "NOAHMP-SF-SURFACE-OPT-TDRN",
+      "NOAHMP-TDRN"
+    ],
+    "noah_mp.opt_tksno": [
+      "NOAHMP-SF-SURFACE-OPT-TKSNO"
+    ],
+    "noah_mp.opt_wetland": [
+      "NOAHMP-SF-SURFACE-OPT-WETLAND"
+    ],
+    "noah_mp.snicar_aerosol_readtable": [
+      "NOAHMP-SF-SURFACE-SNICAR-AEROSOL-READTABLE"
+    ],
+    "noah_mp.snicar_bandnumber_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-BANDNUMBER-OPT"
+    ],
+    "noah_mp.snicar_dustoptics_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-DUSTOPTICS-OPT"
+    ],
+    "noah_mp.snicar_rtsolver_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-RTSOLVER-OPT"
+    ],
+    "noah_mp.snicar_snowbc_intmix": [
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWBC-INTMIX"
+    ],
+    "noah_mp.snicar_snowdust_intmix": [
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWDUST-INTMIX"
+    ],
+    "noah_mp.snicar_snowoptics_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWOPTICS-OPT"
+    ],
+    "noah_mp.snicar_snowshape_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWSHAPE-OPT"
+    ],
+    "noah_mp.snicar_solarspec_opt": [
+      "NOAHMP-SF-SURFACE-SNICAR-SOLARSPEC-OPT"
+    ],
+    "noah_mp.snicar_use_aerosol": [
+      "NOAHMP-SF-SURFACE-SNICAR-USE-AEROSOL"
+    ],
+    "noah_mp.snicar_use_oc": [
+      "NOAHMP-SF-SURFACE-SNICAR-USE-OC"
+    ],
+    "noah_mp.soiltstep": [
+      "NOAHMP-SF-SURFACE-SOILTSTEP"
+    ],
+    "obsproc_record1.obs_err_filename": [
+      "OBSPROC-INPUT-FILES"
+    ],
+    "obsproc_record1.obs_gts_filename": [
+      "OBSPROC-INPUT-FILES"
+    ],
+    "obsproc_record2.time_analysis": [
+      "OBSPROC-RECORD2-TIME-WINDOW"
+    ],
+    "obsproc_record8.nestix": [
+      "OBSPROC-RECORD8-WRF-DOMAIN"
+    ],
+    "obsproc_record9.output_ob_format": [
+      "OBSPROC-OUTPUT-FORMAT"
+    ],
+    "obsproc_record9.use_for": [
+      "OBSPROC-4DVAR-SLOTS"
+    ],
+    "physics.aer_angexp_opt": [
+      "AER-ANGEXP-VAL"
+    ],
+    "physics.aer_angexp_val": [
+      "AER-ANGEXP-VAL"
+    ],
+    "physics.aer_aod550_opt": [
+      "AER-AOD550-VAL"
+    ],
+    "physics.aer_aod550_val": [
+      "AER-AOD550-VAL"
+    ],
+    "physics.aer_asy_opt": [
+      "AER-ASY-VAL"
+    ],
+    "physics.aer_asy_val": [
+      "AER-ASY-VAL"
+    ],
+    "physics.aer_opt": [
+      "AER-OPT-3"
+    ],
+    "physics.aer_ssa_opt": [
+      "AER-SSA-VAL"
+    ],
+    "physics.aer_ssa_val": [
+      "AER-SSA-VAL"
+    ],
+    "physics.bl_pbl_physics": [
+      "CU-7-PBL",
+      "KM-5",
+      "LES-PBL",
+      "LSM-7",
+      "PBL-1",
+      "PBL-10",
+      "PBL-12",
+      "PBL-16",
+      "PBL-2",
+      "PBL-4",
+      "PBL-5",
+      "PBL-6",
+      "PBL-7",
+      "PBL-8",
+      "PBL-9",
+      "PERT-MYNN-PBL",
+      "SHCU-DENG",
+      "SPP-PHYSICS-COMBINATION",
+      "TOPO-WIND",
+      "URBAN-BEM",
+      "URBAN-BEP"
+    ],
+    "physics.bucket_j": [
+      "BUCKET-J"
+    ],
+    "physics.cam_abs_dim1": [
+      "CAM-LW-RADIATION-WORKFLOW",
+      "CAM-SW-RADIATION-WORKFLOW"
+    ],
+    "physics.cam_abs_dim2": [
+      "CAM-LW-RADIATION-WORKFLOW",
+      "CAM-SW-RADIATION-WORKFLOW"
+    ],
+    "physics.co2tf": [
+      "GFDL-LW-CO2TF",
+      "GFDL-SW-CO2TF"
+    ],
+    "physics.convtrans_avglen_m": [
+      "CONVTRANS",
+      "CONVTRANS-AVGLEN-M-USER"
+    ],
+    "physics.cu_diag": [
+      "CU-DIAG",
+      "CU-RAD"
+    ],
+    "physics.cu_physics": [
+      "AVGFLX-CUGD-GD",
+      "CONVTRANS",
+      "CONVTRANS-AVGLEN-M-USER",
+      "CU-14-SHCU",
+      "CU-7-PBL",
+      "CU-DIAG",
+      "CU-OFF",
+      "CU-RAD",
+      "CU-RAD-FEEDBACK",
+      "CUGD-AVEDX",
+      "CUGD-AVEDX-USER",
+      "CUP-MINDEEP",
+      "CUP-MINSHALLOW",
+      "CUP-THBIN",
+      "ENSDIM",
+      "ENSDIM-USER",
+      "ISHALLOW",
+      "KF-EDRATES",
+      "KFETA",
+      "KFETA-TRIGGER-USER",
+      "LIGHTNING-11",
+      "MAXENS",
+      "MAXENS-USER",
+      "MAXENS2",
+      "MAXENS2-USER",
+      "MAXENS3",
+      "MAXENS3-USER",
+      "MAXIENS",
+      "MAXIENS-USER",
+      "SPP-PHYSICS-COMBINATION"
+    ],
+    "physics.cu_rad_feedback": [
+      "CU-RAD",
+      "CU-RAD-FEEDBACK"
+    ],
+    "physics.cugd_avedx": [
+      "CUGD-AVEDX",
+      "CUGD-AVEDX-USER"
+    ],
+    "physics.distributed_ahe_opt": [
+      "AHE-INPUT"
+    ],
+    "physics.do_radar_ref": [
+      "LIGHTNING-RADAR",
+      "NWPDIAG",
+      "RADARREF-MP"
+    ],
+    "physics.ensdim": [
+      "ENSDIM",
+      "ENSDIM-USER"
+    ],
+    "physics.fractional_seaice": [
+      "FRAC-SEAICE"
+    ],
+    "physics.ghg_input": [
+      "GHG-INPUT-RADIATION-USER"
+    ],
+    "physics.iccg_method": [
+      "ICCG-1"
+    ],
+    "physics.iccg_prescribed_den": [
+      "ICCG-1"
+    ],
+    "physics.iccg_prescribed_num": [
+      "ICCG-1"
+    ],
+    "physics.icloud": [
+      "ICLOUD",
+      "PERT-CLOUD3-ICLOUD"
+    ],
+    "physics.ifsnow": [
+      "IFSNOW"
+    ],
+    "physics.isfflx": [
+      "ISFFLX-USER",
+      "LES-PBL"
+    ],
+    "physics.isftcflx": [
+      "ISFTCFLX"
+    ],
+    "physics.ishallow": [
+      "ISHALLOW"
+    ],
+    "physics.kf_edrates": [
+      "KF-EDRATES"
+    ],
+    "physics.kfeta_trigger": [
+      "KFETA",
+      "KFETA-TRIGGER-USER"
+    ],
+    "physics.levsiz": [
+      "CAM-LW-RADIATION-WORKFLOW",
+      "CAM-SW-RADIATION-WORKFLOW"
+    ],
+    "physics.lightning_option": [
+      "LIGHTNING-11",
+      "LIGHTNING-RADAR"
+    ],
+    "physics.maxens": [
+      "MAXENS",
+      "MAXENS-USER"
+    ],
+    "physics.maxens2": [
+      "MAXENS2",
+      "MAXENS2-USER"
+    ],
+    "physics.maxens3": [
+      "MAXENS3",
+      "MAXENS3-USER"
+    ],
+    "physics.maxiens": [
+      "MAXIENS",
+      "MAXIENS-USER"
+    ],
+    "physics.minDeepFreq": [
+      "CUP-MINDEEP"
+    ],
+    "physics.minShallowFreq": [
+      "CUP-MINSHALLOW"
+    ],
+    "physics.mosaic_lu": [
+      "MOSAIC-LU"
+    ],
+    "physics.mosaic_soil": [
+      "MOSAIC-SOIL"
+    ],
+    "physics.mp_physics": [
+      "AER-OPT-3",
+      "PERT-THOMPSON-MP",
+      "PROGN-MP",
+      "QNA-UPDATE-MP28",
+      "RADARREF-MP",
+      "USE-MP-RE",
+      "WIF-INPUT-MP28"
+    ],
+    "physics.mp_zero_out": [
+      "MP-ZERO-OUT-THRESH"
+    ],
+    "physics.mp_zero_out_thresh": [
+      "MP-ZERO-OUT-THRESH"
+    ],
+    "physics.num_land_cat": [
+      "NUM-LAND-CAT"
+    ],
+    "physics.paerlev": [
+      "CAM-LW-RADIATION-WORKFLOW",
+      "CAM-SW-RADIATION-WORKFLOW"
+    ],
+    "physics.progn": [
+      "PROGN-MP"
+    ],
+    "physics.qna_update": [
+      "QNA-UPDATE-MP28"
+    ],
+    "physics.ra_lw_physics": [
+      "BUCKET-J",
+      "CAM-LW-RADIATION-WORKFLOW",
+      "GFDL-LW-CO2TF",
+      "GHG-INPUT-RADIATION-USER",
+      "ICLOUD",
+      "LSM-8-RAD",
+      "RRTMGK-LW-COMPILE-FLAG"
+    ],
+    "physics.ra_sw_eclipse": [
+      "RA-SW-ECLIPSE"
+    ],
+    "physics.ra_sw_physics": [
+      "BUCKET-J",
+      "CAM-SW-RADIATION-WORKFLOW",
+      "GFDL-SW-CO2TF",
+      "GHG-INPUT-RADIATION-USER",
+      "ICLOUD",
+      "LSM-8-RAD",
+      "RA-SW-ECLIPSE",
+      "RRTMGK-SW-COMPILE-FLAG",
+      "SWRAD-SCAT-USER"
+    ],
+    "physics.seaice_threshold": [
+      "FRAC-SEAICE",
+      "SEAICE-THRESH"
+    ],
+    "physics.sf_sfclay_physics": [
+      "FRAC-SEAICE",
+      "ISFFLX-USER",
+      "ISFTCFLX",
+      "KM-5",
+      "LES-PBL",
+      "LSM-7",
+      "PBL-1",
+      "PBL-10",
+      "PBL-12",
+      "PBL-16",
+      "PBL-2",
+      "PBL-4",
+      "PBL-5",
+      "PBL-6",
+      "PBL-7",
+      "PBL-8",
+      "PBL-9",
+      "SHALWATER-Z0"
+    ],
+    "physics.sf_surf_irr_scheme": [
+      "SURF-IRR"
+    ],
+    "physics.sf_surface_physics": [
+      "IFSNOW",
+      "LES-PBL",
+      "LSM-7",
+      "LSM-8-RAD",
+      "MOSAIC-LU",
+      "MOSAIC-SOIL",
+      "NOAHMP-SF-SURFACE-DVEG",
+      "NOAHMP-SF-SURFACE-NOAHMP-ACC-DT",
+      "NOAHMP-SF-SURFACE-NOAHMP-OUTPUT",
+      "NOAHMP-SF-SURFACE-OPT-ALB",
+      "NOAHMP-SF-SURFACE-OPT-BTR",
+      "NOAHMP-SF-SURFACE-OPT-COMPACT",
+      "NOAHMP-SF-SURFACE-OPT-CROP",
+      "NOAHMP-SF-SURFACE-OPT-CRS",
+      "NOAHMP-SF-SURFACE-OPT-FRZ",
+      "NOAHMP-SF-SURFACE-OPT-GLA",
+      "NOAHMP-SF-SURFACE-OPT-INF",
+      "NOAHMP-SF-SURFACE-OPT-INFDV",
+      "NOAHMP-SF-SURFACE-OPT-IRR",
+      "NOAHMP-SF-SURFACE-OPT-IRRM",
+      "NOAHMP-SF-SURFACE-OPT-PEDO",
+      "NOAHMP-SF-SURFACE-OPT-RAD",
+      "NOAHMP-SF-SURFACE-OPT-RSF",
+      "NOAHMP-SF-SURFACE-OPT-RUN",
+      "NOAHMP-SF-SURFACE-OPT-RUNSRF",
+      "NOAHMP-SF-SURFACE-OPT-RUNSUB",
+      "NOAHMP-SF-SURFACE-OPT-SCF",
+      "NOAHMP-SF-SURFACE-OPT-SFC",
+      "NOAHMP-SF-SURFACE-OPT-SNF",
+      "NOAHMP-SF-SURFACE-OPT-SOIL",
+      "NOAHMP-SF-SURFACE-OPT-STC",
+      "NOAHMP-SF-SURFACE-OPT-TBOT",
+      "NOAHMP-SF-SURFACE-OPT-TDRN",
+      "NOAHMP-SF-SURFACE-OPT-TKSNO",
+      "NOAHMP-SF-SURFACE-OPT-WETLAND",
+      "NOAHMP-SF-SURFACE-SNICAR-AEROSOL-READTABLE",
+      "NOAHMP-SF-SURFACE-SNICAR-BANDNUMBER-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-DUSTOPTICS-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-RTSOLVER-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWBC-INTMIX",
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWDUST-INTMIX",
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWOPTICS-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-SNOWSHAPE-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-SOLARSPEC-OPT",
+      "NOAHMP-SF-SURFACE-SNICAR-USE-AEROSOL",
+      "NOAHMP-SF-SURFACE-SNICAR-USE-OC",
+      "NOAHMP-SF-SURFACE-SOILTSTEP",
+      "PERT-NOAH-LSM",
+      "SEAICE-THRESH",
+      "SPP-PHYSICS-COMBINATION",
+      "SURF-IRR",
+      "URBAN-NOAH"
+    ],
+    "physics.sf_urban_physics": [
+      "SLUCM-DRAG",
+      "URBAN-BEM",
+      "URBAN-BEP",
+      "URBAN-NOAH"
+    ],
+    "physics.shalwater_z0": [
+      "SHALWATER-Z0"
+    ],
+    "physics.shcu_physics": [
+      "CU-14-SHCU",
+      "SHCU-DENG",
+      "SHCU-OFF"
+    ],
+    "physics.slucm_distributed_drag": [
+      "SLUCM-DRAG"
+    ],
+    "physics.sst_update": [
+      "SST-UPDATE"
+    ],
+    "physics.swrad_scat": [
+      "SWRAD-SCAT-USER"
+    ],
+    "physics.thBinSize": [
+      "CUP-THBIN"
+    ],
+    "physics.topo_wind": [
+      "TOPO-WIND"
+    ],
+    "physics.use_mp_re": [
+      "USE-MP-RE"
+    ],
+    "physics.use_wudapt_lcz": [
+      "SLUCM-DRAG"
+    ],
+    "stoch.pert_cld3": [
+      "PERT-CLOUD3-ICLOUD"
+    ],
+    "stoch.pert_mynn": [
+      "PERT-MYNN-PBL"
+    ],
+    "stoch.pert_noah": [
+      "PERT-NOAH-LSM"
+    ],
+    "stoch.pert_thom": [
+      "PERT-THOMPSON-MP"
+    ],
+    "stoch.spp": [
+      "SPP-PHYSICS-COMBINATION"
+    ],
+    "time_control.auxinput11_end_h": [
+      "OBS-NUDGE"
+    ],
+    "time_control.auxinput11_interval": [
+      "OBS-NUDGE"
+    ],
+    "time_control.auxinput4_inname": [
+      "SST-UPDATE"
+    ],
+    "time_control.auxinput4_interval": [
+      "SST-UPDATE"
+    ],
+    "time_control.bdy_inname": [
+      "MULTI-BDY"
+    ],
+    "time_control.force_use_old_data": [
+      "OLD-FILES"
+    ],
+    "time_control.input_from_hires": [
+      "WPS-HIRES"
+    ],
+    "time_control.io_form_auxinput4": [
+      "SST-UPDATE"
+    ],
+    "time_control.nwp_diagnostics": [
+      "NWPDIAG"
+    ],
+    "time_control.rsmas_data_path": [
+      "WPS-HIRES"
+    ],
+    "wrfvar1.var4d": [
+      "WRFDA-RAIN-4DVAR-ONLY"
+    ],
+    "wrfvar4.radar_rf_opt": [
+      "WRFDA-RADAR-RF-OPTION"
+    ],
+    "wrfvar4.use_radar_rf": [
+      "WRFDA-RADAR-RF-OPTION",
+      "WRFDA-RADAR-RF-REQUIRES-RADAROBS"
+    ],
+    "wrfvar4.use_radar_rhv": [
+      "WRFDA-RADAR-RHV-REQUIRES-RADAROBS"
+    ],
+    "wrfvar4.use_radar_rqv": [
+      "WRFDA-RADAR-RQV-REQUIRES-RADAROBS"
+    ],
+    "wrfvar4.use_radar_rv": [
+      "WRFDA-RADAR-RV-REQUIRES-RADAROBS"
+    ],
+    "wrfvar4.use_radarobs": [
+      "WRFDA-RADAR-FILE-WORKFLOW",
+      "WRFDA-RADAR-RF-REQUIRES-RADAROBS",
+      "WRFDA-RADAR-RHV-REQUIRES-RADAROBS",
+      "WRFDA-RADAR-RQV-REQUIRES-RADAROBS",
+      "WRFDA-RADAR-RV-REQUIRES-RADAROBS"
+    ],
+    "wrfvar4.use_rainobs": [
+      "WRFDA-RAIN-4DVAR-ONLY",
+      "WRFDA-RAIN-FILE-SLOTS"
+    ],
+    "wrfvar7.cv_options": [
+      "WRFDA-CV567-BE-DAT",
+      "WRFDA-CV6-BE-DAT"
+    ],
+    "wrfvarchem.chem_cv_options": [
+      "WRFDA-CHEM-BUILD",
+      "WRFDA-CHEM-CV-OPTIONS"
+    ],
+    "wrfvarchem.chemicda_opt": [
+      "WRFDA-CHEM-OBS-TYPE"
+    ],
+    "wrfvarchem.use_chemic_surfobs": [
+      "WRFDA-CHEM-SURFOBS-FILE"
+    ],
+    "wrfvarchem.var_scaling12": [
+      "WRFDA-CHEM-SCALING-DIMS"
+    ]
   }
 }
