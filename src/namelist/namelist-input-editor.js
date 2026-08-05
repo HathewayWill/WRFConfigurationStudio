@@ -372,6 +372,27 @@
     return field.enumValues && Object.keys(field.enumValues).length > 0;
   }
 
+  function naturalGroupCompare(a, b) {
+    var aa = String(a || '').toLowerCase().split(/(\d+)/).filter(Boolean);
+    var bb = String(b || '').toLowerCase().split(/(\d+)/).filter(Boolean);
+    var len = Math.max(aa.length, bb.length);
+    for (var i = 0; i < len; i++) {
+      if (aa[i] === undefined) return -1;
+      if (bb[i] === undefined) return 1;
+      var aIsNum = /^\d+$/.test(aa[i]);
+      var bIsNum = /^\d+$/.test(bb[i]);
+      if (aIsNum && bIsNum) {
+        var an = parseInt(aa[i], 10);
+        var bn = parseInt(bb[i], 10);
+        if (an !== bn) return an - bn;
+        if (aa[i].length !== bb[i].length) return aa[i].length - bb[i].length;
+      } else if (aa[i] !== bb[i]) {
+        return aa[i].localeCompare(bb[i]);
+      }
+    }
+    return String(a || '').localeCompare(String(b || ''));
+  }
+
   function orderGroups(groupNames) {
     var seen = {};
     var ordered = [];
@@ -390,7 +411,7 @@
       }
     });
 
-    groupNames.slice().sort().forEach(function (name) {
+    groupNames.slice().sort(naturalGroupCompare).forEach(function (name) {
       if (!seen[name]) ordered.push(name);
     });
     return ordered;
@@ -1132,6 +1153,42 @@
     return engine.getIssues();
   };
 
+  HybridNamelistInputEditor.prototype.buildCompatibilityIssueMap = function (issues) {
+    var issueMap = {};
+    (issues || []).forEach(function (issue) {
+      (issue.fieldKeys || []).forEach(function (key) {
+        issueMap[key] = issueMap[key] || [];
+        issueMap[key].push(issue);
+      });
+    });
+    return issueMap;
+  };
+
+  HybridNamelistInputEditor.prototype.buildGroupIssueSummaries = function (issueMap) {
+    var summaries = {};
+    var catalogGroups = (this.catalog && this.catalog.groups) || {};
+    Object.keys(catalogGroups).forEach(function (groupName) {
+      var summary = { errors: 0, warnings: 0, firstErrorKey: null, firstWarningKey: null };
+      var seen = {};
+      (catalogGroups[groupName] || []).forEach(function (field) {
+        ((issueMap && issueMap[field.key]) || []).forEach(function (issue) {
+          var issueId = issue.id || issue.ruleId || issue.message || (field.key + ':' + issue.type);
+          if (seen[issueId]) return;
+          seen[issueId] = true;
+          if (issue.type === 'error') {
+            summary.errors += 1;
+            if (!summary.firstErrorKey) summary.firstErrorKey = field.key;
+          } else if (issue.type === 'warning') {
+            summary.warnings += 1;
+            if (!summary.firstWarningKey) summary.firstWarningKey = field.key;
+          }
+        });
+      });
+      summaries[groupName] = summary;
+    });
+    return summaries;
+  };
+
   HybridNamelistInputEditor.prototype.getIssuesForField = function (field) {
     if (!field || !field.key) return [];
     return this.getCompatibilityIssues().filter(function (issue) {
@@ -1163,19 +1220,18 @@
       self.render();
       self.updateText();
     });
+    this.$container.find('.namelist-input-compatibility-jump').off('click.namelistcompatjump').on('click.namelistcompatjump', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      self.jumpToFirstCompatibilityIssue($(this).data('issue-type'));
+    });
   };
 
   HybridNamelistInputEditor.prototype.refreshCompatibilityDisplay = function () {
     if (!this.catalog || !this.$container || !this.$container.length) return;
 
     var issues = this.getCompatibilityIssues();
-    var issueMap = {};
-    issues.forEach(function (issue) {
-      (issue.fieldKeys || []).forEach(function (key) {
-        issueMap[key] = issueMap[key] || [];
-        issueMap[key].push(issue);
-      });
-    });
+    var issueMap = this.buildCompatibilityIssueMap(issues);
 
     var panel = this.$container.find('.namelist-input-compatibility-panel').first();
     if (panel.length) {
@@ -1247,8 +1303,8 @@
     var html = '<div class="alert ' + panelClass + ' py-2 namelist-input-compatibility-panel">';
     html += '<div class="d-flex flex-wrap align-items-center">';
     html += '<strong class="mr-2">Compatibility:</strong>';
-    html += '<span class="badge badge-danger mr-1">' + errors + ' errors</span>';
-    html += '<span class="badge badge-warning mr-3">' + warnings + ' warnings</span>';
+    html += '<button type="button" class="btn btn-sm btn-danger py-0 mr-1 namelist-input-compatibility-jump" data-issue-type="error"' + (errors ? '' : ' disabled') + '>' + errors + ' errors</button>';
+    html += '<button type="button" class="btn btn-sm btn-warning py-0 mr-3 namelist-input-compatibility-jump" data-issue-type="warning"' + (warnings ? '' : ' disabled') + '>' + warnings + ' warnings</button>';
     html += '<label class="small mb-0 mr-2" for="namelist-input-target-wrf-version">Target WRF</label>';
     html += '<select id="namelist-input-target-wrf-version" class="custom-select custom-select-sm namelist-input-target-wrf-version mr-3" style="width:auto">';
     html += '<option value="≥ 4.8.0"' + ((this.targetWrfVersion || '≥ 4.8.0') === '≥ 4.8.0' ? ' selected' : '') + '>≥ 4.8.0</option>';
@@ -1367,6 +1423,33 @@
       e.stopPropagation();
       self.applyWorkflowPreset(self.state.selectedWorkflowPreset || self.$container.find('.namelist-input-workflow-preset-select').val());
     });
+  };
+
+  HybridNamelistInputEditor.prototype.findFirstCompatibilityIssueKey = function (issueType, groupName) {
+    var issues = this.showCompatibility ? this.getCompatibilityIssues() : [];
+    var issueMap = this.buildCompatibilityIssueMap(issues);
+    var groups = groupName ? [groupName] : orderGroups(Object.keys((this.catalog && this.catalog.groups) || {}));
+
+    for (var gi = 0; gi < groups.length; gi++) {
+      var fields = ((this.catalog && this.catalog.groups && this.catalog.groups[groups[gi]]) || []);
+      for (var fi = 0; fi < fields.length; fi++) {
+        var key = fields[fi].key;
+        var keyIssues = issueMap[key] || [];
+        for (var ii = 0; ii < keyIssues.length; ii++) {
+          if (!issueType || keyIssues[ii].type === issueType) return key;
+        }
+      }
+    }
+    return null;
+  };
+
+  HybridNamelistInputEditor.prototype.jumpToFirstCompatibilityIssue = function (issueType, groupName) {
+    var key = this.findFirstCompatibilityIssueKey(issueType, groupName);
+    if (!key) {
+      global.alert('No ' + (issueType || 'compatibility') + ' issue was found.');
+      return;
+    }
+    this.jumpToVariable(key);
   };
 
   HybridNamelistInputEditor.prototype.applyWpsMasteredDomainValues = function () {
@@ -1695,6 +1778,21 @@
       ' outline-offset: -2px;' +
       '}';
 
+    style.textContent += '\n' +
+      '.namelist-input-group.namelist-input-group-has-error > .namelist-input-group-header {' +
+      ' background: #fee2e2 !important;' +
+      ' border-left: 4px solid #dc3545 !important;' +
+      ' padding-left: .5rem !important;' +
+      '}' +
+      '.namelist-input-group.namelist-input-group-has-warning > .namelist-input-group-header {' +
+      ' background: #fef3c7 !important;' +
+      ' border-left: 4px solid #ffc107 !important;' +
+      ' padding-left: .5rem !important;' +
+      '}' +
+      '.namelist-input-group-issue-jump {' +
+      ' line-height: 1.1 !important;' +
+      '}';
+
     document.head.appendChild(style);
   };
 
@@ -1877,9 +1975,13 @@
 
   HybridNamelistInputEditor.prototype.render = function () {
     if (!this.catalog) return;
+    this.ensureSearchHighlightStyle();
     var self = this;
     var query = $.trim(this.$search.val()).toLowerCase();
     var groupOrder = orderGroups(Object.keys(this.catalog.groups));
+    var renderIssues = this.showCompatibility ? this.getCompatibilityIssues() : [];
+    var issueMap = this.buildCompatibilityIssueMap(renderIssues);
+    var groupIssueSummaries = this.buildGroupIssueSummaries(issueMap);
     var html = '';
     html += this.renderWorkflowPresetPanel();
     html += this.renderCompatibilityPanel();
@@ -1887,6 +1989,8 @@
     var totalCount = 0;
     groupOrder.forEach(function (groupName) {
       var fields = self.catalog.groups[groupName];
+      var groupIssueSummary = groupIssueSummaries[groupName] || { errors: 0, warnings: 0 };
+      var groupIssueClass = groupIssueSummary.errors ? ' namelist-input-group-has-error' : (groupIssueSummary.warnings ? ' namelist-input-group-has-warning' : '');
       var visibleFields = self.sortFieldsForRender(fields.filter(function (field) {
         totalCount += 1;
         if (self.state.enabled[field.key]) enabledCount += 1;
@@ -1895,11 +1999,13 @@
       }));
       if (self.hideEmptyGroups && visibleFields.length === 0) return;
       var expanded = self.state.expanded[groupName] || !!query;
-      html += '<div class="namelist-input-group' + (CORE_GROUPS[groupName] ? ' namelist-input-group-core' : '') + '" id="nml-group-' + esc(groupName) + '">';
+      html += '<div class="namelist-input-group' + (CORE_GROUPS[groupName] ? ' namelist-input-group-core' : '') + groupIssueClass + '" id="nml-group-' + esc(groupName) + '">';
       html += '<div class="namelist-input-group-header">';
       html += '<button type="button" class="btn btn-link btn-sm p-0 mr-2 namelist-input-group-toggle" data-group="' + esc(groupName) + '"><i class="fas ' + (expanded ? 'fa-chevron-down' : 'fa-chevron-right') + '"></i></button>';
       html += '<h5 class="mb-0">' + renderGroupLabelHtml(groupName, fields) + '</h5>';
       html += '<span class="badge badge-light ml-2">' + visibleFields.length + '</span>';
+      if (groupIssueSummary.errors) html += '<button type="button" class="btn btn-sm btn-danger py-0 ml-2 namelist-input-group-issue-jump" data-group="' + esc(groupName) + '" data-issue-type="error">' + groupIssueSummary.errors + ' errors</button>';
+      if (groupIssueSummary.warnings) html += '<button type="button" class="btn btn-sm btn-warning py-0 ml-2 namelist-input-group-issue-jump" data-group="' + esc(groupName) + '" data-issue-type="warning">' + groupIssueSummary.warnings + ' warnings</button>';
       if (CORE_GROUPS[groupName]) html += '<span class="badge badge-primary ml-2">core</span>';
       html += '</div>';
       html += '<div class="namelist-input-variables" style="display:' + (expanded ? 'block' : 'none') + '">';
@@ -1918,7 +2024,7 @@
           html += '</div></details>';
           currentSub = null;
         }
-        html += self.renderField(field);
+        html += self.renderField(field, issueMap);
       });
       if (currentSub !== null) html += '</div></details>';
       html += '</div></div>';
@@ -2463,10 +2569,10 @@
   }
 
 
-  HybridNamelistInputEditor.prototype.renderField = function (field) {
+  HybridNamelistInputEditor.prototype.renderField = function (field, issueMap) {
     var enabled = !!this.state.enabled[field.key];
     var compat = this.evaluateFieldCompatibility(field);
-    var engineIssues = this.showCompatibility ? this.getIssuesForField(field) : [];
+    var engineIssues = this.showCompatibility ? ((issueMap && issueMap[field.key]) || this.getIssuesForField(field)) : [];
     var cls = 'namelist-input-variable';
     if (!enabled) cls += ' namelist-input-variable-unset';
     if (compat.status) cls += ' compatibility-' + compat.status;
@@ -2559,6 +2665,11 @@
       var group = $(this).data('group');
       self.state.expanded[group] = !self.state.expanded[group];
       self.render();
+    });
+    this.$container.find('.namelist-input-group-issue-jump').off('click.namelistgroupissue').on('click.namelistgroupissue', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      self.jumpToFirstCompatibilityIssue($(this).data('issue-type'), $(this).data('group'));
     });
     this.$container.find('.namelist-input-subsection').off('toggle').on('toggle', function () {
       var key = $(this).data('subsection-key');
