@@ -1,17 +1,20 @@
 # 🌎 WRF Configuration Studio
 
-**WRF Configuration Studio** is a browser-based configuration environment for designing Weather Research and Forecasting Model domains, editing `namelist.wps` and `namelist.input`, and exploring WRF, WRFDA, OBSPROC, Registry, and compatibility-rule metadata.
+**WRF Configuration Studio** is a browser-based configuration environment for designing Weather Research and Forecasting Model domains, editing `namelist.wps`, editing `namelist.input`, exporting `namelist.obsproc`, and reviewing WRF, WRFDA, OBSPROC, Registry, and compatibility-rule metadata.
 
-This README is written for the first public web release of WRF Configuration Studio.
+This package is the current stable main checkpoint prepared for the public release review. It is intended to be used as a static web application through a local HTTP server or a static website host such as GitHub Pages.
 
 The project continues the technical lineage of browser-based WRF domain design tools, including the WRF Domain Wizard web build. The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation. WRF Configuration Studio also acknowledges earlier NOAA Forecast Systems Laboratory WRF Standard Initialization GUI work as part of the broader history of graphical WRF configuration and initialization tools.
 
 ---
 
-## Current validated release checkpoint
+## Current release checkpoint
 
 ```text
-Compatibility rules: 164 total, 144 valid/enforced, 15 unreviewed, 5 needs_review
+Application label: WRF Configuration Studio v1.0.0
+Release channel: stable main public-release review
+Compatibility rules: 184 total, 184 valid/enforced, 0 unreviewed, 0 needs_review
+Primary package contents: static browser app, runtime catalogs, source/provenance data, examples, documentation, and validation tools
 ```
 
 ---
@@ -22,11 +25,16 @@ Compatibility rules: 164 total, 144 valid/enforced, 15 unreviewed, 5 needs_revie
 - `namelist.wps` workflow support
 - Full-catalog `namelist.input` editor
 - WRFDA groups exposed as `&wrfvar*`
-- OBSPROC records exposed as `&obsproc_record1` through `&obsproc_record9`
+- OBSPROC records displayed as `obsproc_record1` through `obsproc_record9` in the editor and exported as `&record1` through `&record9` in `namelist.obsproc`
 - WRF Registry metadata for reference and discovery
 - Runtime JSON catalogs for browser-based use
 - Validated WRF namelist compatibility-rule engine
-- Version-aware compatibility checks for WRF ≤ 4.7.1 and WRF 4.8.x metadata
+- WRFDA and OBSPROC workflow compatibility rules
+- WRFDA and OBSPROC workflow presets
+- Collapsed group warning/error highlighting
+- Click-to-jump compatibility issue navigation
+- Natural numeric WRFVAR group sorting, so `wrfvar1`, `wrfvar2`, `wrfvar3`, and later groups appear in numeric order
+- Version-aware metadata support for the stable WRF 4.7.1 baseline and the unreleased `4.8.1-dev` Registry preview
 - Required-field save warnings
 - Suggested starting values for `time_step`, `radt`, `run_*`, and `cudt`
 - 360-degree map and graticule behavior
@@ -40,22 +48,49 @@ Compatibility rules: 164 total, 144 valid/enforced, 15 unreviewed, 5 needs_revie
 
 ---
 
+## Important WRF version note
+
+WRF Configuration Studio currently includes a development Registry preview labeled:
+
+```text
+data/raw/wrf/4.8.1-dev/
+```
+
+That material is **not** labeled as an official WRF release. It is retained as development/provenance data from the WRF `release-v4.8.1` source branch and should be treated as an unreleased preview until an official WRF release tag exists.
+
+Use these labels when describing this material:
+
+```text
+WRF 4.8.1-dev
+unreleased Registry preview
+source branch metadata
+not an official WRF release tag
+```
+
+---
+
 ## Compatibility-rule engine
 
 WRF Configuration Studio includes a conservative validated compatibility-rule framework for `namelist.input`.
 
-Validated-rule state for this release:
+Validated-rule state for this package:
 
 ```text
-164 total compatibility rules
-144 valid/enforced rules
-15 unreviewed rules retained but not enforced
-5 needs_review rules retained but not enforced
+184 total compatibility rules
+184 valid/enforced rules
+0 unreviewed rules
+0 needs_review rules
 ```
 
-Only validated rules are enforced by the browser interface. Rules marked `unreviewed` or `needs_review` are retained in the metadata for transparency and future review, but they are not enforced.
+Only rules with `validationStatus: "valid"` are enforced by the browser interface. In this package, every compatibility rule in the runtime validation file is valid and enforced according to its rule strength and trigger conditions.
 
-This behavior is intentional. The compatibility engine prioritizes safe enforcement over aggressive rule coverage.
+Rule strengths are used as follows:
+
+```text
+Hard      configuration conflicts or requirements that should be treated as errors
+Soft      warnings where user review is recommended
+Workflow  external-file, domain-role, compile-option, or workflow guidance
+```
 
 Supported compatibility-condition modes include:
 
@@ -72,6 +107,7 @@ not_equals
 not_one_of
 non_zero
 user_edited
+user_edited_one_of
 user_edited_non_zero
 greater_than
 greater_than_or_equal
@@ -81,25 +117,13 @@ between
 outside_range
 ```
 
-Example conservative rules in this release:
-
-```text
-BUCKET-J
-- Enforced only when bucket_j is greater than 0.
-- Avoids warnings on the default inactive value.
-
-CUGD-AVEDX-USER
-- Enforced only when the user edits cugd_avedx to a nonzero value.
-- Avoids default-page noise while still warning when the setting is actively used.
-```
-
-The browser interface displays the number of validated rules being enforced and separates hard errors, soft warnings, workflow guidance, and review-only metadata.
+The browser interface displays the number of validated rules being enforced and separates hard errors, soft warnings, workflow guidance, and source/reference metadata.
 
 ---
 
 ## Quick start
 
-Use a local HTTP server rather than opening `index.html` directly.
+Use a local HTTP server rather than opening `index.html` directly. Static JSON catalogs load more reliably from an HTTP server than from the browser's direct file mode.
 
 From the repository root:
 
@@ -119,6 +143,7 @@ Convenience launchers are also provided:
 Windows:      launch-local.bat
 macOS:        launch-local.command
 Linux/macOS:  launch-local.sh
+Python:       python3 launch_local_server.py
 ```
 
 ---
@@ -135,9 +160,9 @@ Expected validation summary:
 
 ```text
 Compatibility rules:
-  total: 164
-  statuses: Counter({'valid': 144, 'unreviewed': 15, 'needs_review': 5})
-  strengths: Counter({'Hard': 120, 'Soft': 24, 'Workflow': 20})
+  total: 184
+  statuses: Counter({'valid': 184})
+  strengths: Counter({'Hard': 125, 'Workflow': 35, 'Soft': 24})
 Compatibility numeric condition mode tests passed.
 Release validation passed.
 ```
@@ -146,7 +171,9 @@ Optional JavaScript syntax checks:
 
 ```bash
 node --check src/namelist/namelist-compatibility-engine.js
+node --check src/namelist/namelist-runtime-engine.js
 node --check src/namelist/namelist-input-editor.js
+node --check src/tools/wps-tools.js
 node --check tools/test_compatibility_condition_modes.js
 ```
 
@@ -160,7 +187,7 @@ Supported desktop browsers:
 - macOS: Safari, Chrome, Firefox
 - Linux: Chrome/Chromium, Firefox, Edge
 
-Mobile layouts are not a release target for this public release.
+Mobile layouts are not a release target for this package.
 
 ---
 
@@ -206,22 +233,19 @@ WRFConfigurationStudio/
 
 Main browser application source code.
 
-```text
-src/core/
-src/namelist/
-src/shared/
-src/tools/
-src/wps/
-```
-
 Important files include:
 
 ```text
 src/core/wrf-domain-wizard.js
+src/core/browser-compat.js
+src/core/app-version.js
 src/namelist/namelist-input-editor.js
 src/namelist/namelist-compatibility-engine.js
 src/namelist/namelist-runtime-engine.js
+src/tools/wps-tools.js
 ```
+
+`src/core/wrf-domain-wizard.js` contains the large domain-map and WPS editing layer inherited from the browser domain-wizard lineage. Smaller first-party layers under `src/namelist/` and `src/tools/` add the newer namelist editor, compatibility engine, WRFDA/OBSPROC workflow logic, and WPS helper panels.
 
 ### `styles/`
 
@@ -243,7 +267,7 @@ vendor/js/
 vendor/webfonts/
 ```
 
-These files are included so the application can run locally without a package install step.
+These files are included so the application can run locally without a package install step. They should not be hand-commented as first-party source files.
 
 ### `data/runtime/`
 
@@ -255,9 +279,12 @@ Important files include:
 data/runtime/namelist.catalog.json
 data/runtime/namelist.input.catalog.json
 data/runtime/namelist.input.compatibility.validated.json
+data/runtime/namelist.obsproc.catalog.json
 data/runtime/namelist.registry.merged.v3.json
 data/runtime/namelist.registry.group_index.v3.json
 ```
+
+Runtime JSON files are generated or curated data. JSON does not support comments, so explanatory notes are stored in metadata fields and in `docs/SOURCE_FILE_NOTES.md`.
 
 ### `data/raw/`
 
@@ -281,9 +308,11 @@ examples/doc/
 examples/test/
 ```
 
+These files are upstream/reference material and are not rewritten as first-party application comments.
+
 ### `docs/`
 
-User-facing and reference documentation.
+User-facing and maintainer documentation.
 
 Important contents include:
 
@@ -293,51 +322,12 @@ docs/USER_GUIDE.md
 docs/TECHNICAL_REFERENCE.md
 docs/PROJECT_LINEAGE.md
 docs/RELEASE_HISTORY.md
+docs/SOURCE_FILE_NOTES.md
+docs/COMMENT_AND_NOTES_AUDIT.md
+docs/GITHUB_WEBSITE_STRUCTURE.md
 docs/references/
 docs/release-notes/
 docs/user-guide/
-```
-
-### `docs/images/`
-
-User-guide screenshots and visual documentation assets.
-
-```text
-docs/images/user-guide/
-```
-
-### `docs/references/`
-
-Reference and lineage materials.
-
-Important files include:
-
-```text
-docs/references/WRF_GUI_original_source_69852.pdf
-docs/references/v4_technote.pdf
-docs/references/legacy_source_docs.zip
-```
-
-The legacy source documentation archive is retained as part of the project provenance trail.
-
-### `docs/release-notes/`
-
-Release-note snapshots and publication layout notes.
-
-```text
-docs/release-notes/PUBLICATION_LAYOUT.md
-docs/release-notes/WRF_v4.7.1_release.json
-docs/release-notes/WRF_v4.7.1_release_notes.md
-docs/release-notes/WRF_v4.8.0_release.json
-docs/release-notes/WRF_v4.8.0_release_notes.md
-```
-
-### `docs/user-guide/`
-
-User-guide publication assets.
-
-```text
-docs/user-guide/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx
 ```
 
 ### `tools/`
@@ -360,6 +350,8 @@ Primary documentation:
 - [Technical Reference](docs/TECHNICAL_REFERENCE.md)
 - [Project Lineage](docs/PROJECT_LINEAGE.md)
 - [Release History](docs/RELEASE_HISTORY.md)
+- [Source File Notes](docs/SOURCE_FILE_NOTES.md)
+- [Comment and Notes Audit](docs/COMMENT_AND_NOTES_AUDIT.md)
 - [GitHub Website Structure](docs/GITHUB_WEBSITE_STRUCTURE.md)
 - [Publication Layout](docs/release-notes/PUBLICATION_LAYOUT.md)
 
@@ -381,11 +373,11 @@ docs/user-guide/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx
 
 For publications, this software can be described as:
 
-> WRF Configuration Studio is a browser-based WRF configuration environment for domain design, `namelist.wps` editing, `namelist.input` editing, and metadata-assisted WRF configuration review. The first public release includes a conservative validated compatibility-rule engine that enforces only reviewed rules while retaining uncertain or workflow-dependent rules as non-enforcing metadata.
+> WRF Configuration Studio is a browser-based WRF configuration environment for domain design, `namelist.wps` editing, `namelist.input` editing, `namelist.obsproc` export, and metadata-assisted WRF configuration review. The current package includes a conservative validated compatibility-rule engine with 184 valid rules, WRFDA and OBSPROC workflow presets, issue navigation, and runtime Registry metadata for configuration review.
 
 Suggested limitation statement:
 
-> The compatibility-rule system is not intended to exhaustively encode every possible WRF namelist interaction. It prioritizes safe enforcement: validated rules are active, while uncertain, workflow-dependent, or manually reviewed rules remain documented but non-enforcing until additional validation or metadata support is added.
+> The compatibility-rule system is not intended to exhaustively encode every possible WRF namelist interaction. It prioritizes safe enforcement and clear user guidance. Rules that require external files, compile-time configuration, or domain-role interpretation are shown as workflow guidance rather than silent assumptions.
 
 ---
 
@@ -415,7 +407,9 @@ The original WRF Domain Wizard project by Jiří Richter remains credited in the
 
 This project is distributed under the GPL-3.0 License.
 
-[License:](https://github.com/HathewayWill/WRFConfigurationStudio/blob/main/LICENSE) GPL-3.0 License
+```text
+GPL-3.0 License
+```
 
 ---
 
@@ -444,9 +438,9 @@ WRFConfigurationStudio
 ## Release summary
 
 ```text
-rules: 164 total, 144 valid, 15 unreviewed, 5 needs_review
-latest validated UI checkpoint before final package: stable-namelist-description-formatting-20260802
+release label: WRF Configuration Studio v1.0.0 stable main public-release review
+compatibility rules: 184 total, 184 valid, 0 unreviewed, 0 needs_review
+rule strengths: 125 Hard, 35 Workflow, 24 Soft
+WRF 4.8.1 material: 4.8.1-dev, unreleased Registry preview only
 package SHA256: generate after building the final release zip
 ```
----
-<a href='https://mapmyvisitors.com/web/1c5d0'  title='Visit tracker'><img src='https://mapmyvisitors.com/map.png?cl=ffffff&w=500&t=tt&d=MQhYoa3dqHKn__1fbkfKyN4JddYCLARtWhmyUaa6iXg&co=2d78ad&ct=ffffff'/></a>

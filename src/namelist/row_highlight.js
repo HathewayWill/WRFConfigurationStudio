@@ -1,3 +1,6 @@
+/*
+ * Small row-highlighting helper used by the namelist editor UI.
+ */
 
 // Row Highlight Logic (v0.4.3)
 

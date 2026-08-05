@@ -1,3 +1,10 @@
+/*
+ * WRF Configuration Studio WPS helper tools.
+ *
+ * This file provides browser-side checks and helper calculations for WPS-style
+ * grid configuration. It does not run WPS executables. The helpers are intended
+ * to catch common setup issues before users export namelist.wps.
+ */
 (function () {
   const WPS_TOOLS_VERSION = (window.WRF_CONFIG_STUDIO_VERSION_TEXT || window.WRF_DOMAIN_WIZARD_VERSION_TEXT || 'v1.0.0');
 
@@ -65,6 +72,8 @@
   function getVisibleGridRows() {
     return qa('#grids .container-grid').filter(el => el.id !== 'grid_template' && el.offsetParent !== null);
   }
+  // Read one visible WPS grid row into a normalized object used by helper
+  // checks. Keeping this in one place avoids scattered DOM parsing.
   function getGridData(row) {
     return {
       row,
@@ -77,6 +86,8 @@
       label: ((q('.grid-label', row) || {}).textContent || '').trim() || 'grid'
     };
   }
+  // Provide a user-facing starting suggestion for map projection. This is
+  // guidance only; final projection choice remains a modeling decision.
   function recommendedProjection(refLat, eWe, eSn) {
     const a = Math.abs(refLat);
     if (!isFinite(a)) return 'lambert';

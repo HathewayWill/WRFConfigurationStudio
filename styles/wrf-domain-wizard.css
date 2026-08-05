@@ -1,3 +1,8 @@
+/*
+ * Main WRF Configuration Studio layout and domain-map styles.
+ * This file styles the map shell, WPS panels, namelist dialogs, and custom
+ * controls. Vendor CSS remains under vendor/ and should not be edited here.
+ */
 html,
 body {
   height: 100%;

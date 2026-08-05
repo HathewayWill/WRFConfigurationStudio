@@ -1,3 +1,12 @@
+/*
+ * WRF Configuration Studio namelist compatibility engine.
+ *
+ * The engine is intentionally data-driven: rule definitions live in
+ * data/runtime/namelist.input.compatibility.validated.json, while this file
+ * evaluates trigger conditions, requirement conditions, user-edited gates, and
+ * numeric comparisons in the browser. Keep rule-source evidence in JSON and
+ * keep execution semantics here.
+ */
 (function (global) {
   'use strict';
 
