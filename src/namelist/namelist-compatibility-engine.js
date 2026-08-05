@@ -101,6 +101,7 @@
     if (mode === 'set' || mode === 'required') return value !== undefined && value !== null && String(value).trim() !== '';
     if (mode === 'non_zero') return isNonZeroValue(value);
     if (mode === 'user_edited') return !!userEdited;
+    if (mode === 'user_edited_one_of') return !!userEdited && valuesMatch(value, vals);
     if (mode === 'user_edited_non_zero') return !!userEdited && isNonZeroValue(value);
     if (mode === 'truthy') return value === true || norm(value) === '.true.' || norm(value) === '1';
     if (mode === 'falsy') return value === false || norm(value) === '.false.' || norm(value) === '0';
