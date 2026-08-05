@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+/*
+ * Test browser compatibility-rule condition modes.
+ *
+ * This script loads the browser engine through vm and verifies numeric,
+ * user-edited, and version-gated modes without needing a browser.
+ */
 const fs = require('fs');
 const vm = require('vm');
 

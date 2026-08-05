@@ -1,11 +1,11 @@
 {
-  "name": "WRF Config Studio",
-  "version": "v1.0.0",
-  "repositoryNameRecommendation": "wrf-config-studio",
-  "description": "Browser-based WRF domain, namelist, and registry configuration tool.",
+  "name": "WRFConfigurationStudio",
+  "version": "1.0.0",
+  "repositoryNameRecommendation": "WRFConfigurationStudio",
+  "description": "Browser-based WRF domain, namelist, WRFDA, OBSPROC, Registry, and compatibility-rule configuration tool.",
   "legacyName": "WRF Domain Wizard",
-  "legacyLineage": "V3.1.0 beta full-catalog touch/trackpad docs-fixed build",
   "generated": "2026-05-04T23:20:07Z",
-  "channel": "mainline",
-  "feature": "ARW Technical Note scientific context for namelist editor"
+  "channel": "stable-main-public-release-review",
+  "feature": "WRF domain design, namelist.input editor, namelist.obsproc export, WRFDA/OBSPROC presets, and validated compatibility rules",
+  "lineageDocumentation": "docs/PROJECT_LINEAGE.md"
 }

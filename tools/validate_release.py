@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""Validate the static WRF Configuration Studio release package.
+
+The release check confirms required files, verifies the runtime compatibility
+catalog has the expected 184 valid rules, and runs the JavaScript condition-mode
+test. It is intentionally lightweight so it can be run before every package.
+"""
 import json
 import subprocess
 from collections import Counter

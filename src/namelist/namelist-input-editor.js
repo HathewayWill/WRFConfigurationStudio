@@ -1,6 +1,22 @@
+/*
+ * WRF Configuration Studio namelist.input / namelist.obsproc editor.
+ *
+ * Responsibilities:
+ * - load runtime namelist, OBSPROC, source-priority, and compatibility catalogs;
+ * - seed WRF-style scalar and per-domain array values;
+ * - render searchable and collapsible namelist groups;
+ * - evaluate compatibility rules and show issue navigation;
+ * - apply WRFDA and OBSPROC workflow presets;
+ * - export namelist.input and namelist.obsproc text.
+ *
+ * This file is intentionally verbose because it owns the browser UI state. Keep
+ * WRF-specific decisions close to the related code and keep rule evidence in the
+ * runtime JSON files.
+ */
 (function (global, $) {
   'use strict';
 
+  // Preferred display order from the WRF namelist documentation.
   var README_GROUP_ORDER = [
     'time_control', 'domains', 'physics', 'dfi_control', 'stoch', 'noah_mp',
     'fdda', 'scm', 'dynamics', 'bdy_control', 'ideal', 'tc',
@@ -218,6 +234,8 @@
   };
 
 
+  // WRFDA and OBSPROC workflow presets. These set common companion fields but
+  // still leave final scientific choices to the user.
   var WORKFLOW_PRESETS = [
     {
       id: 'wrfda-3dvar-conventional',
@@ -882,6 +900,8 @@
   };
 
 
+  // Load validated compatibility rules from data/runtime so the browser uses
+  // the current 184-rule catalog instead of stale embedded fallback data.
   HybridNamelistInputEditor.prototype.loadRuntimeCompatibility = async function (runtimeBase, fallback) {
     runtimeBase = runtimeBase || (this.opts.runtimeBaseUrl || 'data/runtime');
     fallback = fallback || this.compatibility || { rules: [] };
@@ -1141,6 +1161,8 @@
     return this.createRuntimeEngine(this.maxDom || this.detectMaxDom());
   };
 
+  // Return the currently evaluated compatibility issues. This is the common
+  // source for row coloring, group badges, and top-panel issue counts.
   HybridNamelistInputEditor.prototype.getCompatibilityIssues = function () {
     var factory = global.NamelistCompatibilityEngine && global.NamelistCompatibilityEngine.create;
     if (!factory || !this.catalog) return [];
@@ -1287,6 +1309,7 @@
     return null;
   };
 
+  // Render the top compatibility panel, including clickable issue counters.
   HybridNamelistInputEditor.prototype.renderCompatibilityPanel = function () {
     var issues = this.getCompatibilityIssues();
     var errors = issues.filter(function (issue) { return issue.type === 'error'; }).length;
@@ -1317,6 +1340,8 @@
     return html;
   };
 
+  // Render workflow presets separately from raw field editing so users can
+  // start from common WRFDA/OBSPROC setups without hiding any fields.
   HybridNamelistInputEditor.prototype.renderWorkflowPresetPanel = function () {
     var selectedId = this.state.selectedWorkflowPreset || '';
     var selectedPreset = this.getWorkflowPresetById(selectedId);
@@ -1443,6 +1468,8 @@
     return null;
   };
 
+  // Expand the relevant group and scroll to the first field involved in an
+  // error or warning. This makes collapsed-group issue badges actionable.
   HybridNamelistInputEditor.prototype.jumpToFirstCompatibilityIssue = function (issueType, groupName) {
     var key = this.findFirstCompatibilityIssueKey(issueType, groupName);
     if (!key) {
@@ -1973,6 +2000,8 @@
     });
   };
 
+  // Main render pass for the modal editor. Keep expensive work out of this path
+  // unless it is needed every time the editor state changes.
   HybridNamelistInputEditor.prototype.render = function () {
     if (!this.catalog) return;
     this.ensureSearchHighlightStyle();
@@ -2036,6 +2065,8 @@
   };
 
 
+  // Field-description helpers remove duplicated names/defaults and keep the UI
+  // focused on useful WRF guidance rather than raw extracted text.
   function getUsefulFieldDescription(field) {
     var description = field && field.description !== undefined && field.description !== null
       ? String(field.description).trim()
@@ -2870,6 +2901,8 @@
     return exportKind === 'obsproc' ? 'namelist.obsproc' : 'namelist.input';
   };
 
+  // Build exported namelist text. OBSPROC display groups are converted from
+  // obsproc_record* back to &record* during namelist.obsproc export.
   HybridNamelistInputEditor.prototype.buildNamelistText = function (exportKind) {
     exportKind = exportKind || 'input';
     var out = [];
