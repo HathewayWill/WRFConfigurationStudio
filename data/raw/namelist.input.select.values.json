@@ -102,22 +102,7 @@
       }
     }
   },
-  "group": {
-    "var": {
-      "values": {
-        "0": "val0",
-        "1": "val1",
-        "2": "val2"
-      }
-    }
-  },
   "physics": {
-    "03input": {
-      "values": {
-        "0": "use the profile inside RRTMG scheme",
-        "2": "use CAM ozone data from ozone.formatted"
-      }
-    },
     "aer_angexp_opt": {
       "values": {
         "1": "constant value from aer_angexp_val",
@@ -836,6 +821,12 @@
         "0": "off",
         "1": "turn on top-down radiation-driven mixing"
       }
+    },
+    "o3input": {
+      "values": {
+        "0": "use the profile inside RRTMG scheme",
+        "2": "use CAM ozone data from ozone.formatted"
+      }
     }
   },
   "time_control": {
@@ -857,7 +848,7 @@
         "10": "GRIB2",
         "11": "parallel netCDF",
         "2": "netCDF",
-        "4": "PHD5",
+        "4": "PHDF5",
         "5": "GRIB1"
       }
     },
@@ -866,7 +857,7 @@
         "10": "GRIB2",
         "11": "parallel netCDF",
         "2": "netCDF",
-        "4": "PHD5",
+        "4": "PHDF5",
         "5": "GRIB1"
       }
     },
@@ -932,7 +923,7 @@
     "fire_fmc_read": {
       "values": {
         "0": "fuel moisture from wrfinput",
-        "1": "user-prescribed fuel moisture",
+        "1": "user-prescribedribed fuel moisture",
         "2": "read fuel moisture from file"
       }
     },
@@ -946,7 +937,7 @@
       "values": {
         "-1": "registry default / not explicitly selected",
         "0": "uniform fuel category",
-        "1": "user-prescribed fuel categories",
+        "1": "user-prescribedribed fuel categories",
         "2": "read fuel categories from file"
       }
     },

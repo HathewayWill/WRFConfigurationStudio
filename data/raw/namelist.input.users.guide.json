@@ -974,11 +974,6 @@
       "description": "option to read CAMtr_volume_mixing_ratio files of greenhouse gas values; new since V4.4;",
       "entries": "1"
     },
-    "03input": {
-      "defaultValue": "2",
-      "description": "ozone input option for RRTMG radiation;",
-      "entries": "1"
-    },
     "aer_opt": {
       "defaultValue": "0",
       "description": "aerosol input option for RRTMG radiation;",
@@ -1697,6 +1692,11 @@
     "bucket_J": {
       "defaultValue": "-1",
       "description": "bucket reset value for energy accumulation (in Joules); useful for long (multi-year) simulations; default value of -1 means inactive",
+      "entries": "1"
+    },
+    "o3input": {
+      "defaultValue": "2",
+      "description": "ozone input option for RRTMG radiation;",
       "entries": "1"
     }
   },
