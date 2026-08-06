@@ -1,7 +1,7 @@
 [2026-05-04] WRF Config Studio v1.0.0-local-server-port-fix
 - Fixed local launcher crash when port 8000 is already in use.
 - launch_local_server.py now automatically uses the next available port.
-- START_LOCAL_SERVER.bat, START_LOCAL_SERVER.sh, and START_LOCAL_SERVER.command now pass optional port arguments through to the Python launcher.
+- launch-local.bat, launch-local.sh, and launch-local.command now pass optional port arguments through to the Python launcher.
 - Added docs/LOCAL_SERVER_PORT_FIX_V1.0.0.md.
 - No map, export, WRFDA, OBSPROC, ARW context, or UI behavior changes.
 
@@ -236,7 +236,7 @@ Changed / added:
 - data/runtime/namelist.registry.merged.v3.json
 - data/runtime/namelist.registry.group_index.v3.json
 - data/runtime/namelist.input.catalog.json metadata annotations
-- data/registry/*
+- data/raw/registry/*
 - docs/REGISTRY_METADATA_AUDIT_V3.0.0.md
 - docs/CHANGELOG.txt
 - docs/ALL_PATCH_NOTES.txt
@@ -2605,7 +2605,7 @@ Changed / added:
 - data/runtime/namelist.registry.merged.v3.json
 - data/runtime/namelist.registry.group_index.v3.json
 - data/runtime/namelist.input.catalog.json metadata annotations
-- data/registry/*
+- data/raw/registry/*
 - docs/REGISTRY_METADATA_AUDIT_V3.0.0.md
 - docs/CHANGELOG.txt
 - docs/ALL_PATCH_NOTES.txt

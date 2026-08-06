@@ -1,91 +1,56 @@
-# WRF Config Studio Quick Start
+# Quick Start
 
-Version: **v1.0.0**  
-Generated: 2026-05-04T23:20:07Z
+WRF Configuration Studio is a static browser application. Use a local HTTP server rather than opening `index.html` directly.
 
-## 1. Extract the package
+## Start the local server
 
-Unzip the WRF Config Studio release package.
-
-## 2. Start a local server
-
-From inside the extracted folder:
+From the package root:
 
 ```bash
-python -m http.server 8000
+python3 -m http.server 8001
 ```
 
-Or use one of the included launch helpers:
+Open:
 
 ```text
-START_LOCAL_SERVER.bat
-START_LOCAL_SERVER.sh
-START_LOCAL_SERVER.command
-launch_local_server.py
+http://127.0.0.1:8001
 ```
 
-
-
-### Port already in use
-
-If port `8000` is already in use, the launcher automatically uses the next available port and prints the correct local URL.
-
-Example:
-
-```text
-Port 8000 is already in use. Using port 8001 instead.
-Open: http://127.0.0.1:8001/
-```
-
-You can also request a preferred port:
+Alternative launcher:
 
 ```bash
-python launch_local_server.py 8010
+python3 launch_local_server.py
 ```
 
-## 3. Open the app
+## Basic workflow
+
+1. Open the application in a supported desktop browser.
+2. Use the map and domain controls to create or edit WRF domains.
+3. Review and export `namelist.wps`.
+4. Open the `namelist.input` editor.
+5. Review required fields, compatibility warnings, WRFDA settings, and workflow presets.
+6. Export `namelist.input`.
+7. Export `namelist.obsproc` when OBSPROC records are configured.
+
+## Validate a package
+
+From the package root:
+
+```bash
+python3 tools/validate_release.py
+```
+
+Expected result:
 
 ```text
-http://127.0.0.1:8000
+Compatibility rules:
+  total: 184
+  statuses: Counter({'valid': 184})
+  strengths: Counter({'Hard': 125, 'Workflow': 35, 'Soft': 24})
+Compatibility numeric condition mode tests passed.
+Release validation passed.
 ```
 
-## 4. Create a domain
+## Map note
 
-1. Open the Domains panel.
-2. Click New.
-3. Draw the parent domain on the map.
-4. Adjust projection, grid, and nesting values.
-
-## 5. Export files
-
-Use the app to save or copy:
-
-```text
-namelist.wps
-namelist.input
-namelist.obsproc
-```
-
-## 6. Remember the file split
-
-WRFDA stays in:
-
-```text
-namelist.input
-```
-
-OBSPROC saves separately as:
-
-```text
-namelist.obsproc
-```
-
-## 7. Hard refresh after updates
-
-When replacing local builds, use:
-
-```text
-Ctrl+F5
-```
-
-Then reload the app.
+The app files run locally, but map tiles are loaded from online tile providers unless the application is configured to use another tile source.
