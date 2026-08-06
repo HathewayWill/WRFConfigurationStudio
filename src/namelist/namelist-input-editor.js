@@ -546,6 +546,42 @@
   }
 
 
+  function applySelectValueOverlayToCatalog(inputCatalog, selectValues) {
+    if (!inputCatalog || !inputCatalog.groups || !selectValues) return inputCatalog;
+
+    var merged = cloneCatalogJson(inputCatalog) || { groups: {} };
+    Object.keys(selectValues || {}).forEach(function (groupName) {
+      var selectGroup = selectValues[groupName] || {};
+      var fields = normalizeCatalogGroupFields(merged.groups[groupName]);
+
+      if (!fields.length) return;
+
+      fields.forEach(function (field) {
+        if (!field || !field.name) return;
+
+        var selectMeta = selectGroup[field.name] || {};
+        var values = selectMeta.values || null;
+
+        if (values && Object.keys(values).length) {
+          field.enumValues = values;
+          field.enum_values = values;
+          field.enumSource = 'select_values';
+          field.enum_source = 'select_values';
+          field.type = 'selection';
+        }
+
+        if (selectMeta.range) {
+          field.range = selectMeta.range;
+        }
+      });
+
+      merged.groups[groupName] = fields;
+    });
+
+    return merged;
+  }
+
+
   function buildMergedCatalog(registry, selectValues, usersGuide, manual, readme, inventory, subsections, sourcePriority, semantics) {
     function getSourceRule(groupName, varName) {
       return (sourcePriority || {})[fieldKey(groupName, varName)] || {};
@@ -944,6 +980,13 @@
 
     var obsprocCondensed = await $.getJSON(runtimeBase + '/namelist.obsproc.catalog.json').catch(function () { return null; });
     condensed = mergeObsprocCatalog(condensed, obsprocCondensed);
+
+    // Runtime catalogs are browser-ready and may not include every raw select-value
+    // overlay. Apply the raw select-value table here so finite integer options, such
+    // as fire namelist modes, render as selection controls instead of free numeric
+    // inputs.
+    var selectValueOverlay = await Promise.resolve($.getJSON('data/raw/namelist.input.select.values.json')).catch(function () { return null; });
+    condensed = applySelectValueOverlayToCatalog(condensed, selectValueOverlay);
 
     if (condensed && condensed.groups) {
       this.catalog = { groups: condensed.groups || {} };

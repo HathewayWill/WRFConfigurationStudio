@@ -921,5 +921,99 @@
         "1": "add 48 sfc diagnostic arrays (max/min/mean/std) in the specified time interval"
       }
     }
+  },
+  "fire": {
+    "fire_advection": {
+      "values": {
+        "0": "compute fire spread from normal wind speed and slope",
+        "1": "project fireline particle speed onto the normal direction"
+      }
+    },
+    "fire_fmc_read": {
+      "values": {
+        "0": "fuel moisture from wrfinput",
+        "1": "user-prescribed fuel moisture",
+        "2": "read fuel moisture from file"
+      }
+    },
+    "fire_fuel_left_method": {
+      "values": {
+        "1": "fuel_left computation method 1",
+        "2": "fuel_left computation method 2"
+      }
+    },
+    "fire_fuel_read": {
+      "values": {
+        "-1": "registry default / not explicitly selected",
+        "0": "uniform fuel category",
+        "1": "user-prescribed fuel categories",
+        "2": "read fuel categories from file"
+      }
+    },
+    "fire_grows_only": {
+      "values": {
+        "0": "off",
+        "1": "on, fire can only grow"
+      }
+    },
+    "fire_mountain_type": {
+      "values": {
+        "0": "none",
+        "1": "COS hill",
+        "2": "east-west ridge",
+        "3": "north-south ridge"
+      }
+    },
+    "fire_sfc_flx": {
+      "values": {
+        "0": "exponential decay heat-flux distribution",
+        "1": "Truncated Gaussian heat-flux distribution"
+      }
+    },
+    "fire_smk_scheme": {
+      "values": {
+        "0": "smoke tracers at first model level",
+        "1": "Truncated Gaussian smoke-release distribution"
+      }
+    },
+    "fire_sprd_mdl": {
+      "values": {
+        "0": "MacArthur spread-rate formula",
+        "1": "BEHAVE spread-rate formula"
+      }
+    },
+    "fire_topo_from_atm": {
+      "values": {
+        "0": "do not populate fire terrain from atmosphere",
+        "1": "populate ZSF by interpolating from atmosphere"
+      }
+    },
+    "fire_upwind_split": {
+      "values": {
+        "0": "off",
+        "1": "upwind advection separately from normal-direction spread"
+      }
+    },
+    "fire_upwinding": {
+      "values": {
+        "1": "standard",
+        "2": "Godunov",
+        "3": "ENO",
+        "4": "Sethian",
+        "5": "second-order",
+        "6": "WENO3",
+        "7": "WENO5",
+        "8": "hybrid WENO3/ENO1",
+        "9": "hybrid WENO5/ENO1"
+      }
+    },
+    "fire_upwinding_reinit": {
+      "values": {
+        "1": "WENO3",
+        "2": "WENO5",
+        "3": "hybrid WENO3/ENO1",
+        "4": "hybrid WENO5/ENO1"
+      }
+    }
   }
 }
