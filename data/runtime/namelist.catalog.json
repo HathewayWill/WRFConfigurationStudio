@@ -263,7 +263,7 @@
     },
     "version": "V3.1.0-beta-full-catalog-merged-fixes",
     "visibilityPolicy": "everything_visible_no_filtering",
-    "compatibilityValidation": "inactive_metadata_only",
+    "compatibilityValidation": "validated_runtime_enforced",
     "obsprocMergedIntoMainCatalog": true,
     "publicAppName": "WRF Config Studio",
     "publicVersion": "v1.0.0",
@@ -14502,7 +14502,7 @@
         "type": "real",
         "entries": "1",
         "normalized_default": 10000.0,
-        "description": "Threshhold pressure, Qv > flag set to value; Pa",
+        "description": "Threshold pressure, Qv > flag set to value; Pa",
         "is_logical": false,
         "is_finite": false,
         "ui_status": "curated_group_hidden",
@@ -14514,7 +14514,7 @@
           "default_normalized": 10000.0,
           "comments": [
             "qv_max_p_safe",
-            "Threshhold pressure, Qv > flag set to value",
+            "Threshold pressure, Qv > flag set to value",
             "Pa"
           ],
           "io": "irh",
@@ -14544,7 +14544,7 @@
         "inventory": {
           "default_raw": 10000.0,
           "default_normalized": 10000.0,
-          "description": "Threshhold pressure, Qv > flag set to value; Pa",
+          "description": "Threshold pressure, Qv > flag set to value; Pa",
           "description_source": "registry"
         }
       },
@@ -14658,7 +14658,7 @@
         "type": "real",
         "entries": "1",
         "normalized_default": 110000.0,
-        "description": "Threshhold pressure, Qv < flag set to value; Pa",
+        "description": "Threshold pressure, Qv < flag set to value; Pa",
         "is_logical": false,
         "is_finite": false,
         "ui_status": "curated_group_hidden",
@@ -14670,7 +14670,7 @@
           "default_normalized": 110000.0,
           "comments": [
             "qv_min_p_safe",
-            "Threshhold pressure, Qv < flag set to value",
+            "Threshold pressure, Qv < flag set to value",
             "Pa"
           ],
           "io": "irh",
@@ -14700,7 +14700,7 @@
         "inventory": {
           "default_raw": 110000.0,
           "default_normalized": 110000.0,
-          "description": "Threshhold pressure, Qv < flag set to value; Pa",
+          "description": "Threshold pressure, Qv < flag set to value; Pa",
           "description_source": "registry"
         }
       },
@@ -15308,7 +15308,7 @@
           "default_normalized": false,
           "comments": [
             "smooth_cg_topo",
-            "T/F smooth CG topo on boundarries",
+            "T/F smooth CG topo on boundaries",
             "flag"
           ],
           "io": "irh",
@@ -17134,7 +17134,7 @@
           "default_raw": 1,
           "default_normalized": 1,
           "comments": [
-            "vertical refinment factor for ndown, not used for concurrent vertical grid nesting"
+            "vertical refinement factor for ndown, not used for concurrent vertical grid nesting"
           ],
           "io": "irh",
           "sources": [
@@ -29473,7 +29473,7 @@
         "type": "integer",
         "entries": "max_domains",
         "normalized_default": 1,
-        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
         "is_logical": false,
         "is_finite": false,
         "ui_status": "hidden_advanced",
@@ -29485,7 +29485,7 @@
           "default_normalized": 1,
           "comments": [
             "fire_fmc_read",
-            "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file"
+            "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file"
           ],
           "io": "-",
           "sources": [
@@ -29514,7 +29514,7 @@
         "inventory": {
           "default_raw": 1,
           "default_normalized": 1,
-          "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+          "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
           "description_source": "registry"
         }
       },
@@ -29728,7 +29728,7 @@
         "type": "integer",
         "entries": "max_domains",
         "normalized_default": -1,
-        "description": "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+        "description": "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
         "is_logical": false,
         "is_finite": false,
         "ui_status": "hidden_advanced",
@@ -29740,7 +29740,7 @@
           "default_normalized": -1,
           "comments": [
             "fire_fuel_read",
-            "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file"
+            "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file"
           ],
           "io": "-",
           "sources": [
@@ -29769,7 +29769,7 @@
         "inventory": {
           "default_raw": -1,
           "default_normalized": -1,
-          "description": "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+          "description": "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
           "description_source": "registry"
         }
       },
@@ -34672,7 +34672,7 @@
         "type": "integer",
         "entries": "max_domains",
         "normalized_default": 1,
-        "description": "which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+        "description": "which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
         "is_logical": false,
         "is_finite": false,
         "ui_status": "hidden_advanced",
@@ -34684,7 +34684,7 @@
           "default_normalized": 1,
           "comments": [
             "fire_sprd_mdl",
-            "which spread rate formula: if 0, Macarthur; if 1, BEHAVE"
+            "which spread rate formula: if 0, MacArthur; if 1, BEHAVE"
           ],
           "io": "-",
           "sources": [
@@ -34713,7 +34713,7 @@
         "inventory": {
           "default_raw": 1,
           "default_normalized": 1,
-          "description": "which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+          "description": "which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
           "description_source": "registry"
         }
       },
@@ -37669,58 +37669,6 @@
           "description_source": "users"
         },
         "pdf_default_semantics": "published_default"
-      }
-    },
-    "group": {
-      "var": {
-        "name": "var",
-        "group": "group",
-        "type": null,
-        "entries": null,
-        "normalized_default": null,
-        "description": null,
-        "is_logical": false,
-        "is_finite": true,
-        "ui_status": null,
-        "enum_source": "select_values",
-        "enum_values": {
-          "0": "val0",
-          "1": "val1",
-          "2": "val2"
-        },
-        "dependency_hints": [],
-        "registry": {
-          "default_raw": null,
-          "default_normalized": null,
-          "comments": [],
-          "io": null,
-          "sources": [],
-          "errors": []
-        },
-        "users_guide": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null
-        },
-        "manual": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null,
-          "sources": []
-        },
-        "readme": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null,
-          "comments": [],
-          "sources": []
-        },
-        "inventory": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null,
-          "description_source": null
-        }
       }
     },
     "ideal": {
@@ -41438,61 +41386,6 @@
       }
     },
     "physics": {
-      "03input": {
-        "name": "03input",
-        "group": "physics",
-        "type": "integer",
-        "entries": "1",
-        "normalized_default": 2,
-        "description": "ozone input option for RRTMG radiation;",
-        "is_logical": false,
-        "is_finite": true,
-        "ui_status": "curated_group_hidden",
-        "enum_source": "select/guide",
-        "enum_values": {
-          "0": "use the profile inside RRTMG scheme",
-          "2": "use CAM ozone data from ozone.formatted"
-        },
-        "dependency_hints": [],
-        "registry": {
-          "default_raw": 2,
-          "default_normalized": 2,
-          "comments": [
-            "03input",
-            "ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)"
-          ],
-          "io": "-",
-          "sources": [
-            "UsersGuide/master_full"
-          ],
-          "errors": []
-        },
-        "users_guide": {
-          "default_raw": "2",
-          "default_normalized": 2,
-          "description": "ozone input option for RRTMG radiation;"
-        },
-        "manual": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null,
-          "sources": []
-        },
-        "readme": {
-          "default_raw": null,
-          "default_normalized": null,
-          "description": null,
-          "comments": [],
-          "sources": []
-        },
-        "inventory": {
-          "default_raw": 2,
-          "default_normalized": 2,
-          "description": "ozone input option for RRTMG radiation;",
-          "description_source": "users"
-        },
-        "pdf_default_semantics": "published_default"
-      },
       "acc_phy_tend": {
         "name": "acc_phy_tend",
         "group": "physics",
@@ -42534,7 +42427,7 @@
           "default_normalized": 2,
           "comments": [
             "bl_mynn_cloudpdf",
-            "0:original, 1:Kuwano, 2:Chaboreau-Bechtold"
+            "0:original, 1:Kuwano, 2:Chaboureau-Bechtold"
           ],
           "io": "irh",
           "sources": [
@@ -46801,7 +46694,7 @@
           "default_normalized": 0.0,
           "comments": [
             "irr_daily_amount",
-            "sf_surf_irr_scheme WATER AMOUNT [mm]"
+            "Daily irrigation water amount [mm]"
           ],
           "io": "rh",
           "sources": [
@@ -73384,7 +73277,7 @@
           "10": "GRIB2",
           "11": "parallel netCDF",
           "2": "netCDF",
-          "4": "PHD5",
+          "4": "PHDF5",
           "5": "GRIB1"
         },
         "dependency_hints": [],
@@ -73393,7 +73286,7 @@
           "default_normalized": null,
           "comments": [
             "io_form_auxhist2",
-            "output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+            "output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
           ],
           "io": "-",
           "sources": [
@@ -73539,7 +73432,7 @@
           "10": "GRIB2",
           "11": "parallel netCDF",
           "2": "netCDF",
-          "4": "PHD5",
+          "4": "PHDF5",
           "5": "GRIB1"
         },
         "dependency_hints": [],
@@ -73548,7 +73441,7 @@
           "default_normalized": 2,
           "comments": [
             "io_form_auxinput2",
-            "IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+            "IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
           ],
           "io": "-",
           "sources": [

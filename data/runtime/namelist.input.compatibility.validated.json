@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "notes": "Promoted Bucket A compatibility rules from unreviewed to valid.",
+    "notes": "All compatibility rules in this runtime file have validationStatus=valid and are eligible for enforcement by the editor.",
     "patched_date": "2026-04-15",
     "patched_version": "v0.7.3",
     "ruleCount": 184,
@@ -12,7 +12,7 @@
     },
     "variableCount": 169,
     "lastReviewedDate": "2026-08-02",
-    "validRuleCount": 144,
+    "validRuleCount": 184,
     "lastPromotionBatch": "2026-08-02_bucket_a_promotion",
     "statusCounts": {
       "valid": 184
@@ -26,7 +26,7 @@
   },
   "rules": [
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-1",
       "notes": null,
       "requirements": [
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-2",
       "notes": null,
       "requirements": [
@@ -96,7 +96,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-4",
       "notes": null,
       "requirements": [
@@ -128,7 +128,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-5",
       "notes": null,
       "requirements": [
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-6",
       "notes": null,
       "requirements": [
@@ -208,7 +208,7 @@
       ]
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-7",
       "notes": null,
       "requirements": [
@@ -247,7 +247,7 @@
       ]
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-8",
       "notes": null,
       "requirements": [
@@ -280,7 +280,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-9",
       "notes": null,
       "requirements": [
@@ -313,7 +313,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-10",
       "notes": null,
       "requirements": [
@@ -345,7 +345,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-12",
       "notes": null,
       "requirements": [
@@ -377,7 +377,7 @@
       "validationUrl": "https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/namelist_variables.html"
     },
     {
-      "category": "PBL \u2194 Surface Layer",
+      "category": "PBL ↔ Surface Layer",
       "id": "PBL-16",
       "notes": null,
       "requirements": [
@@ -458,7 +458,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Land Surface \u2194 Radiation",
+      "category": "Land Surface ↔ Radiation",
       "id": "LSM-8-RAD",
       "notes": null,
       "requirements": [
@@ -548,7 +548,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban \u2194 PBL",
+      "category": "Urban ↔ PBL",
       "id": "URBAN-BEP",
       "notes": null,
       "requirements": [
@@ -587,7 +587,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Urban \u2194 PBL",
+      "category": "Urban ↔ PBL",
       "id": "URBAN-BEM",
       "notes": null,
       "requirements": [
@@ -1075,7 +1075,7 @@
       ]
     },
     {
-      "category": "Cumulus \u2194 PBL",
+      "category": "Cumulus ↔ PBL",
       "id": "CU-7-PBL",
       "notes": null,
       "requirements": [
@@ -1113,7 +1113,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus \u2194 Shallow",
+      "category": "Cumulus ↔ Shallow",
       "id": "CU-14-SHCU",
       "notes": null,
       "requirements": [
@@ -1225,7 +1225,7 @@
       ]
     },
     {
-      "category": "Shallow Cumulus \u2194 PBL",
+      "category": "Shallow Cumulus ↔ PBL",
       "id": "SHCU-DENG",
       "notes": null,
       "requirements": [
@@ -1418,7 +1418,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Cumulus \u2194 Radiation",
+      "category": "Cumulus ↔ Radiation",
       "id": "CU-RAD",
       "notes": null,
       "requirements": [
@@ -1844,7 +1844,7 @@
       "validationBatch": "2026-07-31_batch4_safe_default_off"
     },
     {
-      "category": "Radiation \u2194 MP",
+      "category": "Radiation ↔ MP",
       "id": "USE-MP-RE",
       "notes": null,
       "requirements": [
@@ -2042,7 +2042,7 @@
       "validationBatch": "2026-07-31_bucket_j_numeric"
     },
     {
-      "category": "Aerosol \u2194 MP",
+      "category": "Aerosol ↔ MP",
       "id": "AER-OPT-3",
       "notes": null,
       "requirements": [
@@ -2559,7 +2559,7 @@
       ]
     },
     {
-      "category": "WPS \u2194 WRF",
+      "category": "WPS ↔ WRF",
       "id": "NUM-LAND-CAT",
       "notes": null,
       "requirements": [
@@ -2883,7 +2883,7 @@
       "fix": "Set physics.cu_physics=10, or leave minShallowFreq unset/default."
     },
     {
-      "category": "Radiation \u2194 MP",
+      "category": "Radiation ↔ MP",
       "id": "PROGN-MP",
       "notes": null,
       "requirements": [
@@ -3251,7 +3251,7 @@
       ]
     },
     {
-      "category": "Cumulus \u2194 Radiation",
+      "category": "Cumulus ↔ Radiation",
       "id": "CU-RAD-FEEDBACK",
       "notes": null,
       "requirements": [

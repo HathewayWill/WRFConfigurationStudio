@@ -13308,11 +13308,11 @@
       {
         "comments": [
           "qv_max_p_safe",
-          "Threshhold pressure, Qv > flag set to value",
+          "Threshold pressure, Qv > flag set to value",
           "Pa"
         ],
         "defaultValue": 10000.0,
-        "description": "qv_max_p_safe | Threshhold pressure, Qv > flag set to value | Pa",
+        "description": "qv_max_p_safe | Threshold pressure, Qv > flag set to value | Pa",
         "entries": "1",
         "group": "domains",
         "io": "irh",
@@ -13413,11 +13413,11 @@
       {
         "comments": [
           "qv_min_p_safe",
-          "Threshhold pressure, Qv < flag set to value",
+          "Threshold pressure, Qv < flag set to value",
           "Pa"
         ],
         "defaultValue": 110000.0,
-        "description": "qv_min_p_safe | Threshhold pressure, Qv < flag set to value | Pa",
+        "description": "qv_min_p_safe | Threshold pressure, Qv < flag set to value | Pa",
         "entries": "1",
         "group": "domains",
         "io": "irh",
@@ -13868,11 +13868,11 @@
       {
         "comments": [
           "smooth_cg_topo",
-          "T/F smooth CG topo on boundarries",
+          "T/F smooth CG topo on boundaries",
           "flag"
         ],
         "defaultValue": false,
-        "description": "smooth_cg_topo | T/F smooth CG topo on boundarries | flag",
+        "description": "smooth_cg_topo | T/F smooth CG topo on boundaries | flag",
         "entries": "1",
         "group": "domains",
         "io": "irh",
@@ -15036,10 +15036,10 @@
       },
       {
         "comments": [
-          "vertical refinment factor for ndown, not used for concurrent vertical grid nesting"
+          "vertical refinement factor for ndown, not used for concurrent vertical grid nesting"
         ],
         "defaultValue": 1,
-        "description": "vertical refinment factor for ndown, not used for concurrent vertical grid nesting",
+        "description": "vertical refinement factor for ndown, not used for concurrent vertical grid nesting",
         "entries": "1",
         "group": "domains",
         "io": "irh",
@@ -23212,10 +23212,10 @@
       {
         "comments": [
           "fire_fmc_read",
-          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file"
+          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": 1,
-        "description": "fire_fmc_read | ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+        "description": "fire_fmc_read | ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
         "entries": "max_domains",
         "group": "fire",
         "io": "-",
@@ -23382,10 +23382,10 @@
       {
         "comments": [
           "fire_fuel_read",
-          "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file"
+          "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": -1,
-        "description": "fire_fuel_read | fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+        "description": "fire_fuel_read | fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
         "entries": "max_domains",
         "group": "fire",
         "io": "-",
@@ -26681,10 +26681,10 @@
       {
         "comments": [
           "fire_sprd_mdl",
-          "which spread rate formula: if 0, Macarthur; if 1, BEHAVE"
+          "which spread rate formula: if 0, MacArthur; if 1, BEHAVE"
         ],
         "defaultValue": 1,
-        "description": "fire_sprd_mdl | which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+        "description": "fire_sprd_mdl | which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
         "entries": "max_domains",
         "group": "fire",
         "io": "-",
@@ -31675,35 +31675,6 @@
     "physics": [
       {
         "comments": [
-          "03input",
-          "ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)"
-        ],
-        "defaultValue": 2,
-        "description": "03input | ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)",
-        "entries": "1",
-        "group": "physics",
-        "io": "-",
-        "key": "physics.03input",
-        "name": "03input",
-        "originalKeys": [
-          "physics.03input"
-        ],
-        "sources": [
-          "UsersGuide/master_full"
-        ],
-        "type": "integer",
-        "uiStatus": "generated_registry",
-        "versionSupport": {
-          "firstSeen": "4.7.1",
-          "note": "Present in WRF 4.7.1 baseline catalog but not found in WRF 4.8.x overlay. Kept for backward compatibility.",
-          "presentIn": [
-            "4.7.1"
-          ],
-          "status": "legacy_471_only"
-        }
-      },
-      {
-        "comments": [
           "acc_phy_tend",
           "option to output accumulated physics tendencies",
           "flag"
@@ -32370,10 +32341,10 @@
       {
         "comments": [
           "bl_mynn_cloudpdf",
-          "0:original, 1:Kuwano, 2:Chaboreau-Bechtold"
+          "0:original, 1:Kuwano, 2:Chaboureau-Bechtold"
         ],
         "defaultValue": 2,
-        "description": "bl_mynn_cloudpdf | 0:original, 1:Kuwano, 2:Chaboreau-Bechtold",
+        "description": "bl_mynn_cloudpdf | 0:original, 1:Kuwano, 2:Chaboureau-Bechtold",
         "entries": "1",
         "group": "physics",
         "io": "irh",
@@ -35186,10 +35157,10 @@
       {
         "comments": [
           "irr_daily_amount",
-          "sf_surf_irr_scheme WATER AMOUNT [mm]"
+          "Daily irrigation water amount [mm]"
         ],
         "defaultValue": 0.0,
-        "description": "irr_daily_amount | sf_surf_irr_scheme WATER AMOUNT [mm]",
+        "description": "irr_daily_amount | Daily irrigation water amount [mm]",
         "entries": "max_domains",
         "group": "physics",
         "io": "rh",
@@ -50251,10 +50222,10 @@
       {
         "comments": [
           "io_form_auxhist2",
-          "output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+          "output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
         ],
         "defaultValue": null,
-        "description": "io_form_auxhist2 | output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
+        "description": "io_form_auxhist2 | output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
         "entries": "1",
         "group": "time_control",
         "io": "-",
@@ -50331,10 +50302,10 @@
       {
         "comments": [
           "io_form_auxinput2",
-          "IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+          "IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
         ],
         "defaultValue": 2,
-        "description": "io_form_auxinput2 | IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
+        "description": "io_form_auxinput2 | IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
         "entries": "1",
         "group": "time_control",
         "io": "-",
@@ -67291,12 +67262,11 @@
   "metadata": {
     "betaNotes": [
       "All catalog entries are visible.",
-      "uiStatusOriginal preserves previous hidden/curated status.",
-      "Dependency hints and compatibility metadata are retained for user reference only.",
-      "No compatibility warning, blocking, or auto-fix behavior is enabled by this catalog.",
+      "uiStatusOriginal preserves previous hidden/curated status when present.",
+      "Compatibility rules are loaded from data/runtime/namelist.input.compatibility.validated.json and enforced by the runtime engine.",
       "OBSPROC record groups are merged into the main runtime catalog as obsproc_record* groups so the existing editor panel can display them."
     ],
-    "compatibilityValidation": "inactive_metadata_only",
+    "compatibilityValidation": "validated_runtime_enforced",
     "condensedRuntime": true,
     "description": "Condensed runtime catalog for namelist.input editor. Merges metadata, subsection order, source priority, semantics, and compatibility into a single runtime payload.",
     "generated": "2026-05-04T23:20:07Z",
