@@ -1,13 +1,3 @@
-/*
- * WRF Configuration Studio domain-map layer.
- *
- * This large browser bundle owns the interactive map, WRF domain geometry, grid
- * editing workflow, WPS form behavior, and legacy-compatible hooks inherited
- * from the browser domain-wizard lineage. Keep broad behavioral notes here and
- * make detailed edits cautiously because this file coordinates map state, form
- * state, and exported namelist.wps text. The minified companion file should be
- * regenerated deliberately rather than hand-edited.
- */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('stream'), require('events'), require('buffer'), require('util')) :
   typeof define === 'function' && define.amd ? define(['exports', 'stream', 'events', 'buffer', 'util'], factory) :

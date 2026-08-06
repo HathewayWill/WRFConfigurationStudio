@@ -1,10 +1,3 @@
-/*
- * WRF Configuration Studio namelist runtime helper.
- *
- * This small helper seeds editor values from runtime catalog metadata and
- * exposes catalog utilities to the browser. It is deliberately separate from
- * the larger UI renderer so generated catalog behavior can be tested and reused.
- */
 (function (global) {
   'use strict';
 
@@ -34,7 +27,6 @@
     return deepClone(field.defaultValue);
   }
 
-  // Seed scalar and per-domain array values from catalog defaults.
   function seedValueForField(field, maxDom) {
     var count = resolveEntries(field.entries, maxDom);
     if (count > 1) {
@@ -45,8 +37,6 @@
     return Array.isArray(field.defaultValue) ? deepClone(field.defaultValue[0]) : deepClone(field.defaultValue);
   }
 
-  // Build quick lookup tables for field keys so the editor does not repeatedly
-  // scan every group.
   function buildFieldIndex(catalog) {
     var index = {};
     Object.keys((catalog && catalog.groups) || {}).forEach(function (groupName) {

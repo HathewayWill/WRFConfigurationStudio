@@ -1,8 +1,3 @@
-/*
- * WPS helper panel styles for WRF Configuration Studio.
- * These styles are first-party UI styles, separate from vendored Bootstrap and
- * Leaflet CSS under vendor/.
- */
 #wps-tools-panel {
   border: 1px solid #c9d6e2;
   background: #f8fbff;

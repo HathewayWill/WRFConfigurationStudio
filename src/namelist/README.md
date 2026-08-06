@@ -2,17 +2,17 @@
 
 Runtime namelist behavior currently lives in:
 
-- `namelist-input-editor.js` — main editor UI, runtime catalog loading, workflow presets, issue navigation, rendering, and export.
-- `namelist-compatibility-engine.js` — browser-side rule evaluation for hard errors, soft warnings, and workflow guidance.
-- `namelist-runtime-engine.js` — catalog seeding and runtime helper utilities.
-- `namelist-input-data.js` — generated fallback data bundle; do not hand-edit.
-- `row_highlight.js` — small row-highlighting helper.
+- `namelist-input-editor.js`
+- `namelist-input-data.js`
+- `row_highlight.js`
 
-Current runtime compatibility state:
+Planned follow-up split:
+- `namelist-editor.js`
+- `namelist-sync.js`
+- `namelist-save.js`
+- `namelist-ordering.js`
+- `namelist-compatibility.js`
+- `namelist-templates.js`
 
-```text
-184 total rules
-184 valid/enforced rules
-0 unreviewed
-0 needs_review
-```
+Current baseline source-priority artifact:
+- `data/runtime/namelist.input.source_priority.json`

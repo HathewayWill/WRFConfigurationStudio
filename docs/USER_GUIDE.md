@@ -1,29 +1,23 @@
-# WRF Configuration Studio Website User Guide
+# WRF Config Studio Website User Guide
 
 Version: **v1.0.0**  
 Guide scope: **online hosted use and local package use**  
-Prepared for: **WRF Configuration Studio website and GitHub documentation**
+Prepared for: **WRF Config Studio website and GitHub documentation**
 
-WRF Configuration Studio is a browser-based configuration environment for WRF domain design, `namelist.wps` editing, `namelist.input` editing, WRFDA group review, OBSPROC export, and Registry metadata exploration. The application is designed to help users organize WRF configuration work before running the official WRF, WPS, WRFDA, and OBSPROC programs.
+WRF Config Studio is a browser-based configuration environment for WRF domain design, `namelist.wps` editing, `namelist.input` editing, WRFDA group review, OBSPROC export, and Registry metadata exploration. The application is designed to help users organize WRF configuration work before running the official WRF, WPS, WRFDA, and OBSPROC programs.
 
 This guide covers both supported ways to use the website build:
 
 - **Online hosted mode**, where the app is opened from a hosted website or GitHub Pages address.
 - **Local package mode**, where the release package is extracted and served from the user's computer with a local HTTP server.
 
-> **Important map note:** WRF Configuration Studio v1.0.0 uses online map tiles only. The bundled offline vector-map fallback is not included. Local package mode can run the app files from the user's computer, but the map background still requires network access to online tile providers.
+> **Important map note:** WRF Config Studio v1.0.0 uses online map tiles only. The previous bundled offline vector-map fallback has been removed. Local package mode can run the app files from the user's computer, but the map background still requires network access to online tile providers.
 
 ---
 
-## Current feature checkpoint
+## 1. What WRF Config Studio Does
 
-This package includes 184 valid compatibility rules, WRFDA and OBSPROC workflow presets, collapsed-group issue highlighting, click-to-jump issue navigation, natural numeric WRFVAR group sorting, and separate `namelist.obsproc` export.
-
----
-
-## 1. What WRF Configuration Studio Does
-
-WRF Configuration Studio helps users prepare and review WRF-family configuration files through one browser-based workspace.
+WRF Config Studio helps users prepare and review WRF-family configuration files through one browser-based workspace.
 
 It supports:
 
@@ -50,7 +44,7 @@ Online hosted mode is the simplest way to use the app when the project is publis
 
 ### Steps
 
-1. Open the public WRF Configuration Studio website address.
+1. Open the public WRF Config Studio website address.
 2. Wait for the map and side panels to load.
 3. Open the **Domains** panel.
 4. Create or edit the WRF domain.
@@ -81,7 +75,7 @@ Local package mode is the recommended method when using the downloaded release p
 
 ### Steps
 
-1. Download the WRF Configuration Studio release package.
+1. Download the WRF Config Studio release package.
 2. Extract the package to a normal folder.
 3. Start a local HTTP server from inside the extracted folder.
 4. Open the local address printed by the launcher.
@@ -92,28 +86,28 @@ Local package mode is the recommended method when using the downloaded release p
 The package includes helper launchers:
 
 ```text
-launch-local.bat
-launch-local.sh
-launch-local.command
+START_LOCAL_SERVER.bat
+START_LOCAL_SERVER.sh
+START_LOCAL_SERVER.command
 launch_local_server.py
 ```
 
 On Windows, use:
 
 ```text
-launch-local.bat
+START_LOCAL_SERVER.bat
 ```
 
 On macOS or Linux, use:
 
 ```text
-launch-local.sh
+START_LOCAL_SERVER.sh
 ```
 
 or:
 
 ```text
-launch-local.command
+START_LOCAL_SERVER.command
 ```
 
 The launcher starts on port `8000` when available. If that port is already in use, the launcher uses the next available port and prints the correct local URL.
@@ -214,7 +208,7 @@ Nests are edited from the **Grids** section. Users should review `parent_grid_ra
 
 ## 8. Full 360-Degree Map and Dateline Behavior
 
-WRF Configuration Studio supports repeated-world map display and graticule behavior. This helps when users pan across the dateline or work near longitude wrap boundaries.
+WRF Config Studio supports repeated-world map display and graticule behavior. This helps when users pan across the dateline or work near longitude wrap boundaries.
 
 ![Figure 6. Full 360-degree repeated-world map display.](images/user-guide/fig08-360-map-wrap.png)
 
@@ -228,7 +222,7 @@ The map display is limited to approximately 85 degrees south to 85 degrees north
 
 ## 9. Domain Size and Grid Warnings
 
-WRF Configuration Studio includes visible warnings for selected structural issues, such as domains that are too small for typical WRF use.
+WRF Config Studio includes visible warnings for selected structural issues, such as domains that are too small for typical WRF use.
 
 ![Figure 7. Domain size warning in the Grids section.](images/user-guide/fig11-domain-size-warning.png)
 
@@ -258,7 +252,7 @@ The About panel describes the current project, map behavior, lineage, credits, a
 
 **Figure 9. About panel with project lineage and credits.** The About panel credits Jiří Richter and the original WRF Domain Wizard, acknowledges NOAA/FSL WRF Standard Initialization GUI work, and links to included references.
 
-WRF Configuration Studio is built from the original WRF Domain Wizard lineage and acknowledges earlier NOAA/FSL graphical WRF configuration work. This lineage matters because map-based WRF configuration tools have a long history in the WRF community.
+WRF Config Studio is built from the original WRF Domain Wizard lineage and acknowledges earlier NOAA/FSL graphical WRF configuration work. This lineage matters because map-based WRF configuration tools have a long history in the WRF community.
 
 ---
 
@@ -300,7 +294,7 @@ Use the group and variable selectors when reviewing large configurations. This i
 
 ## 14. WRFDA and OBSPROC File Split
 
-WRF Configuration Studio separates WRFDA and OBSPROC export behavior.
+WRF Config Studio separates WRFDA and OBSPROC export behavior.
 
 ### WRFDA
 
@@ -370,7 +364,7 @@ The **Text** tab previews `namelist.input` only. OBSPROC records are exported se
 
 If required `namelist.input` selections are blank, the editor warns before export. The user can cancel and return to the editor or continue intentionally.
 
-This warning system is designed to prevent accidental incomplete exports while preserving user control. Some research or teaching workflows may require partial files, so WRF Configuration Studio warns rather than blocking every export.
+This warning system is designed to prevent accidental incomplete exports while preserving user control. Some research or teaching workflows may require partial files, so WRF Config Studio warns rather than blocking every export.
 
 ---
 
@@ -393,7 +387,7 @@ Select a variable in the Editor tab to review merged documentation, defaults, so
 
 A typical workflow is:
 
-1. Open WRF Configuration Studio in online hosted mode or local package mode.
+1. Open WRF Config Studio in online hosted mode or local package mode.
 2. Open the Domains panel.
 3. Draw or open a domain.
 4. Choose the projection and grid settings.
@@ -405,7 +399,7 @@ A typical workflow is:
 10. Review WRFDA groups if data assimilation is part of the case.
 11. Review OBSPROC records if observation processing is part of the case.
 12. Save `namelist.input`, `namelist.obsproc`, or both.
-13. Run the official WPS, WRF, WRFDA, or OBSPROC tools outside WRF Configuration Studio.
+13. Run the official WPS, WRF, WRFDA, or OBSPROC tools outside WRF Config Studio.
 14. Review logs, model output, diagnostics, and verification results.
 
 ---
@@ -422,7 +416,7 @@ Use the included launcher. It automatically selects the next available port and 
 
 ### The map background is blank
 
-WRF Configuration Studio v1.0.0 uses online map tiles only. Confirm that the computer has a network connection and that the browser can reach the selected tile provider.
+WRF Config Studio v1.0.0 uses online map tiles only. Confirm that the computer has a network connection and that the browser can reach the selected tile provider.
 
 ### The map or UI looks old after replacing files
 
@@ -450,7 +444,7 @@ Check the Lambert parallels mode, then press **Update**. Review `truelat1`, `tru
 
 ## 20. Known Limitations
 
-WRF Configuration Studio v1.0.0 does not:
+WRF Config Studio v1.0.0 does not:
 
 - download meteorological input data,
 - run WPS,
@@ -470,7 +464,7 @@ The map is an editing and visualization surface. It is not a numerical proof of 
 
 ## 21. Credits
 
-WRF Configuration Studio is built on the original WRF Domain Wizard developed by Jiří Richter.
+WRF Config Studio is built on the original WRF Domain Wizard developed by Jiří Richter.
 
 The project also acknowledges earlier NOAA Forecast Systems Laboratory / Forecast Systems Laboratory WRF Standard Initialization GUI work by Paula T. McCaslin, John R. Smart, Brent Shaw, and Brian D. Jamison.
 
