@@ -1014,6 +1014,48 @@
         "3": "hybrid WENO3/ENO1",
         "4": "hybrid WENO5/ENO1"
       }
+    },
+    "fire_lfn_ext_up": {
+      "values": {
+        "0": "extend level-set function at boundary by reflection",
+        "1": "always extend level-set function upward"
+      }
+    },
+    "fire_read_atm_grad": {
+      "values": {
+        ".false.": "do not read terrain gradient on atmosphere mesh from file",
+        ".true.": "read terrain gradient on atmosphere mesh from file"
+      }
+    },
+    "fire_read_atm_ht": {
+      "values": {
+        ".false.": "do not read terrain height on atmosphere mesh from file",
+        ".true.": "read terrain height on atmosphere mesh from file"
+      }
+    },
+    "fire_read_fire_grad": {
+      "values": {
+        ".false.": "do not read terrain gradient on fire mesh from file",
+        ".true.": "read terrain gradient on fire mesh from file"
+      }
+    },
+    "fire_read_fire_ht": {
+      "values": {
+        ".false.": "do not read terrain height on fire mesh from file",
+        ".true.": "read terrain height on fire mesh from file"
+      }
+    },
+    "fire_read_lu": {
+      "values": {
+        ".false.": "do not read land-use data from input_lu",
+        ".true.": "read land-use data from input_lu"
+      }
+    },
+    "fire_lsm_zcoupling": {
+      "values": {
+        ".false.": "use reference velocity at fire_wind_height",
+        ".true.": "activate reference velocity at a different height from fire_wind_height"
+      }
     }
   }
 }
