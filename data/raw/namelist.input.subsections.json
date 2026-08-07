@@ -108,7 +108,7 @@
           "write_thompson_tables"
         ],
         "radiation": [
-          "03input",
+          "o3input",
           "aer_angexp_opt",
           "aer_angexp_val",
           "aer_aod550_opt",

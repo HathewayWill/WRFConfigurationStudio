@@ -1560,7 +1560,7 @@
       "entries": "1",
       "comments": [
         "io_form_auxinput2",
-        "IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+        "IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
       ],
       "io": "-",
       "sources": [
@@ -1599,7 +1599,7 @@
       "entries": "1",
       "comments": [
         "io_form_auxhist2",
-        "output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+        "output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
       ],
       "io": "-",
       "sources": [
@@ -2677,7 +2677,7 @@
       "defaultValue": 1,
       "entries": "1",
       "comments": [
-        "vertical refinment factor for ndown, not used for concurrent vertical grid nesting"
+        "vertical refinement factor for ndown, not used for concurrent vertical grid nesting"
       ],
       "io": "irh",
       "sources": [
@@ -2874,7 +2874,7 @@
       "entries": "1",
       "comments": [
         "smooth_cg_topo",
-        "T/F smooth CG topo on boundarries",
+        "T/F smooth CG topo on boundaries",
         "flag"
       ],
       "io": "irh",
@@ -2966,7 +2966,7 @@
       "entries": "1",
       "comments": [
         "qv_max_p_safe",
-        "Threshhold pressure, Qv > flag set to value",
+        "Threshold pressure, Qv > flag set to value",
         "Pa"
       ],
       "io": "irh",
@@ -3008,7 +3008,7 @@
       "entries": "1",
       "comments": [
         "qv_min_p_safe",
-        "Threshhold pressure, Qv < flag set to value",
+        "Threshold pressure, Qv < flag set to value",
         "Pa"
       ],
       "io": "irh",
@@ -4265,7 +4265,7 @@
       "entries": "max_domains",
       "comments": [
         "irr_daily_amount",
-        "sf_surf_irr_scheme WATER AMOUNT [mm]"
+        "Daily irrigation water amount [mm]"
       ],
       "io": "rh",
       "sources": [
@@ -4404,7 +4404,7 @@
       "entries": "1",
       "comments": [
         "bl_mynn_cloudpdf",
-        "0:original, 1:Kuwano, 2:Chaboreau-Bechtold"
+        "0:original, 1:Kuwano, 2:Chaboureau-Bechtold"
       ],
       "io": "irh",
       "sources": [
@@ -5169,11 +5169,11 @@
       "entries": "1",
       "comments": [
         "o3input",
-        "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2"
+        "ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)"
       ],
       "io": "-",
       "sources": [
-        "Registry/Registry.EM_COMMON"
+        "UsersGuide/master_full"
       ]
     },
     "aer_opt": {
@@ -6942,19 +6942,6 @@
       "comments": [
         "nssl_rho_ghl",
         "hail density"
-      ],
-      "io": "-",
-      "sources": [
-        "UsersGuide/master_full"
-      ]
-    },
-    "03input": {
-      "type": "integer",
-      "defaultValue": 2,
-      "entries": "1",
-      "comments": [
-        "03input",
-        "ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)"
       ],
       "io": "-",
       "sources": [
@@ -15330,7 +15317,7 @@
       "entries": "max_domains",
       "comments": [
         "fire_sprd_mdl",
-        "which spread rate formula: if 0, Macarthur; if 1, BEHAVE"
+        "which spread rate formula: if 0, MacArthur; if 1, BEHAVE"
       ],
       "io": "-",
       "sources": [
@@ -15481,7 +15468,7 @@
       "entries": "max_domains",
       "comments": [
         "fire_fuel_read",
-        "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file"
+        "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file"
       ],
       "io": "-",
       "sources": [
@@ -15507,7 +15494,7 @@
       "entries": "max_domains",
       "comments": [
         "fire_fmc_read",
-        "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file"
+        "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file"
       ],
       "io": "-",
       "sources": [

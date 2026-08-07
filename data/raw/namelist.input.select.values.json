@@ -923,7 +923,7 @@
     "fire_fmc_read": {
       "values": {
         "0": "fuel moisture from wrfinput",
-        "1": "user-prescribedribed fuel moisture",
+        "1": "user-prescribed fuel moisture",
         "2": "read fuel moisture from file"
       }
     },
@@ -937,7 +937,7 @@
       "values": {
         "-1": "registry default / not explicitly selected",
         "0": "uniform fuel category",
-        "1": "user-prescribedribed fuel categories",
+        "1": "user-prescribed fuel categories",
         "2": "read fuel categories from file"
       }
     },

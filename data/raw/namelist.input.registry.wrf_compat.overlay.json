@@ -6487,13 +6487,13 @@
       "qv_max_p_safe": {
         "comments": [
           "qv_max_p_safe",
-          "Threshhold pressure, Qv > flag set to value",
+          "Threshold pressure, Qv > flag set to value",
           "Pa"
         ],
         "defaultValue": 10000.0,
         "entries": "1",
         "io": "irh",
-        "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshhold pressure, Qv > flag set to value\"      \"Pa\"",
+        "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshold pressure, Qv > flag set to value\"      \"Pa\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
@@ -6556,13 +6556,13 @@
       "qv_min_p_safe": {
         "comments": [
           "qv_min_p_safe",
-          "Threshhold pressure, Qv < flag set to value",
+          "Threshold pressure, Qv < flag set to value",
           "Pa"
         ],
         "defaultValue": 110000.0,
         "entries": "1",
         "io": "irh",
-        "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshhold pressure, Qv < flag set to value\"      \"Pa\"",
+        "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshold pressure, Qv < flag set to value\"      \"Pa\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
@@ -6840,13 +6840,13 @@
       "smooth_cg_topo": {
         "comments": [
           "smooth_cg_topo",
-          "T/F smooth CG topo on boundarries",
+          "T/F smooth CG topo on boundaries",
           "flag"
         ],
         "defaultValue": false,
         "entries": "1",
         "io": "irh",
-        "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundarries\" \"flag\"",
+        "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundaries\" \"flag\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
@@ -7517,12 +7517,12 @@
       },
       "vert_refine_fact": {
         "comments": [
-          "vertical refinment factor for ndown, not used for concurrent vertical grid nesting"
+          "vertical refinement factor for ndown, not used for concurrent vertical grid nesting"
         ],
         "defaultValue": 1,
         "entries": "1",
         "io": "irh",
-        "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinment factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
+        "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinement factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
@@ -12659,12 +12659,12 @@
       "fire_fmc_read": {
         "comments": [
           "fire_fmc_read",
-          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file"
+          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": 1,
         "entries": "max_domains",
         "io": "-",
-        "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file\"   \"\"",
+        "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file\"   \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/registry.fire"
         ],
@@ -12769,12 +12769,12 @@
       "fire_fuel_read": {
         "comments": [
           "fire_fuel_read",
-          "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file"
+          "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": -1,
         "entries": "max_domains",
         "io": "-",
-        "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file\"   \"\"",
+        "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file\"   \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/registry.fire"
         ],
@@ -14928,12 +14928,12 @@
       "fire_sprd_mdl": {
         "comments": [
           "fire_sprd_mdl",
-          "which spread rate formula: if 0, Macarthur; if 1, BEHAVE"
+          "which spread rate formula: if 0, MacArthur; if 1, BEHAVE"
         ],
         "defaultValue": 1,
         "entries": "max_domains",
         "io": "-",
-        "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, Macarthur; if 1, BEHAVE\" \"\"",
+        "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, MacArthur; if 1, BEHAVE\" \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/registry.fire"
         ],
@@ -18696,12 +18696,12 @@
       "bl_mynn_cloudpdf": {
         "comments": [
           "bl_mynn_cloudpdf",
-          "0:original, 1:Kuwano, 2:Chaboreau-Bechtold"
+          "0:original, 1:Kuwano, 2:Chaboureau-Bechtold"
         ],
         "defaultValue": 2,
         "entries": "1",
         "io": "irh",
-        "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboreau-Bechtold\"            \"\"",
+        "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboureau-Bechtold\"            \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
@@ -20277,12 +20277,12 @@
       "irr_daily_amount": {
         "comments": [
           "irr_daily_amount",
-          "sf_surf_irr_scheme WATER AMOUNT [mm]"
+          "Daily irrigation water amount [mm]"
         ],
         "defaultValue": 0.0,
         "entries": "max_domains",
         "io": "rh",
-        "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"sf_surf_irr_scheme WATER AMOUNT [mm]\" \"\"",
+        "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"Daily irrigation water amount [mm]\" \"\"",
         "sources": [
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
