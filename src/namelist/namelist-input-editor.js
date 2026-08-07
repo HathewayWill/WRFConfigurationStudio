@@ -2585,6 +2585,56 @@
     return clean;
   }
 
+  function descriptionLooksLikeTrueFalseOptions(description) {
+    var text = String(description == null ? '' : description).toLowerCase().replace(/\s+/g, ' ');
+
+    return (
+      text.indexOf('t/f') !== -1 ||
+      text.indexOf('t / f') !== -1 ||
+      text.indexOf('true/false') !== -1 ||
+      text.indexOf('true / false') !== -1 ||
+      text.indexOf('false/true') !== -1 ||
+      text.indexOf('false / true') !== -1 ||
+      text.indexOf('true or false') !== -1 ||
+      text.indexOf('false or true') !== -1 ||
+      /1\s*=\s*true/.test(text) ||
+      /0\s*=\s*false/.test(text)
+    );
+  }
+
+  function optionItemsContainTrueFalse(optionItems) {
+    var seenTrue = false;
+    var seenFalse = false;
+
+    (optionItems || []).forEach(function (option) {
+      var label = normalizeOptionLabelForDisplay(option && option.label).toLowerCase();
+      var value = String(option && option.value == null ? '' : option.value).toLowerCase();
+
+      if (label === 'true' || value === 'true' || value === '.true.' || value === '1') seenTrue = true;
+      if (label === 'false' || value === 'false' || value === '.false.' || value === '0') seenFalse = true;
+    });
+
+    return seenTrue && seenFalse;
+  }
+
+  function addTrueFalseOptionItemsForField(field, description, optionItems) {
+    var items = Array.isArray(optionItems) ? optionItems.slice() : [];
+
+    if (optionItemsContainTrueFalse(items)) return items;
+
+    if (field && field.type === 'logical') {
+      items.push({ value: 'true', label: 'true' });
+      items.push({ value: 'false', label: 'false' });
+      return items;
+    }
+
+    if (descriptionLooksLikeTrueFalseOptions(description)) {
+      items.push({ value: '1', label: 'true' });
+      items.push({ value: '0', label: 'false' });
+    }
+
+    return items;
+  }
   function htmlTag(tagName, attrs, body) {
     var lt = String.fromCharCode(60);
     var gt = String.fromCharCode(62);
@@ -2621,7 +2671,8 @@
       : getFieldStructuredOptions(field);
 
     var parts = parsed || splitDescriptionParts(description || '');
-    var hasOptions = optionItems && optionItems.length;
+    var displayOptionItems = addTrueFalseOptionItemsForField(field, description, optionItems);
+    var hasOptions = displayOptionItems && displayOptionItems.length;
 
     if (!description && !hasOptions) {
       return panel ? '<div>No description available.</div>' : '';
@@ -2637,7 +2688,7 @@
     if (parts.units) html += '<div class="small text-muted mt-1">Units / type: ' + esc(parts.units) + '</div>';
     if (parts.valueHint) html += '<div class="small text-muted mt-1">Values: ' + esc(parts.valueHint) + '</div>';
 
-    if (hasOptions) html += renderOptionListHtml(optionItems, panel);
+    if (hasOptions) html += renderOptionListHtml(displayOptionItems, panel);
 
     if (!panel) html += '</div>';
 
