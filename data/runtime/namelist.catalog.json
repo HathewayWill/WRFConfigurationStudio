@@ -102727,7 +102727,7 @@
         "name": "output_ob_format",
         "group": "obsproc_record9",
         "key": "obsproc_record9.output_ob_format",
-        "type": "character",
+        "type": "selection",
         "entries": "1",
         "defaultValue": "2",
         "sources": [
@@ -102751,8 +102751,12 @@
         "filterPolicy": "none",
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
-        "description": "OBSPROC record9 field output_ob_format",
-        "enumValues": {},
+        "description": "Controls OBSPROC record9 output type. 1 = PREPBUFR only; 2 = ASCII only; 3 = both PREPBUFR and ASCII.",
+        "enumValues": {
+          "1": "PREPBUFR only",
+          "2": "ASCII only",
+          "3": "PREPBUFR and ASCII"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -102785,7 +102789,21 @@
               "raw": " OUTPUT_OB_FORMAT = 2"
             }
           ]
-        }
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": "PREPBUFR only"
+          },
+          {
+            "value": "2",
+            "label": "ASCII only"
+          },
+          {
+            "value": "3",
+            "label": "PREPBUFR and ASCII"
+          }
+        ]
       },
       "prepbufr_output_filename": {
         "name": "prepbufr_output_filename",
