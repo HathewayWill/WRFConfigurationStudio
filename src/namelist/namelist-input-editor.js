@@ -2149,8 +2149,40 @@
     return String(value || '').replace(/[\s_\-]+/g, '').toLowerCase();
   }
 
+  function cleanTrueFalseNotationForDisplay(description) {
+    var text = String(description == null ? '' : description).trim();
+
+    text = text.replace(/(^|[|,;:()\-–—]\s*)(?:T\s*\/\s*F|true\s*\/\s*false|false\s*\/\s*true)\b\s*[-:–—]?\s*/ig, function (match, lead) {
+      return lead || '';
+    });
+
+    return text
+      .replace(/\s{2,}/g, ' ')
+      .replace(/\s+\|/g, ' |')
+      .replace(/\|\s+/g, '| ')
+      .trim();
+  }
+
+  function cleanTrueFalseMeaningMarkersForDisplay(description) {
+    var text = String(description == null ? '' : description).trim();
+
+    if (/\bT\s*=/.test(text) && /\bF\s*=/.test(text)) {
+      text = text
+        .replace(/\bT\s*=\s*/g, 'true = ')
+        .replace(/\bF\s*=\s*/g, 'false = ');
+    }
+
+    if (/\bT\s*:/.test(text) && /\bF\s*:/.test(text)) {
+      text = text
+        .replace(/\bT\s*:\s*/g, 'true: ')
+        .replace(/\bF\s*:\s*/g, 'false: ');
+    }
+
+    return text.replace(/\s{2,}/g, ' ').trim();
+  }
+
   function splitDescriptionParts(description) {
-    var text = String(description || '').trim();
+    var text = cleanTrueFalseMeaningMarkersForDisplay(cleanTrueFalseNotationForDisplay(description));
     var parts = text.split('|').map(function (part) {
       return part.trim();
     }).filter(function (part) {
@@ -2189,10 +2221,7 @@
       }
     }
 
-    summary = summary.replace(/^(T\/F|true\/false)\s*:\s*/i, function (m, hint) {
-      valueHint = hint;
-      return '';
-    }).trim();
+    summary = cleanTrueFalseNotationForDisplay(summary);
 
     var unitPrefix = summary.match(/^(SECONDS?|MINUTES?|HOURS?|DAYS?|PA|HPA|K|M|KM)\s+(.*)$/i);
     if (!units && unitPrefix) {
@@ -2530,7 +2559,7 @@
 
     if (firstOption < 0) return null;
 
-    var lead = text.slice(0, firstOption).trim();
+    var lead = cleanTrueFalseMeaningMarkersForDisplay(cleanTrueFalseNotationForDisplay(text.slice(0, firstOption).trim()));
     var optionText = text.slice(firstOption).trim();
 
     if (optionText.charAt(0) === '(' && optionText.charAt(optionText.length - 1) === ')') {
@@ -2648,13 +2677,16 @@
     html += lt + 'ul class="namelist-input-option-list' + (panel ? ' namelist-input-option-list-panel' : '') + '"' + gt;
 
     options.forEach(function (option) {
+      var optionValue = String(option && option.value == null ? '' : option.value).trim();
       var optionLabel = normalizeOptionLabelForDisplay(option.label);
+      var showLabel = optionLabel && optionLabel.toLowerCase() !== optionValue.toLowerCase();
+      var labelHtml = showLabel ? htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)) : '';
 
       if (panel) {
-        html += htmlTag('li', '', htmlTag('span', 'class="namelist-input-option-value"', esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)));
+        html += htmlTag('li', '', htmlTag('span', 'class="namelist-input-option-value"', esc(optionValue)) + labelHtml);
       } else {
-        var buttonAttrs = 'type="button" class="btn btn-sm btn-light py-0 px-1 namelist-input-option-value namelist-input-option-apply" data-option-value="' + esc(option.value) + '" data-option-label="' + esc(optionLabel) + '" title="Click to use this value"';
-        html += htmlTag('li', '', htmlTag('button', buttonAttrs, esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)));
+        var buttonAttrs = 'type="button" class="btn btn-sm btn-light py-0 px-1 namelist-input-option-value namelist-input-option-apply" data-option-value="' + esc(optionValue) + '" data-option-label="' + esc(optionLabel) + '" title="Click to use this value"';
+        html += htmlTag('li', '', htmlTag('button', buttonAttrs, esc(optionValue)) + labelHtml);
       }
     });
 
