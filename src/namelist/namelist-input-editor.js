@@ -2559,15 +2559,40 @@
     };
   }
 
+  function normalizeOptionValueForEditorField(field, optionValue) {
+    var value = String(optionValue == null ? '' : optionValue).trim();
+
+    if (field && field.type === 'logical') {
+      var logicalValue = value.toLowerCase();
+      if (logicalValue === '.true.' || logicalValue === 'true') return 'true';
+      if (logicalValue === '.false.' || logicalValue === 'false') return 'false';
+    }
+
+    return value;
+  }
+
+  function htmlTag(tagName, attrs, body) {
+    var lt = String.fromCharCode(60);
+    var gt = String.fromCharCode(62);
+    return lt + tagName + (attrs ? ' ' + attrs : '') + gt + (body == null ? '' : body) + lt + '/' + tagName + gt;
+  }
+
   function renderOptionListHtml(options, panel) {
-    var html = '<div class="small text-muted mb-1">Options</div>';
-    html += '<ul class="namelist-input-option-list' + (panel ? ' namelist-input-option-list-panel' : '') + '">';
+    var lt = String.fromCharCode(60);
+    var gt = String.fromCharCode(62);
+    var html = htmlTag('div', 'class="small text-muted mb-1"', 'Options');
+    html += lt + 'ul class="namelist-input-option-list' + (panel ? ' namelist-input-option-list-panel' : '') + '"' + gt;
 
     options.forEach(function (option) {
-      html += '<li><span class="namelist-input-option-value">' + esc(option.value) + '</span><span class="namelist-input-option-label">' + esc(option.label) + '</span></li>';
+      if (panel) {
+        html += htmlTag('li', '', htmlTag('span', 'class="namelist-input-option-value"', esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(option.label)));
+      } else {
+        var buttonAttrs = 'type="button" class="btn btn-sm btn-light py-0 px-1 namelist-input-option-value namelist-input-option-apply" data-option-value="' + esc(option.value) + '" data-option-label="' + esc(option.label) + '" title="Click to use this value"';
+        html += htmlTag('li', '', htmlTag('button', buttonAttrs, esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(option.label)));
+      }
     });
 
-    html += '</ul>';
+    html += lt + '/ul' + gt;
     return html;
   }
 
@@ -2751,6 +2776,103 @@
     });
     this.bindCompatibilityPanelEvents();
     this.bindWorkflowPresetEvents();
+    this.$container.off('click.namelistOptionApply', '.namelist-input-option-apply')
+      .on('click.namelistOptionApply', '.namelist-input-option-apply', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var optionValue = $(this).attr('data-option-value');
+        var optionLabel = $(this).attr('data-option-label') || $(this).siblings('.namelist-input-option-label').first().text() || '';
+        var row = $(this).closest('.namelist-input-variable');
+        var key = row.data('key');
+        var field = self.findFieldByKey(key);
+        if (!field) return;
+
+        var editorValue = normalizeOptionValueForEditorField(field, optionValue);
+        var parsedValue = self.parseScalarValueForField(field, editorValue);
+        var controls = row.find('.namelist-input-field');
+        var compactControls = row.find('.namelist-input-field-array');
+
+        var toggle = row.find('.namelist-input-toggle').first();
+        if (toggle.length && !toggle.prop('checked')) {
+          toggle.prop('checked', true);
+          row.removeClass('namelist-input-variable-unset');
+        }
+        self.state.enabled[key] = true;
+
+        var applied = false;
+
+        function applyToControl(control) {
+          if (control.is('select')) {
+            var matchingValue = null;
+
+            control.find('option').each(function () {
+              if (String($(this).val()) === String(editorValue)) {
+                matchingValue = $(this).val();
+                return false;
+              }
+              return true;
+            });
+
+            if (matchingValue === null) {
+              var displayText = String(editorValue);
+              if (optionLabel && String(optionLabel) !== String(editorValue)) {
+                displayText += ' \u2014 ' + optionLabel;
+              }
+
+              if (field.type === 'selection') {
+                field.enumValues = field.enumValues || {};
+                if (!field.enumValues[editorValue]) field.enumValues[editorValue] = optionLabel || 'selected option';
+              }
+
+              control.append($(document.createElement('option')).attr('value', editorValue).text(displayText));
+              matchingValue = editorValue;
+            }
+
+            control.val(matchingValue);
+          } else {
+            control.val(editorValue);
+          }
+
+          return true;
+        }
+
+        if (controls.length) {
+          controls.each(function () {
+            var control = $(this);
+            if (!applyToControl(control)) return;
+
+            var index = control.data('index');
+            if (index === undefined) {
+              self.state.values[key] = parsedValue;
+            } else {
+              if (!Array.isArray(self.state.values[key])) self.state.values[key] = [];
+              self.state.values[key][Number(index)] = parsedValue;
+            }
+
+            applied = true;
+          });
+        } else if (compactControls.length) {
+          var count = resolveEntries(field.entries, self.maxDom);
+          var values = [];
+          for (var i = 0; i < count; i++) values.push(parsedValue);
+          self.state.values[key] = values;
+
+          compactControls.each(function () {
+            $(this).val(values.map(function (value) {
+              return value == null ? '' : String(value);
+            }).join(', '));
+          });
+
+          applied = true;
+        }
+
+        if (!applied) return;
+
+        self.markFieldUserEdited(key);
+        self.updateText();
+        self.refreshCompatibilityDisplay();
+      });
     this.$container.find('.namelist-input-toggle').off('change').on('change', function () {
       var key = $(this).data('key');
       self.state.enabled[key] = this.checked;
