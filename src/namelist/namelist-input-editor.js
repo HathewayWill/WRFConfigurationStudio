@@ -2571,6 +2571,20 @@
     return value;
   }
 
+  function normalizeOptionLabelForDisplay(label) {
+    var clean = String(label == null ? '' : label).trim();
+
+    clean = clean.replace(/\s+or\s*$/i, '').trim();
+    clean = clean.replace(/\s+and\s*$/i, '').trim();
+
+    if (/^true$/i.test(clean)) return 'true';
+    if (/^false$/i.test(clean)) return 'false';
+    if (/^\.true\.$/i.test(clean)) return 'true';
+    if (/^\.false\.$/i.test(clean)) return 'false';
+
+    return clean;
+  }
+
   function htmlTag(tagName, attrs, body) {
     var lt = String.fromCharCode(60);
     var gt = String.fromCharCode(62);
@@ -2584,17 +2598,20 @@
     html += lt + 'ul class="namelist-input-option-list' + (panel ? ' namelist-input-option-list-panel' : '') + '"' + gt;
 
     options.forEach(function (option) {
+      var optionLabel = normalizeOptionLabelForDisplay(option.label);
+
       if (panel) {
-        html += htmlTag('li', '', htmlTag('span', 'class="namelist-input-option-value"', esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(option.label)));
+        html += htmlTag('li', '', htmlTag('span', 'class="namelist-input-option-value"', esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)));
       } else {
-        var buttonAttrs = 'type="button" class="btn btn-sm btn-light py-0 px-1 namelist-input-option-value namelist-input-option-apply" data-option-value="' + esc(option.value) + '" data-option-label="' + esc(option.label) + '" title="Click to use this value"';
-        html += htmlTag('li', '', htmlTag('button', buttonAttrs, esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(option.label)));
+        var buttonAttrs = 'type="button" class="btn btn-sm btn-light py-0 px-1 namelist-input-option-value namelist-input-option-apply" data-option-value="' + esc(option.value) + '" data-option-label="' + esc(optionLabel) + '" title="Click to use this value"';
+        html += htmlTag('li', '', htmlTag('button', buttonAttrs, esc(option.value)) + htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)));
       }
     });
 
     html += lt + '/ul' + gt;
     return html;
   }
+
 
   function renderDescriptionBlockHtml(field, panel) {
     var description = getUsefulFieldDescription(field);
