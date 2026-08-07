@@ -1393,7 +1393,7 @@
         "name": "output_ob_format",
         "group": "record9",
         "key": "record9.output_ob_format",
-        "type": "unknown",
+        "type": "selection",
         "entries": "1",
         "defaultValue": "2",
         "sources": [
@@ -1414,7 +1414,28 @@
         ],
         "uiStatus": "visible",
         "visibility": "visible",
-        "filterPolicy": "none"
+        "filterPolicy": "none",
+        "enumValues": {
+          "1": "PREPBUFR only",
+          "2": "ASCII only",
+          "3": "PREPBUFR and ASCII"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": "PREPBUFR only"
+          },
+          {
+            "value": "2",
+            "label": "ASCII only"
+          },
+          {
+            "value": "3",
+            "label": "PREPBUFR and ASCII"
+          }
+        ],
+        "description": "Controls OBSPROC record9 output type. 1 = PREPBUFR only; 2 = ASCII only; 3 = both PREPBUFR and ASCII.",
+        "typeInferred": false
       },
       "use_for": {
         "name": "use_for",
