@@ -99511,7 +99511,7 @@
         "name": "gts_from_mmm_archive",
         "group": "obsproc_record1",
         "key": "obsproc_record1.gts_from_mmm_archive",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -99536,7 +99536,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record1 field gts_from_mmm_archive",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -99899,7 +99902,7 @@
         "name": "fatal_if_exceed_max_obs",
         "group": "obsproc_record3",
         "key": "obsproc_record3.fatal_if_exceed_max_obs",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -99924,7 +99927,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record3 field fatal_if_exceed_max_obs",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100029,7 +100035,7 @@
         "name": "calc_psfc_from_qnh",
         "group": "obsproc_record4",
         "key": "obsproc_record4.calc_psfc_from_qnh",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -100054,7 +100060,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field calc_psfc_from_qnh",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100093,7 +100102,7 @@
         "name": "domain_check_h",
         "group": "obsproc_record4",
         "key": "obsproc_record4.domain_check_h",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -100118,7 +100127,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field domain_check_h",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100157,7 +100169,7 @@
         "name": "qc_test_above_lid",
         "group": "obsproc_record4",
         "key": "obsproc_record4.qc_test_above_lid",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100182,7 +100194,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field qc_test_above_lid",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100221,7 +100236,7 @@
         "name": "qc_test_convective_adj",
         "group": "obsproc_record4",
         "key": "obsproc_record4.qc_test_convective_adj",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100246,7 +100261,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field qc_test_convective_adj",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100285,7 +100303,7 @@
         "name": "qc_test_vert_consistency",
         "group": "obsproc_record4",
         "key": "obsproc_record4.qc_test_vert_consistency",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100310,7 +100328,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field qc_test_vert_consistency",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100349,7 +100370,7 @@
         "name": "remove_above_lid",
         "group": "obsproc_record4",
         "key": "obsproc_record4.remove_above_lid",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".false.",
         "sources": [
@@ -100374,7 +100395,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field remove_above_lid",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100413,7 +100437,7 @@
         "name": "thining_qscat",
         "group": "obsproc_record4",
         "key": "obsproc_record4.thining_qscat",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".false.",
         "sources": [
@@ -100438,7 +100462,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field thining_qscat",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100477,7 +100504,7 @@
         "name": "thining_satob",
         "group": "obsproc_record4",
         "key": "obsproc_record4.thining_satob",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".false.",
         "sources": [
@@ -100502,7 +100529,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field thining_satob",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100541,7 +100571,7 @@
         "name": "thining_ssmi",
         "group": "obsproc_record4",
         "key": "obsproc_record4.thining_ssmi",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".false.",
         "sources": [
@@ -100566,7 +100596,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record4 field thining_ssmi",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100607,7 +100640,7 @@
         "name": "print_duplicate_loc",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_duplicate_loc",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100632,7 +100665,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_duplicate_loc",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100671,7 +100707,7 @@
         "name": "print_duplicate_time",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_duplicate_time",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100696,7 +100732,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_duplicate_time",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100735,7 +100774,7 @@
         "name": "print_gpspw_read",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_gpspw_read",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100760,7 +100799,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_gpspw_read",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100799,7 +100841,7 @@
         "name": "print_gts_read",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_gts_read",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100824,7 +100866,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_gts_read",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100863,7 +100908,7 @@
         "name": "print_qc_conv",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_qc_conv",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100888,7 +100933,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_qc_conv",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100927,7 +100975,7 @@
         "name": "print_qc_lid",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_qc_lid",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -100952,7 +101000,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_qc_lid",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -100991,7 +101042,7 @@
         "name": "print_qc_vert",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_qc_vert",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -101016,7 +101067,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_qc_vert",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -101055,7 +101109,7 @@
         "name": "print_recoverh",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_recoverh",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -101080,7 +101134,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_recoverh",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -101119,7 +101176,7 @@
         "name": "print_recoverp",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_recoverp",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -101144,7 +101201,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_recoverp",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -101183,7 +101243,7 @@
         "name": "print_uncomplete",
         "group": "obsproc_record5",
         "key": "obsproc_record5.print_uncomplete",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".TRUE.",
         "sources": [
@@ -101208,7 +101268,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record5 field print_uncomplete",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103001,7 +103064,7 @@
         "name": "write_airep",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_airep",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103026,7 +103089,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_airep",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103065,7 +103131,7 @@
         "name": "write_airs",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_airs",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103090,7 +103156,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_airs",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103129,7 +103198,7 @@
         "name": "write_amdar",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_amdar",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103154,7 +103223,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_amdar",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103193,7 +103265,7 @@
         "name": "write_bogus",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_bogus",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103218,7 +103290,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_bogus",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103257,7 +103332,7 @@
         "name": "write_buoy",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_buoy",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103282,7 +103357,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_buoy",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103321,7 +103399,7 @@
         "name": "write_gpseph",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_gpseph",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103346,7 +103424,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_gpseph",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103385,7 +103466,7 @@
         "name": "write_gpspw",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_gpspw",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103410,7 +103491,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_gpspw",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103449,7 +103533,7 @@
         "name": "write_gpsref",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_gpsref",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103474,7 +103558,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_gpsref",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103513,7 +103600,7 @@
         "name": "write_gpsztd",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_gpsztd",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103538,7 +103625,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_gpsztd",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103577,7 +103667,7 @@
         "name": "write_metar",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_metar",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103602,7 +103692,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_metar",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103641,7 +103734,7 @@
         "name": "write_pilot",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_pilot",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103666,7 +103759,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_pilot",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103705,7 +103801,7 @@
         "name": "write_profl",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_profl",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103730,7 +103826,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_profl",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103769,7 +103868,7 @@
         "name": "write_qscat",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_qscat",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103794,7 +103893,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_qscat",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103833,7 +103935,7 @@
         "name": "write_satem",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_satem",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103858,7 +103960,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_satem",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103897,7 +104002,7 @@
         "name": "write_satob",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_satob",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103922,7 +104027,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_satob",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -103961,7 +104069,7 @@
         "name": "write_ship",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_ship",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -103986,7 +104094,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_ship",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104025,7 +104136,7 @@
         "name": "write_sound",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_sound",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104050,7 +104161,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_sound",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104089,7 +104203,7 @@
         "name": "write_ssmi",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_ssmi",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104114,7 +104228,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_ssmi",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104153,7 +104270,7 @@
         "name": "write_ssmt1",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_ssmt1",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104178,7 +104295,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_ssmt1",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104217,7 +104337,7 @@
         "name": "write_ssmt2",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_ssmt2",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104242,7 +104362,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_ssmt2",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104281,7 +104404,7 @@
         "name": "write_synop",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_synop",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104306,7 +104429,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_synop",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
@@ -104345,7 +104471,7 @@
         "name": "write_tovs",
         "group": "obsproc_record9",
         "key": "obsproc_record9.write_tovs",
-        "type": "character",
+        "type": "logical",
         "entries": "1",
         "defaultValue": ".true.",
         "sources": [
@@ -104370,7 +104496,10 @@
         "typeInferred": false,
         "defaultSource": "obsproc_uploaded_namelist",
         "description": "OBSPROC record9 field write_tovs",
-        "enumValues": {},
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
         "range": null,
         "subsection": "obsproc",
         "subsectionLabel": "OBSPROC",
