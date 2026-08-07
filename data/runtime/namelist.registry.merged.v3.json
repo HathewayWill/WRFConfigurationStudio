@@ -21311,10 +21311,10 @@
         "activationHints": [],
         "allDefinitions": [
           {
-            "description": "Threshhold pressure, Qv > flag set to value",
+            "description": "Threshold pressure, Qv > flag set to value",
             "entries": "1",
             "line": 2308,
-            "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshhold pressure, Qv > flag set to value\"      \"Pa\"",
+            "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshold pressure, Qv > flag set to value\"      \"Pa\"",
             "registryDefault": 10000,
             "sourceFile": "Registry.EM_COMMON",
             "type": "real",
@@ -21323,11 +21323,11 @@
         ],
         "comments": [
           "qv_max_p_safe",
-          "Threshhold pressure, Qv > flag set to value",
+          "Threshold pressure, Qv > flag set to value",
           "Pa"
         ],
         "defaultValue": 10000.0,
-        "description": "Threshhold pressure, Qv > flag set to value",
+        "description": "Threshold pressure, Qv > flag set to value",
         "entries": "1",
         "featureTags": [
           "domains"
@@ -21344,7 +21344,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2308
         },
-        "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshhold pressure, Qv > flag set to value\"      \"Pa\"",
+        "raw": "rconfig   real    qv_max_p_safe           namelist,domains      1              10000   irh    \"qv_max_p_safe\" \"Threshold pressure, Qv > flag set to value\"      \"Pa\"",
         "registryDefault": 10000,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -21485,10 +21485,10 @@
         "activationHints": [],
         "allDefinitions": [
           {
-            "description": "Threshhold pressure, Qv < flag set to value",
+            "description": "Threshold pressure, Qv < flag set to value",
             "entries": "1",
             "line": 2311,
-            "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshhold pressure, Qv < flag set to value\"      \"Pa\"",
+            "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshold pressure, Qv < flag set to value\"      \"Pa\"",
             "registryDefault": 110000,
             "sourceFile": "Registry.EM_COMMON",
             "type": "real",
@@ -21497,11 +21497,11 @@
         ],
         "comments": [
           "qv_min_p_safe",
-          "Threshhold pressure, Qv < flag set to value",
+          "Threshold pressure, Qv < flag set to value",
           "Pa"
         ],
         "defaultValue": 110000.0,
-        "description": "Threshhold pressure, Qv < flag set to value",
+        "description": "Threshold pressure, Qv < flag set to value",
         "entries": "1",
         "featureTags": [
           "domains"
@@ -21518,7 +21518,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2311
         },
-        "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshhold pressure, Qv < flag set to value\"      \"Pa\"",
+        "raw": "rconfig   real    qv_min_p_safe           namelist,domains      1              110000  irh    \"qv_min_p_safe\" \"Threshold pressure, Qv < flag set to value\"      \"Pa\"",
         "registryDefault": 110000,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -22266,10 +22266,10 @@
         "activationHints": [],
         "allDefinitions": [
           {
-            "description": "T/F smooth CG topo on boundarries",
+            "description": "T/F smooth CG topo on boundaries",
             "entries": "1",
             "line": 2301,
-            "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundarries\" \"flag\"",
+            "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundaries\" \"flag\"",
             "registryDefault": false,
             "sourceFile": "Registry.EM_COMMON",
             "type": "logical",
@@ -22278,11 +22278,11 @@
         ],
         "comments": [
           "smooth_cg_topo",
-          "T/F smooth CG topo on boundarries",
+          "T/F smooth CG topo on boundaries",
           "flag"
         ],
         "defaultValue": false,
-        "description": "T/F smooth CG topo on boundarries",
+        "description": "T/F smooth CG topo on boundaries",
         "entries": "1",
         "featureTags": [
           "domains"
@@ -22299,7 +22299,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2301
         },
-        "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundarries\" \"flag\"",
+        "raw": "rconfig   logical smooth_cg_topo          namelist,domains\t1              .false. irh    \"smooth_cg_topo\"   \"T/F smooth CG topo on boundaries\" \"flag\"",
         "registryDefault": false,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -24290,7 +24290,7 @@
             "description": "",
             "entries": "1",
             "line": 2282,
-            "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinment factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
+            "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinement factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
             "registryDefault": 1,
             "sourceFile": "Registry.EM_COMMON",
             "type": "integer",
@@ -24298,10 +24298,10 @@
           }
         ],
         "comments": [
-          "vertical refinment factor for ndown, not used for concurrent vertical grid nesting"
+          "vertical refinement factor for ndown, not used for concurrent vertical grid nesting"
         ],
         "defaultValue": 1,
-        "description": "vertical refinment factor for ndown, not used for concurrent vertical grid nesting",
+        "description": "vertical refinement factor for ndown, not used for concurrent vertical grid nesting",
         "entries": "1",
         "featureTags": [
           "domains"
@@ -24318,7 +24318,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2282
         },
-        "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinment factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
+        "raw": "rconfig   integer vert_refine_fact        namelist,domains      1              1       irh    \"vertical refinement factor for ndown, not used for concurrent vertical grid nesting\"  \"\" \"\"",
         "registryDefault": 1,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -37938,10 +37938,10 @@
         ],
         "allDefinitions": [
           {
-            "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+            "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
             "entries": "max_dom",
             "line": 242,
-            "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file\"   \"\"",
+            "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file\"   \"\"",
             "registryDefault": 1,
             "sourceFile": "registry.fire",
             "type": "integer",
@@ -37950,10 +37950,10 @@
         ],
         "comments": [
           "fire_fmc_read",
-          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file"
+          "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": 1,
-        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
         "entries": "max_domains",
         "featureTags": [
           "fire"
@@ -37970,7 +37970,7 @@
           "file": "registry.fire",
           "line": 242
         },
-        "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file\"   \"\"",
+        "raw": "rconfig   integer fire_fmc_read          namelist,fire         max_domains           1       -      \"fire_fmc_read\"    \"ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file\"   \"\"",
         "registryDefault": 1,
         "sources": [
           "Registry/registry.fire",
@@ -38248,10 +38248,10 @@
         ],
         "allDefinitions": [
           {
-            "description": "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+            "description": "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
             "entries": "max_dom",
             "line": 236,
-            "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file\"   \"\"",
+            "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file\"   \"\"",
             "registryDefault": -1,
             "sourceFile": "registry.fire",
             "type": "integer",
@@ -38260,10 +38260,10 @@
         ],
         "comments": [
           "fire_fuel_read",
-          "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file"
+          "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file"
         ],
         "defaultValue": -1,
-        "description": "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+        "description": "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
         "entries": "max_domains",
         "featureTags": [
           "fire"
@@ -38280,7 +38280,7 @@
           "file": "registry.fire",
           "line": 236
         },
-        "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file\"   \"\"",
+        "raw": "rconfig   integer fire_fuel_read         namelist,fire         max_domains           -1      -      \"fire_fuel_read\"   \"fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file\"   \"\"",
         "registryDefault": -1,
         "sources": [
           "Registry/registry.fire",
@@ -44224,10 +44224,10 @@
         ],
         "allDefinitions": [
           {
-            "description": "which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+            "description": "which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
             "entries": "max_dom",
             "line": 220,
-            "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, Macarthur; if 1, BEHAVE\" \"\"",
+            "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, MacArthur; if 1, BEHAVE\" \"\"",
             "registryDefault": 1,
             "sourceFile": "registry.fire",
             "type": "integer",
@@ -44236,10 +44236,10 @@
         ],
         "comments": [
           "fire_sprd_mdl",
-          "which spread rate formula: if 0, Macarthur; if 1, BEHAVE"
+          "which spread rate formula: if 0, MacArthur; if 1, BEHAVE"
         ],
         "defaultValue": 1,
-        "description": "which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+        "description": "which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
         "entries": "max_domains",
         "featureTags": [
           "fire"
@@ -44256,7 +44256,7 @@
           "file": "registry.fire",
           "line": 220
         },
-        "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, Macarthur; if 1, BEHAVE\" \"\"",
+        "raw": "rconfig   integer fire_sprd_mdl          namelist,fire         max_domains           1       -      \"fire_sprd_mdl\"    \"which spread rate formula: if 0, MacArthur; if 1, BEHAVE\" \"\"",
         "registryDefault": 1,
         "sources": [
           "Registry/registry.fire",
@@ -52670,34 +52670,62 @@
       }
     },
     "physics": {
-      "03input": {
+      "o3input": {
         "comments": [
-          "03input",
-          "ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)"
+          "o3input",
+          "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2"
         ],
         "defaultValue": 2,
-        "description": "03input | ozone input option for RRTMG radiation;  =0 : use the profile inside RRTMG scheme  =2 : use CAM ozone data (from  \"ozone.formatted\" file found in run/ or  test/em_real directory)",
+        "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
         "entries": "1",
         "group": "physics",
         "io": "-",
-        "key": "physics.03input",
-        "name": "03input",
+        "key": "physics.o3input",
+        "name": "o3input",
         "originalKeys": [
-          "physics.03input"
+          "physics.o3input"
         ],
         "sources": [
-          "UsersGuide/master_full"
+          "Registry/Registry.EM_COMMON",
+          "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
         ],
         "type": "integer",
         "uiStatus": "generated_registry",
         "versionSupport": {
+          "baselineVersion": "4.7.1",
+          "changedSinceBaseline": false,
+          "currentVersion": "4.8.1-dev",
           "firstSeen": "4.7.1",
-          "note": "Present in WRF 4.7.1 baseline catalog but not found in WRF 4.8.x overlay. Kept for backward compatibility.",
           "presentIn": [
-            "4.7.1"
+            "4.7.1",
+            "4.8.1-dev"
           ],
-          "status": "legacy_471_only"
-        }
+          "status": "active"
+        },
+        "activationHints": [],
+        "allDefinitions": [
+          {
+            "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
+            "entries": "1",
+            "line": 2582,
+            "raw": "rconfig   integer o3input                 namelist,physics      1             2       -      \"o3input\"      \"ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2\"      \"\"",
+            "registryDefault": 2,
+            "sourceFile": "Registry.EM_COMMON",
+            "type": "integer",
+            "units": ""
+          }
+        ],
+        "featureTags": [
+          "domains"
+        ],
+        "mergeStatus": "single",
+        "primarySource": {
+          "file": "Registry.EM_COMMON",
+          "line": 2582
+        },
+        "raw": "rconfig   integer o3input                 namelist,physics      1             2       -      \"o3input\"      \"ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2\"      \"\"",
+        "registryDefault": 2,
+        "units": ""
       },
       "acc_phy_tend": {
         "activationHints": [],
@@ -53796,10 +53824,10 @@
         "activationHints": [],
         "allDefinitions": [
           {
-            "description": "0:original, 1:Kuwano, 2:Chaboreau-Bechtold",
+            "description": "0:original, 1:Kuwano, 2:Chaboureau-Bechtold",
             "entries": "1",
             "line": 2477,
-            "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboreau-Bechtold\"            \"\"",
+            "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboureau-Bechtold\"            \"\"",
             "registryDefault": 2,
             "sourceFile": "Registry.EM_COMMON",
             "type": "integer",
@@ -53808,10 +53836,10 @@
         ],
         "comments": [
           "bl_mynn_cloudpdf",
-          "0:original, 1:Kuwano, 2:Chaboreau-Bechtold"
+          "0:original, 1:Kuwano, 2:Chaboureau-Bechtold"
         ],
         "defaultValue": 2,
-        "description": "0:original, 1:Kuwano, 2:Chaboreau-Bechtold",
+        "description": "0:original, 1:Kuwano, 2:Chaboureau-Bechtold",
         "entries": "1",
         "featureTags": [],
         "group": "physics",
@@ -53826,7 +53854,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2477
         },
-        "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboreau-Bechtold\"            \"\"",
+        "raw": "rconfig   integer     bl_mynn_cloudpdf    namelist,physics      1              2       irh      \"bl_mynn_cloudpdf\"              \"0:original, 1:Kuwano, 2:Chaboureau-Bechtold\"            \"\"",
         "registryDefault": 2,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -58307,10 +58335,10 @@
         "activationHints": [],
         "allDefinitions": [
           {
-            "description": "sf_surf_irr_scheme WATER AMOUNT [mm]",
+            "description": "Daily irrigation water amount [mm]",
             "entries": "max_dom",
             "line": 2462,
-            "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"sf_surf_irr_scheme WATER AMOUNT [mm]\" \"\"",
+            "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"Daily irrigation water amount [mm]\" \"\"",
             "registryDefault": 0,
             "sourceFile": "Registry.EM_COMMON",
             "type": "real",
@@ -58319,10 +58347,10 @@
         ],
         "comments": [
           "irr_daily_amount",
-          "sf_surf_irr_scheme WATER AMOUNT [mm]"
+          "Daily irrigation water amount [mm]"
         ],
         "defaultValue": 0.0,
-        "description": "sf_surf_irr_scheme WATER AMOUNT [mm]",
+        "description": "Daily irrigation water amount [mm]",
         "entries": "max_domains",
         "featureTags": [
           "chemistry"
@@ -58339,7 +58367,7 @@
           "file": "Registry.EM_COMMON",
           "line": 2462
         },
-        "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"sf_surf_irr_scheme WATER AMOUNT [mm]\" \"\"",
+        "raw": "rconfig   real        irr_daily_amount    namelist,physics      max_domains    0       rh       \"irr_daily_amount\"     \"Daily irrigation water amount [mm]\" \"\"",
         "registryDefault": 0,
         "sources": [
           "Registry/Registry.EM_COMMON",
@@ -64177,63 +64205,6 @@
         },
         "raw": "rconfig   integer numBins                 namelist,physics      max_domains    1  -     \"number of bins to use in the CuP PDF\"",
         "registryDefault": 1,
-        "sources": [
-          "Registry/Registry.EM_COMMON",
-          "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
-        ],
-        "type": "integer",
-        "uiStatus": "generated_registry",
-        "units": "",
-        "versionSupport": {
-          "baselineVersion": "4.7.1",
-          "changedSinceBaseline": false,
-          "currentVersion": "4.8.1-dev",
-          "firstSeen": "4.7.1",
-          "presentIn": [
-            "4.7.1",
-            "4.8.1-dev"
-          ],
-          "status": "active"
-        }
-      },
-      "o3input": {
-        "activationHints": [],
-        "allDefinitions": [
-          {
-            "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
-            "entries": "1",
-            "line": 2582,
-            "raw": "rconfig   integer o3input                 namelist,physics      1             2       -      \"o3input\"      \"ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2\"      \"\"",
-            "registryDefault": 2,
-            "sourceFile": "Registry.EM_COMMON",
-            "type": "integer",
-            "units": ""
-          }
-        ],
-        "comments": [
-          "o3input",
-          "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2"
-        ],
-        "defaultValue": 2,
-        "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
-        "entries": "1",
-        "featureTags": [
-          "domains"
-        ],
-        "group": "physics",
-        "io": "-",
-        "key": "physics.o3input",
-        "mergeStatus": "single",
-        "name": "o3input",
-        "originalKeys": [
-          "physics.o3input"
-        ],
-        "primarySource": {
-          "file": "Registry.EM_COMMON",
-          "line": 2582
-        },
-        "raw": "rconfig   integer o3input                 namelist,physics      1             2       -      \"o3input\"      \"ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2\"      \"\"",
-        "registryDefault": 2,
         "sources": [
           "Registry/Registry.EM_COMMON",
           "WRF/4.8.1-dev/Registry/Registry.EM_COMMON"
@@ -83243,10 +83214,10 @@
       "io_form_auxhist2": {
         "comments": [
           "io_form_auxhist2",
-          "output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+          "output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
         ],
         "defaultValue": null,
-        "description": "io_form_auxhist2 | output file format when using auxhist2;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
+        "description": "io_form_auxhist2 | output file format when using auxhist2;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
         "entries": "1",
         "group": "time_control",
         "io": "-",
@@ -83387,10 +83358,10 @@
       "io_form_auxinput2": {
         "comments": [
           "io_form_auxinput2",
-          "IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
+          "IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF"
         ],
         "defaultValue": 2,
-        "description": "io_form_auxinput2 | IO format for input stream 2 data;  =2 : netCDF  =4 : PHD5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
+        "description": "io_form_auxinput2 | IO format for input stream 2 data;  =2 : netCDF  =4 : PHDF5  =5 : GRIB1  =10 : GRIB2  =11 : pnetCDF",
         "entries": "1",
         "group": "time_control",
         "io": "-",

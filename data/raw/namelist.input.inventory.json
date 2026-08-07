@@ -4140,7 +4140,7 @@
       "qv_max_p_safe": {
         "defaultValue": 10000.0,
         "dependencyHints": [],
-        "description": "Threshhold pressure, Qv > flag set to value; Pa",
+        "description": "Threshold pressure, Qv > flag set to value; Pa",
         "descriptionSource": "registry",
         "entries": "1",
         "enumSource": null,
@@ -4185,7 +4185,7 @@
       "qv_min_p_safe": {
         "defaultValue": 110000.0,
         "dependencyHints": [],
-        "description": "Threshhold pressure, Qv < flag set to value; Pa",
+        "description": "Threshold pressure, Qv < flag set to value; Pa",
         "descriptionSource": "registry",
         "entries": "1",
         "enumSource": null,
@@ -8525,7 +8525,7 @@
       "fire_fmc_read": {
         "defaultValue": 1,
         "dependencyHints": [],
-        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-presc; if 2, read from file",
+        "description": "ground fuel moisture is set by: if 0, in wrfinput; if 1, user-prescribed; if 2, read from file",
         "descriptionSource": "registry",
         "entries": "max_domains",
         "enumSource": null,
@@ -8600,7 +8600,7 @@
       "fire_fuel_read": {
         "defaultValue": -1,
         "dependencyHints": [],
-        "description": "fuel categories are set by: if 0, uniform; if 1, user-presc; if 2, read from file",
+        "description": "fuel categories are set by: if 0, uniform; if 1, user-prescribed; if 2, read from file",
         "descriptionSource": "registry",
         "entries": "max_domains",
         "enumSource": null,
@@ -10055,7 +10055,7 @@
       "fire_sprd_mdl": {
         "defaultValue": 1,
         "dependencyHints": [],
-        "description": "which spread rate formula: if 0, Macarthur; if 1, BEHAVE",
+        "description": "which spread rate formula: if 0, MacArthur; if 1, BEHAVE",
         "descriptionSource": "registry",
         "entries": "max_domains",
         "enumSource": null,
@@ -12071,25 +12071,22 @@
       }
     },
     "physics": {
-      "03input": {
+      "o3input": {
         "defaultValue": 2,
         "dependencyHints": [],
-        "description": "ozone input option for RRTMG radiation;",
-        "descriptionSource": "users",
+        "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
+        "descriptionSource": "registry",
         "entries": "1",
-        "enumSource": "select/guide",
-        "enumValues": {
-          "0": "use the profile inside RRTMG scheme",
-          "2": "use CAM ozone data from ozone.formatted"
-        },
+        "enumSource": null,
+        "enumValues": {},
         "group": "physics",
-        "isFinite": true,
+        "isFinite": false,
         "isLogical": false,
-        "name": "03input",
+        "name": "o3input",
         "type": "integer",
         "uiStatus": "curated_group_hidden",
-        "subsection": "radiation",
-        "subsectionOrder": 2
+        "subsection": "specialized",
+        "subsectionOrder": 12
       },
       "acc_phy_tend": {
         "defaultValue": 0,
@@ -15714,23 +15711,6 @@
         "uiStatus": "curated_group_hidden",
         "subsection": "cumulus",
         "subsectionOrder": 7
-      },
-      "o3input": {
-        "defaultValue": 2,
-        "dependencyHints": [],
-        "description": "ozone input for RRTMG for CG domain: original = 0; CAM ozone = 2",
-        "descriptionSource": "registry",
-        "entries": "1",
-        "enumSource": null,
-        "enumValues": {},
-        "group": "physics",
-        "isFinite": false,
-        "isLogical": false,
-        "name": "o3input",
-        "type": "integer",
-        "uiStatus": "curated_group_hidden",
-        "subsection": "specialized",
-        "subsectionOrder": 12
       },
       "ocean_levels": {
         "defaultValue": 30,
@@ -21025,7 +21005,7 @@
           "10": "GRIB2",
           "11": "parallel netCDF",
           "2": "netCDF",
-          "4": "PHD5",
+          "4": "PHDF5",
           "5": "GRIB1"
         },
         "group": "time_control",
@@ -21076,7 +21056,7 @@
           "10": "GRIB2",
           "11": "parallel netCDF",
           "2": "netCDF",
-          "4": "PHD5",
+          "4": "PHDF5",
           "5": "GRIB1"
         },
         "group": "time_control",
