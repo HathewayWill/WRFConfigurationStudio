@@ -2215,7 +2215,7 @@
 
     if (parts.length >= 2) {
       var last = parts[parts.length - 1].trim();
-      if (/^(seconds?|minutes?|hours?|days?|pa|hpa|k|m|km|m\/s|kg\/kg|flag|logical|logical\s+flag|integer|integer\s+flag|real|character)$/i.test(last)) {
+      if (/^(seconds?|minutes?|hours?|days?|years?|pa|hpa|kpa|k|m|meters?|metres?|km|cm|mm|m\/s|mps|kg\/kg|g\/kg|kg\s+kg(?:\{-?1\}|\[-?1\]|-1)?|j\s+kg-1|k\/s|k\s+m-1|k\s+m\s+s-1|kg\s+m-2|m2\s+s-3|m\^-1|m-1|s-1|pa\/m|pa\/pa|dbz|o3\s+dobson\s+units|flag|logical|logical\s+flag|integer|integer\s+flag|real|character)$/i.test(last)) {
         units = last;
         summary = parts.slice(0, -1).join(' | ').trim();
       }
@@ -2678,7 +2678,7 @@
 
     options.forEach(function (option) {
       var optionValue = String(option && option.value == null ? '' : option.value).trim();
-      var optionLabel = normalizeOptionLabelForDisplay(option.label);
+      var optionLabel = normalizeEmbeddedUnitsForDisplay(normalizeOptionLabelForDisplay(option.label));
       var showLabel = optionLabel && optionLabel.toLowerCase() !== optionValue.toLowerCase();
       var labelHtml = showLabel ? htmlTag('span', 'class="namelist-input-option-label"', esc(optionLabel)) : '';
 
@@ -2868,6 +2868,55 @@
     return text;
   }
 
+
+  function normalizeEmbeddedUnitsForDisplay(text) {
+    var out = String(text == null ? '' : text);
+    if (!out) return '';
+
+    out = out
+      .replace(/\bmeters\s+per\s+second\b/gi, 'm s⁻¹')
+      .replace(/\bmeter\s+per\s+second\b/gi, 'm s⁻¹')
+      .replace(/\bmetres\s+per\s+second\b/gi, 'm s⁻¹')
+      .replace(/\bmetre\s+per\s+second\b/gi, 'm s⁻¹')
+      .replace(/\bmps\b/gi, 'm s⁻¹')
+      .replace(/\bm\s*\/\s*s\b/gi, 'm s⁻¹')
+
+      .replace(/\bK\s*\/\s*km\b/g, 'K km⁻¹')
+      .replace(/\bK\s*\/\s*s\b/g, 'K s⁻¹')
+      .replace(/\bK\s+m\s+s-1\b/g, 'K m s⁻¹')
+      .replace(/\bK\s+m-1\b/g, 'K m⁻¹')
+
+      .replace(/\bPa\s*\/\s*m\b/g, 'Pa m⁻¹')
+      .replace(/\bPa\s*\/\s*Pa\b/g, 'Pa Pa⁻¹')
+
+      .replace(/\bkg\s*\/\s*kg\b/g, 'kg kg⁻¹')
+      .replace(/\bkg\s+kg\{-?1\}\b/g, 'kg kg⁻¹')
+      .replace(/\bkg\s+kg\[-?1\]\b/g, 'kg kg⁻¹')
+      .replace(/\bkg\s+kg-1\b/g, 'kg kg⁻¹')
+      .replace(/\bg\s*\/\s*kg\b/g, 'g kg⁻¹')
+      .replace(/\bJ\s+kg-1\b/g, 'J kg⁻¹')
+      .replace(/\bkg\s+m-2\b/g, 'kg m⁻²')
+
+      .replace(/\bm2\s+s-3\b/g, 'm² s⁻³')
+      .replace(/\bm\^-1\b/g, 'm⁻¹')
+      .replace(/\bm-1\b/g, 'm⁻¹')
+      .replace(/\bs-1\b/g, 's⁻¹')
+      .replace(/\b#\s+m-3\b/g, '# m⁻³')
+
+      .replace(/\bg\s*\/\s*m3\b/g, 'g m⁻³')
+      .replace(/\bg\s*\/\s*m\^3\b/g, 'g m⁻³')
+
+      .replace(/\bo3\s+Dobson\s+units\b/gi, 'O₃ DU')
+      .replace(/\bO3\s+Dobson\s+units\b/g, 'O₃ DU')
+
+      .replace(/\|\s*METERS\b/g, '| m')
+      .replace(/\|\s*meters\b/gi, '| m')
+      .replace(/\|\s*METRES\b/g, '| m')
+      .replace(/\|\s*metres\b/gi, '| m');
+
+    return out;
+  }
+
   function renderDescriptionBlockHtml(field, panel) {
     var description = getUsefulFieldDescription(field);
     var parsed = description ? splitOptionDescription(description) : null;
@@ -2889,9 +2938,9 @@
     var html = panel ? '' : '<div class="' + cls + '">';
 
     if (parts.name) html += '<div class="font-weight-bold' + (panel ? '' : ' mb-1') + '">' + esc(parts.name) + '</div>';
-    if (parts.summary) html += '<div' + (hasOptions ? ' class="mb-1"' : '') + '>' + esc(parts.summary) + '</div>';
+    if (parts.summary) html += '<div' + (hasOptions ? ' class="mb-1"' : '') + '>' + esc(normalizeEmbeddedUnitsForDisplay(parts.summary)) + '</div>';
     if (parts.units) html += '<div class="small text-muted mt-1">Units / type: ' + esc(normalizeUnitForDisplay(parts.units)) + '</div>';
-    if (parts.valueHint) html += '<div class="small text-muted mt-1">Values: ' + esc(parts.valueHint) + '</div>';
+    if (parts.valueHint) html += '<div class="small text-muted mt-1">Values: ' + esc(normalizeEmbeddedUnitsForDisplay(parts.valueHint)) + '</div>';
 
     if (hasOptions) html += renderOptionListHtml(displayOptionItems, panel);
 
@@ -3046,7 +3095,7 @@
       var html = '<select class="form-control form-control-sm namelist-input-field" data-key="' + esc(field.key) + '"' + dataIndex + '>';
       html += '<option value="" ' + (isBlankValue ? 'selected' : '') + '></option>';
       Object.keys(field.enumValues || {}).forEach(function (opt) {
-        html += '<option value="' + esc(opt) + '" ' + (String(value) === String(opt) ? 'selected' : '') + '>' + esc(opt + ' — ' + field.enumValues[opt]) + '</option>';
+        html += '<option value="' + esc(opt) + '" ' + (String(value) === String(opt) ? 'selected' : '') + '>' + esc(opt + ' — ' + normalizeEmbeddedUnitsForDisplay(field.enumValues[opt])) + '</option>';
       });
       html += '</select>';
       return html;
