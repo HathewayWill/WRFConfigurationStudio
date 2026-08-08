@@ -409,7 +409,7 @@ This project is distributed under the GPL-3.0 License.
 
 ```text
 GPL-3.0 License
-[Full text available at: [https://choosealicense.com/licenses/gpl-3.0/]
+https://choosealicense.com/licenses/gpl-3.0/
 ```
 
 ---
