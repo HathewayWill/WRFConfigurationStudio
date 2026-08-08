@@ -2843,7 +2843,9 @@
       field.description || ''
     ].join(' ').toLowerCase();
 
-    return /(^|[._-])(file|filename|path|dir|directory)([._-]|$)/.test(text) ||
+    var tokens = text.replace(/[^a-z0-9]+/g, ' ');
+
+    return /\b(file|filename|path|dir|directory)\b/.test(tokens) ||
       /file_name|pathname|directory/.test(text);
   }
 

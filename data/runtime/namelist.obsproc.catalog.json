@@ -27,7 +27,7 @@
         "name": "obs_gts_filename",
         "group": "record1",
         "key": "record1.obs_gts_filename",
-        "type": "unknown",
+        "type": "character",
         "entries": "1",
         "defaultValue": "'obs.2008020512'",
         "sources": [
@@ -48,13 +48,15 @@
         ],
         "uiStatus": "visible",
         "visibility": "visible",
-        "filterPolicy": "none"
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC GTS observation filename"
       },
       "obs_err_filename": {
         "name": "obs_err_filename",
         "group": "record1",
         "key": "record1.obs_err_filename",
-        "type": "unknown",
+        "type": "character",
         "entries": "1",
         "defaultValue": "'obserr.txt'",
         "sources": [
@@ -75,7 +77,9 @@
         ],
         "uiStatus": "visible",
         "visibility": "visible",
-        "filterPolicy": "none"
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC observation-error filename"
       },
       "gts_from_mmm_archive": {
         "name": "gts_from_mmm_archive",
@@ -1465,7 +1469,7 @@
         "name": "prepbufr_output_filename",
         "group": "record9",
         "key": "record9.prepbufr_output_filename",
-        "type": "unknown",
+        "type": "character",
         "entries": "1",
         "defaultValue": "'prepbufr_output_filename'",
         "sources": [
@@ -1486,13 +1490,15 @@
         ],
         "uiStatus": "visible",
         "visibility": "visible",
-        "filterPolicy": "none"
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC PREPBUFR output filename"
       },
       "prepbufr_table_filename": {
         "name": "prepbufr_table_filename",
         "group": "record9",
         "key": "record9.prepbufr_table_filename",
-        "type": "unknown",
+        "type": "character",
         "entries": "1",
         "defaultValue": "'prepbufr_table_filename'",
         "sources": [
@@ -1513,7 +1519,9 @@
         ],
         "uiStatus": "visible",
         "visibility": "visible",
-        "filterPolicy": "none"
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC PREPBUFR table filename"
       },
       "output_ob_format": {
         "name": "output_ob_format",
