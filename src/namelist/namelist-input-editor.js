@@ -2695,6 +2695,179 @@
   }
 
 
+
+  function superscriptExponentForDisplay(exp) {
+    return String(exp)
+      .replace(/\+/g, '')
+      .replace(/-/g, '⁻')
+      .replace(/0/g, '⁰')
+      .replace(/1/g, '¹')
+      .replace(/2/g, '²')
+      .replace(/3/g, '³')
+      .replace(/4/g, '⁴')
+      .replace(/5/g, '⁵')
+      .replace(/6/g, '⁶')
+      .replace(/7/g, '⁷')
+      .replace(/8/g, '⁸')
+      .replace(/9/g, '⁹');
+  }
+
+  function normalizeUnitTokenForDisplay(token, denominator) {
+    token = String(token || '').trim().replace(/−/g, '-');
+    if (!token) return '';
+
+    token = token
+      .replace(/\{\s*([-+]?\d+)\s*\}/g, '^$1')
+      .replace(/\[\s*([-+]?\d+)\s*\]/g, '^$1');
+
+    var match = token.match(/^([A-Za-zµμΩ#%°]+)(?:\^?([-+]?\d+))?$/);
+    if (!match) return '';
+
+    var unitCase = {
+      m: 'm', s: 's', kg: 'kg', g: 'g', a: 'A', k: 'K',
+      mol: 'mol', cd: 'cd', rad: 'rad', sr: 'sr',
+      hz: 'Hz', khz: 'kHz', mhz: 'MHz', ghz: 'GHz',
+      n: 'N', pa: 'Pa', hpa: 'hPa', kpa: 'kPa', mpa: 'MPa',
+      j: 'J', kj: 'kJ', mj: 'MJ',
+      w: 'W', kw: 'kW', mw: 'MW',
+      c: 'C', v: 'V', f: 'F',
+      ohm: 'Ω', 'ω': 'Ω', wb: 'Wb', t: 'T',
+      lm: 'lm', lx: 'lx', bq: 'Bq', gy: 'Gy', sv: 'Sv', kat: 'kat',
+      min: 'min', h: 'h', d: 'd', yr: 'yr', l: 'L',
+      mm: 'mm', cm: 'cm', km: 'km', um: 'µm', 'µm': 'µm', 'μm': 'µm',
+      nm: 'nm', dbz: 'dBZ', du: 'DU', '%': '%', '#': '#'
+    };
+
+    var symbol = unitCase[String(match[1]).toLowerCase()];
+    if (!symbol) return '';
+
+    var exp = match[2];
+    var expNum;
+
+    if (denominator) {
+      expNum = exp && /^[-+]?\d+$/.test(exp) ? -Math.abs(parseInt(exp, 10)) : -1;
+    } else {
+      expNum = exp && /^[-+]?\d+$/.test(exp) ? parseInt(exp, 10) : 1;
+    }
+
+    return expNum === 1 ? symbol : symbol + superscriptExponentForDisplay(expNum);
+  }
+
+  function normalizeSymbolUnitForDisplay(text) {
+    text = String(text || '')
+      .replace(/−/g, '-')
+      .replace(/[()\[\],;]/g, ' ')
+      .replace(/\*/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!text) return '';
+
+    if (text.indexOf('/') !== -1) {
+      var parts = text.split('/').map(function (part) { return part.trim(); });
+      if (parts.some(function (part) { return !part; })) return '';
+
+      var out = [];
+
+      parts[0].split(/\s+/).forEach(function (token) {
+        var normalized = normalizeUnitTokenForDisplay(token, false);
+        if (normalized) out.push(normalized);
+      });
+
+      for (var i = 1; i < parts.length; i++) {
+        parts[i].split(/\s+/).forEach(function (token) {
+          var normalized = normalizeUnitTokenForDisplay(token, true);
+          if (normalized) out.push(normalized);
+        });
+      }
+
+      return out.length ? out.join(' ') : '';
+    }
+
+    var tokens = text.split(/\s+/);
+    var normalizedTokens = [];
+
+    for (var j = 0; j < tokens.length; j++) {
+      var item = normalizeUnitTokenForDisplay(tokens[j], false);
+      if (!item) return '';
+      normalizedTokens.push(item);
+    }
+
+    return normalizedTokens.join(' ');
+  }
+
+  function normalizeUnitWordsForDisplay(text) {
+    var lower = String(text || '').toLowerCase().replace(/−/g, '-').replace(/\s+/g, ' ').trim();
+
+    var exact = {
+      'minutes': 'min',
+      'minutes from start of run': 'min from start of run',
+      'seconds': 's',
+      'seconds from start of run': 's from start of run',
+      'hours': 'h',
+      'hours from start of run': 'h from start of run',
+      'days from start of run': 'd from start of run',
+      'years from start of run': 'yr from start of run',
+      'meter': 'm',
+      'meters': 'm',
+      'metre': 'm',
+      'metres': 'm',
+      'meters per second': 'm s⁻¹',
+      'meter per second': 'm s⁻¹',
+      'metres per second': 'm s⁻¹',
+      'metre per second': 'm s⁻¹',
+      'mps': 'm s⁻¹',
+      'm/s': 'm s⁻¹',
+      'pa': 'Pa',
+      'hpa': 'hPa',
+      'kpa': 'kPa',
+      'pa/pa': 'Pa Pa⁻¹',
+      'pa/m': 'Pa m⁻¹',
+      'km': 'km',
+      'cm': 'cm',
+      'mm': 'mm',
+      '%': '%',
+      'dbz': 'dBZ',
+      'g/kg': 'g kg⁻¹',
+      'kg/kg': 'kg kg⁻¹',
+      'kg kg{-1}': 'kg kg⁻¹',
+      'kg kg[-1]': 'kg kg⁻¹',
+      'kg kg-1': 'kg kg⁻¹',
+      'j kg-1': 'J kg⁻¹',
+      'm^-1': 'm⁻¹',
+      'm-1': 'm⁻¹',
+      's-1': 's⁻¹',
+      'k/s': 'K s⁻¹',
+      'k m-1': 'K m⁻¹',
+      'k m s-1': 'K m s⁻¹',
+      'kg m-2': 'kg m⁻²',
+      'm2 s-3': 'm² s⁻³',
+      '# m-3': '# m⁻³',
+      'moles/flash': 'mol flash⁻¹',
+      'o3 dobson units': 'O₃ DU',
+      'g_smoke/kg_air': 'g smoke kg_air⁻¹'
+    };
+
+    if (exact[lower]) return exact[lower];
+
+    if (/meters? per second|metres? per second/.test(lower)) return 'm s⁻¹';
+
+    return '';
+  }
+
+  function normalizeUnitForDisplay(unit) {
+    var text = String(unit == null ? '' : unit).trim();
+    if (!text) return '';
+
+    var whole = normalizeUnitWordsForDisplay(text);
+    if (whole) return whole;
+
+    var symbol = normalizeSymbolUnitForDisplay(text);
+    if (symbol) return symbol;
+
+    return text;
+  }
+
   function renderDescriptionBlockHtml(field, panel) {
     var description = getUsefulFieldDescription(field);
     var parsed = description ? splitOptionDescription(description) : null;
@@ -2717,7 +2890,7 @@
 
     if (parts.name) html += '<div class="font-weight-bold' + (panel ? '' : ' mb-1') + '">' + esc(parts.name) + '</div>';
     if (parts.summary) html += '<div' + (hasOptions ? ' class="mb-1"' : '') + '>' + esc(parts.summary) + '</div>';
-    if (parts.units) html += '<div class="small text-muted mt-1">Units / type: ' + esc(parts.units) + '</div>';
+    if (parts.units) html += '<div class="small text-muted mt-1">Units / type: ' + esc(normalizeUnitForDisplay(parts.units)) + '</div>';
     if (parts.valueHint) html += '<div class="small text-muted mt-1">Values: ' + esc(parts.valueHint) + '</div>';
 
     if (hasOptions) html += renderOptionListHtml(displayOptionItems, panel);
