@@ -2890,12 +2890,11 @@
     return '<div class="namelist-input-file-path-helper input-group input-group-sm">' +
       inputHtml +
       '<div class="input-group-append">' +
-      '<button type="button" class="btn btn-outline-secondary namelist-input-file-browse" data-key="' + esc(field.key) + '"' + dataIndex + '>Browse</button>' +
-      '<button type="button" class="btn btn-outline-secondary namelist-input-file-clear" data-key="' + esc(field.key) + '"' + dataIndex + '>Clear</button>' +
+      '<button type="button" class="btn btn-outline-secondary namelist-input-file-browse" title="Browse inserts the selected filename. Paste a full Linux, HPC, or Windows path manually when needed." data-key="' + esc(field.key) + '"' + dataIndex + '>Browse</button>' +
+      '<button type="button" class="btn btn-outline-secondary namelist-input-file-clear" title="Clear this file/path value" data-key="' + esc(field.key) + '"' + dataIndex + '>Clear</button>' +
       '</div>' +
       '<input type="file" class="d-none namelist-input-file-picker" data-key="' + esc(field.key) + '"' + dataIndex + '>' +
-      '</div>' +
-      '<div class="small text-muted mt-1">Browse inserts the selected filename. Paste a full Linux, HPC, or Windows path manually when needed.</div>';
+      '</div>';
   };
 
   HybridNamelistInputEditor.prototype.bindRenderedEvents = function () {
