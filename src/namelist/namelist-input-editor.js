@@ -2831,6 +2831,32 @@
     return this.renderSingleInput(field, value, null);
   };
 
+  function isFilePathLikeField(field) {
+    if (!field) return false;
+
+    var fieldType = String(field.type || '').toLowerCase();
+    if (fieldType !== 'character' && fieldType !== 'unknown' && fieldType !== 'string') return false;
+
+    var text = [
+      field.key || '',
+      field.name || '',
+      field.description || ''
+    ].join(' ').toLowerCase();
+
+    return /(^|[._-])(file|filename|path|dir|directory)([._-]|$)/.test(text) ||
+      /file_name|pathname|directory/.test(text);
+  }
+
+  function quoteFilePathForNamelist(value) {
+    var text = String(value == null ? '' : value).trim();
+    if (!text) return '';
+    if ((text.charAt(0) === "'" && text.charAt(text.length - 1) === "'") ||
+        (text.charAt(0) === '"' && text.charAt(text.length - 1) === '"')) {
+      return text;
+    }
+    return "'" + text.replace(/'/g, "''") + "'";
+  }
+
   HybridNamelistInputEditor.prototype.renderSingleInput = function (field, value, index) {
     var dataIndex = index == null ? '' : ' data-index="' + index + '"';
     var isBlankValue = value === null || value === undefined || String(value) === '';
@@ -2855,7 +2881,19 @@
     var typeAttr = useNumberInput ? 'number' : 'text';
     var stepAttr = useNumberInput ? (field.type === 'integer' ? ' step="1"' : ' step="any"') : '';
     var fallbackClass = numericField && !useNumberInput ? ' namelist-input-numeric-text-fallback' : '';
-    return '<input class="form-control form-control-sm namelist-input-field' + fallbackClass + '" data-key="' + esc(field.key) + '"' + dataIndex + ' type="' + typeAttr + '" value="' + esc(value == null ? '' : value) + '"' + stepAttr + '>';
+    var inputHtml = '<input class="form-control form-control-sm namelist-input-field' + fallbackClass + '" data-key="' + esc(field.key) + '"' + dataIndex + ' type="' + typeAttr + '" value="' + esc(value == null ? '' : value) + '"' + stepAttr + '>';
+
+    if (!isFilePathLikeField(field)) return inputHtml;
+
+    return '<div class="namelist-input-file-path-helper input-group input-group-sm">' +
+      inputHtml +
+      '<div class="input-group-append">' +
+      '<button type="button" class="btn btn-outline-secondary namelist-input-file-browse" data-key="' + esc(field.key) + '"' + dataIndex + '>Browse</button>' +
+      '<button type="button" class="btn btn-outline-secondary namelist-input-file-clear" data-key="' + esc(field.key) + '"' + dataIndex + '>Clear</button>' +
+      '</div>' +
+      '<input type="file" class="d-none namelist-input-file-picker" data-key="' + esc(field.key) + '"' + dataIndex + '>' +
+      '</div>' +
+      '<div class="small text-muted mt-1">Browse inserts the selected filename. Paste a full Linux, HPC, or Windows path manually when needed.</div>';
   };
 
   HybridNamelistInputEditor.prototype.bindRenderedEvents = function () {
@@ -2979,6 +3017,34 @@
       self.updateText();
       self.render();
     });
+    this.$container.find('.namelist-input-file-browse').off('click').on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).closest('.namelist-input-file-path-helper').find('.namelist-input-file-picker').first().trigger('click');
+    });
+
+    this.$container.find('.namelist-input-file-clear').off('click').on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).closest('.namelist-input-file-path-helper').find('.namelist-input-field').first().val('').trigger('input');
+    });
+
+    this.$container.find('.namelist-input-file-picker').off('change').on('change', function () {
+      var file = this.files && this.files.length ? this.files[0] : null;
+      if (!file) return;
+
+      var selected = file.webkitRelativePath || file.name || '';
+      if (!selected) return;
+
+      $(this).closest('.namelist-input-file-path-helper')
+        .find('.namelist-input-field')
+        .first()
+        .val(quoteFilePathForNamelist(selected))
+        .trigger('input');
+
+      $(this).val('');
+    });
+
     this.$container.find('.namelist-input-field').off('change input').on('change input', function () {
       var key = $(this).data('key');
       var index = $(this).data('index');
