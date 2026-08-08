@@ -75496,7 +75496,8 @@
           "description": "path the directory when the high-res data can be found",
           "description_source": "users"
         },
-        "pdf_default_semantics": "published_default"
+        "pdf_default_semantics": "published_default",
+        "typeInferred": false
       },
       "rst_inname": {
         "name": "rst_inname",
