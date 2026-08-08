@@ -15,7 +15,7 @@ root = Path(__file__).resolve().parents[1]
 required_paths = [
     "index.html",
     "README.md",
-    "LICENSE",
+    "LICENSE.md",
     "src",
     "styles",
     "vendor",
