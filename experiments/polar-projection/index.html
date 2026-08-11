@@ -78,6 +78,52 @@
       font-size: 14px;
     }
 
+    .wps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+      margin-top: 10px;
+    }
+
+    .wps-field label {
+      display: block;
+      margin: 0 0 3px 0;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .wps-field input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5px 6px;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+
+    .update-domain-button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 7px 10px;
+      border: 1px solid #777;
+      border-radius: 4px;
+      background: #f5f5f5;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .update-domain-button:hover {
+      background: #e9e9e9;
+    }
+
+    .wps-validation {
+      margin-top: 8px;
+      min-height: 18px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
     .projection-readout {
       margin-top: 10px;
       margin-bottom: 10px;
@@ -125,6 +171,99 @@
         Southern Hemisphere - Antarctic
       </option>
     </select>
+
+    <div class="wps-grid">
+
+      <div class="wps-field">
+        <label for="wps-ref-lat">ref_lat</label>
+        <input
+          id="wps-ref-lat"
+          type="number"
+          step="0.1"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-ref-lon">ref_lon</label>
+        <input
+          id="wps-ref-lon"
+          type="number"
+          step="0.1"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-truelat1">truelat1</label>
+        <input
+          id="wps-truelat1"
+          type="number"
+          step="0.1"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-stand-lon">stand_lon</label>
+        <input
+          id="wps-stand-lon"
+          type="number"
+          step="0.1"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-e-we">e_we</label>
+        <input
+          id="wps-e-we"
+          type="number"
+          step="1"
+          min="2"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-e-sn">e_sn</label>
+        <input
+          id="wps-e-sn"
+          type="number"
+          step="1"
+          min="2"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-dx">dx (m)</label>
+        <input
+          id="wps-dx"
+          type="number"
+          step="1000"
+          min="1"
+        >
+      </div>
+
+      <div class="wps-field">
+        <label for="wps-dy">dy (m)</label>
+        <input
+          id="wps-dy"
+          type="number"
+          step="1000"
+          min="1"
+        >
+      </div>
+
+    </div>
+
+    <button
+      id="update-domain"
+      class="update-domain-button"
+      type="button"
+    >
+      Update Domain
+    </button>
+
+    <div
+      id="wps-validation"
+      class="wps-validation"
+    ></div>
 
     <div
       id="projection-readout"
@@ -442,14 +581,366 @@
         "</div>";
     }
 
+    const wpsDefaults = {
+
+      north: {
+        refLat: 75.0,
+        refLon: -40.0,
+        truelat1: 60.0,
+        standLon: -40.0,
+        eWe: 151,
+        eSn: 151,
+        dx: 12000,
+        dy: 12000
+      },
+
+      south: {
+        refLat: -75.0,
+        refLon: 0.0,
+        truelat1: -60.0,
+        standLon: 0.0,
+        eWe: 151,
+        eSn: 151,
+        dx: 12000,
+        dy: 12000
+      }
+    };
+
+    function setWpsDefaults(hemisphere) {
+
+      const defaults =
+        wpsDefaults[hemisphere];
+
+      document.getElementById(
+        "wps-ref-lat"
+      ).value = defaults.refLat;
+
+      document.getElementById(
+        "wps-ref-lon"
+      ).value = defaults.refLon;
+
+      document.getElementById(
+        "wps-truelat1"
+      ).value = defaults.truelat1;
+
+      document.getElementById(
+        "wps-stand-lon"
+      ).value = defaults.standLon;
+
+      document.getElementById(
+        "wps-e-we"
+      ).value = defaults.eWe;
+
+      document.getElementById(
+        "wps-e-sn"
+      ).value = defaults.eSn;
+
+      document.getElementById(
+        "wps-dx"
+      ).value = defaults.dx;
+
+      document.getElementById(
+        "wps-dy"
+      ).value = defaults.dy;
+    }
+
+    function readWpsParameters() {
+
+      return {
+        refLat: Number(
+          document.getElementById(
+            "wps-ref-lat"
+          ).value
+        ),
+
+        refLon: Number(
+          document.getElementById(
+            "wps-ref-lon"
+          ).value
+        ),
+
+        truelat1: Number(
+          document.getElementById(
+            "wps-truelat1"
+          ).value
+        ),
+
+        standLon: Number(
+          document.getElementById(
+            "wps-stand-lon"
+          ).value
+        ),
+
+        eWe: Number(
+          document.getElementById(
+            "wps-e-we"
+          ).value
+        ),
+
+        eSn: Number(
+          document.getElementById(
+            "wps-e-sn"
+          ).value
+        ),
+
+        dx: Number(
+          document.getElementById(
+            "wps-dx"
+          ).value
+        ),
+
+        dy: Number(
+          document.getElementById(
+            "wps-dy"
+          ).value
+        )
+      };
+    }
+
+    function validateWpsParameters(
+      parameters,
+      hemisphere
+    ) {
+
+      const values = [
+        parameters.refLat,
+        parameters.refLon,
+        parameters.truelat1,
+        parameters.standLon,
+        parameters.eWe,
+        parameters.eSn,
+        parameters.dx,
+        parameters.dy
+      ];
+
+      if (
+        values.some(function (value) {
+          return !Number.isFinite(value);
+        })
+      ) {
+        return "All WPS fields must contain valid numbers.";
+      }
+
+      if (
+        parameters.refLat <= -90 ||
+        parameters.refLat >= 90
+      ) {
+        return "ref_lat must be between -90 and 90 degrees.";
+      }
+
+      if (
+        parameters.refLon < -180 ||
+        parameters.refLon > 180
+      ) {
+        return "ref_lon must be between -180 and 180 degrees.";
+      }
+
+      if (
+        parameters.standLon < -180 ||
+        parameters.standLon > 180
+      ) {
+        return "stand_lon must be between -180 and 180 degrees.";
+      }
+
+      if (hemisphere === "north") {
+
+        if (parameters.refLat <= 0) {
+          return "Northern Hemisphere requires a positive ref_lat.";
+        }
+
+        if (
+          parameters.truelat1 <= 0 ||
+          parameters.truelat1 >= 90
+        ) {
+          return "Northern polar truelat1 must be between 0 and 90 degrees.";
+        }
+
+      } else {
+
+        if (parameters.refLat >= 0) {
+          return "Southern Hemisphere requires a negative ref_lat.";
+        }
+
+        if (
+          parameters.truelat1 >= 0 ||
+          parameters.truelat1 <= -90
+        ) {
+          return "Southern polar truelat1 must be between -90 and 0 degrees.";
+        }
+      }
+
+      if (
+        !Number.isInteger(parameters.eWe) ||
+        parameters.eWe < 2
+      ) {
+        return "e_we must be an integer of 2 or greater.";
+      }
+
+      if (
+        !Number.isInteger(parameters.eSn) ||
+        parameters.eSn < 2
+      ) {
+        return "e_sn must be an integer of 2 or greater.";
+      }
+
+      if (parameters.dx <= 0) {
+        return "dx must be greater than zero.";
+      }
+
+      if (parameters.dy <= 0) {
+        return "dy must be greater than zero.";
+      }
+
+      return "";
+    }
+
+    function setValidationMessage(
+      message,
+      isError
+    ) {
+
+      const element =
+        document.getElementById(
+          "wps-validation"
+        );
+
+      element.textContent = message;
+
+      element.style.color =
+        isError ? "#b00020" : "#1b5e20";
+    }
+
+    function normalizeLongitude(longitude) {
+
+      let value = longitude;
+
+      while (value > 180) {
+        value -= 360;
+      }
+
+      while (value < -180) {
+        value += 360;
+      }
+
+      return value;
+    }
+
+    function makeWrfPolarProjection(
+      hemisphere,
+      parameters
+    ) {
+
+      const latitudeOfOrigin =
+        hemisphere === "north"
+          ? 90
+          : -90;
+
+      return (
+        "+proj=stere " +
+        "+lat_0=" +
+        latitudeOfOrigin +
+        " " +
+        "+lat_ts=" +
+        parameters.truelat1 +
+        " " +
+        "+lon_0=" +
+        parameters.standLon +
+        " " +
+        "+a=6370000 " +
+        "+b=6370000 " +
+        "+units=m " +
+        "+no_defs"
+      );
+    }
+
+    function calculateWrfDomainCorners(
+      hemisphere,
+      parameters
+    ) {
+
+      const wrfProjection =
+        makeWrfPolarProjection(
+          hemisphere,
+          parameters
+        );
+
+      const centerProjected =
+        proj4(
+          "EPSG:4326",
+          wrfProjection,
+          [
+            parameters.refLon,
+            parameters.refLat
+          ]
+        );
+
+      const widthMeters =
+        (parameters.eWe - 1) *
+        parameters.dx;
+
+      const heightMeters =
+        (parameters.eSn - 1) *
+        parameters.dy;
+
+      const halfWidth =
+        widthMeters / 2;
+
+      const halfHeight =
+        heightMeters / 2;
+
+      const projectedCorners = [
+
+        [
+          centerProjected[0] - halfWidth,
+          centerProjected[1] - halfHeight
+        ],
+
+        [
+          centerProjected[0] + halfWidth,
+          centerProjected[1] - halfHeight
+        ],
+
+        [
+          centerProjected[0] + halfWidth,
+          centerProjected[1] + halfHeight
+        ],
+
+        [
+          centerProjected[0] - halfWidth,
+          centerProjected[1] + halfHeight
+        ]
+      ];
+
+      return projectedCorners.map(
+        function (point) {
+
+          const geographic =
+            proj4(
+              wrfProjection,
+              "EPSG:4326",
+              point
+            );
+
+          return [
+            geographic[1],
+            normalizeLongitude(
+              geographic[0]
+            )
+          ];
+        }
+      );
+    }
+
     function addExampleDomain(
       mapInstance,
-      configuration
+      configuration,
+      parameters,
+      domainCorners
     ) {
 
       const domain =
         L.polygon(
-          configuration.domainCorners,
+          domainCorners,
           {
             color: "blue",
             weight: 3,
@@ -459,14 +950,29 @@
         )
         .addTo(mapInstance)
         .bindPopup(
-          "<strong>Example WRF-style polar domain</strong>" +
-          "<br>" +
-          configuration.hemisphere +
-          "<br>" +
-          "Prototype geometry only"
+          "<strong>WPS-style polar domain</strong>" +
+          "<br>map_proj = 'polar'" +
+          "<br>ref_lat = " +
+          parameters.refLat +
+          "<br>ref_lon = " +
+          parameters.refLon +
+          "<br>truelat1 = " +
+          parameters.truelat1 +
+          "<br>stand_lon = " +
+          parameters.standLon +
+          "<br>e_we = " +
+          parameters.eWe +
+          "<br>e_sn = " +
+          parameters.eSn +
+          "<br>dx = " +
+          parameters.dx +
+          " m" +
+          "<br>dy = " +
+          parameters.dy +
+          " m"
         );
 
-      configuration.domainCorners.forEach(
+      domainCorners.forEach(
         function (corner, index) {
 
           L.circleMarker(
@@ -485,9 +991,9 @@
             (index + 1) +
             "</strong>" +
             "<br>Latitude: " +
-            corner[0].toFixed(2) +
+            corner[0].toFixed(4) +
             "<br>Longitude: " +
-            corner[1].toFixed(2)
+            corner[1].toFixed(4)
           );
         }
       );
@@ -495,13 +1001,104 @@
       return domain;
     }
 
+    function updateWpsReadout(
+      configuration,
+      parameters
+    ) {
+
+      updateProjectionReadout(
+        configuration
+      );
+
+      const readout =
+        document.getElementById(
+          "projection-readout"
+        );
+
+      readout.innerHTML +=
+        "<div><strong>WPS map_proj:</strong> polar</div>" +
+
+        "<div><strong>ref_lat / ref_lon:</strong> " +
+        parameters.refLat +
+        ", " +
+        parameters.refLon +
+        "</div>" +
+
+        "<div><strong>truelat1:</strong> " +
+        parameters.truelat1 +
+        "</div>" +
+
+        "<div><strong>stand_lon:</strong> " +
+        parameters.standLon +
+        "</div>" +
+
+        "<div><strong>Grid:</strong> " +
+        parameters.eWe +
+        " × " +
+        parameters.eSn +
+        "</div>" +
+
+        "<div><strong>Spacing:</strong> " +
+        parameters.dx +
+        " m × " +
+        parameters.dy +
+        " m</div>";
+    }
+
     function buildMap(hemisphere) {
 
       const configuration =
         polarConfigurations[hemisphere];
 
-      updateProjectionReadout(
-        configuration
+      const parameters =
+        readWpsParameters();
+
+      const validationError =
+        validateWpsParameters(
+          parameters,
+          hemisphere
+        );
+
+      if (validationError) {
+
+        setValidationMessage(
+          validationError,
+          true
+        );
+
+        return;
+      }
+
+      let domainCorners;
+
+      try {
+
+        domainCorners =
+          calculateWrfDomainCorners(
+            hemisphere,
+            parameters
+          );
+
+      } catch (error) {
+
+        console.error(error);
+
+        setValidationMessage(
+          "Unable to calculate the polar domain geometry.",
+          true
+        );
+
+        return;
+      }
+
+      setValidationMessage(
+        "Domain geometry updated.",
+        false
+      );
+
+      updateWpsReadout(
+        configuration,
+        parameters
       );
 
       if (map !== null) {
@@ -510,15 +1107,19 @@
       }
 
       const crs =
-        buildPolarCrs(configuration);
+        buildPolarCrs(
+          configuration
+        );
 
       map = L.map(
         "map",
         {
           crs: crs,
 
-          center:
-            configuration.initialCenter,
+          center: [
+            parameters.refLat,
+            parameters.refLon
+          ],
 
           zoom: 2,
 
@@ -558,25 +1159,34 @@
         "</strong>"
       );
 
-      L.circle(
-        configuration.exampleCircle,
+      L.circleMarker(
+        [
+          parameters.refLat,
+          parameters.refLon
+        ],
         {
-          radius: 500000,
+          radius: 6,
           color: "red",
           weight: 2,
-          fillColor: "red",
-          fillOpacity: 0.15
+          fillColor: "white",
+          fillOpacity: 1
         }
       )
       .addTo(map)
       .bindPopup(
-        configuration.exampleCircleName
+        "<strong>WRF reference point</strong>" +
+        "<br>ref_lat = " +
+        parameters.refLat +
+        "<br>ref_lon = " +
+        parameters.refLon
       );
 
       const domain =
         addExampleDomain(
           map,
-          configuration
+          configuration,
+          parameters,
+          domainCorners
         );
 
       map.fitBounds(
@@ -623,11 +1233,73 @@
         "change",
         function (event) {
 
+          const hemisphere =
+            event.target.value;
+
+          setWpsDefaults(
+            hemisphere
+          );
+
           buildMap(
-            event.target.value
+            hemisphere
           );
         }
       );
+
+    document
+      .getElementById(
+        "update-domain"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          const hemisphere =
+            document.getElementById(
+              "polar-hemisphere"
+            ).value;
+
+          buildMap(
+            hemisphere
+          );
+        }
+      );
+
+    [
+      "wps-ref-lat",
+      "wps-ref-lon",
+      "wps-truelat1",
+      "wps-stand-lon",
+      "wps-e-we",
+      "wps-e-sn",
+      "wps-dx",
+      "wps-dy"
+    ].forEach(
+      function (id) {
+
+        document
+          .getElementById(id)
+          .addEventListener(
+            "keydown",
+            function (event) {
+
+              if (event.key === "Enter") {
+
+                const hemisphere =
+                  document.getElementById(
+                    "polar-hemisphere"
+                  ).value;
+
+                buildMap(
+                  hemisphere
+                );
+              }
+            }
+          );
+      }
+    );
+
+    setWpsDefaults("north");
 
     buildMap("north");
   </script>
