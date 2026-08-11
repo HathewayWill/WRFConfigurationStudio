@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WRF Configuration Studio, Polar Projection Prototype</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>WRF Configuration Studio - Polar Projection Prototype</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
   <link
     rel="stylesheet"
@@ -11,10 +16,13 @@
   >
 
   <style>
-    html, body {
+    html,
+    body {
+      width: 100%;
       height: 100%;
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     #map {
@@ -22,316 +30,607 @@
       height: 100%;
     }
 
-    .info-panel {
+    .polar-control-panel {
       position: absolute;
-      z-index: 1000;
       top: 12px;
       left: 12px;
-      max-width: 410px;
-      background: white;
-      padding: 12px 14px;
+      z-index: 1000;
+
+      width: 390px;
+      max-width: calc(100% - 52px);
+
+      padding: 14px;
+
+      background: rgba(255, 255, 255, 0.96);
+
       border-radius: 6px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+      box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.25);
+
       font-size: 14px;
-      line-height: 1.35;
+      line-height: 1.4;
     }
 
-    .info-panel h1 {
-      font-size: 18px;
-      margin: 0 0 8px 0;
+    .polar-control-panel h1 {
+      margin: 0 0 10px 0;
+
+      font-size: 19px;
+      line-height: 1.2;
     }
 
-    .info-panel code {
-      background: #f3f3f3;
-      padding: 1px 4px;
-      border-radius: 3px;
-    }
-
-    .info-panel label {
+    .polar-control-panel label {
       display: block;
+
       margin-top: 10px;
+      margin-bottom: 4px;
+
       font-weight: bold;
     }
 
-    .info-panel select {
+    .polar-control-panel select {
+      box-sizing: border-box;
+
       width: 100%;
-      margin-top: 4px;
-      padding: 4px;
+
+      padding: 6px;
+
       font-size: 14px;
     }
 
-    .readout {
+    .projection-readout {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      padding: 8px;
+
+      background: #f3f3f3;
+
+      border-radius: 4px;
+    }
+
+    .projection-readout div {
+      margin: 2px 0;
+    }
+
+    .prototype-note {
       margin-top: 8px;
-      font-size: 13px;
-      color: #333;
+
+      font-size: 12px;
+      color: #555;
+    }
+
+    .leaflet-popup-content {
+      line-height: 1.45;
     }
   </style>
 </head>
 
 <body>
-  <div class="info-panel">
-    <h1>Polar Projection Prototype</h1>
 
-    <label for="projection-select">Polar display</label>
-    <select id="projection-select">
-      <option value="north" selected>Northern Hemisphere, Arctic LAEA, EPSG:3575</option>
-      <option value="south">Southern Hemisphere, Antarctic Stereographic, EPSG:3031</option>
+  <div class="polar-control-panel">
+
+    <h1>WRF Polar Projection Prototype</h1>
+
+    <label for="polar-hemisphere">
+      Polar Hemisphere
+    </label>
+
+    <select id="polar-hemisphere">
+      <option value="north" selected>
+        Northern Hemisphere - Arctic
+      </option>
+
+      <option value="south">
+        Southern Hemisphere - Antarctic
+      </option>
     </select>
 
-    <div class="readout" id="projection-readout"></div>
+    <div
+      id="projection-readout"
+      class="projection-readout"
+    ></div>
 
-    <div><strong>Purpose:</strong> test high-latitude and polar map behavior for possible future WRF domain inspection.</div>
-    <div><strong>Status:</strong> isolated experiment, not part of the paper-freeze release.</div>
+    <div>
+      <strong>Purpose:</strong>
+      Test true polar browser-map behavior before integrating it into the
+      WRF Configuration Studio domain wizard.
+    </div>
+
+    <div class="prototype-note">
+      Experimental only. This page does not modify the production domain
+      wizard or exported WPS configuration.
+    </div>
+
   </div>
 
   <div id="map"></div>
 
-  <script src="https://unpkg.com/proj4@2.11.0/dist/proj4.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/proj4leaflet@1.0.2/src/proj4leaflet.js"></script>
+  <script
+    src="https://unpkg.com/proj4@2.11.0/dist/proj4.js"
+  ></script>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
+
+  <script
+    src="https://unpkg.com/proj4leaflet@1.0.2/src/proj4leaflet.js"
+  ></script>
 
   <script>
     const MAX_ZOOM = 16;
+
     const TILE_SIZE = 512;
+
     const EARTH_AUTHALIC_RADIUS_M = 6371007.2;
-    const extent = Math.sqrt(2) * EARTH_AUTHALIC_RADIUS_M;
 
-    const resolutions = Array(MAX_ZOOM + 1)
-      .fill(null)
-      .map((_, i) => extent / TILE_SIZE / Math.pow(2, i - 1));
+    const POLAR_EXTENT =
+      Math.sqrt(2) * EARTH_AUTHALIC_RADIUS_M;
 
-    const projectionConfigs = {
+    const resolutions =
+      Array.from(
+        { length: MAX_ZOOM + 1 },
+        function (_, zoom) {
+          return (
+            POLAR_EXTENT /
+            TILE_SIZE /
+            Math.pow(2, zoom - 1)
+          );
+        }
+      );
+
+    const polarConfigurations = {
+
       north: {
-        label: "Northern Hemisphere",
+        hemisphere: "Northern Hemisphere",
+        region: "Arctic",
+
         epsg: "EPSG:3575",
-        name: "Arctic LAEA",
-        proj4: "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
-        tileUrl: "https://tile.gbif.org/3575/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
-        center: [90, 0],
-        poleMarker: [90, 0],
-        poleLabel: "North Pole",
-        circleCenter: [75, -40],
-        circleLabel: "Example high-latitude Arctic test area",
+
+        projectionName:
+          "WGS 84 / North Pole LAEA Europe",
+
+        proj4:
+          "+proj=laea " +
+          "+lat_0=90 " +
+          "+lon_0=10 " +
+          "+x_0=0 " +
+          "+y_0=0 " +
+          "+datum=WGS84 " +
+          "+units=m " +
+          "+no_defs",
+
+        tileUrl:
+          "https://tile.gbif.org/3575/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
+
+        pole: [90, 0],
+
+        poleName: "North Pole",
+
+        initialCenter: [80, 0],
+
+        exampleCircle: [75, -40],
+
+        exampleCircleName:
+          "Example Arctic high-latitude test area",
+
         domainCorners: [
           [63.0, -72.0],
           [63.0, -20.0],
           [82.0, -10.0],
           [82.0, -82.0]
         ],
-        graticuleLatStart: 50,
-        graticuleLatEnd: 85,
-        meridianLatStart: 50,
-        meridianLatEnd: 89
+
+        latitudeLines: [
+          50,
+          55,
+          60,
+          65,
+          70,
+          75,
+          80,
+          85
+        ]
       },
+
       south: {
-        label: "Southern Hemisphere",
+        hemisphere: "Southern Hemisphere",
+        region: "Antarctic",
+
         epsg: "EPSG:3031",
-        name: "Antarctic Polar Stereographic",
-        proj4: "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
-        tileUrl: "https://tile.gbif.org/3031/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
-        center: [-90, 0],
-        poleMarker: [-90, 0],
-        poleLabel: "South Pole",
-        circleCenter: [-75, 0],
-        circleLabel: "Example high-latitude Antarctic test area",
+
+        projectionName:
+          "WGS 84 / Antarctic Polar Stereographic",
+
+        proj4:
+          "+proj=stere " +
+          "+lat_0=-90 " +
+          "+lat_ts=-71 " +
+          "+lon_0=0 " +
+          "+x_0=0 " +
+          "+y_0=0 " +
+          "+datum=WGS84 " +
+          "+units=m " +
+          "+no_defs",
+
+        tileUrl:
+          "https://tile.gbif.org/3031/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
+
+        pole: [-90, 0],
+
+        poleName: "South Pole",
+
+        initialCenter: [-80, 0],
+
+        exampleCircle: [-75, 0],
+
+        exampleCircleName:
+          "Example Antarctic high-latitude test area",
+
         domainCorners: [
           [-63.0, -72.0],
           [-63.0, -20.0],
           [-82.0, -10.0],
           [-82.0, -82.0]
         ],
-        graticuleLatStart: -85,
-        graticuleLatEnd: -50,
-        meridianLatStart: -89,
-        meridianLatEnd: -50
+
+        latitudeLines: [
+          -50,
+          -55,
+          -60,
+          -65,
+          -70,
+          -75,
+          -80,
+          -85
+        ]
       }
     };
 
     let map = null;
-    let activeLayers = [];
 
-    function makeCrs(config) {
+    function buildPolarCrs(configuration) {
+
       return new L.Proj.CRS(
-        config.epsg,
-        config.proj4,
+        configuration.epsg,
+        configuration.proj4,
         {
-          origin: [-extent, extent],
+          origin: [
+            -POLAR_EXTENT,
+            POLAR_EXTENT
+          ],
+
           bounds: L.bounds(
-            L.point(-extent, extent),
-            L.point(extent, -extent)
+            L.point(
+              -POLAR_EXTENT,
+              -POLAR_EXTENT
+            ),
+
+            L.point(
+              POLAR_EXTENT,
+              POLAR_EXTENT
+            )
           ),
+
           resolutions: resolutions
         }
       );
     }
 
-    function clearActiveLayers() {
-      activeLayers.forEach(function (layer) {
-        if (map && layer) {
-          map.removeLayer(layer);
-        }
-      });
-      activeLayers = [];
+    function createLatitudeCircle(latitude) {
+
+      const points = [];
+
+      for (
+        let longitude = -180;
+        longitude <= 180;
+        longitude += 3
+      ) {
+        points.push([
+          latitude,
+          longitude
+        ]);
+      }
+
+      return points;
     }
 
-    function addLayer(layer) {
-      layer.addTo(map);
-      activeLayers.push(layer);
-      return layer;
-    }
+    function createMeridian(
+      longitude,
+      hemisphere
+    ) {
 
-    function addPolyline(points, options) {
-      return addLayer(L.polyline(points, options));
-    }
+      const points = [];
 
-    function addGraticule(config) {
-      const latStep = 5;
-      const lonStep = 5;
-      const meridianStep = 15;
-      const meridianLatStep = 2;
+      if (hemisphere === "north") {
 
-      if (config.graticuleLatStart < config.graticuleLatEnd) {
-        for (let lat = config.graticuleLatStart; lat <= config.graticuleLatEnd; lat += latStep) {
-          const points = [];
-          for (let lon = -180; lon <= 180; lon += lonStep) {
-            points.push([lat, lon]);
-          }
-          addPolyline(points, {
-            color: "#555",
-            weight: 1,
-            opacity: 0.35
-          });
+        for (
+          let latitude = 50;
+          latitude <= 89;
+          latitude += 1
+        ) {
+          points.push([
+            latitude,
+            longitude
+          ]);
         }
 
-        for (let lon = -180; lon < 180; lon += meridianStep) {
-          const points = [];
-          for (let lat = config.meridianLatStart; lat <= config.meridianLatEnd; lat += meridianLatStep) {
-            points.push([lat, lon]);
-          }
-          addPolyline(points, {
-            color: "#555",
-            weight: 1,
-            opacity: 0.25
-          });
-        }
       } else {
-        for (let lat = config.graticuleLatStart; lat >= config.graticuleLatEnd; lat -= latStep) {
-          const points = [];
-          for (let lon = -180; lon <= 180; lon += lonStep) {
-            points.push([lat, lon]);
-          }
-          addPolyline(points, {
-            color: "#555",
-            weight: 1,
-            opacity: 0.35
-          });
-        }
 
-        for (let lon = -180; lon < 180; lon += meridianStep) {
-          const points = [];
-          for (let lat = config.meridianLatStart; lat <= config.meridianLatEnd; lat += meridianLatStep) {
-            points.push([lat, lon]);
-          }
-          addPolyline(points, {
+        for (
+          let latitude = -89;
+          latitude <= -50;
+          latitude += 1
+        ) {
+          points.push([
+            latitude,
+            longitude
+          ]);
+        }
+      }
+
+      return points;
+    }
+
+    function addGraticule(
+      mapInstance,
+      configuration,
+      hemisphere
+    ) {
+
+      configuration.latitudeLines.forEach(
+        function (latitude) {
+
+          L.polyline(
+            createLatitudeCircle(latitude),
+            {
+              color: "#555",
+              weight: 1,
+              opacity: 0.30,
+              interactive: false
+            }
+          ).addTo(mapInstance);
+        }
+      );
+
+      for (
+        let longitude = -180;
+        longitude < 180;
+        longitude += 15
+      ) {
+
+        L.polyline(
+          createMeridian(
+            longitude,
+            hemisphere
+          ),
+          {
             color: "#555",
             weight: 1,
-            opacity: 0.25
-          });
-        }
+            opacity: 0.25,
+            interactive: false
+          }
+        ).addTo(mapInstance);
       }
     }
 
-    function updateReadout(config) {
-      document.getElementById("projection-readout").innerHTML =
-        "<strong>Projection:</strong> " + config.name +
-        ", <code>" + config.epsg + "</code>";
+    function updateProjectionReadout(
+      configuration
+    ) {
+
+      const readout =
+        document.getElementById(
+          "projection-readout"
+        );
+
+      readout.innerHTML =
+        "<div><strong>Hemisphere:</strong> " +
+        configuration.hemisphere +
+        "</div>" +
+
+        "<div><strong>Region:</strong> " +
+        configuration.region +
+        "</div>" +
+
+        "<div><strong>Display CRS:</strong> " +
+        configuration.epsg +
+        "</div>" +
+
+        "<div><strong>Projection:</strong> " +
+        configuration.projectionName +
+        "</div>";
     }
 
-    function buildMap(mode) {
-      const config = projectionConfigs[mode];
-      updateReadout(config);
+    function addExampleDomain(
+      mapInstance,
+      configuration
+    ) {
 
-      if (map) {
+      const domain =
+        L.polygon(
+          configuration.domainCorners,
+          {
+            color: "blue",
+            weight: 3,
+            fillColor: "blue",
+            fillOpacity: 0.12
+          }
+        )
+        .addTo(mapInstance)
+        .bindPopup(
+          "<strong>Example WRF-style polar domain</strong>" +
+          "<br>" +
+          configuration.hemisphere +
+          "<br>" +
+          "Prototype geometry only"
+        );
+
+      configuration.domainCorners.forEach(
+        function (corner, index) {
+
+          L.circleMarker(
+            corner,
+            {
+              radius: 5,
+              color: "blue",
+              weight: 2,
+              fillColor: "white",
+              fillOpacity: 1
+            }
+          )
+          .addTo(mapInstance)
+          .bindPopup(
+            "<strong>Corner " +
+            (index + 1) +
+            "</strong>" +
+            "<br>Latitude: " +
+            corner[0].toFixed(2) +
+            "<br>Longitude: " +
+            corner[1].toFixed(2)
+          );
+        }
+      );
+
+      return domain;
+    }
+
+    function buildMap(hemisphere) {
+
+      const configuration =
+        polarConfigurations[hemisphere];
+
+      updateProjectionReadout(
+        configuration
+      );
+
+      if (map !== null) {
         map.remove();
         map = null;
       }
 
-      map = L.map("map", {
-        crs: makeCrs(config),
-        center: config.center,
-        zoom: 2,
-        minZoom: 1,
-        maxZoom: MAX_ZOOM,
-        maxBoundsViscosity: 1.0
-      });
+      const crs =
+        buildPolarCrs(configuration);
 
-      activeLayers = [];
+      map = L.map(
+        "map",
+        {
+          crs: crs,
 
-      addLayer(L.tileLayer(config.tileUrl, {
-        tileSize: TILE_SIZE,
-        attribution: "Tiles © GBIF, OpenMapTiles, OpenStreetMap contributors"
-      }));
+          center:
+            configuration.initialCenter,
 
-      addLayer(L.marker(config.poleMarker)
-        .bindPopup(config.poleLabel));
+          zoom: 2,
 
-      addLayer(L.circle(config.circleCenter, {
-        radius: 500000,
-        color: "red",
-        fillColor: "red",
-        fillOpacity: 0.15
-      })
-        .bindPopup(config.circleLabel));
+          minZoom: 1,
 
-      const wrfPolarDomain = addLayer(L.polygon(config.domainCorners, {
-        color: "blue",
-        weight: 3,
-        fillColor: "blue",
-        fillOpacity: 0.12
-      })
-        .bindPopup(
-          "<strong>Example WRF-style polar domain</strong><br>" +
-          "Test polygon only<br>" +
-          config.label + " domain footprint"
-        ));
+          maxZoom: MAX_ZOOM
+        }
+      );
 
-      config.domainCorners.forEach(function (corner, index) {
-        addLayer(L.circleMarker(corner, {
-          radius: 5,
-          color: "blue",
-          fillColor: "white",
-          fillOpacity: 1,
-          weight: 2
-        })
-          .bindPopup(
-            "Corner " + (index + 1) +
-            "<br>Lat: " + corner[0].toFixed(2) +
-            "<br>Lon: " + corner[1].toFixed(2)
-          ));
-      });
+      L.tileLayer(
+        configuration.tileUrl,
+        {
+          tileSize: TILE_SIZE,
 
-      addGraticule(config);
+          minZoom: 0,
 
-      map.fitBounds(wrfPolarDomain.getBounds(), {
-        padding: [60, 60]
-      });
+          maxZoom: MAX_ZOOM,
 
-      map.on("click", function (event) {
-        const lat = event.latlng.lat.toFixed(4);
-        const lon = event.latlng.lng.toFixed(4);
+          attribution:
+            "GBIF | OpenMapTiles | OpenStreetMap contributors"
+        }
+      ).addTo(map);
 
-        L.popup()
-          .setLatLng(event.latlng)
-          .setContent("Lat: " + lat + "<br>Lon: " + lon)
-          .openOn(map);
-      });
+      addGraticule(
+        map,
+        configuration,
+        hemisphere
+      );
+
+      L.marker(
+        configuration.pole
+      )
+      .addTo(map)
+      .bindPopup(
+        "<strong>" +
+        configuration.poleName +
+        "</strong>"
+      );
+
+      L.circle(
+        configuration.exampleCircle,
+        {
+          radius: 500000,
+          color: "red",
+          weight: 2,
+          fillColor: "red",
+          fillOpacity: 0.15
+        }
+      )
+      .addTo(map)
+      .bindPopup(
+        configuration.exampleCircleName
+      );
+
+      const domain =
+        addExampleDomain(
+          map,
+          configuration
+        );
+
+      map.fitBounds(
+        domain.getBounds(),
+        {
+          padding: [
+            60,
+            60
+          ]
+        }
+      );
+
+      map.on(
+        "click",
+        function (event) {
+
+          const latitude =
+            event.latlng.lat.toFixed(4);
+
+          const longitude =
+            event.latlng.lng.toFixed(4);
+
+          L.popup()
+            .setLatLng(
+              event.latlng
+            )
+            .setContent(
+              "<strong>Map location</strong>" +
+              "<br>Latitude: " +
+              latitude +
+              "<br>Longitude: " +
+              longitude
+            )
+            .openOn(map);
+        }
+      );
     }
 
-    document.getElementById("projection-select").addEventListener("change", function (event) {
-      buildMap(event.target.value);
-    });
+    document
+      .getElementById(
+        "polar-hemisphere"
+      )
+      .addEventListener(
+        "change",
+        function (event) {
+
+          buildMap(
+            event.target.value
+          );
+        }
+      );
 
     buildMap("north");
   </script>
+
 </body>
 </html>
