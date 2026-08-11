@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WRF Configuration Studio, Polar Projection Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .info-panel {
+      position: absolute;
+      z-index: 1000;
+      top: 12px;
+      left: 12px;
+      max-width: 380px;
+      background: white;
+      padding: 12px 14px;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .info-panel h1 {
+      font-size: 18px;
+      margin: 0 0 8px 0;
+    }
+
+    .info-panel code {
+      background: #f3f3f3;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="info-panel">
+    <h1>Polar Projection Prototype</h1>
+    <div><strong>Projection:</strong> Arctic LAEA, <code>EPSG:3575</code></div>
+    <div><strong>Purpose:</strong> test high-latitude and polar map behavior for possible future WRF domain inspection.</div>
+    <div><strong>Status:</strong> isolated experiment, not part of the paper-freeze release.</div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/proj4@2.11.0/dist/proj4.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/proj4leaflet@1.0.2/src/proj4leaflet.js"></script>
+
+  <script>
+    const MAX_ZOOM = 16;
+    const TILE_SIZE = 512;
+
+    const extent = Math.sqrt(2) * 6371007.2;
+
+    const resolutions = Array(MAX_ZOOM + 1)
+      .fill(null)
+      .map((_, i) => extent / TILE_SIZE / Math.pow(2, i - 1));
+
+    const arcticCrs = new L.Proj.CRS(
+      "EPSG:3575",
+      "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+      {
+        origin: [-extent, extent],
+        bounds: L.bounds(
+          L.point(-extent, extent),
+          L.point(extent, -extent)
+        ),
+        resolutions: resolutions
+      }
+    );
+
+    const map = L.map("map", {
+      crs: arcticCrs,
+      center: [90, 0],
+      zoom: 2,
+      minZoom: 1,
+      maxZoom: MAX_ZOOM,
+      maxBoundsViscosity: 1.0
+    });
+
+    L.tileLayer(
+      "https://tile.gbif.org/3575/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
+      {
+        tileSize: TILE_SIZE,
+        attribution: "Tiles © GBIF, OpenMapTiles, OpenStreetMap contributors"
+      }
+    ).addTo(map);
+
+    L.marker([90, 0])
+      .addTo(map)
+      .bindPopup("North Pole");
+
+    L.circle([75, -40], {
+      radius: 500000,
+      color: "red",
+      fillColor: "red",
+      fillOpacity: 0.15
+    })
+      .addTo(map)
+      .bindPopup("Example high-latitude test area");
+
+    function addPolyline(points, options) {
+      return L.polyline(points, options).addTo(map);
+    }
+
+    for (let lat = 50; lat <= 85; lat += 5) {
+      const points = [];
+      for (let lon = -180; lon <= 180; lon += 5) {
+        points.push([lat, lon]);
+      }
+      addPolyline(points, {
+        color: "#555",
+        weight: 1,
+        opacity: 0.35
+      });
+    }
+
+    for (let lon = -180; lon < 180; lon += 15) {
+      const points = [];
+      for (let lat = 50; lat <= 89; lat += 2) {
+        points.push([lat, lon]);
+      }
+      addPolyline(points, {
+        color: "#555",
+        weight: 1,
+        opacity: 0.25
+      });
+    }
+
+    map.on("click", function (event) {
+      const lat = event.latlng.lat.toFixed(4);
+      const lon = event.latlng.lng.toFixed(4);
+
+      L.popup()
+        .setLatLng(event.latlng)
+        .setContent("Lat: " + lat + "<br>Lon: " + lon)
+        .openOn(map);
+    });
+  </script>
+</body>
+</html>
