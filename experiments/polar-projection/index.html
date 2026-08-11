@@ -27,7 +27,7 @@
       z-index: 1000;
       top: 12px;
       left: 12px;
-      max-width: 380px;
+      max-width: 410px;
       background: white;
       padding: 12px 14px;
       border-radius: 6px;
@@ -46,13 +46,40 @@
       padding: 1px 4px;
       border-radius: 3px;
     }
+
+    .info-panel label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .info-panel select {
+      width: 100%;
+      margin-top: 4px;
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    .readout {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #333;
+    }
   </style>
 </head>
 
 <body>
   <div class="info-panel">
     <h1>Polar Projection Prototype</h1>
-    <div><strong>Projection:</strong> Arctic LAEA, <code>EPSG:3575</code></div>
+
+    <label for="projection-select">Polar display</label>
+    <select id="projection-select">
+      <option value="north" selected>Northern Hemisphere, Arctic LAEA, EPSG:3575</option>
+      <option value="south">Southern Hemisphere, Antarctic Stereographic, EPSG:3031</option>
+    </select>
+
+    <div class="readout" id="projection-readout"></div>
+
     <div><strong>Purpose:</strong> test high-latitude and polar map behavior for possible future WRF domain inspection.</div>
     <div><strong>Status:</strong> isolated experiment, not part of the paper-freeze release.</div>
   </div>
@@ -66,133 +93,245 @@
   <script>
     const MAX_ZOOM = 16;
     const TILE_SIZE = 512;
-
-    const extent = Math.sqrt(2) * 6371007.2;
+    const EARTH_AUTHALIC_RADIUS_M = 6371007.2;
+    const extent = Math.sqrt(2) * EARTH_AUTHALIC_RADIUS_M;
 
     const resolutions = Array(MAX_ZOOM + 1)
       .fill(null)
       .map((_, i) => extent / TILE_SIZE / Math.pow(2, i - 1));
 
-    const arcticCrs = new L.Proj.CRS(
-      "EPSG:3575",
-      "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
-      {
-        origin: [-extent, extent],
-        bounds: L.bounds(
-          L.point(-extent, extent),
-          L.point(extent, -extent)
-        ),
-        resolutions: resolutions
+    const projectionConfigs = {
+      north: {
+        label: "Northern Hemisphere",
+        epsg: "EPSG:3575",
+        name: "Arctic LAEA",
+        proj4: "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+        tileUrl: "https://tile.gbif.org/3575/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
+        center: [90, 0],
+        poleMarker: [90, 0],
+        poleLabel: "North Pole",
+        circleCenter: [75, -40],
+        circleLabel: "Example high-latitude Arctic test area",
+        domainCorners: [
+          [63.0, -72.0],
+          [63.0, -20.0],
+          [82.0, -10.0],
+          [82.0, -82.0]
+        ],
+        graticuleLatStart: 50,
+        graticuleLatEnd: 85,
+        meridianLatStart: 50,
+        meridianLatEnd: 89
+      },
+      south: {
+        label: "Southern Hemisphere",
+        epsg: "EPSG:3031",
+        name: "Antarctic Polar Stereographic",
+        proj4: "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+        tileUrl: "https://tile.gbif.org/3031/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
+        center: [-90, 0],
+        poleMarker: [-90, 0],
+        poleLabel: "South Pole",
+        circleCenter: [-75, 0],
+        circleLabel: "Example high-latitude Antarctic test area",
+        domainCorners: [
+          [-63.0, -72.0],
+          [-63.0, -20.0],
+          [-82.0, -10.0],
+          [-82.0, -82.0]
+        ],
+        graticuleLatStart: -85,
+        graticuleLatEnd: -50,
+        meridianLatStart: -89,
+        meridianLatEnd: -50
       }
-    );
+    };
 
-    const map = L.map("map", {
-      crs: arcticCrs,
-      center: [90, 0],
-      zoom: 2,
-      minZoom: 1,
-      maxZoom: MAX_ZOOM,
-      maxBoundsViscosity: 1.0
-    });
+    let map = null;
+    let activeLayers = [];
 
-    L.tileLayer(
-      "https://tile.gbif.org/3575/omt/{z}/{x}/{y}@4x.png?style=osm-bright-en",
-      {
-        tileSize: TILE_SIZE,
-        attribution: "Tiles © GBIF, OpenMapTiles, OpenStreetMap contributors"
-      }
-    ).addTo(map);
-
-    L.marker([90, 0])
-      .addTo(map)
-      .bindPopup("North Pole");
-
-    const testCircle = L.circle([75, -40], {
-      radius: 500000,
-      color: "red",
-      fillColor: "red",
-      fillOpacity: 0.15
-    })
-      .addTo(map)
-      .bindPopup("Example high-latitude test area");
-
-    const wrfPolarDomainCorners = [
-      [63.0, -72.0],
-      [63.0, -20.0],
-      [82.0, -10.0],
-      [82.0, -82.0]
-    ];
-
-    const wrfPolarDomain = L.polygon(wrfPolarDomainCorners, {
-      color: "blue",
-      weight: 3,
-      fillColor: "blue",
-      fillOpacity: 0.12
-    })
-      .addTo(map)
-      .bindPopup(
-        "<strong>Example WRF-style polar domain</strong><br>" +
-        "Test polygon only<br>" +
-        "Approximate high-latitude domain footprint"
+    function makeCrs(config) {
+      return new L.Proj.CRS(
+        config.epsg,
+        config.proj4,
+        {
+          origin: [-extent, extent],
+          bounds: L.bounds(
+            L.point(-extent, extent),
+            L.point(extent, -extent)
+          ),
+          resolutions: resolutions
+        }
       );
+    }
 
-    wrfPolarDomainCorners.forEach(function (corner, index) {
-      L.circleMarker(corner, {
-        radius: 5,
-        color: "blue",
-        fillColor: "white",
-        fillOpacity: 1,
-        weight: 2
-      })
-        .addTo(map)
-        .bindPopup(
-          "Corner " + (index + 1) +
-          "<br>Lat: " + corner[0].toFixed(2) +
-          "<br>Lon: " + corner[1].toFixed(2)
-        );
-    });
+    function clearActiveLayers() {
+      activeLayers.forEach(function (layer) {
+        if (map && layer) {
+          map.removeLayer(layer);
+        }
+      });
+      activeLayers = [];
+    }
 
-    map.fitBounds(wrfPolarDomain.getBounds(), {
-      padding: [60, 60]
-    });
+    function addLayer(layer) {
+      layer.addTo(map);
+      activeLayers.push(layer);
+      return layer;
+    }
 
     function addPolyline(points, options) {
-      return L.polyline(points, options).addTo(map);
+      return addLayer(L.polyline(points, options));
     }
 
-    for (let lat = 50; lat <= 85; lat += 5) {
-      const points = [];
-      for (let lon = -180; lon <= 180; lon += 5) {
-        points.push([lat, lon]);
+    function addGraticule(config) {
+      const latStep = 5;
+      const lonStep = 5;
+      const meridianStep = 15;
+      const meridianLatStep = 2;
+
+      if (config.graticuleLatStart < config.graticuleLatEnd) {
+        for (let lat = config.graticuleLatStart; lat <= config.graticuleLatEnd; lat += latStep) {
+          const points = [];
+          for (let lon = -180; lon <= 180; lon += lonStep) {
+            points.push([lat, lon]);
+          }
+          addPolyline(points, {
+            color: "#555",
+            weight: 1,
+            opacity: 0.35
+          });
+        }
+
+        for (let lon = -180; lon < 180; lon += meridianStep) {
+          const points = [];
+          for (let lat = config.meridianLatStart; lat <= config.meridianLatEnd; lat += meridianLatStep) {
+            points.push([lat, lon]);
+          }
+          addPolyline(points, {
+            color: "#555",
+            weight: 1,
+            opacity: 0.25
+          });
+        }
+      } else {
+        for (let lat = config.graticuleLatStart; lat >= config.graticuleLatEnd; lat -= latStep) {
+          const points = [];
+          for (let lon = -180; lon <= 180; lon += lonStep) {
+            points.push([lat, lon]);
+          }
+          addPolyline(points, {
+            color: "#555",
+            weight: 1,
+            opacity: 0.35
+          });
+        }
+
+        for (let lon = -180; lon < 180; lon += meridianStep) {
+          const points = [];
+          for (let lat = config.meridianLatStart; lat <= config.meridianLatEnd; lat += meridianLatStep) {
+            points.push([lat, lon]);
+          }
+          addPolyline(points, {
+            color: "#555",
+            weight: 1,
+            opacity: 0.25
+          });
+        }
       }
-      addPolyline(points, {
-        color: "#555",
-        weight: 1,
-        opacity: 0.35
+    }
+
+    function updateReadout(config) {
+      document.getElementById("projection-readout").innerHTML =
+        "<strong>Projection:</strong> " + config.name +
+        ", <code>" + config.epsg + "</code>";
+    }
+
+    function buildMap(mode) {
+      const config = projectionConfigs[mode];
+      updateReadout(config);
+
+      if (map) {
+        map.remove();
+        map = null;
+      }
+
+      map = L.map("map", {
+        crs: makeCrs(config),
+        center: config.center,
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: MAX_ZOOM,
+        maxBoundsViscosity: 1.0
+      });
+
+      activeLayers = [];
+
+      addLayer(L.tileLayer(config.tileUrl, {
+        tileSize: TILE_SIZE,
+        attribution: "Tiles © GBIF, OpenMapTiles, OpenStreetMap contributors"
+      }));
+
+      addLayer(L.marker(config.poleMarker)
+        .bindPopup(config.poleLabel));
+
+      addLayer(L.circle(config.circleCenter, {
+        radius: 500000,
+        color: "red",
+        fillColor: "red",
+        fillOpacity: 0.15
+      })
+        .bindPopup(config.circleLabel));
+
+      const wrfPolarDomain = addLayer(L.polygon(config.domainCorners, {
+        color: "blue",
+        weight: 3,
+        fillColor: "blue",
+        fillOpacity: 0.12
+      })
+        .bindPopup(
+          "<strong>Example WRF-style polar domain</strong><br>" +
+          "Test polygon only<br>" +
+          config.label + " domain footprint"
+        ));
+
+      config.domainCorners.forEach(function (corner, index) {
+        addLayer(L.circleMarker(corner, {
+          radius: 5,
+          color: "blue",
+          fillColor: "white",
+          fillOpacity: 1,
+          weight: 2
+        })
+          .bindPopup(
+            "Corner " + (index + 1) +
+            "<br>Lat: " + corner[0].toFixed(2) +
+            "<br>Lon: " + corner[1].toFixed(2)
+          ));
+      });
+
+      addGraticule(config);
+
+      map.fitBounds(wrfPolarDomain.getBounds(), {
+        padding: [60, 60]
+      });
+
+      map.on("click", function (event) {
+        const lat = event.latlng.lat.toFixed(4);
+        const lon = event.latlng.lng.toFixed(4);
+
+        L.popup()
+          .setLatLng(event.latlng)
+          .setContent("Lat: " + lat + "<br>Lon: " + lon)
+          .openOn(map);
       });
     }
 
-    for (let lon = -180; lon < 180; lon += 15) {
-      const points = [];
-      for (let lat = 50; lat <= 89; lat += 2) {
-        points.push([lat, lon]);
-      }
-      addPolyline(points, {
-        color: "#555",
-        weight: 1,
-        opacity: 0.25
-      });
-    }
-
-    map.on("click", function (event) {
-      const lat = event.latlng.lat.toFixed(4);
-      const lon = event.latlng.lng.toFixed(4);
-
-      L.popup()
-        .setLatLng(event.latlng)
-        .setContent("Lat: " + lat + "<br>Lon: " + lon)
-        .openOn(map);
+    document.getElementById("projection-select").addEventListener("change", function (event) {
+      buildMap(event.target.value);
     });
+
+    buildMap("north");
   </script>
 </body>
 </html>
