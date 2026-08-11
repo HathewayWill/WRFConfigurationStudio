@@ -107,7 +107,7 @@
       .addTo(map)
       .bindPopup("North Pole");
 
-    L.circle([75, -40], {
+    const testCircle = L.circle([75, -40], {
       radius: 500000,
       color: "red",
       fillColor: "red",
@@ -115,6 +115,46 @@
     })
       .addTo(map)
       .bindPopup("Example high-latitude test area");
+
+    const wrfPolarDomainCorners = [
+      [63.0, -72.0],
+      [63.0, -20.0],
+      [82.0, -10.0],
+      [82.0, -82.0]
+    ];
+
+    const wrfPolarDomain = L.polygon(wrfPolarDomainCorners, {
+      color: "blue",
+      weight: 3,
+      fillColor: "blue",
+      fillOpacity: 0.12
+    })
+      .addTo(map)
+      .bindPopup(
+        "<strong>Example WRF-style polar domain</strong><br>" +
+        "Test polygon only<br>" +
+        "Approximate high-latitude domain footprint"
+      );
+
+    wrfPolarDomainCorners.forEach(function (corner, index) {
+      L.circleMarker(corner, {
+        radius: 5,
+        color: "blue",
+        fillColor: "white",
+        fillOpacity: 1,
+        weight: 2
+      })
+        .addTo(map)
+        .bindPopup(
+          "Corner " + (index + 1) +
+          "<br>Lat: " + corner[0].toFixed(2) +
+          "<br>Lon: " + corner[1].toFixed(2)
+        );
+    });
+
+    map.fitBounds(wrfPolarDomain.getBounds(), {
+      padding: [60, 60]
+    });
 
     function addPolyline(points, options) {
       return L.polyline(points, options).addTo(map);
