@@ -81,6 +81,140 @@
     return 50;
   }
 
+  /*
+   * Curated high-latitude marine geographic labels.
+   *
+   * Coordinates are cartographic label anchors only. They do not alter
+   * the browser CRS, WPS projection parameters, or WRF domain geometry.
+   *
+   * Start with the major polar water bodies. Additional regional seas can
+   * be added after visual testing of density and placement.
+   */
+  var MARINE_LABELS = {
+    north: [
+      {
+        name: 'Arctic Ocean',
+        lat: 86.0,
+        lon: 0.0,
+        minZoom: 1,
+        major: true
+      },
+      {
+        name: 'Beaufort Sea',
+        lat: 73.0,
+        lon: -145.0,
+        minZoom: 2
+      },
+      {
+        name: 'Baffin Bay',
+        lat: 72.0,
+        lon: -67.0,
+        minZoom: 2
+      },
+      {
+        name: 'Greenland Sea',
+        lat: 74.0,
+        lon: -7.0,
+        minZoom: 2
+      },
+      {
+        name: 'Barents Sea',
+        lat: 74.0,
+        lon: 38.0,
+        minZoom: 2
+      },
+      {
+        name: 'Bering Sea',
+        lat: 58.0,
+        lon: -175.0,
+        minZoom: 3
+      },
+      {
+        name: 'Chukchi Sea',
+        lat: 70.0,
+        lon: -170.0,
+        minZoom: 3
+      },
+      {
+        name: 'Kara Sea',
+        lat: 75.0,
+        lon: 72.0,
+        minZoom: 3
+      },
+      {
+        name: 'Laptev Sea',
+        lat: 76.0,
+        lon: 120.0,
+        minZoom: 3
+      },
+      {
+        name: 'East Siberian Sea',
+        lat: 72.0,
+        lon: 160.0,
+        minZoom: 3
+      },
+      {
+        name: 'Norwegian Sea',
+        lat: 67.0,
+        lon: 2.0,
+        minZoom: 3
+      },
+      {
+        name: 'Labrador Sea',
+        lat: 59.0,
+        lon: -55.0,
+        minZoom: 3
+      },
+      {
+        name: 'Hudson Bay',
+        lat: 60.0,
+        lon: -84.0,
+        minZoom: 3
+      }
+    ],
+
+    south: [
+      {
+        name: 'Southern Ocean',
+        lat: -63.0,
+        lon: 30.0,
+        minZoom: 1,
+        major: true
+      },
+      {
+        name: 'Weddell Sea',
+        lat: -72.0,
+        lon: -45.0,
+        minZoom: 2
+      },
+      {
+        name: 'Ross Sea',
+        lat: -74.0,
+        lon: 175.0,
+        minZoom: 2
+      },
+      {
+        name: 'Amundsen Sea',
+        lat: -72.0,
+        lon: -112.0,
+        minZoom: 2
+      },
+      {
+        name: 'Bellingshausen Sea',
+        lat: -70.0,
+        lon: -80.0,
+        minZoom: 2
+      },
+      {
+        name: 'Davis Sea',
+        lat: -66.0,
+        lon: 92.0,
+        minZoom: 3
+      }
+    ]
+  };
+
+
   var activeOverlay = null;
   var jsonCache = {};
 
@@ -1023,6 +1157,120 @@
   }
 
 
+  /*
+   * Estimate the screen footprint of a marine divIcon before rendering it.
+   *
+   * Marine labels are centered on their geographic anchor because their CSS
+   * uses translate(-50%, -50%).
+   */
+  function estimateMarineLabelBox(
+    map,
+    label
+  ) {
+    if (
+      !label ||
+      !Number.isFinite(Number(label.lat)) ||
+      !Number.isFinite(Number(label.lon))
+    ) {
+      return null;
+    }
+
+    var point =
+      map.latLngToContainerPoint(
+        L.latLng(
+          Number(label.lat),
+          Number(label.lon)
+        )
+      );
+
+    if (
+      !isFinite(point.x) ||
+      !isFinite(point.y)
+    ) {
+      return null;
+    }
+
+    var name =
+      String(label.name || '');
+
+    var width =
+      label.major
+        ? Math.max(
+            72,
+            Math.min(
+              190,
+              20 + name.length * 7.0
+            )
+          )
+        : Math.max(
+            55,
+            Math.min(
+              175,
+              16 + name.length * 6.2
+            )
+          );
+
+    var height =
+      label.major
+        ? 18
+        : 16;
+
+    return {
+      left:
+        point.x - width / 2,
+
+      right:
+        point.x + width / 2,
+
+      top:
+        point.y - height / 2,
+
+      bottom:
+        point.y + height / 2
+    };
+  }
+
+
+  function createMarineLabelMarker(
+    label,
+    paneName
+  ) {
+    var cssClass =
+      'polar-reference-marine-label';
+
+    if (label.major) {
+      cssClass +=
+        ' polar-reference-marine-label-major';
+    }
+
+    return L.marker(
+      L.latLng(
+        label.lat,
+        label.lon
+      ),
+      {
+        pane: paneName,
+        interactive: false,
+        keyboard: false,
+        icon: L.divIcon({
+          className:
+            'polar-reference-marine-label-icon',
+
+          html:
+            '<span class="' +
+            cssClass +
+            '">' +
+            escapeHtml(label.name) +
+            '</span>',
+
+          iconSize: [1, 1],
+          iconAnchor: [0, 0]
+        })
+      }
+    );
+  }
+
+
   function createOverlay(map, mode) {
     if (
       !map ||
@@ -1042,6 +1290,9 @@
     var boundaryPaneName =
       'polarReferenceBoundaryPane';
 
+    var marinePaneName =
+      'polarReferenceMarinePane';
+
     var pointPaneName =
       'polarReferencePointPane';
 
@@ -1056,6 +1307,12 @@
       map,
       boundaryPaneName,
       330
+    );
+
+    ensurePane(
+      map,
+      marinePaneName,
+      335
     );
 
     ensurePane(
@@ -1088,6 +1345,9 @@
         boundaryLayer
       );
 
+    var marineLayer =
+      L.layerGroup().addTo(map);
+
     var pointLayer =
       L.layerGroup().addTo(map);
 
@@ -1103,6 +1363,7 @@
       admin1Data: null,
       admin1Loading: false,
       admin1Rendered: false,
+      marineLayer: marineLayer,
       pointLayer: pointLayer,
       labelLayer: labelLayer,
       placesData: null,
@@ -1111,12 +1372,162 @@
     };
 
 
+    function drawMarineLabels(
+      placeLabelBoxes
+    ) {
+      if (state.destroyed) {
+        return;
+      }
+
+      marineLayer.clearLayers();
+
+      var zoom =
+        map.getZoom();
+
+      /*
+       * Work on a copy because marine labels are added after all surviving
+       * place labels. This makes populated places and scientific stations
+       * absolute collision winners.
+       */
+      var acceptedBoxes =
+        Array.isArray(placeLabelBoxes)
+          ? placeLabelBoxes.slice()
+          : [];
+
+      var labels =
+        (
+          MARINE_LABELS[mode] ||
+          []
+        ).slice();
+
+      var mapSize =
+        map.getSize();
+
+      /*
+       * Major ocean labels win over regional sea labels. Within each class,
+       * sort alphabetically so redraw ordering remains deterministic.
+       */
+      labels.sort(
+        function (a, b) {
+          if (
+            Boolean(a.major) !==
+            Boolean(b.major)
+          ) {
+            return a.major
+              ? -1
+              : 1;
+          }
+
+          return String(a.name || '')
+            .localeCompare(
+              String(b.name || '')
+            );
+        }
+      );
+
+      var collisionPadding =
+        zoom <= 2
+          ? 5
+          : zoom === 3
+            ? 3
+            : 2;
+
+
+      for (
+        var i = 0;
+        i < labels.length;
+        i++
+      ) {
+        var label =
+          labels[i];
+
+        if (
+          zoom <
+          label.minZoom
+        ) {
+          continue;
+        }
+
+        if (
+          !latitudeIsVisible(
+            label.lat,
+            mode
+          )
+        ) {
+          continue;
+        }
+
+        var box =
+          estimateMarineLabelBox(
+            map,
+            label
+          );
+
+        if (!box) {
+          continue;
+        }
+
+        /*
+         * Ignore labels whose estimated footprint is well outside the
+         * viewport. A small margin avoids distracting edge pop-in.
+         */
+        if (
+          box.right < -120 ||
+          box.left > mapSize.x + 120 ||
+          box.bottom < -50 ||
+          box.top > mapSize.y + 50
+        ) {
+          continue;
+        }
+
+        var collides =
+          false;
+
+        for (
+          var acceptedIndex = 0;
+          acceptedIndex < acceptedBoxes.length;
+          acceptedIndex++
+        ) {
+          if (
+            labelBoxesOverlap(
+              box,
+              acceptedBoxes[acceptedIndex],
+              collisionPadding
+            )
+          ) {
+            collides = true;
+            break;
+          }
+        }
+
+        if (collides) {
+          continue;
+        }
+
+        createMarineLabelMarker(
+          label,
+          marinePaneName
+        ).addTo(
+          marineLayer
+        );
+
+        /*
+         * Accepted marine labels also reserve space so lower-priority marine
+         * labels cannot overlap them.
+         */
+        acceptedBoxes.push(
+          box
+        );
+      }
+    }
+
+
     function drawPlaceLabels() {
       if (
         state.destroyed ||
         !state.placesData
       ) {
-        return;
+        return [];
       }
 
       pointLayer.clearLayers();
@@ -1313,16 +1724,18 @@
           candidate.box
         );
       }
+
+      return acceptedBoxes;
     }
 
 
     /*
      * Render 10m Admin-1 detail only at useful close zooms.
      *
-     * The 10m Admin-1 source is approximately 21 MiB, so broad whole-pole
-     * views should not pay that download and parsing cost. Once fetched, the
-     * existing fetchJson() cache keeps it available for the remainder of the
-     * page session.
+     * The compact Northern Hemisphere 10m Admin-1 subset is still the
+     * largest polar reference payload, so broad whole-pole views avoid that
+     * download and parsing cost. Once fetched, the existing fetchJson() cache
+     * keeps it available for the remainder of the page session.
      */
     function updateAdmin1Detail() {
       if (state.destroyed) {
@@ -1488,7 +1901,13 @@
 
 
 
-        drawPlaceLabels();
+        var placeLabelBoxes =
+          drawPlaceLabels();
+
+        drawMarineLabels(
+          placeLabelBoxes
+        );
+
         updateAdmin1Detail();
       })
       .catch(function (error) {
@@ -1505,7 +1924,13 @@
 
     state.zoomHandler =
       function () {
-        drawPlaceLabels();
+        var placeLabelBoxes =
+          drawPlaceLabels();
+
+        drawMarineLabels(
+          placeLabelBoxes
+        );
+
         updateAdmin1Detail();
       };
 
@@ -1531,6 +1956,7 @@
         }
 
         boundaryLayer.remove();
+        marineLayer.remove();
         pointLayer.remove();
         labelLayer.remove();
       };
