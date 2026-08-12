@@ -2,19 +2,18 @@
 
 **WRF Configuration Studio** is a browser-based configuration environment for designing Weather Research and Forecasting Model domains, editing `namelist.wps`, editing `namelist.input`, exporting `namelist.obsproc`, and reviewing WRF, WRFDA, OBSPROC, Registry, and compatibility-rule metadata.
 
-This package is the current stable main checkpoint prepared for the public release review. It is intended to be used as a static web application through a local HTTP server or a static website host such as GitHub Pages.
+WRF Configuration Studio is distributed as a static browser application and can be used through a local HTTP server or a static website host such as GitHub Pages.
 
 The project continues the technical lineage of browser-based WRF domain design tools, including the WRF Domain Wizard web build. The original WRF Domain Wizard project by Jiří Richter remains credited in the About section and project documentation. WRF Configuration Studio also acknowledges earlier NOAA Forecast Systems Laboratory WRF Standard Initialization GUI work as part of the broader history of graphical WRF configuration and initialization tools.
 
 ---
 
-## Current release checkpoint
+## Package overview
 
 ```text
 Application label: WRF Configuration Studio v1.0.0
-Release channel: stable main public-release review
 Compatibility rules: 184 total, 184 valid/enforced, 0 unreviewed, 0 needs_review
-Primary package contents: static browser app, runtime catalogs, source/provenance data, examples, documentation, and validation tools
+Primary package contents: static browser app, runtime catalogs, source/provenance data, polar reference cartography, examples, documentation, and validation tools
 ```
 
 ---
@@ -22,6 +21,11 @@ Primary package contents: static browser app, runtime catalogs, source/provenanc
 ## What WRF Configuration Studio includes
 
 - Interactive WRF domain creation and editing
+- Standard, Northern Hemisphere, and Southern Hemisphere map modes
+- Polar Stereographic domain support with automatic Northern/Southern Hemisphere routing
+- Regional latitude-longitude and rotated latitude-longitude domain support
+- Polar reference cartography, including coastlines, lakes, administrative boundaries, populated-place labels, marine labels, and Antarctic ice-shelf lines
+- Latitude-longitude overlap and near-360-degree domain safeguards
 - `namelist.wps` workflow support
 - Full-catalog `namelist.input` editor
 - WRFDA groups exposed as `&wrfvar*`
@@ -34,17 +38,17 @@ Primary package contents: static browser app, runtime catalogs, source/provenanc
 - Collapsed group warning/error highlighting
 - Click-to-jump compatibility issue navigation
 - Natural numeric WRFVAR group sorting, so `wrfvar1`, `wrfvar2`, `wrfvar3`, and later groups appear in numeric order
-- Version-aware metadata support for the stable WRF 4.7.1 baseline and the unreleased `4.8.1-dev` Registry preview
+- Version-aware metadata support for the stable WRF 4.7.1 baseline and the development `4.8.1-dev` Registry preview
 - Required-field save warnings
-- Suggested starting values for `time_step`, `radt`, `run_*`, and `cudt`
-- 360-degree map and graticule behavior
+- Suggested starting values for `time_step`, `radt`, `run_*`, and `cudt`, including automatic `time_step ≈ 6 × d01 dx_km` initialization when appropriate
+- Global and polar graticule behavior with collision-aware geographic and place labeling
 - Desktop touch-screen and trackpad interaction fixes
 - Desktop browser compatibility shims for Chrome, Edge, Firefox, and Safari
 - Local vendored JavaScript, CSS, and webfont dependencies
 - Raw provenance data under `data/raw/`
 - Source/reference materials under `docs/references/`
 - WRF example documentation and test-case namelists under `examples/`
-- Release validation tools under `tools/`
+- Package validation tools under `tools/`
 
 ---
 
@@ -56,15 +60,12 @@ WRF Configuration Studio currently includes a development Registry preview label
 data/raw/wrf/4.8.1-dev/
 ```
 
-That material is **not** labeled as an official WRF release. It is retained as development/provenance data from the WRF `release-v4.8.1` source branch and should be treated as an unreleased preview until an official WRF release tag exists.
+That material is retained as development/provenance metadata and is separate from the stable WRF 4.7.1 baseline used for version-aware reference support.
 
-Use these labels when describing this material:
+Use this label when describing the material:
 
 ```text
-WRF 4.8.1-dev
-unreleased Registry preview
-source branch metadata
-not an official WRF release tag
+WRF 4.8.1-dev Registry preview
 ```
 
 ---
@@ -148,7 +149,7 @@ Python:       python3 launch_local_server.py
 
 ---
 
-## Validate the release
+## Validate the package
 
 From the repository root:
 
@@ -187,7 +188,7 @@ Supported desktop browsers:
 - macOS: Safari, Chrome, Firefox
 - Linux: Chrome/Chromium, Firefox, Edge
 
-Mobile layouts are not a release target for this package.
+Mobile layouts are not a supported target for this package.
 
 ---
 
@@ -211,14 +212,14 @@ WRFConfigurationStudio/
 ├── img/
 ├── data/
 │   ├── runtime/
-│   └── raw/
-│       ├── registry/
-│       └── wrf/
+│   ├── raw/
+│   │   ├── registry/
+│   │   └── wrf/
+│   └── polar-reference/
 ├── examples/
 ├── docs/
 │   ├── images/
 │   ├── references/
-│   ├── release-notes/
 │   └── user-guide/
 └── tools/
     ├── validate_release.py
@@ -243,9 +244,11 @@ src/namelist/namelist-input-editor.js
 src/namelist/namelist-compatibility-engine.js
 src/namelist/namelist-runtime-engine.js
 src/tools/wps-tools.js
+src/tools/polar-domain-mode.js
+src/tools/polar-reference-overlay.js
 ```
 
-`src/core/wrf-domain-wizard.js` contains the large domain-map and WPS editing layer inherited from the browser domain-wizard lineage. Smaller first-party layers under `src/namelist/` and `src/tools/` add the newer namelist editor, compatibility engine, WRFDA/OBSPROC workflow logic, and WPS helper panels.
+`src/core/wrf-domain-wizard.js` contains the large domain-map and WPS editing layer inherited from the browser domain-wizard lineage. Smaller first-party layers under `src/namelist/` and `src/tools/` add the namelist editor, compatibility engine, WRFDA/OBSPROC workflow logic, WPS helper panels, polar-mode routing, and polar reference overlays.
 
 ### `styles/`
 
@@ -296,8 +299,24 @@ Important contents include:
 data/raw/registry/
 data/raw/wrf/
 data/raw/wrf/4.8.1-dev/
-data/raw/wrf/releases/
 ```
+
+### `data/polar-reference/`
+
+Compact browser-ready geographic reference data used by the polar map modes.
+
+Important contents include Natural Earth-derived subsets for:
+
+```text
+coastlines
+lakes
+administrative boundaries
+populated places
+marine labels
+Antarctic ice-shelf lines
+```
+
+These subsets are used for polar reference cartography and labeling without changing WPS projection parameters.
 
 ### `examples/`
 
@@ -321,18 +340,16 @@ docs/QUICK_START.md
 docs/USER_GUIDE.md
 docs/TECHNICAL_REFERENCE.md
 docs/PROJECT_LINEAGE.md
-docs/RELEASE_HISTORY.md
 docs/SOURCE_FILE_NOTES.md
 docs/COMMENT_AND_NOTES_AUDIT.md
 docs/GITHUB_WEBSITE_STRUCTURE.md
 docs/references/
-docs/release-notes/
 docs/user-guide/
 ```
 
 ### `tools/`
 
-Release validation tools.
+Package validation tools.
 
 ```text
 tools/validate_release.py
@@ -349,11 +366,9 @@ Primary documentation:
 - [User Guide](docs/USER_GUIDE.md)
 - [Technical Reference](docs/TECHNICAL_REFERENCE.md)
 - [Project Lineage](docs/PROJECT_LINEAGE.md)
-- [Release History](docs/RELEASE_HISTORY.md)
 - [Source File Notes](docs/SOURCE_FILE_NOTES.md)
 - [Comment and Notes Audit](docs/COMMENT_AND_NOTES_AUDIT.md)
 - [GitHub Website Structure](docs/GITHUB_WEBSITE_STRUCTURE.md)
-- [Publication Layout](docs/release-notes/PUBLICATION_LAYOUT.md)
 
 User-guide images are stored in:
 
@@ -373,7 +388,7 @@ docs/user-guide/print/WRF_CONFIG_STUDIO_WEBSITE_USER_GUIDE_ONLINE_LOCAL.docx
 
 For publications, this software can be described as:
 
-> WRF Configuration Studio is a browser-based WRF configuration environment for domain design, `namelist.wps` editing, `namelist.input` editing, `namelist.obsproc` export, and metadata-assisted WRF configuration review. The current package includes a conservative validated compatibility-rule engine with 184 valid rules, WRFDA and OBSPROC workflow presets, issue navigation, and runtime Registry metadata for configuration review.
+> WRF Configuration Studio is a browser-based WRF configuration environment for standard, polar, and regional latitude-longitude domain design, `namelist.wps` editing, `namelist.input` editing, `namelist.obsproc` export, and metadata-assisted WRF configuration review. The package includes Northern and Southern Hemisphere polar map modes, polar reference cartography, automatic hemisphere routing for Polar Stereographic domains, a conservative validated compatibility-rule engine with 184 valid rules, WRFDA and OBSPROC workflow presets, issue navigation, and runtime Registry metadata for configuration review.
 
 Suggested limitation statement:
 
@@ -411,11 +426,13 @@ This project is distributed under the GPL-3.0 License.
 ```text
 GPL-3.0 License
 https://choosealicense.com/licenses/gpl-3.0/
+```
+
 ---
 
 ## Online map mode
 
-This browser build uses online tile providers for map backgrounds. The application source and runtime metadata are included locally, but map tiles require network access unless the application is configured to point to local or alternative tile services.
+This browser build uses online tile providers for map backgrounds. The application source, runtime metadata, and compact polar reference cartography are included locally, but background map tiles require network access unless the application is configured to point to local or alternative tile services.
 
 ---
 
@@ -433,14 +450,3 @@ Repository name:
 WRFConfigurationStudio
 ```
 
----
-
-## Release summary
-
-```text
-release label: WRF Configuration Studio v1.0.0 stable main public-release review
-compatibility rules: 184 total, 184 valid, 0 unreviewed, 0 needs_review
-rule strengths: 125 Hard, 35 Workflow, 24 Soft
-WRF 4.8.1 material: 4.8.1-dev, unreleased Registry preview only
-package SHA256: generate after building the final release zip
-```
