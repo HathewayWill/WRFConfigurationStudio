@@ -816,7 +816,7 @@
         this._addPolarGeographicLine(
           this._buildPolarMeridian(
             0,
-            45,
+            50,
             89
           ),
           55,
@@ -827,7 +827,7 @@
         this._addPolarGeographicLine(
           this._buildPolarMeridian(
             180,
-            45,
+            50,
             89
           ),
           55,
@@ -847,7 +847,7 @@
         this._addPolarGeographicLine(
           this._buildPolarMeridian(
             0,
-            -45,
+            -50,
             -89
           ),
           -55,
@@ -858,7 +858,7 @@
         this._addPolarGeographicLine(
           this._buildPolarMeridian(
             180,
-            -45,
+            -50,
             -89
           ),
           -55,
@@ -897,11 +897,40 @@
       // Minimum distance between two lines in pixels
       verticalLabelOffset: 200
     },
+    /*
+     * Standard Web Mercator graticule styling.
+     *
+     * Keep this unchanged from the main Studio interface. Polar maps use
+     * their own dedicated styles below.
+     */
     lineStyle: {
       stroke: true,
       color: '#111',
       opacity: 0.6,
       weight: 1,
+      interactive: false
+    },
+
+    /*
+     * Polar graticule hierarchy:
+     *
+     *   - meridians and intermediate parallels stay subdued;
+     *   - 10-degree latitude rings receive slightly more emphasis;
+     *   - the separate 50-degree workspace boundary remains strongest.
+     */
+    polarLineStyle: {
+      stroke: true,
+      color: '#59636e',
+      opacity: 0.42,
+      weight: 0.8,
+      interactive: false
+    },
+
+    majorPolarLineStyle: {
+      stroke: true,
+      color: '#46515c',
+      opacity: 0.58,
+      weight: 1.05,
       interactive: false
     },
     _bounds: null,
@@ -1012,10 +1041,10 @@
                 '<div style="' +
                 'white-space:nowrap;' +
                 'font-size:11px;' +
-                'font-weight:600;' +
-                'color:#222;' +
-                'background:rgba(255,255,255,0.78);' +
-                'padding:1px 3px;' +
+                'font-weight:500;' +
+                'color:#3f4953;' +
+                'background:rgba(255,255,255,0.70);' +
+                'padding:1px 2px;' +
                 'border-radius:2px;' +
                 'transform:translate(-50%,-50%);' +
                 '">' +
@@ -1057,7 +1086,23 @@
        * workspace. This avoids unnecessary projection requests near the edge
        * of the finite polar display CRS.
        */
-      var minimumAbsoluteLatitude = 45;
+      var polarConfig =
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.getActiveConfig
+          ? window.WRFPolarDomainMode.getActiveConfig()
+          : null;
+
+      /*
+       * Use the polar browser configuration as the single source of truth
+       * for the visible high-latitude workspace. Current polar modes use
+       * 50N and 50S as their outer geographic boundary.
+       */
+      var minimumAbsoluteLatitude =
+        polarConfig &&
+        isFinite(Number(polarConfig.boundaryLat))
+          ? Math.abs(Number(polarConfig.boundaryLat))
+          : 50;
+
       var maximumAbsoluteLatitude = 89;
 
       var longitude;
@@ -1124,7 +1169,7 @@
         this.addLayer(
           L.polyline(
             path,
-            this.lineStyle
+            this.polarLineStyle
           )
         );
 
@@ -1136,8 +1181,8 @@
         ) {
           this._addPolarGraticuleLabel(
             mode === 'north'
-              ? 47
-              : -47,
+              ? minimumAbsoluteLatitude + 2
+              : -(minimumAbsoluteLatitude + 2),
             longitude,
             this._formatPolarLongitude(
               longitude
@@ -1149,7 +1194,8 @@
       /*
        * Parallels.
        *
-       * Start with the first complete interval at or poleward of 45 degrees.
+       * Start with the first complete interval at or poleward of the
+       * configured polar workspace boundary.
        */
       var firstAbsoluteLatitude =
         Math.ceil(
@@ -1187,7 +1233,9 @@
         this.addLayer(
           L.polyline(
             path,
-            this.lineStyle
+            absoluteLatitude % 10 === 0
+              ? this.majorPolarLineStyle
+              : this.polarLineStyle
           )
         );
 
@@ -1444,7 +1492,24 @@
               switch (control.type) {
                 case 'checkbox':
                   control.addEventListener('click', function (e) {
-                    _this2._appSettings.set(key, e.currentTarget.checked);
+                    /*
+                     * Polar maps always start with the graticule enabled, but
+                     * the user may toggle it for the current polar session.
+                     *
+                     * Do not overwrite the saved Standard Map graticule
+                     * preference when doing so.
+                     */
+                    if (
+                      key === 'showGraticule' &&
+                      _this2._isPolarMode()
+                    ) {
+                      return;
+                    }
+
+                    _this2._appSettings.set(
+                      key,
+                      e.currentTarget.checked
+                    );
                   });
                   break;
                 case 'number':
@@ -1511,14 +1576,20 @@
       }
       if ('showGraticule' in this._controls) {
         if (this._isPolarMode()) {
+          /*
+           * Polar maps start with the graticule visible, but unlike the
+           * previous always-on behavior the checkbox remains user-toggleable.
+           */
           this._controls['showGraticule'].checked = true;
-          this._controls['showGraticule'].disabled = true;
-          this._controls['showGraticule'].title = 'Graticule is always enabled in polar map mode.';
+          this._controls['showGraticule'].disabled = false;
+          this._controls['showGraticule'].removeAttribute('title');
           this._showGraticule(true);
         } else {
           this._controls['showGraticule'].disabled = false;
           this._controls['showGraticule'].removeAttribute('title');
-          this._showGraticule(this._appSettings.get('showGraticule'));
+          this._showGraticule(
+            this._appSettings.get('showGraticule')
+          );
         }
       }
       if ('showGeographicLines' in this._controls) {
@@ -1527,14 +1598,9 @@
     },
     _showGraticule: function _showGraticule(show) {
       /*
-       * Northern and Southern polar maps always display the
-       * latitude/longitude graticule. Standard-map behavior remains
-       * controlled by the user's normal setting.
+       * Polar maps initialize with the graticule visible, but this method
+       * respects the current checkbox state so users can hide it.
        */
-      if (this._isPolarMode()) {
-        show = true;
-      }
-
       if (show === true) {
         this._graticule.addTo(this._map);
       } else {
@@ -32333,10 +32399,156 @@
           ]);
         }
         newDomainContext.endMarker.setLatLng(e.latlng);
-        center = bounds.getCenter();
-        domain.setDefaultValues(center.lat, center.lng);
-        e_we = Math.round(map.distance(newDomainContext.startLatlng, [newDomainContext.startLatlng.lat, e.latlng.lng]) / domain.dxInMeters);
-        e_sn = Math.round(map.distance(newDomainContext.startLatlng, [e.latlng.lat, newDomainContext.startLatlng.lng]) / domain.dyInMeters);
+
+        if (polarNewDomainPreview) {
+          /*
+           * A geographic LatLngBounds rectangle is not a Cartesian rectangle
+           * in a pole-centered map. Find the visual midpoint in the active
+           * Leaflet polar CRS instead.
+           */
+          var startLayerPoint =
+            map.latLngToLayerPoint(
+              newDomainContext.startLatlng
+            );
+
+          var endLayerPoint =
+            map.latLngToLayerPoint(
+              e.latlng
+            );
+
+          var centerLayerPoint =
+            L.point(
+              (
+                startLayerPoint.x +
+                endLayerPoint.x
+              ) * 0.5,
+              (
+                startLayerPoint.y +
+                endLayerPoint.y
+              ) * 0.5
+            );
+
+          center =
+            map.layerPointToLatLng(
+              centerLayerPoint
+            );
+
+          domain.setDefaultValues(
+            center.lat,
+            wrfNormalizeLongitudeForWps(
+              center.lng
+            )
+          );
+
+          /*
+           * Measure the rubber-band dimensions in the actual WRF projection,
+           * not as independent geographic latitude/longitude distances.
+           *
+           * This is especially important near the pole and across +/-180,
+           * where longitude is angular and discontinuous.
+           */
+          var newDomainProjection =
+            new WrfProjection({
+              map_proj:
+                domain.map_proj,
+
+              ref_lat:
+                domain.ref_lat,
+
+              ref_lon:
+                domain.ref_lon,
+
+              truelat1:
+                domain.truelat1,
+
+              truelat2:
+                domain.truelat2,
+
+              stand_lon:
+                domain.stand_lon,
+
+              pole_lat:
+                domain.pole_lat,
+
+              pole_lon:
+                domain.pole_lon,
+
+              dx:
+                domain.dx,
+
+              dy:
+                domain.dy
+            });
+
+          var startProjectedXY =
+            newDomainProjection.latlon_to_ij(
+              newDomainContext.startLatlng.lat,
+              wrfNormalizeLongitudeForWps(
+                newDomainContext.startLatlng.lng
+              )
+            );
+
+          var endProjectedXY =
+            newDomainProjection.latlon_to_ij(
+              e.latlng.lat,
+              wrfNormalizeLongitudeForWps(
+                e.latlng.lng
+              )
+            );
+
+          e_we =
+            Math.round(
+              Math.abs(
+                endProjectedXY[0] -
+                startProjectedXY[0]
+              ) /
+              domain.dxInMeters
+            );
+
+          e_sn =
+            Math.round(
+              Math.abs(
+                endProjectedXY[1] -
+                startProjectedXY[1]
+              ) /
+              domain.dyInMeters
+            );
+        } else {
+          /*
+           * Preserve the original Standard Map New-domain behavior exactly.
+           */
+          center =
+            bounds.getCenter();
+
+          domain.setDefaultValues(
+            center.lat,
+            center.lng
+          );
+
+          e_we =
+            Math.round(
+              map.distance(
+                newDomainContext.startLatlng,
+                [
+                  newDomainContext.startLatlng.lat,
+                  e.latlng.lng
+                ]
+              ) /
+              domain.dxInMeters
+            );
+
+          e_sn =
+            Math.round(
+              map.distance(
+                newDomainContext.startLatlng,
+                [
+                  e.latlng.lat,
+                  newDomainContext.startLatlng.lng
+                ]
+              ) /
+              domain.dyInMeters
+            );
+        }
         if (e_we < WRFDomainGrid.minGridSize || e_sn < WRFDomainGrid.minGridSize) {
           domain.remove();
           wpsPanel.hide();
@@ -33088,6 +33300,41 @@
     var map = L.map(settings['div'][0], mapOptions);
     if (typeof document !== 'undefined' && document.documentElement) {
       document.documentElement.setAttribute('data-wrf-map-mode', polarMapConfig ? polarMapConfig.mode : 'standard');
+    }
+
+    /*
+     * Polar reference cartography is a browser-display overlay only.
+     *
+     * It does not participate in WRF/WPS projection calculations, domain
+     * geometry, nesting, dragging, resizing, or namelist generation.
+     *
+     * The overlay is intentionally attached only when a polar browser CRS is
+     * active. Standard Web Mercator behavior remains unchanged.
+     */
+    if (
+      polarMapConfig &&
+      typeof window !== 'undefined' &&
+      window.WRFPolarReferenceOverlay &&
+      typeof window.WRFPolarReferenceOverlay.attach === 'function'
+    ) {
+      window.WRFPolarReferenceOverlay.attach(
+        map,
+        polarMapConfig.mode
+      );
+    }
+
+    /*
+     * Hide background cartography equatorward of the configured polar
+     * workspace boundary. The CRS and WPS projection remain unchanged.
+     */
+    if (
+      polarMapConfig &&
+      polarMapMode &&
+      typeof polarMapMode.createPolarBoundaryMask === 'function'
+    ) {
+      polarMapMode.createPolarBoundaryMask(
+        map
+      );
     }
 
     var mapModeStatus = L.control({ position: 'bottomleft' });

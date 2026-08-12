@@ -39,6 +39,7 @@
       code: 'EPSG:3575',
       proj4: '+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
       extent: Math.sqrt(2) * ARCTIC_RADIUS,
+      boundaryLat: 50,
       center: [80, 0],
       zoom: 2,
       tileSrs: '3575'
@@ -51,6 +52,7 @@
       proj4: '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
       // GBIF's published EPSG:3031 zoom-zero extent.
       extent: 12367396.2185,
+      boundaryLat: -50,
       center: [-80, 0],
       zoom: 2,
       tileSrs: '3031'
@@ -280,6 +282,330 @@
     });
   }
 
+  /*
+   * Hide all browser cartography equatorward of the configured polar
+   * workspace boundary.
+   *
+   * The GBIF EPSG:3575 / EPSG:3031 tile grids remain square and retain their
+   * published CRS extents. Rather than modifying those extents, this layer
+   * places a viewport-sized SVG mask above the background/reference
+   * cartography with a circular hole corresponding to exactly 50N or 50S.
+   *
+   * This avoids exposing the square corners of the underlying polar tile
+   * matrix while preserving correct tile alignment and WRF geometry.
+   */
+  function createPolarBoundaryMask(map) {
+    var config = getActiveConfig();
+
+    if (
+      !map ||
+      !config ||
+      !global.L ||
+      !global.document ||
+      !Number.isFinite(Number(config.boundaryLat))
+    ) {
+      return null;
+    }
+
+    var paneName =
+      'polarBoundaryMaskPane';
+
+    var pane =
+      map.getPane(paneName);
+
+    if (!pane) {
+      pane =
+        map.createPane(paneName);
+    }
+
+    /*
+     * Tile pane:                         ~200
+     * Natural Earth boundaries/labels:  330/340
+     * Polar cutoff mask:                350
+     * Normal Leaflet/WRF overlays:      ~400+
+     */
+    pane.style.zIndex =
+      '350';
+
+    pane.style.pointerEvents =
+      'none';
+
+    var svgNamespace =
+      'http://www.w3.org/2000/svg';
+
+    var svg =
+      global.document.createElementNS(
+        svgNamespace,
+        'svg'
+      );
+
+    svg.setAttribute(
+      'class',
+      'polar-boundary-mask-svg'
+    );
+
+    svg.style.position =
+      'absolute';
+
+    svg.style.pointerEvents =
+      'none';
+
+    svg.style.overflow =
+      'visible';
+
+    var maskPath =
+      global.document.createElementNS(
+        svgNamespace,
+        'path'
+      );
+
+    maskPath.setAttribute(
+      'fill',
+      '#dddddd'
+    );
+
+    maskPath.setAttribute(
+      'fill-rule',
+      'evenodd'
+    );
+
+    maskPath.setAttribute(
+      'pointer-events',
+      'none'
+    );
+
+    var edgeCircle =
+      global.document.createElementNS(
+        svgNamespace,
+        'circle'
+      );
+
+    edgeCircle.setAttribute(
+      'fill',
+      'none'
+    );
+
+    edgeCircle.setAttribute(
+      'stroke',
+      '#56616b'
+    );
+
+    edgeCircle.setAttribute(
+      'stroke-width',
+      '1.25'
+    );
+
+    edgeCircle.setAttribute(
+      'stroke-opacity',
+      '0.88'
+    );
+
+    edgeCircle.setAttribute(
+      'pointer-events',
+      'none'
+    );
+
+    svg.appendChild(
+      maskPath
+    );
+
+    svg.appendChild(
+      edgeCircle
+    );
+
+    pane.appendChild(
+      svg
+    );
+
+    var boundaryLat =
+      Number(config.boundaryLat);
+
+    var poleLat =
+      config.mode === 'north'
+        ? 90
+        : -90;
+
+
+    function updateMask() {
+      if (
+        !map ||
+        !map._loaded
+      ) {
+        return;
+      }
+
+      var size =
+        map.getSize();
+
+      /*
+       * The SVG lives inside a Leaflet pane, whose parent mapPane moves as
+       * Leaflet pans. Position the SVG at the layer point corresponding to
+       * the viewport's upper-left corner so its local coordinate system
+       * remains identical to container pixels.
+       */
+      var topLeft =
+        map.containerPointToLayerPoint(
+          global.L.point(
+            0,
+            0
+          )
+        );
+
+      global.L.DomUtil.setPosition(
+        svg,
+        topLeft
+      );
+
+      svg.setAttribute(
+        'width',
+        size.x
+      );
+
+      svg.setAttribute(
+        'height',
+        size.y
+      );
+
+      svg.setAttribute(
+        'viewBox',
+        '0 0 ' +
+        size.x +
+        ' ' +
+        size.y
+      );
+
+      var center =
+        map.latLngToContainerPoint(
+          global.L.latLng(
+            poleLat,
+            0
+          )
+        );
+
+      var boundaryPoint =
+        map.latLngToContainerPoint(
+          global.L.latLng(
+            boundaryLat,
+            0
+          )
+        );
+
+      var dx =
+        boundaryPoint.x -
+        center.x;
+
+      var dy =
+        boundaryPoint.y -
+        center.y;
+
+      var radius =
+        Math.sqrt(
+          dx * dx +
+          dy * dy
+        );
+
+      if (
+        !Number.isFinite(center.x) ||
+        !Number.isFinite(center.y) ||
+        !Number.isFinite(radius) ||
+        radius <= 0
+      ) {
+        return;
+      }
+
+      /*
+       * Even-odd path:
+       *
+       *   outer path = entire browser viewport
+       *   inner path = circular transparent polar workspace
+       */
+      var d =
+        'M 0 0 ' +
+        'H ' + size.x + ' ' +
+        'V ' + size.y + ' ' +
+        'H 0 Z ' +
+
+        'M ' +
+        (center.x - radius) +
+        ' ' +
+        center.y +
+
+        ' A ' +
+        radius +
+        ' ' +
+        radius +
+        ' 0 1 0 ' +
+        (center.x + radius) +
+        ' ' +
+        center.y +
+
+        ' A ' +
+        radius +
+        ' ' +
+        radius +
+        ' 0 1 0 ' +
+        (center.x - radius) +
+        ' ' +
+        center.y +
+
+        ' Z';
+
+      maskPath.setAttribute(
+        'd',
+        d
+      );
+
+      edgeCircle.setAttribute(
+        'cx',
+        center.x
+      );
+
+      edgeCircle.setAttribute(
+        'cy',
+        center.y
+      );
+
+      edgeCircle.setAttribute(
+        'r',
+        radius
+      );
+    }
+
+
+    /*
+     * Keep the circular boundary attached to geographic 50N/50S as the user
+     * pans, zooms, or resizes the browser.
+     */
+    map.on(
+      'move zoom zoomend moveend viewreset resize',
+      updateMask
+    );
+
+    updateMask();
+
+
+    return {
+      remove: function remove() {
+        map.off(
+          'move zoom zoomend moveend viewreset resize',
+          updateMask
+        );
+
+        if (
+          svg &&
+          svg.parentNode
+        ) {
+          svg.parentNode.removeChild(
+            svg
+          );
+        }
+      },
+
+      update: updateMask
+    };
+  }
+
+
   function polarTileLayers() {
     if (!isPolarMode() || !global.L) return null;
     var common = {
@@ -451,6 +777,7 @@
     getActiveConfig: getActiveConfig,
     getTileUrl: getTileUrl,
     createLeafletCrs: createLeafletCrs,
+    createPolarBoundaryMask: createPolarBoundaryMask,
     polarTileLayers: polarTileLayers,
     enforceProjectionOptions: enforceProjectionOptions,
     inferModeFromWps: inferModeFromWps,
