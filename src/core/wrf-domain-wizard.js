@@ -26045,12 +26045,25 @@
       return out;
     },
     _getPrimaryWorldShift: function _getPrimaryWorldShift() {
+      // Repeated 360-degree world copies are a Web Mercator display feature.
+      // A polar browser CRS has one physical pole-centered map and must never
+      // shift WRF domains by +/-360 degrees for display.
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        return 0;
+      }
+
       if (!this._map || !this.geogrid) {
         return 0;
       }
+
       var basePath = this._canonicalPathPairs(this.geogrid.polygonPath);
       var meanLng = this._pathMeanLng(basePath);
       var centerLng = this._map.getCenter().lng;
+
       return Math.round((centerLng - meanLng) / 360) * 360;
     },
     _getDisplayPath: function _getDisplayPath(extraShift) {
@@ -26091,21 +26104,43 @@
       }
     },
     _updateWorldCopyLayers: function _updateWorldCopyLayers() {
+      // World-copy rendering exists only for the standard repeated Web
+      // Mercator map. Polar map projections do not wrap horizontally and
+      // map.getBounds() can request inverse-projection points outside the
+      // finite polar display CRS. Do not create world copies in polar mode.
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        this._removeWorldCopyLayers();
+        return;
+      }
+
       if (!this._map || !this.geogrid) {
         return;
       }
+
       this._ensureWorldCopyLayers();
       this._worldCopyLayers.clearLayers();
+
       var mapBounds = this._map.getBounds().pad(0.25);
       var offsets = [-720, -360, 360, 720];
+
       for (var i = 0; i < offsets.length; i++) {
         var path = this._getDisplayPath(offsets[i]);
+
         if (!path || !path.length) {
           continue;
         }
+
         var copyBounds = L.latLngBounds(path);
+
         if (mapBounds.intersects(copyBounds)) {
-          L.polygon(path, this._getWorldCopyStyle()).addTo(this._worldCopyLayers);
+          L.polygon(
+            path,
+            this._getWorldCopyStyle()
+          ).addTo(this._worldCopyLayers);
         }
       }
     },
@@ -28518,7 +28553,8 @@
         case 'polar':
           showInputGroup(inputTrueLat1, true);
           showStandLon(true);
-          showPoleLatLon(true);
+          // pole_lat and pole_lon are WPS lat-lon parameters, not polar-stereographic parameters.
+          hideInputGroup(inputPoleLat);
           break;
         case 'lat-lon':
           showStandLon(true, formatFloat(domain.stand_lon));
@@ -28819,6 +28855,14 @@
       // enable map proj
       enableMapProjectionSelect();
       var map_proj = localStorage.getItem(localStorageKey + 'map_proj') || 'lambert';
+      // A polar browser view intentionally limits new domains to the two WPS
+      // projections supported by this workflow. Do not let a previously saved
+      // Lambert/Mercator preference re-enter through localStorage.
+      if (typeof window !== 'undefined' && window.WRFPolarDomainMode && window.WRFPolarDomainMode.isPolarMode()) {
+        if (map_proj !== WrfProjections.polar && map_proj !== WrfProjections.latlon) {
+          map_proj = WrfProjections.polar;
+        }
+      }
       selectMapProj.val(map_proj);
       configureDxDyFields(map_proj);
       initializeDxDyFields(map_proj);
@@ -31110,6 +31154,20 @@
             } else {
               wpsNamelist = new WPSNamelist(e.target.result);
             }
+
+            // A Leaflet map cannot change CRS after construction. If an opened WPS file belongs
+            // on a different browser map, preserve the raw file in sessionStorage, switch the
+            // browser-map mode, reload, and then reopen it automatically below. The WPS namelist
+            // itself is not modified by this display-mode transition.
+            if (typeof window !== 'undefined' && window.WRFPolarDomainMode && filename != 'wrfsi.nl') {
+              var desiredMapMode = window.WRFPolarDomainMode.inferModeFromWps(wpsNamelist);
+              var currentMapMode = window.WRFPolarDomainMode.getMode();
+              if (desiredMapMode !== currentMapMode && window.WRFPolarDomainMode.queueWpsForReload(e.target.result, filename, desiredMapMode)) {
+                window.WRFPolarDomainMode.navigateToMode(desiredMapMode);
+                return;
+              }
+            }
+
             createDomainFromNamelist(true);
           } catch (error) {
             _handleWPSNamelistError(error);
@@ -31284,7 +31342,27 @@
 
       // a list of leaflet feature groups containing markers for sample geogrid outpput files
       this._geogridCornerMarkerGroups = [];
-      if (location.hash) {
+
+      // Complete an automatic map-CRS switch initiated while opening namelist.wps.
+      var pendingWpsPayload = typeof window !== 'undefined' && window.WRFPolarDomainMode ? window.WRFPolarDomainMode.consumePendingWps() : null;
+      if (pendingWpsPayload) {
+        try {
+          removeDomain();
+          wpsNamelist = new WPSNamelist(pendingWpsPayload.rawText);
+          sidebar.open('domains');
+          createDomainFromNamelist(true);
+        } catch (error) {
+          _handleWPSNamelistError(error);
+        }
+      }
+
+      var pendingNewDomain = !pendingWpsPayload && typeof window !== 'undefined' && window.WRFPolarDomainMode ? window.WRFPolarDomainMode.consumePendingNewDomain() : false;
+      if (pendingNewDomain) {
+        sidebar.open('domains');
+        initNewDomain();
+      }
+
+      if (!pendingWpsPayload && !pendingNewDomain && location.hash) {
         var sample = location.hash.substring(1),
           sampleRoute = sample.toLowerCase(),
           ignoredSampleRoutes = {
@@ -31427,6 +31505,15 @@
       map.off('baselayerchange');
     },
     initialize: function initialize(layers, overlays, options) {
+      // Keep the stable map's saved base-layer preference separate from the
+      // experimental north/south polar tile selections. Otherwise a saved
+      // "Polar Street" key can leak into the standard Web Mercator map, or a
+      // standard Esri/OpenStreetMap key can leak into a polar map.
+      if (options && options.storageKey) {
+        this._localStorageKey = options.storageKey;
+        options = Object.assign({}, options);
+        delete options.storageKey;
+      }
       this._layers = layers;
       this._overlays = overlays;
       this._currentBaseLayer = this.getCurrentLayer();
@@ -31866,38 +31953,54 @@
       throw "invalid div option";
     }
     var tileLayerOptions = {
-      // Keep wrapped world copies when zoomed far out so the map view stays visually continuous
-      // around the international date line. We will handle domain-edge geometry separately.
+      // Keep wrapped world copies when zoomed far out so the standard map view stays visually
+      // continuous around the international date line. Polar tile schemes do not wrap.
       noWrap: false
     };
 
-    var openStreetMapLayer = L.tileLayer.provider('OpenStreetMap', tileLayerOptions);
-    var esriWorldTopoLayer = L.tileLayer.provider('Esri.WorldTopoMap', tileLayerOptions);
-    var esriWorldStreetLayer = L.tileLayer.provider('Esri.WorldStreetMap', tileLayerOptions);
-    var esriNatGeoLayer = L.tileLayer.provider('Esri.NatGeoWorldMap', tileLayerOptions);
-    var esriWorldImageryLayer = L.tileLayer.provider('Esri.WorldImagery', tileLayerOptions);
-    var openTopoMapLayer = L.tileLayer.provider('OpenTopoMap', tileLayerOptions);
+    // Browser-map CRS is independent from WPS map_proj. The existing Studio uses Web Mercator
+    // for ordinary domain design. The experimental polar branch can instead initialize Leaflet
+    // with an Arctic or Antarctic CRS while preserving the same sidebar, domain objects, WPS
+    // validation, nesting logic, and namelist.wps export path.
+    var polarMapMode = typeof window !== 'undefined' ? window.WRFPolarDomainMode : null;
+    var polarMapConfig = polarMapMode && polarMapMode.getActiveConfig ? polarMapMode.getActiveConfig() : null;
+    var persistentLayersControl;
+    var initialBaseLayer;
 
-    // create a list of online base layer tile providers. OpenStreetMap is intentionally first.
-    var persistentLayersControl = persistentLayers({
-      "Open Street Map": openStreetMapLayer,
-      "Esri World Topo": esriWorldTopoLayer,
-      "Esri World Street": esriWorldStreetLayer,
-      "Esri NatGeo": esriNatGeoLayer,
-      "Esri World Imagery": esriWorldImageryLayer,
-      "Open Topo Map": openTopoMapLayer
-    }, null, {
-      position: 'topright'
-    });
+    if (polarMapConfig) {
+      var polarBaseLayers = polarMapMode.polarTileLayers();
+      persistentLayersControl = persistentLayers(polarBaseLayers, null, {
+        position: 'topright',
+        storageKey: '_leaflet_persistent_layers_polar_' + polarMapConfig.mode
+      });
+      initialBaseLayer = persistentLayersControl.getCurrentLayer() || polarBaseLayers['Polar Street'];
+    } else {
+      var openStreetMapLayer = L.tileLayer.provider('OpenStreetMap', tileLayerOptions);
+      var esriWorldTopoLayer = L.tileLayer.provider('Esri.WorldTopoMap', tileLayerOptions);
+      var esriWorldStreetLayer = L.tileLayer.provider('Esri.WorldStreetMap', tileLayerOptions);
+      var esriNatGeoLayer = L.tileLayer.provider('Esri.NatGeoWorldMap', tileLayerOptions);
+      var esriWorldImageryLayer = L.tileLayer.provider('Esri.WorldImagery', tileLayerOptions);
+      var openTopoMapLayer = L.tileLayer.provider('OpenTopoMap', tileLayerOptions);
 
-    var initialBaseLayer = esriWorldStreetLayer;
+      // Standard-map layer ordering remains identical to the stable application.
+      persistentLayersControl = persistentLayers({
+        "Open Street Map": openStreetMapLayer,
+        "Esri World Topo": esriWorldTopoLayer,
+        "Esri World Street": esriWorldStreetLayer,
+        "Esri NatGeo": esriNatGeoLayer,
+        "Esri World Imagery": esriWorldImageryLayer,
+        "Open Topo Map": openTopoMapLayer
+      }, null, {
+        position: 'topright'
+      });
+      initialBaseLayer = esriWorldStreetLayer;
+    }
 
-    // initialize map object
-    var map = L.map(settings['div'][0], {
+    var mapOptions = {
       layers: [initialBaseLayer],
-      center: [0, 0],
+      center: polarMapConfig ? polarMapConfig.center : [0, 0],
       zoomControl: false,
-      zoom: Math.max((initialBaseLayer.options && initialBaseLayer.options.minZoom) || 1, 3),
+      zoom: polarMapConfig ? polarMapConfig.zoom : Math.max((initialBaseLayer.options && initialBaseLayer.options.minZoom) || 1, 3),
       dragging: true,
       touchZoom: true,
       doubleClickZoom: true,
@@ -31910,7 +32013,17 @@
       wheelDebounceTime: 40,
       wheelPxPerZoomLevel: 120,
       bounceAtZoomLimits: false
-    });
+    };
+
+    if (polarMapConfig) {
+      mapOptions.crs = polarMapMode.createLeafletCrs();
+    }
+
+    // initialize map object
+    var map = L.map(settings['div'][0], mapOptions);
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.setAttribute('data-wrf-map-mode', polarMapConfig ? polarMapConfig.mode : 'standard');
+    }
 
     var mapModeStatus = L.control({ position: 'bottomleft' });
     mapModeStatus.onAdd = function () {
@@ -31920,7 +32033,7 @@
       div.style.borderRadius = '4px';
       div.style.fontSize = '11px';
       div.style.boxShadow = '0 1px 4px rgba(0,0,0,0.2)';
-      div.innerHTML = 'Map: Online';
+      div.innerHTML = polarMapConfig ? 'Map: ' + polarMapConfig.shortLabel : 'Map: Online';
       this._container = div;
       return div;
     };
@@ -31932,7 +32045,7 @@
     mapModeStatus.addTo(map);
 
     map.on('baselayerchange', function () {
-      mapModeStatus.setText('Map: Online');
+      mapModeStatus.setText(polarMapConfig ? 'Map: ' + polarMapConfig.shortLabel : 'Map: Online');
     });
 
     // add layers control to map

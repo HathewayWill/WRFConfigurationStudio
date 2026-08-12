@@ -183,6 +183,33 @@
                 <div class="leaflet-sidebar-pane" id="domains">
     <h1 class="leaflet-sidebar-header">Domains <span class="badge badge-light align-middle" style="font-size:0.55em; vertical-align: middle;" data-wrf-version-text>v1.0.0</span><span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 
+    <!--
+      Polar browser-map selector.
+      This is a WRF Configuration Studio display control, not a namelist.wps
+      variable. Polar browser mode restricts map_proj to polar or lat-lon.
+    -->
+    <div id="polar-hemisphere-control" class="pt-2 pb-1">
+        <label
+            for="polar-hemisphere-select"
+            class="small font-weight-bold mb-1"
+            title="Browser map hemisphere for polar-domain design. This setting controls the Studio map display and is not written to namelist.wps."
+        >
+            Polar Hemisphere
+        </label>
+
+        <select
+            id="polar-hemisphere-select"
+            name="polar_hemisphere"
+            class="form-control form-control-sm"
+            aria-label="Polar browser-map hemisphere"
+            autocomplete="off"
+        >
+            <option value="standard">Off (Standard Map)</option>
+            <option value="north">Northern Hemisphere</option>
+            <option value="south">Southern Hemisphere</option>
+        </select>
+    </div>
+
     <div class="wps-top-buttons">
         <button type="button" class="btn btn-sm btn-outline-secondary" id="button-wps-new"><i class="far fa-object-group"></i></i>New</button>
         <button type="button" class="btn btn-sm btn-outline-secondary" id="button-wps-open"><i class="fas fa-folder-open"></i>Open</button>
@@ -652,6 +679,7 @@
     <script src="vendor/js/immediate.min.js"></script>
     <script src="vendor/js/proj4.js"></script>
     <script src="vendor/js/leaflet.js"></script>
+    <script src="src/tools/polar-domain-mode.js?v=20260812-2"></script>
     <script src="vendor/js/leaflet.spin.min.js"></script>
     <script src="vendor/js/leaflet-sidebar.min.js"></script>
     <script src="vendor/js/leaflet-providers.js"></script>
