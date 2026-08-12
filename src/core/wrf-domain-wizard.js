@@ -30484,6 +30484,120 @@
       selectMapProj.tooltip({ container: 'body', trigger: 'hover', html: false });
     }
 
+    /*
+     * A Leaflet map cannot change CRS after construction. When an existing
+     * domain is changed to WPS Polar Stereographic, determine the required
+     * polar browser hemisphere from the domain itself, preserve the complete
+     * current namelist.wps in sessionStorage, and reopen it after the
+     * CRS-changing reload.
+     *
+     * The transition is deferred until the current JavaScript turn finishes.
+     * This is important because WPS helper tools may respond to the same
+     * map_proj change by filling truelat1/stand_lon and applying those values.
+     */
+    function queueAutomaticPolarMapTransition() {
+      if (
+        domain == null ||
+        domain.map_proj !==
+          WrfProjections.polar ||
+        typeof window ===
+          'undefined' ||
+        !window.WRFPolarDomainMode
+      ) {
+        return;
+      }
+
+      window.setTimeout(
+        function () {
+          if (
+            domain == null ||
+            domain.map_proj !==
+              WrfProjections.polar
+          ) {
+            return;
+          }
+
+          try {
+            var currentWps =
+              domain.getWPSNamelist();
+
+            var desiredMode =
+              window.WRFPolarDomainMode
+                .inferModeFromWps(
+                  currentWps
+                );
+
+            /*
+             * A missing/zero latitude is not enough information to choose a
+             * hemisphere safely. In that exceptional case, retain the current
+             * browser map and leave the hemisphere selector available.
+             */
+            if (
+              desiredMode !== 'north' &&
+              desiredMode !== 'south'
+            ) {
+              return;
+            }
+
+            var currentMode =
+              window.WRFPolarDomainMode
+                .getMode();
+
+            if (
+              desiredMode ===
+              currentMode
+            ) {
+              return;
+            }
+
+            /*
+             * Use the same WPS serialization path as Save namelist.wps so
+             * start/end dates, interval_seconds, geog_data_path, root dx/dy,
+             * and the current grid hierarchy survive the reload.
+             */
+            var rawWps =
+              patchWpsNamelistTextWithCustomFields(
+                currentWps.toString()
+              );
+
+            if (
+              !window.WRFPolarDomainMode
+                .queueWpsForReload(
+                  rawWps,
+                  'namelist.wps',
+                  desiredMode
+                )
+            ) {
+              console.error(
+                'Unable to preserve namelist.wps ' +
+                'for automatic polar-map transition.'
+              );
+              return;
+            }
+
+            if (
+              !window.WRFPolarDomainMode
+                .navigateToMode(
+                  desiredMode
+                )
+            ) {
+              console.error(
+                'Unable to switch automatically ' +
+                'to the required polar browser map.'
+              );
+            }
+          } catch (error) {
+            console.error(
+              'Automatic polar-map transition failed:',
+              error
+            );
+          }
+        },
+        0
+      );
+    }
+
+
     // map projection dropdown change
     selectMapProj.on('change', function (e) {
       var map_proj = selectMapProj.val();
@@ -30496,6 +30610,13 @@
           return;
         }
         setGridValues();
+
+        if (
+          map_proj ===
+          WrfProjections.polar
+        ) {
+          queueAutomaticPolarMapTransition();
+        }
       } else {
         configureDxDyFields(map_proj);
         initializeDxDyFields(map_proj);
@@ -30846,17 +30967,120 @@
       refreshWpsHelperTooltips();
     }
 
-    this.show = function (obj) {
+    /*
+     * Restore the Studio's extended WPS fields from an opened or queued
+     * namelist.wps. These fields live outside the legacy domain object, so
+     * simply reconstructing WRFDomain is not enough to restore them after a
+     * CRS-changing reload.
+     */
+    function populateAdvancedWpsFieldsFromNamelist(
+      sourceWpsNamelist
+    ) {
+      if (!sourceWpsNamelist) {
+        return;
+      }
+
+      var share =
+        sourceWpsNamelist.share || {};
+
+      var geogrid =
+        sourceWpsNamelist.geogrid || {};
+
+      function firstValue(value) {
+        if (Array.isArray(value)) {
+          return value.length > 0
+            ? value[0]
+            : null;
+        }
+
+        return value;
+      }
+
+      var startDate =
+        firstValue(
+          share.start_date
+        );
+
+      var endDate =
+        firstValue(
+          share.end_date
+        );
+
+      var intervalSeconds =
+        firstValue(
+          share.interval_seconds
+        );
+
+      var geogDataPath =
+        firstValue(
+          geogrid.geog_data_path
+        );
+
+      if (
+        startDate !== null &&
+        typeof startDate !==
+          'undefined'
+      ) {
+        $('#wps-start-date').val(
+          String(startDate)
+        );
+      }
+
+      if (
+        endDate !== null &&
+        typeof endDate !==
+          'undefined'
+      ) {
+        $('#wps-end-date').val(
+          String(endDate)
+        );
+      }
+
+      if (
+        intervalSeconds !== null &&
+        typeof intervalSeconds !==
+          'undefined'
+      ) {
+        $('#wps-share-interval-seconds')
+          .val(
+            String(intervalSeconds)
+          );
+      }
+
+      if (
+        geogDataPath !== null &&
+        typeof geogDataPath !==
+          'undefined'
+      ) {
+        $('#wps-geog-data-path').val(
+          String(geogDataPath)
+        );
+      }
+    }
+
+
+    this.show = function (
+      obj,
+      sourceWpsNamelist
+    ) {
       if (obj && obj != domain) {
         domain = obj;
         initializedForDomain = false;
       }
+
       if (!initializedForDomain) {
         initDomain();
       }
+
       buttonUpdate.parent().show();
       headerGrids.show();
+
       ensureAdvancedWpsFields();
+
+      populateAdvancedWpsFieldsFromNamelist(
+        sourceWpsNamelist
+      );
+
       container.show();
       setGridsContainerHeight();
     };
@@ -32975,7 +33199,10 @@
       function createDomainFromNamelist(zoom) {
         domain = new WRFDomain(wpsNamelist);
         domain.addTo(map);
-        wpsPanel.show(domain);
+        wpsPanel.show(
+          domain,
+          wpsNamelist
+        );
         domain.grid.select();
         if (zoom) {
           zoomToDomain();

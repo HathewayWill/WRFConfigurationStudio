@@ -710,8 +710,37 @@
     var trueLat1 = parseFloat(geogrid.truelat1);
 
     if (mapProj === 'polar') {
-      var polarLatitude = isFinite(trueLat1) ? trueLat1 : refLat;
-      return polarLatitude < 0 ? 'south' : 'north';
+      /*
+       * The WRF domain location determines the browser hemisphere.
+       *
+       * ref_lat is the geographic reference latitude of d01 and therefore
+       * takes precedence over truelat1, which is a projection parameter.
+       * Only fall back to truelat1 for unusual imported files where ref_lat
+       * is unavailable.
+       */
+      if (
+        isFinite(refLat) &&
+        Math.abs(refLat) > 1e-9
+      ) {
+        return refLat < 0
+          ? 'south'
+          : 'north';
+      }
+
+      if (
+        isFinite(trueLat1) &&
+        Math.abs(trueLat1) > 1e-9
+      ) {
+        return trueLat1 < 0
+          ? 'south'
+          : 'north';
+      }
+
+      /*
+       * Do not guess a hemisphere when neither geographic latitude is
+       * usable. Leave the user on the Standard Map instead.
+       */
+      return 'standard';
     }
 
     // Keep ordinary/global lat-lon files on the standard map. A regional
