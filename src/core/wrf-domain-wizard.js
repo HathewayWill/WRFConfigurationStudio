@@ -641,6 +641,233 @@
       });
       L.LayerGroup.prototype.initialize.call(this, this._lines, Object.assign({}, this._defaultOptions, options));
     },
+
+    /*
+     * GeographicLines was originally designed for the rectangular standard
+     * browser map. In a pole-centered browser CRS, parallels must be sampled
+     * as circles and meridians must be sampled as radial paths.
+     *
+     * Keep the original implementation unchanged for the standard map.
+     */
+    _isPolarMap: function _isPolarMap() {
+      return (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      );
+    },
+
+    onAdd: function onAdd(map) {
+      this._map = map;
+
+      if (this._isPolarMap()) {
+        /*
+         * Remove the standard-map paths and repeated setText labels before
+         * creating their polar equivalents.
+         */
+        this.clearLayers();
+        this._lines = [];
+        this._buildPolarGeographicLines();
+      }
+
+      return L.LayerGroup.prototype.onAdd.call(this, map);
+    },
+
+    _buildPolarParallel: function _buildPolarParallel(latitude) {
+      var path = [];
+
+      for (
+        var longitude = -180;
+        longitude <= 180;
+        longitude += 2
+      ) {
+        path.push(
+          L.latLng(
+            latitude,
+            longitude
+          )
+        );
+      }
+
+      return path;
+    },
+
+    _buildPolarMeridian: function _buildPolarMeridian(
+      longitude,
+      startLatitude,
+      endLatitude
+    ) {
+      var path = [];
+      var latitude;
+
+      if (startLatitude < endLatitude) {
+        for (
+          latitude = startLatitude;
+          latitude <= endLatitude;
+          latitude += 1
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+      } else {
+        for (
+          latitude = startLatitude;
+          latitude >= endLatitude;
+          latitude -= 1
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+      }
+
+      return path;
+    },
+
+    _createPolarGeographicLabel: function _createPolarGeographicLabel(
+      latitude,
+      longitude,
+      text
+    ) {
+      return L.marker(
+        L.latLng(
+          latitude,
+          longitude
+        ),
+        {
+          interactive: false,
+          keyboard: false,
+
+          icon: L.divIcon({
+            iconSize: [0, 0],
+
+            className:
+              'leaflet-grid-label',
+
+            html:
+              '<div style="' +
+              'white-space:nowrap;' +
+              'font-size:12px;' +
+              'font-weight:600;' +
+              'color:#6f237a;' +
+              'background:rgba(255,255,255,0.82);' +
+              'padding:1px 4px;' +
+              'border-radius:3px;' +
+              'transform:translate(-50%,-50%);' +
+              '">' +
+              text +
+              '</div>'
+          })
+        }
+      );
+    },
+
+    _addPolarGeographicLine: function _addPolarGeographicLine(
+      path,
+      labelLatitude,
+      labelLongitude,
+      text
+    ) {
+      var line = L.polyline(
+        path,
+        this._lineOptions
+      );
+
+      this.addLayer(line);
+      this._lines.push(line);
+
+      var label =
+        this._createPolarGeographicLabel(
+          labelLatitude,
+          labelLongitude,
+          text
+        );
+
+      this.addLayer(label);
+      this._lines.push(label);
+    },
+
+    _buildPolarGeographicLines: function _buildPolarGeographicLines() {
+      var mode =
+        window.WRFPolarDomainMode.getMode();
+
+      /*
+       * Restrict the polar reference-line workspace to high latitudes.
+       * Equator and tropical lines are intentionally omitted because they are
+       * outside the practical pole-centered browser-map workspace.
+       */
+      if (mode === 'north') {
+        this._addPolarGeographicLine(
+          this._buildPolarParallel(
+            66.566667
+          ),
+          66.566667,
+          -90,
+          'Arctic Circle'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            0,
+            45,
+            89
+          ),
+          55,
+          0,
+          'Prime Meridian'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            180,
+            45,
+            89
+          ),
+          55,
+          179.999,
+          'International Date Line'
+        );
+      } else {
+        this._addPolarGeographicLine(
+          this._buildPolarParallel(
+            -66.563833
+          ),
+          -66.563833,
+          -90,
+          'Antarctic Circle'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            0,
+            -45,
+            -89
+          ),
+          -55,
+          0,
+          'Prime Meridian'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            180,
+            -45,
+            -89
+          ),
+          -55,
+          179.999,
+          'International Date Line'
+        );
+      }
+    },
+
     _arcticCirle: [[66.566667, -180], [66.566667, 0], [66.566667, 180]],
     // https://en.wikipedia.org/wiki/Antarctic_Circle
     _antarcticCirle: [[-66.563833, -180], [-66.563833, 0], [-66.563833, 180]],
@@ -694,13 +921,322 @@
       this.eachLayer(this.removeLayer, this);
       return this;
     },
+    _isPolarMap: function _isPolarMap() {
+      return (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      );
+    },
+
+    /*
+     * Build a polar graticule independently from the standard Web Mercator
+     * graticule.
+     *
+     * In a polar projection:
+     *
+     *   - lines of longitude are meridians radiating toward the pole;
+     *   - lines of latitude are concentric circles around the pole.
+     *
+     * The standard AutoGraticule implementation creates parallels from only
+     * two geographic endpoints. That is appropriate for the rectangular
+     * standard map, but it produces straight chords when projected onto a
+     * polar CRS. Polar parallels therefore need to be sampled around all
+     * longitudes.
+     */
+    _formatPolarLatitude: function _formatPolarLatitude(
+      latitude
+    ) {
+      var absolute =
+        Math.abs(latitude);
+
+      if (absolute === 0) {
+        return '0°';
+      }
+
+      return (
+        absolute +
+        '°' +
+        (latitude > 0 ? 'N' : 'S')
+      );
+    },
+
+    _formatPolarLongitude: function _formatPolarLongitude(
+      longitude
+    ) {
+      var normalized =
+        ((longitude + 180) % 360 + 360) %
+        360 -
+        180;
+
+      var absolute =
+        Math.abs(normalized);
+
+      if (absolute === 0) {
+        return '0°';
+      }
+
+      if (absolute === 180) {
+        return '180°';
+      }
+
+      return (
+        absolute +
+        '°' +
+        (normalized > 0 ? 'E' : 'W')
+      );
+    },
+
+    _addPolarGraticuleLabel: function _addPolarGraticuleLabel(
+      latitude,
+      longitude,
+      text
+    ) {
+      this.addLayer(
+        L.marker(
+          L.latLng(
+            latitude,
+            longitude
+          ),
+          {
+            interactive: false,
+            keyboard: false,
+
+            icon: L.divIcon({
+              iconSize: [0, 0],
+
+              className:
+                'leaflet-grid-label',
+
+              html:
+                '<div style="' +
+                'white-space:nowrap;' +
+                'font-size:11px;' +
+                'font-weight:600;' +
+                'color:#222;' +
+                'background:rgba(255,255,255,0.78);' +
+                'padding:1px 3px;' +
+                'border-radius:2px;' +
+                'transform:translate(-50%,-50%);' +
+                '">' +
+                text +
+                '</div>'
+            })
+          }
+        )
+      );
+    },
+
+    _constructPolarLines: function _constructPolarLines() {
+      var mode =
+        window.WRFPolarDomainMode.getMode();
+
+      var zoom =
+        this._map.getZoom();
+
+      /*
+       * Line density can increase with zoom, while labels remain intentionally
+       * sparse so a pole-centered map stays readable.
+       */
+      var latitudeStep;
+      var longitudeStep;
+
+      if (zoom >= 5) {
+        latitudeStep = 2;
+        longitudeStep = 10;
+      } else if (zoom >= 3) {
+        latitudeStep = 5;
+        longitudeStep = 15;
+      } else {
+        latitudeStep = 10;
+        longitudeStep = 30;
+      }
+
+      /*
+       * Keep the polar browser-map graticule inside the high-latitude
+       * workspace. This avoids unnecessary projection requests near the edge
+       * of the finite polar display CRS.
+       */
+      var minimumAbsoluteLatitude = 45;
+      var maximumAbsoluteLatitude = 89;
+
+      var longitude;
+      var latitude;
+      var absoluteLatitude;
+      var path;
+
+      /*
+       * Meridians.
+       */
+      for (
+        longitude = -180;
+        longitude < 180;
+        longitude += longitudeStep
+      ) {
+        path = [];
+
+        if (mode === 'north') {
+          for (
+            latitude =
+              minimumAbsoluteLatitude;
+            latitude <=
+              maximumAbsoluteLatitude;
+            latitude += 1
+          ) {
+            path.push(
+              L.latLng(
+                latitude,
+                longitude
+              )
+            );
+          }
+
+          path.push(
+            L.latLng(
+              89.999,
+              longitude
+            )
+          );
+        } else {
+          for (
+            latitude =
+              -minimumAbsoluteLatitude;
+            latitude >=
+              -maximumAbsoluteLatitude;
+            latitude -= 1
+          ) {
+            path.push(
+              L.latLng(
+                latitude,
+                longitude
+              )
+            );
+          }
+
+          path.push(
+            L.latLng(
+              -89.999,
+              longitude
+            )
+          );
+        }
+
+        this.addLayer(
+          L.polyline(
+            path,
+            this.lineStyle
+          )
+        );
+
+        /*
+         * Label only every 30 degrees, regardless of line density.
+         */
+        if (
+          longitude % 30 === 0
+        ) {
+          this._addPolarGraticuleLabel(
+            mode === 'north'
+              ? 47
+              : -47,
+            longitude,
+            this._formatPolarLongitude(
+              longitude
+            )
+          );
+        }
+      }
+
+      /*
+       * Parallels.
+       *
+       * Start with the first complete interval at or poleward of 45 degrees.
+       */
+      var firstAbsoluteLatitude =
+        Math.ceil(
+          minimumAbsoluteLatitude /
+          latitudeStep
+        ) *
+        latitudeStep;
+
+      for (
+        absoluteLatitude =
+          firstAbsoluteLatitude;
+        absoluteLatitude < 90;
+        absoluteLatitude += latitudeStep
+      ) {
+        latitude =
+          mode === 'north'
+            ? absoluteLatitude
+            : -absoluteLatitude;
+
+        path = [];
+
+        for (
+          longitude = -180;
+          longitude <= 180;
+          longitude += 2
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+
+        this.addLayer(
+          L.polyline(
+            path,
+            this.lineStyle
+          )
+        );
+
+        /*
+         * Label the major 10-degree latitude rings.
+         *
+         * Examples:
+         *   50°N, 60°N, 70°N, 80°N
+         *   50°S, 60°S, 70°S, 80°S
+         */
+        if (
+          absoluteLatitude % 10 === 0
+        ) {
+          this._addPolarGraticuleLabel(
+            latitude,
+            -135,
+            this._formatPolarLatitude(
+              latitude
+            )
+          );
+        }
+      }
+    },
+
     redraw: function redraw() {
+      /*
+       * The rectangular bounds calculations used by AutoGraticule are a
+       * Web Mercator concept. Avoid them entirely when the Studio is using
+       * one of its pole-centered browser CRSs.
+       */
+      if (this._isPolarMap()) {
+        this._bounds = null;
+        this.clearLayers();
+        this.constructLines();
+        return this;
+      }
+
       this._bounds = this._map.getBounds().pad(0.5);
       this.clearLayers();
       this.constructLines();
       return this;
     },
+
     constructLines: function constructLines() {
+      if (this._isPolarMap()) {
+        this._constructPolarLines();
+        return;
+      }
+
       var bounds = this._map.getBounds();
       var zoom = this._map.getZoom();
       var fullSouth = Math.max(bounds.getSouth(), -85);
@@ -1060,45 +1596,210 @@
     messageBoxDialog.empty().title(title, MessageBoxDialog.types.error).text(message).open();
   }
   function enableGlobalErrorHandler() {
+    /*
+     * Preserve the first unexpected error while the report dialog is open.
+     *
+     * Some rendering failures can repeat on map redraw, zoom, move, or layer
+     * events. Rebuilding the modal for every occurrence previously changed
+     * the timestamp continuously and erased the user's reproduction steps.
+     */
+    var globalErrorDialogOpen = false;
+    var globalErrorSignature = null;
+
+    /*
+     * Once the user closes the report dialog, allow a subsequent error to
+     * create a new report.
+     */
+    $(messageBoxDialog.container)
+      .off('hidden.bs.modal.wrf-global-error')
+      .on(
+        'hidden.bs.modal.wrf-global-error',
+        function () {
+          globalErrorDialogOpen = false;
+          globalErrorSignature = null;
+        }
+      );
+
     window.onerror = function (event, source, lineno, colno, error) {
       if (!event || !source || !error) {
         return;
       }
+
       if (!error.stack) {
         return;
       }
+
       if (source.toLowerCase().includes("/lib/")) {
         return;
       }
+
+      var signature = [
+        String(event),
+        String(source),
+        String(lineno),
+        String(colno),
+        String(error.stack)
+      ].join('|');
+
+      /*
+       * Do not overwrite an existing error report while its modal is open.
+       * This intentionally freezes its timestamp, stack trace, and anything
+       * the user has entered into the Repro Steps field.
+       */
+      if (globalErrorDialogOpen) {
+        return true;
+      }
+
+      globalErrorDialogOpen = true;
+      globalErrorSignature = signature;
+
       var template = getTemplate('global-error');
-      messageBoxDialog.empty().title('Unexpected Error', MessageBoxDialog.types.error).html(template.innerHTML);
+
+      messageBoxDialog
+        .empty()
+        .title(
+          'Unexpected Error',
+          MessageBoxDialog.types.error
+        )
+        .html(template.innerHTML);
+
+      /*
+       * Capture the timestamp exactly once for this report.
+       */
+      var capturedTimestamp = new Date().toISOString();
+
       var errorDetails = '';
-      errorDetails = errorDetails + "Error: ".concat(event, "\n");
-      errorDetails = errorDetails + "Timestamp: ".concat(new Date().toISOString(), "\n");
-      errorDetails = errorDetails + "Source: ".concat(source, "\n");
-      errorDetails = errorDetails + "Line: ".concat(lineno, "\n");
-      errorDetails = errorDetails + "Stack:\n";
-      errorDetails = errorDetails + "".concat(error.stack);
-      messageBoxDialog.dialogBody.querySelector('textarea[name="error-details"]').value = errorDetails;
-      var title = 'Error: ' + event + ' @ ' + source + ":" + lineno;
-      var linkCreateIssue = messageBoxDialog.dialogBody.querySelector('a#create-github-issue');
-      var form = messageBoxDialog.dialogBody.querySelector('form');
-      linkCreateIssue.addEventListener('click', function (e) {
-        var isValid = form.checkValidity();
-        form.classList.add('was-validated');
-        if (isValid === true) {
-          var issueBody = '';
-          issueBody = issueBody + 'Repro Steps:\n';
-          issueBody = issueBody + messageBoxDialog.dialogBody.querySelector('textarea[name="repro-steps"]').value;
-          issueBody = issueBody + '\n\n';
-          issueBody = issueBody + errorDetails;
-          linkCreateIssue.href = "https://github.com/HathewayWill/WRFConfigStudio/issues/new?labels=bug&title=".concat(encodeURI(title), "&body=").concat(encodeURI(issueBody));
-        } else {
+
+      errorDetails =
+        errorDetails +
+        "Error: " +
+        event +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Timestamp: " +
+        capturedTimestamp +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Source: " +
+        source +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Line: " +
+        lineno +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Column: " +
+        colno +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Stack:\n";
+
+      errorDetails =
+        errorDetails +
+        error.stack;
+
+      var errorDetailsField =
+        messageBoxDialog.dialogBody.querySelector(
+          'textarea[name="error-details"]'
+        );
+
+      errorDetailsField.value =
+        errorDetails;
+
+      var title =
+        'Error: ' +
+        event +
+        ' @ ' +
+        source +
+        ':' +
+        lineno;
+
+      var linkCreateIssue =
+        messageBoxDialog.dialogBody.querySelector(
+          'a#create-github-issue'
+        );
+
+      var form =
+        messageBoxDialog.dialogBody.querySelector(
+          'form'
+        );
+
+      linkCreateIssue.addEventListener(
+        'click',
+        function (e) {
+          /*
+           * Always handle the navigation ourselves. This prevents the initial
+           * href="#" from navigating before validation and lets us construct
+           * the GitHub URL safely after the user fills in reproduction steps.
+           */
           e.preventDefault();
           e.stopPropagation();
+
+          var isValid =
+            form.checkValidity();
+
+          form.classList.add(
+            'was-validated'
+          );
+
+          if (!isValid) {
+            return;
+          }
+
+          var reproSteps =
+            messageBoxDialog.dialogBody.querySelector(
+              'textarea[name="repro-steps"]'
+            ).value;
+
+          var issueBody = '';
+
+          issueBody +=
+            'Repro Steps:\n';
+
+          issueBody +=
+            reproSteps;
+
+          issueBody +=
+            '\n\n';
+
+          issueBody +=
+            errorDetails;
+
+          var issueUrl =
+            'https://github.com/HathewayWill/' +
+            'WRFConfigurationStudio/issues/new' +
+            '?labels=' +
+            encodeURIComponent('bug') +
+            '&title=' +
+            encodeURIComponent(title) +
+            '&body=' +
+            encodeURIComponent(issueBody);
+
+          window.open(
+            issueUrl,
+            '_blank',
+            'noopener'
+          );
         }
-      });
+      );
+
       messageBoxDialog.open();
+
+      /*
+       * Tell the browser that the application handled this event. The error
+       * is still available in the report dialog and development console.
+       */
+      return true;
     };
   }
 
