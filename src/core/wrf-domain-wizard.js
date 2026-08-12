@@ -27247,9 +27247,6 @@
       var shift = this._getPrimaryWorldShift() + (extraShift || 0);
       return this._shiftPath(basePath, shift);
     },
-    _getWrappedPolygonPath: function _getWrappedPolygonPath() {
-      return this._getDisplayPath(0);
-    },
     _getWorldCopyStyle: function _getWorldCopyStyle() {
       return {
         pane: this.options.pane,
