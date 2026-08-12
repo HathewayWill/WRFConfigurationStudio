@@ -26388,6 +26388,8 @@
         truelat1: null,
         truelat2: null,
         stand_lon: null,
+        pole_lat: null,
+        pole_lon: null,
         dx: null,
         dy: null,
         e_we: null,
@@ -26413,10 +26415,156 @@
             break;
           }
 
-        // Regular latitude-longitude, or cylindrical equidistant
+        // Regular or rotated latitude-longitude.
         case WrfProjections.latlon:
           {
-            this._proj4 = '+units=m' + ' +proj=eqc' + ' +lon_0=' + this._params.stand_lon + ' +a=' + EarthRadius + ' +b=' + EarthRadius + ' +nadgrids=null' + ' +towgs84=0,0,0' + ' +no_defs=True';
+            /*
+             * WPS map_proj='lat-lon' supports both the ordinary geographic
+             * grid and a rotated computational latitude-longitude grid.
+             *
+             * This bundled Proj4JS build does not contain ob_tran, so store
+             * the equivalent WRF rotated-pole parameters here and perform the
+             * spherical forward/inverse rotation explicitly below.
+             */
+            this._rotatedLatLon = null;
+
+            var poleLat =
+              Number(this._params.pole_lat);
+
+            var poleLon =
+              Number(this._params.pole_lon);
+
+            var standLon =
+              Number(this._params.stand_lon);
+
+            var refLat =
+              Number(this._params.ref_lat);
+
+            var poleValuesValid =
+              Number.isFinite(poleLat) &&
+              Number.isFinite(poleLon);
+
+            /*
+             * WRF's unrotated latitude-longitude defaults are
+             *
+             *   pole_lat = 90
+             *   pole_lon = 0
+             *
+             * Anything else represents a rotated computational grid.
+             */
+            var rotated =
+              poleValuesValid &&
+              (
+                Math.abs(
+                  poleLat - 90
+                ) > 1e-9 ||
+                Math.abs(
+                  poleLon
+                ) > 1e-9
+              );
+
+            if (rotated) {
+              /*
+               * Follow WRF/wrf-python hemisphere conventions:
+               *
+               *   pole_lon = 180 -> normally Northern Hemisphere
+               *   pole_lon =   0 -> normally Southern Hemisphere
+               *
+               * For unusual custom pole_lon values, use ref_lat as the
+               * hemisphere fallback.
+               */
+              var north =
+                true;
+
+              if (
+                Math.abs(poleLon) <
+                1e-9
+              ) {
+                north = false;
+              } else if (
+                Math.abs(
+                  poleLon - 180
+                ) > 1e-9 &&
+                Number.isFinite(refLat) &&
+                refLat < 0
+              ) {
+                north = false;
+              }
+
+              if (
+                !Number.isFinite(
+                  standLon
+                )
+              ) {
+                standLon = 0;
+              }
+
+              /*
+               * Equivalent PROJ ob_tran parameters used by NCAR
+               * wrf-python RotatedLatLon:
+               *
+               *   o_lon_p = 180 - pole_lon
+               *   o_lat_p = pole_lat       (NH)
+               *             -pole_lat      (SH)
+               *
+               *   lon_0   = -stand_lon     (NH)
+               *             180-stand_lon  (SH)
+               */
+              var obliquePoleLat =
+                north
+                  ? poleLat
+                  : -poleLat;
+
+              var obliquePoleLon =
+                180 - poleLon;
+
+              var longitudeOrigin =
+                north
+                  ? -standLon
+                  : 180 - standLon;
+
+              var obliquePoleLatRadians =
+                obliquePoleLat *
+                D2R$1;
+
+              this._rotatedLatLon = {
+                lamp:
+                  obliquePoleLon *
+                  D2R$1,
+
+                sphip:
+                  Math.sin(
+                    obliquePoleLatRadians
+                  ),
+
+                cphip:
+                  Math.cos(
+                    obliquePoleLatRadians
+                  ),
+
+                lon0:
+                  longitudeOrigin *
+                  D2R$1
+              };
+            }
+
+            /*
+             * Preserve the existing eqc definition for truly unrotated
+             * latitude-longitude grids and as the fallback projection.
+             */
+            this._proj4 =
+              '+units=m' +
+              ' +proj=eqc' +
+              ' +lon_0=' +
+              this._params.stand_lon +
+              ' +a=' +
+              EarthRadius +
+              ' +b=' +
+              EarthRadius +
+              ' +nadgrids=null' +
+              ' +towgs84=0,0,0' +
+              ' +no_defs=True';
+
             break;
           }
         default:
@@ -26437,7 +26585,119 @@
         if (isNaN(lat) || isNaN(lon)) {
           throw new Error('Invalid lat-lon coordinates');
         }
-        return proj4(WrfProjection._wrf_proj, this._proj4, [lon, lat]);
+
+        if (
+          this._params.map_proj ===
+            WrfProjections.latlon &&
+          this._rotatedLatLon
+        ) {
+          var rotation =
+            this._rotatedLatLon;
+
+          var phi =
+            Number(lat) *
+            D2R$1;
+
+          var lam =
+            Number(lon) *
+              D2R$1 -
+            rotation.lon0;
+
+          /*
+           * Keep the longitude supplied to the spherical rotation on one
+           * continuous principal revolution.
+           */
+          while (lam > Math.PI) {
+            lam -= TWO_PI;
+          }
+
+          while (lam <= -Math.PI) {
+            lam += TWO_PI;
+          }
+
+          var sinPhi =
+            Math.sin(phi);
+
+          var cosPhi =
+            Math.cos(phi);
+
+          var sinLam =
+            Math.sin(lam);
+
+          var cosLam =
+            Math.cos(lam);
+
+          var rotatedLon =
+            Math.atan2(
+              cosPhi *
+                sinLam,
+
+              rotation.sphip *
+                cosPhi *
+                cosLam +
+              rotation.cphip *
+                sinPhi
+            ) +
+            rotation.lamp;
+
+          var rotatedLatArgument =
+            rotation.sphip *
+              sinPhi -
+            rotation.cphip *
+              cosPhi *
+              cosLam;
+
+          /*
+           * Avoid an asin domain error from tiny floating-point excursions
+           * beyond +/-1 near a pole.
+           */
+          rotatedLatArgument =
+            Math.max(
+              -1,
+              Math.min(
+                1,
+                rotatedLatArgument
+              )
+            );
+
+          var rotatedLat =
+            Math.asin(
+              rotatedLatArgument
+            );
+
+          while (
+            rotatedLon >
+            Math.PI
+          ) {
+            rotatedLon -= TWO_PI;
+          }
+
+          while (
+            rotatedLon <=
+            -Math.PI
+          ) {
+            rotatedLon += TWO_PI;
+          }
+
+          /*
+           * Geogrid internally converts lat-lon DX/DY from degrees to the
+           * equivalent spherical arc length in meters. Return coordinates
+           * in the same meter-based computational space.
+           */
+          return [
+            rotatedLon *
+              EarthRadius,
+
+            rotatedLat *
+              EarthRadius
+          ];
+        }
+
+        return proj4(
+          WrfProjection._wrf_proj,
+          this._proj4,
+          [lon, lat]
+        );
       }
     }, {
       key: "ij_to_latlon",
@@ -26445,8 +26705,122 @@
         if (isNaN(i) || isNaN(j)) {
           throw new Error('Invalid IJ coordinates');
         }
-        var lonlat = proj4(this._proj4, WrfProjection._wrf_proj, [i, j]);
-        return [lonlat[1], lonlat[0]];
+
+        if (
+          this._params.map_proj ===
+            WrfProjections.latlon &&
+          this._rotatedLatLon
+        ) {
+          var rotation =
+            this._rotatedLatLon;
+
+          var rotatedLon =
+            Number(i) /
+              EarthRadius;
+
+          var rotatedLat =
+            Number(j) /
+              EarthRadius;
+
+          var lam =
+            rotatedLon -
+            rotation.lamp;
+
+          while (lam > Math.PI) {
+            lam -= TWO_PI;
+          }
+
+          while (lam <= -Math.PI) {
+            lam += TWO_PI;
+          }
+
+          var sinPhi =
+            Math.sin(
+              rotatedLat
+            );
+
+          var cosPhi =
+            Math.cos(
+              rotatedLat
+            );
+
+          var sinLam =
+            Math.sin(lam);
+
+          var cosLam =
+            Math.cos(lam);
+
+          var geographicLonRelative =
+            Math.atan2(
+              cosPhi *
+                sinLam,
+
+              rotation.sphip *
+                cosPhi *
+                cosLam -
+              rotation.cphip *
+                sinPhi
+            );
+
+          var geographicLatArgument =
+            rotation.sphip *
+              sinPhi +
+            rotation.cphip *
+              cosPhi *
+              cosLam;
+
+          geographicLatArgument =
+            Math.max(
+              -1,
+              Math.min(
+                1,
+                geographicLatArgument
+              )
+            );
+
+          var geographicLat =
+            Math.asin(
+              geographicLatArgument
+            );
+
+          var geographicLon =
+            rotation.lon0 +
+            geographicLonRelative;
+
+          while (
+            geographicLon >
+            Math.PI
+          ) {
+            geographicLon -= TWO_PI;
+          }
+
+          while (
+            geographicLon <=
+            -Math.PI
+          ) {
+            geographicLon += TWO_PI;
+          }
+
+          return [
+            geographicLat *
+              R2D,
+
+            geographicLon *
+              R2D
+          ];
+        }
+
+        var lonlat =
+          proj4(
+            this._proj4,
+            WrfProjection._wrf_proj,
+            [i, j]
+          );
+
+        return [
+          lonlat[1],
+          lonlat[0]
+        ];
       }
     }]);
   }();
@@ -26642,6 +27016,8 @@
           truelat1: this._proj_truelat1,
           truelat2: this._proj_truelat2,
           stand_lon: this._proj_stand_lon,
+          pole_lat: this._wps.pole_lat,
+          pole_lon: this._wps.pole_lon,
           dx: this._proj_dx,
           dy: this._proj_dy,
           e_we: this._proj_e_we,
@@ -26972,6 +27348,8 @@
         truelat1: this.domain.truelat1,
         truelat2: this.domain.truelat2,
         stand_lon: this.domain.stand_lon,
+        pole_lat: this.domain.pole_lat,
+        pole_lon: this.domain.pole_lon,
         dx: this.domain.dx,
         dy: this.domain.dy,
         e_we: this.e_we,
