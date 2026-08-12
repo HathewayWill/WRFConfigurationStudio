@@ -2,16 +2,20 @@
  * WRF Configuration Studio
  * Polar Reference Overlay
  *
- * Adds Studio-controlled political boundaries and place labels to the
- * Northern and Southern Hemisphere polar browser maps.
+ * Adds Studio-controlled physical geography, political boundaries, marine
+ * labels, populated places, and scientific stations to the Northern and
+ * Southern Hemisphere polar browser maps.
  *
  * Reference data:
  * Natural Earth vector data, version 5.1.2.
  *
  * Runtime cartography uses a hybrid resolution:
+ *   - 1:50m coastline
+ *   - 1:50m lakes
+ *   - 1:50m Antarctic ice-shelf edge linework
  *   - 1:50m Admin-0 country boundaries
  *   - 1:10m Admin-1 state/province boundaries
- *   - 1:10m populated places
+ *   - 1:10m populated places and scientific stations
  *
  * This module changes browser cartography only. It does not modify WPS
  * projection parameters or WRF domain geometry.
@@ -35,7 +39,17 @@
 
       places:
         DATA_ROOT +
-        'ne_10m_populated_places_simple_north_50.geojson'
+        'ne_10m_populated_places_simple_north_50.geojson',
+
+      coastline:
+        DATA_ROOT +
+        'ne_50m_coastline_polar_50.geojson',
+
+      lakes:
+        DATA_ROOT +
+        'ne_50m_lakes_polar_50.geojson',
+
+      iceShelfLines: null
     },
 
     south: {
@@ -51,7 +65,19 @@
 
       places:
         DATA_ROOT +
-        'ne_10m_populated_places_simple_south_50.geojson'
+        'ne_10m_populated_places_simple_south_50.geojson',
+
+      coastline:
+        DATA_ROOT +
+        'ne_50m_coastline_polar_50.geojson',
+
+      lakes:
+        DATA_ROOT +
+        'ne_50m_lakes_polar_50.geojson',
+
+      iceShelfLines:
+        DATA_ROOT +
+        'ne_50m_antarctic_ice_shelves_lines_south_50.geojson'
     }
   };
 
@@ -1287,6 +1313,15 @@
       return null;
     }
 
+    var lakePaneName =
+      'polarReferenceLakePane';
+
+    var coastlinePaneName =
+      'polarReferenceCoastlinePane';
+
+    var iceShelfPaneName =
+      'polarReferenceIceShelfPane';
+
     var boundaryPaneName =
       'polarReferenceBoundaryPane';
 
@@ -1303,6 +1338,24 @@
      * Keep reference information beneath normal Leaflet overlays so WRF
      * domains remain visually dominant.
      */
+    ensurePane(
+      map,
+      lakePaneName,
+      325
+    );
+
+    ensurePane(
+      map,
+      coastlinePaneName,
+      328
+    );
+
+    ensurePane(
+      map,
+      iceShelfPaneName,
+      329
+    );
+
     ensurePane(
       map,
       boundaryPaneName,
@@ -1326,6 +1379,28 @@
       labelPaneName,
       340
     );
+
+    /*
+     * Studio-controlled physical geography sits above the raster basemap but
+     * below political boundaries, labels, the 50-degree mask, and WRF domains.
+     */
+    var physicalLayer =
+      L.layerGroup().addTo(map);
+
+    var lakeLayer =
+      L.layerGroup().addTo(
+        physicalLayer
+      );
+
+    var coastlineLayer =
+      L.layerGroup().addTo(
+        physicalLayer
+      );
+
+    var iceShelfLayer =
+      L.layerGroup().addTo(
+        physicalLayer
+      );
 
     var boundaryLayer =
       L.layerGroup().addTo(map);
@@ -1357,6 +1432,10 @@
     var state = {
       map: map,
       mode: mode,
+      physicalLayer: physicalLayer,
+      lakeLayer: lakeLayer,
+      coastlineLayer: coastlineLayer,
+      iceShelfLayer: iceShelfLayer,
       boundaryLayer: boundaryLayer,
       admin0Layer: admin0Layer,
       admin1Layer: admin1Layer,
@@ -1370,6 +1449,149 @@
       destroyed: false,
       zoomHandler: null
     };
+
+
+    /*
+     * Render Natural Earth physical reference geography.
+     *
+     * The base tiles retain responsibility for broad land/ocean coloring.
+     * These vectors add a consistent Studio-controlled shoreline and inland
+     * water reference layer across every polar basemap style.
+     */
+    function drawPhysicalReference(
+      coastline,
+      lakes
+    ) {
+      if (state.destroyed) {
+        return;
+      }
+
+      lakeLayer.clearLayers();
+      coastlineLayer.clearLayers();
+
+
+      if (lakes) {
+        L.geoJSON(
+          lakes,
+          {
+            pane:
+              lakePaneName,
+
+            interactive:
+              false,
+
+            bubblingMouseEvents:
+              false,
+
+            filter:
+              function (feature) {
+                return featureTouchesPolarArea(
+                  feature,
+                  mode
+                );
+              },
+
+            style: {
+              color: '#718695',
+              weight: 0.65,
+              opacity: 0.72,
+              fill: true,
+              fillColor: '#a9c8d8',
+              fillOpacity: 0.16
+            }
+          }
+        ).addTo(
+          lakeLayer
+        );
+      }
+
+
+      if (coastline) {
+        L.geoJSON(
+          coastline,
+          {
+            pane:
+              coastlinePaneName,
+
+            interactive:
+              false,
+
+            bubblingMouseEvents:
+              false,
+
+            filter:
+              function (feature) {
+                return featureTouchesPolarArea(
+                  feature,
+                  mode
+                );
+              },
+
+            style: {
+              color: '#4f5963',
+              weight: 1.05,
+              opacity: 0.82,
+              fill: false
+            }
+          }
+        ).addTo(
+          coastlineLayer
+        );
+      }
+    }
+
+
+    /*
+     * Antarctic floating-ice edge.
+     *
+     * This is deliberately linework only. The selected polar basemap remains
+     * responsible for land, ocean, and ice coloring.
+     */
+    function drawIceShelfReference(
+      iceShelfLines
+    ) {
+      iceShelfLayer.clearLayers();
+
+      if (
+        state.destroyed ||
+        mode !== 'south' ||
+        !iceShelfLines
+      ) {
+        return;
+      }
+
+      L.geoJSON(
+        iceShelfLines,
+        {
+          pane:
+            iceShelfPaneName,
+
+          interactive:
+            false,
+
+          bubblingMouseEvents:
+            false,
+
+          filter:
+            function (feature) {
+              return featureTouchesPolarArea(
+                feature,
+                mode
+              );
+            },
+
+          style: {
+            color: '#6f8798',
+            weight: 1.0,
+            opacity: 0.82,
+            fill: false,
+            dashArray: '4 3'
+          }
+        }
+      ).addTo(
+        iceShelfLayer
+      );
+    }
 
 
     function drawMarineLabels(
@@ -1856,6 +2078,55 @@
     }
 
 
+    if (modeSources.iceShelfLines) {
+      fetchJson(
+        modeSources.iceShelfLines
+      )
+        .then(function (iceShelfLines) {
+          if (state.destroyed) {
+            return;
+          }
+
+          drawIceShelfReference(
+            iceShelfLines
+          );
+        })
+        .catch(function (error) {
+          console.error(
+            'Polar ice-shelf reference overlay:',
+            error
+          );
+        });
+    }
+
+
+    Promise.all([
+      fetchJson(modeSources.coastline),
+      fetchJson(modeSources.lakes)
+    ])
+      .then(function (results) {
+        if (state.destroyed) {
+          return;
+        }
+
+        drawPhysicalReference(
+          results[0],
+          results[1]
+        );
+      })
+      .catch(function (error) {
+        /*
+         * Physical reference vectors are optional browser cartography.
+         * A failure here must never prevent WRF Configuration Studio,
+         * political boundaries, or place labels from operating.
+         */
+        console.error(
+          'Polar physical reference overlay:',
+          error
+        );
+      });
+
+
     Promise.all([
       fetchJson(modeSources.admin0),
       fetchJson(modeSources.places)
@@ -1955,6 +2226,7 @@
           );
         }
 
+        physicalLayer.remove();
         boundaryLayer.remove();
         marineLayer.remove();
         pointLayer.remove();
