@@ -159,8 +159,108 @@
         return global.L.point(xy[0], xy[1]);
       },
       unproject: function (point) {
-        var lonlat = global.proj4(config.proj4, 'EPSG:4326', [point.x, point.y]);
-        return global.L.latLng(lonlat[1], lonlat[0]);
+        /*
+         * The polar browser map represents one geographic hemisphere inside
+         * a circular projected footprint. Leaflet controls can occasionally
+         * request LatLng values for container points outside that circle,
+         * especially during zoom animation, scale-control updates, and mouse
+         * movement over the gray area surrounding the polar map.
+         *
+         * Passing those coordinates directly to proj4 can produce a finite
+         * longitude with NaN latitude. Clamp inverse-projection requests to
+         * just inside the hemisphere boundary before calling proj4.
+         */
+        var x = Number(point.x);
+        var y = Number(point.y);
+
+        if (!Number.isFinite(x) || !Number.isFinite(y)) {
+          return global.L.latLng(
+            config.center[0],
+            config.center[1]
+          );
+        }
+
+        var radius = Math.sqrt(
+          x * x +
+          y * y
+        );
+
+        /*
+         * config.extent is the projected radius of the hemisphere edge used
+         * by the GBIF polar tile scheme. Stay slightly inside that edge to
+         * avoid numerical instability at the projection boundary.
+         */
+        var maximumRadius =
+          extent * 0.999999;
+
+        if (
+          radius > maximumRadius &&
+          radius > 0
+        ) {
+          var factor =
+            maximumRadius / radius;
+
+          x *= factor;
+          y *= factor;
+        }
+
+        var lonlat =
+          global.proj4(
+            config.proj4,
+            'EPSG:4326',
+            [x, y]
+          );
+
+        var longitude =
+          Number(lonlat[0]);
+
+        var latitude =
+          Number(lonlat[1]);
+
+        /*
+         * A second defensive guard prevents a projection-library failure from
+         * ever reaching L.latLng as NaN.
+         */
+        if (
+          !Number.isFinite(latitude) ||
+          !Number.isFinite(longitude)
+        ) {
+          return global.L.latLng(
+            config.center[0],
+            config.center[1]
+          );
+        }
+
+        /*
+         * Numerical noise immediately along the equator must not cause the
+         * opposite hemisphere to appear in the coordinate readout.
+         */
+        if (
+          config.mode === 'north' &&
+          latitude < 0
+        ) {
+          latitude = 0;
+        }
+
+        if (
+          config.mode === 'south' &&
+          latitude > 0
+        ) {
+          latitude = 0;
+        }
+
+        /*
+         * Normalize longitude to the conventional -180..180 range.
+         */
+        longitude =
+          ((longitude + 180) % 360 + 360) %
+          360 -
+          180;
+
+        return global.L.latLng(
+          latitude,
+          longitude
+        );
       }
     };
 
@@ -190,10 +290,22 @@
       attribution: 'GBIF | OpenMapTiles | OpenStreetMap contributors'
     };
     return {
-      'Polar Street': global.L.tileLayer(getTileUrl('osm-bright-en'), common),
-      'Polar Natural': global.L.tileLayer(getTileUrl('gbif-natural-en'), common),
-      'Polar Light': global.L.tileLayer(getTileUrl('gbif-light'), common),
-      'Polar Dark': global.L.tileLayer(getTileUrl('gbif-dark'), common)
+      'Polar World Street': global.L.tileLayer(
+        getTileUrl('osm-bright-en'),
+        common
+      ),
+      'Polar Natural': global.L.tileLayer(
+        getTileUrl('gbif-natural-en'),
+        common
+      ),
+      'Polar Light': global.L.tileLayer(
+        getTileUrl('gbif-light'),
+        common
+      ),
+      'Polar Dark': global.L.tileLayer(
+        getTileUrl('gbif-dark'),
+        common
+      )
     };
   }
 
