@@ -27331,6 +27331,268 @@
       }
     },
     // resize context object
+    /*
+     * A regional latitude-longitude domain must remain a simple polygon.
+     *
+     * In particular, its east and west sides must never cross or fold over
+     * one another. Near a geographic/polar singularity an interactive resize
+     * can otherwise produce a visually self-intersecting domain even though
+     * e_we/e_sn themselves remain numerically valid.
+     *
+     * Test the actual WRF-generated perimeter in the active browser CRS.
+     * Date-line continuity has already been handled by the Geogrid longitude
+     * unwrapping logic before this test.
+     */
+    _latLonPathSelfIntersects: function _latLonPathSelfIntersects(
+      geogrid
+    ) {
+      if (
+        !this._map ||
+        !geogrid ||
+        !geogrid.polygonPath ||
+        geogrid.polygonPath.length < 4
+      ) {
+        return false;
+      }
+
+      var path =
+        geogrid._unwrapLongitudes(
+          geogrid.polygonPath
+        );
+
+      var points = [];
+
+      for (
+        var pointIndex = 0;
+        pointIndex < path.length;
+        pointIndex++
+      ) {
+        var pair =
+          path[pointIndex];
+
+        var point =
+          this._map.project(
+            L.latLng(
+              Number(pair[0]),
+              Number(pair[1])
+            ),
+            0
+          );
+
+        if (
+          !point ||
+          !Number.isFinite(point.x) ||
+          !Number.isFinite(point.y)
+        ) {
+          /*
+           * Non-finite projected geometry is never a valid interactive
+           * regional lat-lon domain.
+           */
+          return true;
+        }
+
+        points.push(point);
+      }
+
+
+      function orientation(
+        a,
+        b,
+        c
+      ) {
+        var value =
+          (
+            b.y - a.y
+          ) *
+          (
+            c.x - b.x
+          ) -
+          (
+            b.x - a.x
+          ) *
+          (
+            c.y - b.y
+          );
+
+        if (Math.abs(value) < 1e-9) {
+          return 0;
+        }
+
+        return value > 0
+          ? 1
+          : 2;
+      }
+
+
+      function onSegment(
+        a,
+        b,
+        c
+      ) {
+        var epsilon =
+          1e-9;
+
+        return (
+          b.x <=
+            Math.max(a.x, c.x) +
+              epsilon &&
+          b.x >=
+            Math.min(a.x, c.x) -
+              epsilon &&
+          b.y <=
+            Math.max(a.y, c.y) +
+              epsilon &&
+          b.y >=
+            Math.min(a.y, c.y) -
+              epsilon
+        );
+      }
+
+
+      function segmentsIntersect(
+        p1,
+        q1,
+        p2,
+        q2
+      ) {
+        var o1 =
+          orientation(
+            p1,
+            q1,
+            p2
+          );
+
+        var o2 =
+          orientation(
+            p1,
+            q1,
+            q2
+          );
+
+        var o3 =
+          orientation(
+            p2,
+            q2,
+            p1
+          );
+
+        var o4 =
+          orientation(
+            p2,
+            q2,
+            q1
+          );
+
+
+        if (
+          o1 !== o2 &&
+          o3 !== o4
+        ) {
+          return true;
+        }
+
+
+        if (
+          o1 === 0 &&
+          onSegment(
+            p1,
+            p2,
+            q1
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o2 === 0 &&
+          onSegment(
+            p1,
+            q2,
+            q1
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o3 === 0 &&
+          onSegment(
+            p2,
+            p1,
+            q2
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o4 === 0 &&
+          onSegment(
+            p2,
+            q1,
+            q2
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      }
+
+
+      var segmentCount =
+        points.length - 1;
+
+      for (
+        var firstIndex = 0;
+        firstIndex < segmentCount;
+        firstIndex++
+      ) {
+        for (
+          var secondIndex =
+            firstIndex + 1;
+          secondIndex < segmentCount;
+          secondIndex++
+        ) {
+          /*
+           * Adjacent perimeter segments legitimately share one endpoint.
+           */
+          if (
+            secondIndex ===
+            firstIndex + 1
+          ) {
+            continue;
+          }
+
+          /*
+           * The first and last perimeter segments also share the polygon's
+           * closing endpoint.
+           */
+          if (
+            firstIndex === 0 &&
+            secondIndex ===
+              segmentCount - 1
+          ) {
+            continue;
+          }
+
+          if (
+            segmentsIntersect(
+              points[firstIndex],
+              points[firstIndex + 1],
+              points[secondIndex],
+              points[secondIndex + 1]
+            )
+          ) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    },
+
+
     _resizeContext: null,
     // end resizing
     _resizeEnd: function _resizeEnd(e) {
@@ -27498,6 +27760,55 @@
         }
         this.update();
       } else {
+        /*
+         * Preserve the last valid regional lat-lon state for this mousemove.
+         * If the proposed resize causes the perimeter to intersect itself,
+         * restore this state and leave the edge at its previous valid limit.
+         */
+        var previousLatLonState =
+          null;
+
+        if (
+          this.domain.map_proj ===
+          WrfProjections.latlon
+        ) {
+          previousLatLonState = {
+            ref_lat:
+              this.domain.ref_lat,
+
+            ref_lon:
+              this.domain.ref_lon,
+
+            pole_lat:
+              this.domain.pole_lat,
+
+            pole_lon:
+              this.domain.pole_lon,
+
+            stand_lon:
+              this.domain.stand_lon,
+
+            e_we:
+              this.e_we,
+
+            e_sn:
+              this.e_sn,
+
+            nests:
+              this.nests.map(
+                function (nest) {
+                  return {
+                    grid: nest,
+                    i_parent_start:
+                      nest.i_parent_start,
+                    j_parent_start:
+                      nest.j_parent_start
+                  };
+                }
+              )
+          };
+        }
+
         var center_i = (this.e_we - 1) / 2,
           center_j = (this.e_sn - 1) / 2,
           _e_we = this.e_we,
@@ -27527,8 +27838,33 @@
           center_j = (_e_sn - 1) / 2;
         }
         var center = this.geogrid.unstaggered_ij_to_latlon(center_i, center_j);
-        this.domain.ref_lat = center[0];
-        this.domain.ref_lon = center[1];
+
+        this.domain.ref_lat =
+          center[0];
+
+        this.domain.ref_lon =
+          wrfNormalizeLongitudeForWps(
+            center[1]
+          );
+
+        /*
+         * A regional WPS latitude-longitude domain uses a rotated
+         * computational grid. Moving the MOAD center during resize must keep
+         * pole_lat, pole_lon, and stand_lon synchronized with ref_lat/ref_lon.
+         *
+         * New-domain creation and center dragging already maintain this
+         * relationship through setDefaultValues()/drag(). Historically the
+         * main-grid resize path changed ref_lat/ref_lon directly and left the
+         * rotation parameters stale, which could make a high-latitude
+         * lat-lon domain fold or draw across itself.
+         */
+        if (
+          this.domain.map_proj ===
+          WrfProjections.latlon
+        ) {
+          this.domain._setDefaultProjValues();
+        }
+
         //this.domain.stand_lon = this.domain.ref_lon + this._resizeContext.stand_lon_delta;
         //this.domain.truelat1 = this.domain.ref_lat + this._resizeContext.truelat1_delta;
         //this.domain.truelat2 = this.domain.ref_lat + this._resizeContext.truelat2_delta;
@@ -27549,6 +27885,63 @@
         } else if (this._resizeContext.jAxisOpt == WRFDomainGrid.JAxisOpt.E_SN) {
           this.e_sn = _e_sn;
         }
+
+
+        /*
+         * Regional latitude-longitude domains may cross the Date Line, but
+         * their perimeter must remain topologically simple. The east and west
+         * sides are never allowed to cross, touch, or fold over one another.
+         */
+        if (previousLatLonState) {
+          var candidateGeogrid =
+            this._initGeogrid();
+
+          if (
+            this._latLonPathSelfIntersects(
+              candidateGeogrid
+            )
+          ) {
+            this.domain.ref_lat =
+              previousLatLonState.ref_lat;
+
+            this.domain.ref_lon =
+              previousLatLonState.ref_lon;
+
+            this.domain.pole_lat =
+              previousLatLonState.pole_lat;
+
+            this.domain.pole_lon =
+              previousLatLonState.pole_lon;
+
+            this.domain.stand_lon =
+              previousLatLonState.stand_lon;
+
+            this.e_we =
+              previousLatLonState.e_we;
+
+            this.e_sn =
+              previousLatLonState.e_sn;
+
+            for (
+              var restoreIndex = 0;
+              restoreIndex <
+                previousLatLonState.nests.length;
+              restoreIndex++
+            ) {
+              var savedNest =
+                previousLatLonState
+                  .nests[restoreIndex];
+
+              savedNest.grid.i_parent_start =
+                savedNest.i_parent_start;
+
+              savedNest.grid.j_parent_start =
+                savedNest.j_parent_start;
+            }
+          }
+        }
+
+
         this.domain.update();
       }
     },
