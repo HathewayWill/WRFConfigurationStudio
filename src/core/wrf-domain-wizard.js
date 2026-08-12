@@ -27893,13 +27893,50 @@
          * sides are never allowed to cross, touch, or fold over one another.
          */
         if (previousLatLonState) {
+          /*
+           * A regional latitude-longitude grid may approach a complete
+           * revolution, but its west and east edges must never become the
+           * same geographic edge or pass through one another.
+           *
+           * e_we is a grid-point count, so there are e_we - 1 longitudinal
+           * grid intervals.
+           */
+          var latLonDx =
+            Number(
+              this.domain.dx
+            );
+
+          var longitudeSpanInvalid =
+            false;
+
+          if (
+            Number.isFinite(latLonDx) &&
+            Math.abs(latLonDx) > 0
+          ) {
+            var longitudeSpanDegrees =
+              (
+                this.e_we - 1
+              ) *
+              Math.abs(latLonDx);
+
+            longitudeSpanInvalid =
+              longitudeSpanDegrees >=
+              360 - 1e-9;
+          }
+
+
           var candidateGeogrid =
             this._initGeogrid();
 
-          if (
+          var geometryInvalid =
             this._latLonPathSelfIntersects(
               candidateGeogrid
-            )
+            );
+
+
+          if (
+            longitudeSpanInvalid ||
+            geometryInvalid
           ) {
             this.domain.ref_lat =
               previousLatLonState.ref_lat;
