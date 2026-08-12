@@ -641,6 +641,233 @@
       });
       L.LayerGroup.prototype.initialize.call(this, this._lines, Object.assign({}, this._defaultOptions, options));
     },
+
+    /*
+     * GeographicLines was originally designed for the rectangular standard
+     * browser map. In a pole-centered browser CRS, parallels must be sampled
+     * as circles and meridians must be sampled as radial paths.
+     *
+     * Keep the original implementation unchanged for the standard map.
+     */
+    _isPolarMap: function _isPolarMap() {
+      return (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      );
+    },
+
+    onAdd: function onAdd(map) {
+      this._map = map;
+
+      if (this._isPolarMap()) {
+        /*
+         * Remove the standard-map paths and repeated setText labels before
+         * creating their polar equivalents.
+         */
+        this.clearLayers();
+        this._lines = [];
+        this._buildPolarGeographicLines();
+      }
+
+      return L.LayerGroup.prototype.onAdd.call(this, map);
+    },
+
+    _buildPolarParallel: function _buildPolarParallel(latitude) {
+      var path = [];
+
+      for (
+        var longitude = -180;
+        longitude <= 180;
+        longitude += 2
+      ) {
+        path.push(
+          L.latLng(
+            latitude,
+            longitude
+          )
+        );
+      }
+
+      return path;
+    },
+
+    _buildPolarMeridian: function _buildPolarMeridian(
+      longitude,
+      startLatitude,
+      endLatitude
+    ) {
+      var path = [];
+      var latitude;
+
+      if (startLatitude < endLatitude) {
+        for (
+          latitude = startLatitude;
+          latitude <= endLatitude;
+          latitude += 1
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+      } else {
+        for (
+          latitude = startLatitude;
+          latitude >= endLatitude;
+          latitude -= 1
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+      }
+
+      return path;
+    },
+
+    _createPolarGeographicLabel: function _createPolarGeographicLabel(
+      latitude,
+      longitude,
+      text
+    ) {
+      return L.marker(
+        L.latLng(
+          latitude,
+          longitude
+        ),
+        {
+          interactive: false,
+          keyboard: false,
+
+          icon: L.divIcon({
+            iconSize: [0, 0],
+
+            className:
+              'leaflet-grid-label',
+
+            html:
+              '<div style="' +
+              'white-space:nowrap;' +
+              'font-size:12px;' +
+              'font-weight:600;' +
+              'color:#6f237a;' +
+              'background:rgba(255,255,255,0.82);' +
+              'padding:1px 4px;' +
+              'border-radius:3px;' +
+              'transform:translate(-50%,-50%);' +
+              '">' +
+              text +
+              '</div>'
+          })
+        }
+      );
+    },
+
+    _addPolarGeographicLine: function _addPolarGeographicLine(
+      path,
+      labelLatitude,
+      labelLongitude,
+      text
+    ) {
+      var line = L.polyline(
+        path,
+        this._lineOptions
+      );
+
+      this.addLayer(line);
+      this._lines.push(line);
+
+      var label =
+        this._createPolarGeographicLabel(
+          labelLatitude,
+          labelLongitude,
+          text
+        );
+
+      this.addLayer(label);
+      this._lines.push(label);
+    },
+
+    _buildPolarGeographicLines: function _buildPolarGeographicLines() {
+      var mode =
+        window.WRFPolarDomainMode.getMode();
+
+      /*
+       * Restrict the polar reference-line workspace to high latitudes.
+       * Equator and tropical lines are intentionally omitted because they are
+       * outside the practical pole-centered browser-map workspace.
+       */
+      if (mode === 'north') {
+        this._addPolarGeographicLine(
+          this._buildPolarParallel(
+            66.566667
+          ),
+          66.566667,
+          -90,
+          'Arctic Circle'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            0,
+            50,
+            89
+          ),
+          55,
+          0,
+          'Prime Meridian'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            180,
+            50,
+            89
+          ),
+          55,
+          179.999,
+          'International Date Line'
+        );
+      } else {
+        this._addPolarGeographicLine(
+          this._buildPolarParallel(
+            -66.563833
+          ),
+          -66.563833,
+          -90,
+          'Antarctic Circle'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            0,
+            -50,
+            -89
+          ),
+          -55,
+          0,
+          'Prime Meridian'
+        );
+
+        this._addPolarGeographicLine(
+          this._buildPolarMeridian(
+            180,
+            -50,
+            -89
+          ),
+          -55,
+          179.999,
+          'International Date Line'
+        );
+      }
+    },
+
     _arcticCirle: [[66.566667, -180], [66.566667, 0], [66.566667, 180]],
     // https://en.wikipedia.org/wiki/Antarctic_Circle
     _antarcticCirle: [[-66.563833, -180], [-66.563833, 0], [-66.563833, 180]],
@@ -670,11 +897,40 @@
       // Minimum distance between two lines in pixels
       verticalLabelOffset: 200
     },
+    /*
+     * Standard Web Mercator graticule styling.
+     *
+     * Keep this unchanged from the main Studio interface. Polar maps use
+     * their own dedicated styles below.
+     */
     lineStyle: {
       stroke: true,
       color: '#111',
       opacity: 0.6,
       weight: 1,
+      interactive: false
+    },
+
+    /*
+     * Polar graticule hierarchy:
+     *
+     *   - meridians and intermediate parallels stay subdued;
+     *   - 10-degree latitude rings receive slightly more emphasis;
+     *   - the separate 50-degree workspace boundary remains strongest.
+     */
+    polarLineStyle: {
+      stroke: true,
+      color: '#59636e',
+      opacity: 0.42,
+      weight: 0.8,
+      interactive: false
+    },
+
+    majorPolarLineStyle: {
+      stroke: true,
+      color: '#46515c',
+      opacity: 0.58,
+      weight: 1.05,
       interactive: false
     },
     _bounds: null,
@@ -694,13 +950,341 @@
       this.eachLayer(this.removeLayer, this);
       return this;
     },
+    _isPolarMap: function _isPolarMap() {
+      return (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      );
+    },
+
+    /*
+     * Build a polar graticule independently from the standard Web Mercator
+     * graticule.
+     *
+     * In a polar projection:
+     *
+     *   - lines of longitude are meridians radiating toward the pole;
+     *   - lines of latitude are concentric circles around the pole.
+     *
+     * The standard AutoGraticule implementation creates parallels from only
+     * two geographic endpoints. That is appropriate for the rectangular
+     * standard map, but it produces straight chords when projected onto a
+     * polar CRS. Polar parallels therefore need to be sampled around all
+     * longitudes.
+     */
+    _formatPolarLatitude: function _formatPolarLatitude(
+      latitude
+    ) {
+      var absolute =
+        Math.abs(latitude);
+
+      if (absolute === 0) {
+        return '0°';
+      }
+
+      return (
+        absolute +
+        '°' +
+        (latitude > 0 ? 'N' : 'S')
+      );
+    },
+
+    _formatPolarLongitude: function _formatPolarLongitude(
+      longitude
+    ) {
+      var normalized =
+        ((longitude + 180) % 360 + 360) %
+        360 -
+        180;
+
+      var absolute =
+        Math.abs(normalized);
+
+      if (absolute === 0) {
+        return '0°';
+      }
+
+      if (absolute === 180) {
+        return '180°';
+      }
+
+      return (
+        absolute +
+        '°' +
+        (normalized > 0 ? 'E' : 'W')
+      );
+    },
+
+    _addPolarGraticuleLabel: function _addPolarGraticuleLabel(
+      latitude,
+      longitude,
+      text
+    ) {
+      this.addLayer(
+        L.marker(
+          L.latLng(
+            latitude,
+            longitude
+          ),
+          {
+            interactive: false,
+            keyboard: false,
+
+            icon: L.divIcon({
+              iconSize: [0, 0],
+
+              className:
+                'leaflet-grid-label',
+
+              html:
+                '<div style="' +
+                'white-space:nowrap;' +
+                'font-size:11px;' +
+                'font-weight:500;' +
+                'color:#3f4953;' +
+                'background:rgba(255,255,255,0.70);' +
+                'padding:1px 2px;' +
+                'border-radius:2px;' +
+                'transform:translate(-50%,-50%);' +
+                '">' +
+                text +
+                '</div>'
+            })
+          }
+        )
+      );
+    },
+
+    _constructPolarLines: function _constructPolarLines() {
+      var mode =
+        window.WRFPolarDomainMode.getMode();
+
+      var zoom =
+        this._map.getZoom();
+
+      /*
+       * Line density can increase with zoom, while labels remain intentionally
+       * sparse so a pole-centered map stays readable.
+       */
+      var latitudeStep;
+      var longitudeStep;
+
+      if (zoom >= 5) {
+        latitudeStep = 2;
+        longitudeStep = 10;
+      } else if (zoom >= 3) {
+        latitudeStep = 5;
+        longitudeStep = 15;
+      } else {
+        latitudeStep = 10;
+        longitudeStep = 30;
+      }
+
+      /*
+       * Keep the polar browser-map graticule inside the high-latitude
+       * workspace. This avoids unnecessary projection requests near the edge
+       * of the finite polar display CRS.
+       */
+      var polarConfig =
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.getActiveConfig
+          ? window.WRFPolarDomainMode.getActiveConfig()
+          : null;
+
+      /*
+       * Use the polar browser configuration as the single source of truth
+       * for the visible high-latitude workspace. Current polar modes use
+       * 50N and 50S as their outer geographic boundary.
+       */
+      var minimumAbsoluteLatitude =
+        polarConfig &&
+        isFinite(Number(polarConfig.boundaryLat))
+          ? Math.abs(Number(polarConfig.boundaryLat))
+          : 50;
+
+      var maximumAbsoluteLatitude = 89;
+
+      var longitude;
+      var latitude;
+      var absoluteLatitude;
+      var path;
+
+      /*
+       * Meridians.
+       */
+      for (
+        longitude = -180;
+        longitude < 180;
+        longitude += longitudeStep
+      ) {
+        path = [];
+
+        if (mode === 'north') {
+          for (
+            latitude =
+              minimumAbsoluteLatitude;
+            latitude <=
+              maximumAbsoluteLatitude;
+            latitude += 1
+          ) {
+            path.push(
+              L.latLng(
+                latitude,
+                longitude
+              )
+            );
+          }
+
+          path.push(
+            L.latLng(
+              89.999,
+              longitude
+            )
+          );
+        } else {
+          for (
+            latitude =
+              -minimumAbsoluteLatitude;
+            latitude >=
+              -maximumAbsoluteLatitude;
+            latitude -= 1
+          ) {
+            path.push(
+              L.latLng(
+                latitude,
+                longitude
+              )
+            );
+          }
+
+          path.push(
+            L.latLng(
+              -89.999,
+              longitude
+            )
+          );
+        }
+
+        this.addLayer(
+          L.polyline(
+            path,
+            this.polarLineStyle
+          )
+        );
+
+        /*
+         * Label only every 30 degrees, regardless of line density.
+         */
+        if (
+          longitude % 30 === 0
+        ) {
+          this._addPolarGraticuleLabel(
+            mode === 'north'
+              ? minimumAbsoluteLatitude + 2
+              : -(minimumAbsoluteLatitude + 2),
+            longitude,
+            this._formatPolarLongitude(
+              longitude
+            )
+          );
+        }
+      }
+
+      /*
+       * Parallels.
+       *
+       * Start with the first complete interval at or poleward of the
+       * configured polar workspace boundary.
+       */
+      var firstAbsoluteLatitude =
+        Math.ceil(
+          minimumAbsoluteLatitude /
+          latitudeStep
+        ) *
+        latitudeStep;
+
+      for (
+        absoluteLatitude =
+          firstAbsoluteLatitude;
+        absoluteLatitude < 90;
+        absoluteLatitude += latitudeStep
+      ) {
+        latitude =
+          mode === 'north'
+            ? absoluteLatitude
+            : -absoluteLatitude;
+
+        path = [];
+
+        for (
+          longitude = -180;
+          longitude <= 180;
+          longitude += 2
+        ) {
+          path.push(
+            L.latLng(
+              latitude,
+              longitude
+            )
+          );
+        }
+
+        this.addLayer(
+          L.polyline(
+            path,
+            absoluteLatitude % 10 === 0
+              ? this.majorPolarLineStyle
+              : this.polarLineStyle
+          )
+        );
+
+        /*
+         * Label the major 10-degree latitude rings.
+         *
+         * Examples:
+         *   50°N, 60°N, 70°N, 80°N
+         *   50°S, 60°S, 70°S, 80°S
+         */
+        if (
+          absoluteLatitude % 10 === 0
+        ) {
+          this._addPolarGraticuleLabel(
+            latitude,
+            -135,
+            this._formatPolarLatitude(
+              latitude
+            )
+          );
+        }
+      }
+    },
+
     redraw: function redraw() {
+      /*
+       * The rectangular bounds calculations used by AutoGraticule are a
+       * Web Mercator concept. Avoid them entirely when the Studio is using
+       * one of its pole-centered browser CRSs.
+       */
+      if (this._isPolarMap()) {
+        this._bounds = null;
+        this.clearLayers();
+        this.constructLines();
+        return this;
+      }
+
       this._bounds = this._map.getBounds().pad(0.5);
       this.clearLayers();
       this.constructLines();
       return this;
     },
+
     constructLines: function constructLines() {
+      if (this._isPolarMap()) {
+        this._constructPolarLines();
+        return;
+      }
+
       var bounds = this._map.getBounds();
       var zoom = this._map.getZoom();
       var fullSouth = Math.max(bounds.getSouth(), -85);
@@ -866,6 +1450,18 @@
     _controls: {},
     _graticule: null,
     _geographicLines: null,
+
+    /*
+     * Northern and Southern Hemisphere browser maps are polar mode.
+     */
+    _isPolarMode: function _isPolarMode() {
+      return !!(
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      );
+    },
     initialize: function initialize(map, sidebar, appSettings) {
       var _this = this;
       this._map = map;
@@ -896,7 +1492,24 @@
               switch (control.type) {
                 case 'checkbox':
                   control.addEventListener('click', function (e) {
-                    _this2._appSettings.set(key, e.currentTarget.checked);
+                    /*
+                     * Polar maps always start with the graticule enabled, but
+                     * the user may toggle it for the current polar session.
+                     *
+                     * Do not overwrite the saved Standard Map graticule
+                     * preference when doing so.
+                     */
+                    if (
+                      key === 'showGraticule' &&
+                      _this2._isPolarMode()
+                    ) {
+                      return;
+                    }
+
+                    _this2._appSettings.set(
+                      key,
+                      e.currentTarget.checked
+                    );
                   });
                   break;
                 case 'number':
@@ -962,13 +1575,32 @@
         _loop2(key);
       }
       if ('showGraticule' in this._controls) {
-        this._showGraticule(this._appSettings.get('showGraticule'));
+        if (this._isPolarMode()) {
+          /*
+           * Polar maps start with the graticule visible, but unlike the
+           * previous always-on behavior the checkbox remains user-toggleable.
+           */
+          this._controls['showGraticule'].checked = true;
+          this._controls['showGraticule'].disabled = false;
+          this._controls['showGraticule'].removeAttribute('title');
+          this._showGraticule(true);
+        } else {
+          this._controls['showGraticule'].disabled = false;
+          this._controls['showGraticule'].removeAttribute('title');
+          this._showGraticule(
+            this._appSettings.get('showGraticule')
+          );
+        }
       }
       if ('showGeographicLines' in this._controls) {
         this._showGeographicLines(this._appSettings.get('showGeographicLines'));
       }
     },
     _showGraticule: function _showGraticule(show) {
+      /*
+       * Polar maps initialize with the graticule visible, but this method
+       * respects the current checkbox state so users can hide it.
+       */
       if (show === true) {
         this._graticule.addTo(this._map);
       } else {
@@ -1060,45 +1692,210 @@
     messageBoxDialog.empty().title(title, MessageBoxDialog.types.error).text(message).open();
   }
   function enableGlobalErrorHandler() {
+    /*
+     * Preserve the first unexpected error while the report dialog is open.
+     *
+     * Some rendering failures can repeat on map redraw, zoom, move, or layer
+     * events. Rebuilding the modal for every occurrence previously changed
+     * the timestamp continuously and erased the user's reproduction steps.
+     */
+    var globalErrorDialogOpen = false;
+    var globalErrorSignature = null;
+
+    /*
+     * Once the user closes the report dialog, allow a subsequent error to
+     * create a new report.
+     */
+    $(messageBoxDialog.container)
+      .off('hidden.bs.modal.wrf-global-error')
+      .on(
+        'hidden.bs.modal.wrf-global-error',
+        function () {
+          globalErrorDialogOpen = false;
+          globalErrorSignature = null;
+        }
+      );
+
     window.onerror = function (event, source, lineno, colno, error) {
       if (!event || !source || !error) {
         return;
       }
+
       if (!error.stack) {
         return;
       }
+
       if (source.toLowerCase().includes("/lib/")) {
         return;
       }
+
+      var signature = [
+        String(event),
+        String(source),
+        String(lineno),
+        String(colno),
+        String(error.stack)
+      ].join('|');
+
+      /*
+       * Do not overwrite an existing error report while its modal is open.
+       * This intentionally freezes its timestamp, stack trace, and anything
+       * the user has entered into the Repro Steps field.
+       */
+      if (globalErrorDialogOpen) {
+        return true;
+      }
+
+      globalErrorDialogOpen = true;
+      globalErrorSignature = signature;
+
       var template = getTemplate('global-error');
-      messageBoxDialog.empty().title('Unexpected Error', MessageBoxDialog.types.error).html(template.innerHTML);
+
+      messageBoxDialog
+        .empty()
+        .title(
+          'Unexpected Error',
+          MessageBoxDialog.types.error
+        )
+        .html(template.innerHTML);
+
+      /*
+       * Capture the timestamp exactly once for this report.
+       */
+      var capturedTimestamp = new Date().toISOString();
+
       var errorDetails = '';
-      errorDetails = errorDetails + "Error: ".concat(event, "\n");
-      errorDetails = errorDetails + "Timestamp: ".concat(new Date().toISOString(), "\n");
-      errorDetails = errorDetails + "Source: ".concat(source, "\n");
-      errorDetails = errorDetails + "Line: ".concat(lineno, "\n");
-      errorDetails = errorDetails + "Stack:\n";
-      errorDetails = errorDetails + "".concat(error.stack);
-      messageBoxDialog.dialogBody.querySelector('textarea[name="error-details"]').value = errorDetails;
-      var title = 'Error: ' + event + ' @ ' + source + ":" + lineno;
-      var linkCreateIssue = messageBoxDialog.dialogBody.querySelector('a#create-github-issue');
-      var form = messageBoxDialog.dialogBody.querySelector('form');
-      linkCreateIssue.addEventListener('click', function (e) {
-        var isValid = form.checkValidity();
-        form.classList.add('was-validated');
-        if (isValid === true) {
-          var issueBody = '';
-          issueBody = issueBody + 'Repro Steps:\n';
-          issueBody = issueBody + messageBoxDialog.dialogBody.querySelector('textarea[name="repro-steps"]').value;
-          issueBody = issueBody + '\n\n';
-          issueBody = issueBody + errorDetails;
-          linkCreateIssue.href = "https://github.com/HathewayWill/WRFConfigStudio/issues/new?labels=bug&title=".concat(encodeURI(title), "&body=").concat(encodeURI(issueBody));
-        } else {
+
+      errorDetails =
+        errorDetails +
+        "Error: " +
+        event +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Timestamp: " +
+        capturedTimestamp +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Source: " +
+        source +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Line: " +
+        lineno +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Column: " +
+        colno +
+        "\n";
+
+      errorDetails =
+        errorDetails +
+        "Stack:\n";
+
+      errorDetails =
+        errorDetails +
+        error.stack;
+
+      var errorDetailsField =
+        messageBoxDialog.dialogBody.querySelector(
+          'textarea[name="error-details"]'
+        );
+
+      errorDetailsField.value =
+        errorDetails;
+
+      var title =
+        'Error: ' +
+        event +
+        ' @ ' +
+        source +
+        ':' +
+        lineno;
+
+      var linkCreateIssue =
+        messageBoxDialog.dialogBody.querySelector(
+          'a#create-github-issue'
+        );
+
+      var form =
+        messageBoxDialog.dialogBody.querySelector(
+          'form'
+        );
+
+      linkCreateIssue.addEventListener(
+        'click',
+        function (e) {
+          /*
+           * Always handle the navigation ourselves. This prevents the initial
+           * href="#" from navigating before validation and lets us construct
+           * the GitHub URL safely after the user fills in reproduction steps.
+           */
           e.preventDefault();
           e.stopPropagation();
+
+          var isValid =
+            form.checkValidity();
+
+          form.classList.add(
+            'was-validated'
+          );
+
+          if (!isValid) {
+            return;
+          }
+
+          var reproSteps =
+            messageBoxDialog.dialogBody.querySelector(
+              'textarea[name="repro-steps"]'
+            ).value;
+
+          var issueBody = '';
+
+          issueBody +=
+            'Repro Steps:\n';
+
+          issueBody +=
+            reproSteps;
+
+          issueBody +=
+            '\n\n';
+
+          issueBody +=
+            errorDetails;
+
+          var issueUrl =
+            'https://github.com/HathewayWill/' +
+            'WRFConfigurationStudio/issues/new' +
+            '?labels=' +
+            encodeURIComponent('bug') +
+            '&title=' +
+            encodeURIComponent(title) +
+            '&body=' +
+            encodeURIComponent(issueBody);
+
+          window.open(
+            issueUrl,
+            '_blank',
+            'noopener'
+          );
         }
-      });
+      );
+
       messageBoxDialog.open();
+
+      /*
+       * Tell the browser that the application handled this event. The error
+       * is still available in the report dialog and development console.
+       */
+      return true;
     };
   }
 
@@ -2188,7 +2985,7 @@
   		    throw new TypeError('Argument must be a number')
   		  }
   		  return buffer.SlowBuffer(size)
-  		}; 
+		};
   	} (safeBuffer$1, safeBuffer$1.exports));
   	return safeBuffer$1.exports;
   }
@@ -2450,7 +3247,7 @@
   		    var obj = util.inspect({ length: this.length });
   		    return this.constructor.name + ' ' + obj;
   		  };
-  		} 
+		}
   	} (BufferList));
   	return BufferList.exports;
   }
@@ -3406,7 +4203,7 @@
   		    throw new TypeError('Argument must be a number')
   		  }
   		  return buffer.SlowBuffer(size)
-  		}; 
+		};
   	} (safeBuffer, safeBuffer.exports));
   	return safeBuffer.exports;
   }
@@ -4911,7 +5708,7 @@
   		  exports.Duplex = require_stream_duplex();
   		  exports.Transform = require_stream_transform();
   		  exports.PassThrough = require_stream_passthrough();
-  		} 
+		}
   	} (readable, readable.exports));
   	return readable.exports;
   }
@@ -6254,7 +7051,7 @@
   		        }
   		        return data;
   		    });
-  		}; 
+		};
   	} (utils));
   	return utils;
   }
@@ -6809,7 +7606,7 @@
   		        meta : chunk.meta
   		    });
   		};
-  		exports.Utf8EncodeWorker = Utf8EncodeWorker; 
+		exports.Utf8EncodeWorker = Utf8EncodeWorker;
   	} (utf8));
   	return utf8;
   }
@@ -7757,7 +8554,7 @@
   		  }
   		};
 
-  		exports.setTyped(TYPED_OK); 
+		exports.setTyped(TYPED_OK);
   	} (common$1));
   	return common$1;
   }
@@ -17352,7 +18149,7 @@
               i += str[0].length;
               prev = "logical";
             } else {
-              // REAL			
+              // REAL
               str = Namelist._re_real.exec(curstr);
               if (str && str.index == 0) {
                 //console.log("found real: " + str[1]);
@@ -17644,7 +18441,7 @@
       }
     }]);
   }();
-  // regular expression for each item	
+  // regular expression for each item
   _defineProperty(Namelist, "_re_comment", /(!.*)\n\s*/);
   _defineProperty(Namelist, "_re_group", /(?:&|\$)\s*([a-zA-Z_][\w]*)\s*/);
   _defineProperty(Namelist, "_re_array", /([a-zA-Z_][\w]*)\s*(\(\s*((\s*:\s*(\-|\+)?\d*){1,2}|((\-|\+)?\d+(\s*:\s*(\-|\+)?\d*){0,2}))(\s*,\s*(((\-|\+)?\d*(\s*:\s*(\-|\+)?\d*){0,2})))*\s*\)(\s*\(\s*(:\s*\d*|\d+(\s*:\s*\d*)?)\s*\))?)\s*=\s*/);
@@ -17730,7 +18527,7 @@
         parent_grid_ratio: null,
         //A list of MAX_DOM integers specifying, for each nest, the nesting ratio relative to the domain's parent
         i_parent_start: null,
-        //A list of MAX_DOM integers specifying, for each nest, the x-coordinate of the lower-left corner of the nest in the parent unstaggered grid. For the coarsest domain, a value of 1 should be specified            
+        //A list of MAX_DOM integers specifying, for each nest, the x-coordinate of the lower-left corner of the nest in the parent unstaggered grid. For the coarsest domain, a value of 1 should be specified
         j_parent_start: null,
         //A list of MAX_DOM integers specifying, for each nest, the y-coordinate of the lower-left corner of the nest in the parent unstaggered grid. For the coarsest domain, a value of 1 should be specified
         s_we: 1,
@@ -17769,7 +18566,7 @@
         //For the latitude-longitude projection for ARW, the longitude of the North Pole with respect to the computational lat/lon grid in which -90.0 degrees latitude is at the bottom of a global domain, 90.0 degrees latitude is at the top, and 180.0 degrees longitude is at the center
         geog_data_path: null,
         //A character string giving the path, either relative or absolute, to the directory where the geographical data directories may be found. This path is the one to which rel_path specifications in the GEOGRID.TBL file are given in relation to
-        opt_geogrid_tbl_path: './geogrid/' //A character string giving the path, either relative or absolute, to the GEOGRID.TBL file. The path should not contain the actual file name, as GEOGRID.TBL is assumed, but should only give the path where this file is located        
+        opt_geogrid_tbl_path: './geogrid/' //A character string giving the path, either relative or absolute, to the GEOGRID.TBL file. The path should not contain the actual file name, as GEOGRID.TBL is assumed, but should only give the path where this file is located
       };
       this.ungrib = {
         out_format: 'WPS',
@@ -17782,7 +18579,7 @@
         //An integer value specifying the method that ungrib will use when vertically interpolating to new levels. A value of 0 causes ungrib to interpolate linearly in pressure, and a value of 1 causes ungrib to interpolate linearly in log pressure
         new_plvl: null,
         //An array of real values that specify the additional vertical levels, given in Pa, to which the ungrib program will attempt to interpolate when ADD_LVLS is true. The set of new levels can be specified explicitly, or, if the levels are evenly spaced in pressure, exactly three values can be specified: the starting pressure, the ending pressure, and the pressure increment. When a starting pressure, ending pressure, and increment are specified, the pressure increment must be a negative number to signal to the ungrib program that this value is not a target pressure level, but rather, an increment to be used between the first and second values
-        pmin: 100 //A real value specifying the minimum pressure level, in Pa, to be processed from GRIB data. This option applies only to isobaric data sets            
+        pmin: 100 //A real value specifying the minimum pressure level, in Pa, to be processed from GRIB data. This option applies only to isobaric data sets
       };
       this.metgrid = {
         fg_name: null,
@@ -17795,7 +18592,7 @@
         //Default current working directory (i.e., ./ ), A character string giving the path, either relative or absolute, to the location where output files from metgrid should be written to
         opt_metgrid_tbl_path: './metgrid',
         //A character string giving the path, either relative or absolute, to the METGRID.TBL file; the path should not contain the actual file name, as METGRID.TBL is assumed, but should only give the path where this file is located
-        process_only_bdy: 0 //An integer specifying the number of boundary rows and columns to be processed by metgrid for time periods after the initial time; for the initial time, metgrid will always interpolate to every grid point. Setting this option to the intended value of spec_bdy_width in the WRF namelist.input will speed up processing in metgrid, but it should not be set if interpolated data are needed in the domain interior. If this option is set to zero, metgrid will horizontally interpolate meteorological data to every grid point in the model domains. This option is only available for ARW            
+        process_only_bdy: 0 //An integer specifying the number of boundary rows and columns to be processed by metgrid for time periods after the initial time; for the initial time, metgrid will always interpolate to every grid point. Setting this option to the intended value of spec_bdy_width in the WRF namelist.input will speed up processing in metgrid, but it should not be set if interpolated data are needed in the domain interior. If this option is set to zero, metgrid will horizontally interpolate meteorological data to every grid point in the model domains. This option is only available for ARW
       };
       if (typeof data === 'string') {
         ns = new Namelist(data);
@@ -22067,22 +22864,22 @@
   function isTypeA(P) {
     var typeAProjections = ['Hotine_Oblique_Mercator','Hotine_Oblique_Mercator_Azimuth_Natural_Origin'];
     var projectionName = typeof P.PROJECTION === "object" ? Object.keys(P.PROJECTION)[0] : P.PROJECTION;
-    
+
     return 'no_uoff' in P || 'no_off' in P || typeAProjections.indexOf(projectionName) !== -1;
   }
 
 
   /* Initialize the Oblique Mercator  projection
       ------------------------------------------*/
-  function init$o() {  
+  function init$o() {
     var con, com, cosph0, D, F, H, L, sinph0, p, J, gamma = 0,
       gamma0, lamc = 0, lam1 = 0, lam2 = 0, phi1 = 0, phi2 = 0, alpha_c = 0;
-    
+
     // only Type A uses the no_off or no_uoff property
     // https://github.com/OSGeo/proj.4/issues/104
     this.no_off = isTypeA(this);
     this.no_rot = 'no_rot' in this;
-    
+
     var alp = false;
     if ("alpha" in this) {
       alp = true;
@@ -22096,11 +22893,11 @@
     if (alp) {
       alpha_c = this.alpha;
     }
-    
+
     if (gam) {
       gamma = (this.rectified_grid_angle * D2R$1);
     }
-    
+
     if (alp || gam) {
       lamc = this.longc;
     } else {
@@ -22108,17 +22905,17 @@
       phi1 = this.lat1;
       lam2 = this.long2;
       phi2 = this.lat2;
-      
+
       if (Math.abs(phi1 - phi2) <= TOL || (con = Math.abs(phi1)) <= TOL ||
           Math.abs(con - HALF_PI) <= TOL || Math.abs(Math.abs(this.lat0) - HALF_PI) <= TOL ||
           Math.abs(Math.abs(phi2) - HALF_PI) <= TOL) {
         throw new Error();
       }
     }
-    
+
     var one_es = 1.0 - this.es;
     com = Math.sqrt(one_es);
-    
+
     if (Math.abs(this.lat0) > EPSLN) {
       sinph0 = Math.sin(this.lat0);
       cosph0 = Math.cos(this.lat0);
@@ -22128,7 +22925,7 @@
       this.A = this.B * this.k0 * com / con;
       D = this.B * com / (cosph0 * Math.sqrt(con));
       F = D * D -1;
-      
+
       if (F <= 0) {
         F = 0;
       } else {
@@ -22137,7 +22934,7 @@
           F = -F;
         }
       }
-      
+
       this.E = F += D;
       this.E *= Math.pow(tsfnz(this.e, this.lat0, sinph0), this.B);
     } else {
@@ -22145,7 +22942,7 @@
       this.A = this.k0;
       this.E = D = F = 1;
     }
-    
+
     if (alp || gam) {
       if (alp) {
         gamma0 = Math.asin(Math.sin(alpha_c) / D);
@@ -22165,38 +22962,38 @@
       J = this.E * this.E;
       J = (J - L * H) / (J + L * H);
       con = lam1 - lam2;
-      
+
       if (con < -Math.pi) {
         lam2 -=TWO_PI;
       } else if (con > Math.pi) {
         lam2 += TWO_PI;
       }
-      
+
       this.lam0 = adjust_lon(0.5 * (lam1 + lam2) - Math.atan(J * Math.tan(0.5 * this.B * (lam1 - lam2)) / p) / this.B);
       gamma0 = Math.atan(2 * Math.sin(this.B * adjust_lon(lam1 - this.lam0)) / (F - 1 / F));
       gamma = alpha_c = Math.asin(D * Math.sin(gamma0));
     }
-    
+
     this.singam = Math.sin(gamma0);
     this.cosgam = Math.cos(gamma0);
     this.sinrot = Math.sin(gamma);
     this.cosrot = Math.cos(gamma);
-    
+
     this.rB = 1 / this.B;
     this.ArB = this.A * this.rB;
     this.BrA = 1 / this.ArB;
     this.A * this.B;
-    
+
     if (this.no_off) {
       this.u_0 = 0;
     } else {
       this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(D * D - 1) / Math.cos(alpha_c)));
-      
+
       if (this.lat0 < 0) {
         this.u_0 = - this.u_0;
-      }  
+      }
     }
-      
+
     F = 0.5 * gamma0;
     this.v_pole_n = this.ArB * Math.log(Math.tan(FORTPI - F));
     this.v_pole_s = this.ArB * Math.log(Math.tan(FORTPI + F));
@@ -22209,33 +23006,33 @@
     var coords = {};
     var S, T, U, V, W, temp, u, v;
     p.x = p.x - this.lam0;
-    
+
     if (Math.abs(Math.abs(p.y) - HALF_PI) > EPSLN) {
       W = this.E / Math.pow(tsfnz(this.e, p.y, Math.sin(p.y)), this.B);
-      
+
       temp = 1 / W;
       S = 0.5 * (W - temp);
       T = 0.5 * (W + temp);
       V = Math.sin(this.B * p.x);
       U = (S * this.singam - V * this.cosgam) / T;
-          
+
       if (Math.abs(Math.abs(U) - 1.0) < EPSLN) {
         throw new Error();
       }
-      
+
       v = 0.5 * this.ArB * Math.log((1 - U)/(1 + U));
       temp = Math.cos(this.B * p.x);
-      
+
       if (Math.abs(temp) < TOL) {
         u = this.A * p.x;
       } else {
         u = this.ArB * Math.atan2((S * this.cosgam + V * this.singam), temp);
-      }    
+      }
     } else {
       v = p.y > 0 ? this.v_pole_n : this.v_pole_s;
       u = this.ArB * p.y;
     }
-       
+
     if (this.no_rot) {
       coords.x = u;
       coords.y = v;
@@ -22244,17 +23041,17 @@
       coords.x = v * this.cosrot + u * this.sinrot;
       coords.y = u * this.cosrot - v * this.sinrot;
     }
-    
+
     coords.x = (this.a * coords.x + this.x0);
     coords.y = (this.a * coords.y + this.y0);
-    
+
     return coords;
   }
 
   function inverse$n(p) {
     var u, v, Qp, Sp, Tp, Vp, Up;
     var coords = {};
-    
+
     p.x = (p.x - this.x0) * (1.0 / this.a);
     p.y = (p.y - this.y0) * (1.0 / this.a);
 
@@ -22265,29 +23062,29 @@
       v = p.x * this.cosrot - p.y * this.sinrot;
       u = p.y * this.cosrot + p.x * this.sinrot + this.u_0;
     }
-    
+
     Qp = Math.exp(-this.BrA * v);
     Sp = 0.5 * (Qp - 1 / Qp);
     Tp = 0.5 * (Qp + 1 / Qp);
     Vp = Math.sin(this.BrA * u);
     Up = (Vp * this.cosgam + Sp * this.singam) / Tp;
-    
+
     if (Math.abs(Math.abs(Up) - 1) < EPSLN) {
       coords.x = 0;
       coords.y = Up < 0 ? -HALF_PI : HALF_PI;
     } else {
       coords.y = this.E / Math.sqrt((1 + Up) / (1 - Up));
       coords.y = phi2z(this.e, Math.pow(coords.y, 1 / this.B));
-      
+
       if (coords.y === Infinity) {
         throw new Error();
       }
-          
+
       coords.x = -this.rB * Math.atan2((Sp * this.cosgam - Vp * this.singam), Math.cos(this.BrA * u));
     }
-    
+
     coords.x += this.lam0;
-    
+
     return coords;
   }
 
@@ -22300,7 +23097,7 @@
   };
 
   function init$n() {
-    
+
     //double lat0;                    /* the reference latitude               */
     //double long0;                   /* the reference longitude              */
     //double lat1;                    /* first standard parallel              */
@@ -22309,7 +23106,7 @@
     //double r_min;                   /* minor axis                           */
     //double false_east;              /* x offset in meters                   */
     //double false_north;             /* y offset in meters                   */
-    
+
     //the above value can be set with proj4.defs
     //example: proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
@@ -25056,7 +25853,7 @@
     if (this.pn1 <= 0 || this.pn1 > 1e10) {
       throw new Error("Invalid height");
     }
-    
+
     this.p = 1 + this.pn1;
     this.rp = 1 / this.p;
     this.h1 = 1 / this.pn1;
@@ -25109,7 +25906,7 @@
         break;
     }
 
-    // Tilt 
+    // Tilt
     var yt, ba;
     yt = y * this.cg + x * this.sg;
     ba = 1 / (yt * this.sw * this.h1 + this.cw);
@@ -25591,6 +26388,8 @@
         truelat1: null,
         truelat2: null,
         stand_lon: null,
+        pole_lat: null,
+        pole_lon: null,
         dx: null,
         dy: null,
         e_we: null,
@@ -25616,10 +26415,156 @@
             break;
           }
 
-        // Regular latitude-longitude, or cylindrical equidistant
+        // Regular or rotated latitude-longitude.
         case WrfProjections.latlon:
           {
-            this._proj4 = '+units=m' + ' +proj=eqc' + ' +lon_0=' + this._params.stand_lon + ' +a=' + EarthRadius + ' +b=' + EarthRadius + ' +nadgrids=null' + ' +towgs84=0,0,0' + ' +no_defs=True';
+            /*
+             * WPS map_proj='lat-lon' supports both the ordinary geographic
+             * grid and a rotated computational latitude-longitude grid.
+             *
+             * This bundled Proj4JS build does not contain ob_tran, so store
+             * the equivalent WRF rotated-pole parameters here and perform the
+             * spherical forward/inverse rotation explicitly below.
+             */
+            this._rotatedLatLon = null;
+
+            var poleLat =
+              Number(this._params.pole_lat);
+
+            var poleLon =
+              Number(this._params.pole_lon);
+
+            var standLon =
+              Number(this._params.stand_lon);
+
+            var refLat =
+              Number(this._params.ref_lat);
+
+            var poleValuesValid =
+              Number.isFinite(poleLat) &&
+              Number.isFinite(poleLon);
+
+            /*
+             * WRF's unrotated latitude-longitude defaults are
+             *
+             *   pole_lat = 90
+             *   pole_lon = 0
+             *
+             * Anything else represents a rotated computational grid.
+             */
+            var rotated =
+              poleValuesValid &&
+              (
+                Math.abs(
+                  poleLat - 90
+                ) > 1e-9 ||
+                Math.abs(
+                  poleLon
+                ) > 1e-9
+              );
+
+            if (rotated) {
+              /*
+               * Follow WRF/wrf-python hemisphere conventions:
+               *
+               *   pole_lon = 180 -> normally Northern Hemisphere
+               *   pole_lon =   0 -> normally Southern Hemisphere
+               *
+               * For unusual custom pole_lon values, use ref_lat as the
+               * hemisphere fallback.
+               */
+              var north =
+                true;
+
+              if (
+                Math.abs(poleLon) <
+                1e-9
+              ) {
+                north = false;
+              } else if (
+                Math.abs(
+                  poleLon - 180
+                ) > 1e-9 &&
+                Number.isFinite(refLat) &&
+                refLat < 0
+              ) {
+                north = false;
+              }
+
+              if (
+                !Number.isFinite(
+                  standLon
+                )
+              ) {
+                standLon = 0;
+              }
+
+              /*
+               * Equivalent PROJ ob_tran parameters used by NCAR
+               * wrf-python RotatedLatLon:
+               *
+               *   o_lon_p = 180 - pole_lon
+               *   o_lat_p = pole_lat       (NH)
+               *             -pole_lat      (SH)
+               *
+               *   lon_0   = -stand_lon     (NH)
+               *             180-stand_lon  (SH)
+               */
+              var obliquePoleLat =
+                north
+                  ? poleLat
+                  : -poleLat;
+
+              var obliquePoleLon =
+                180 - poleLon;
+
+              var longitudeOrigin =
+                north
+                  ? -standLon
+                  : 180 - standLon;
+
+              var obliquePoleLatRadians =
+                obliquePoleLat *
+                D2R$1;
+
+              this._rotatedLatLon = {
+                lamp:
+                  obliquePoleLon *
+                  D2R$1,
+
+                sphip:
+                  Math.sin(
+                    obliquePoleLatRadians
+                  ),
+
+                cphip:
+                  Math.cos(
+                    obliquePoleLatRadians
+                  ),
+
+                lon0:
+                  longitudeOrigin *
+                  D2R$1
+              };
+            }
+
+            /*
+             * Preserve the existing eqc definition for truly unrotated
+             * latitude-longitude grids and as the fallback projection.
+             */
+            this._proj4 =
+              '+units=m' +
+              ' +proj=eqc' +
+              ' +lon_0=' +
+              this._params.stand_lon +
+              ' +a=' +
+              EarthRadius +
+              ' +b=' +
+              EarthRadius +
+              ' +nadgrids=null' +
+              ' +towgs84=0,0,0' +
+              ' +no_defs=True';
+
             break;
           }
         default:
@@ -25640,7 +26585,119 @@
         if (isNaN(lat) || isNaN(lon)) {
           throw new Error('Invalid lat-lon coordinates');
         }
-        return proj4(WrfProjection._wrf_proj, this._proj4, [lon, lat]);
+
+        if (
+          this._params.map_proj ===
+            WrfProjections.latlon &&
+          this._rotatedLatLon
+        ) {
+          var rotation =
+            this._rotatedLatLon;
+
+          var phi =
+            Number(lat) *
+            D2R$1;
+
+          var lam =
+            Number(lon) *
+              D2R$1 -
+            rotation.lon0;
+
+          /*
+           * Keep the longitude supplied to the spherical rotation on one
+           * continuous principal revolution.
+           */
+          while (lam > Math.PI) {
+            lam -= TWO_PI;
+          }
+
+          while (lam <= -Math.PI) {
+            lam += TWO_PI;
+          }
+
+          var sinPhi =
+            Math.sin(phi);
+
+          var cosPhi =
+            Math.cos(phi);
+
+          var sinLam =
+            Math.sin(lam);
+
+          var cosLam =
+            Math.cos(lam);
+
+          var rotatedLon =
+            Math.atan2(
+              cosPhi *
+                sinLam,
+
+              rotation.sphip *
+                cosPhi *
+                cosLam +
+              rotation.cphip *
+                sinPhi
+            ) +
+            rotation.lamp;
+
+          var rotatedLatArgument =
+            rotation.sphip *
+              sinPhi -
+            rotation.cphip *
+              cosPhi *
+              cosLam;
+
+          /*
+           * Avoid an asin domain error from tiny floating-point excursions
+           * beyond +/-1 near a pole.
+           */
+          rotatedLatArgument =
+            Math.max(
+              -1,
+              Math.min(
+                1,
+                rotatedLatArgument
+              )
+            );
+
+          var rotatedLat =
+            Math.asin(
+              rotatedLatArgument
+            );
+
+          while (
+            rotatedLon >
+            Math.PI
+          ) {
+            rotatedLon -= TWO_PI;
+          }
+
+          while (
+            rotatedLon <=
+            -Math.PI
+          ) {
+            rotatedLon += TWO_PI;
+          }
+
+          /*
+           * Geogrid internally converts lat-lon DX/DY from degrees to the
+           * equivalent spherical arc length in meters. Return coordinates
+           * in the same meter-based computational space.
+           */
+          return [
+            rotatedLon *
+              EarthRadius,
+
+            rotatedLat *
+              EarthRadius
+          ];
+        }
+
+        return proj4(
+          WrfProjection._wrf_proj,
+          this._proj4,
+          [lon, lat]
+        );
       }
     }, {
       key: "ij_to_latlon",
@@ -25648,8 +26705,122 @@
         if (isNaN(i) || isNaN(j)) {
           throw new Error('Invalid IJ coordinates');
         }
-        var lonlat = proj4(this._proj4, WrfProjection._wrf_proj, [i, j]);
-        return [lonlat[1], lonlat[0]];
+
+        if (
+          this._params.map_proj ===
+            WrfProjections.latlon &&
+          this._rotatedLatLon
+        ) {
+          var rotation =
+            this._rotatedLatLon;
+
+          var rotatedLon =
+            Number(i) /
+              EarthRadius;
+
+          var rotatedLat =
+            Number(j) /
+              EarthRadius;
+
+          var lam =
+            rotatedLon -
+            rotation.lamp;
+
+          while (lam > Math.PI) {
+            lam -= TWO_PI;
+          }
+
+          while (lam <= -Math.PI) {
+            lam += TWO_PI;
+          }
+
+          var sinPhi =
+            Math.sin(
+              rotatedLat
+            );
+
+          var cosPhi =
+            Math.cos(
+              rotatedLat
+            );
+
+          var sinLam =
+            Math.sin(lam);
+
+          var cosLam =
+            Math.cos(lam);
+
+          var geographicLonRelative =
+            Math.atan2(
+              cosPhi *
+                sinLam,
+
+              rotation.sphip *
+                cosPhi *
+                cosLam -
+              rotation.cphip *
+                sinPhi
+            );
+
+          var geographicLatArgument =
+            rotation.sphip *
+              sinPhi +
+            rotation.cphip *
+              cosPhi *
+              cosLam;
+
+          geographicLatArgument =
+            Math.max(
+              -1,
+              Math.min(
+                1,
+                geographicLatArgument
+              )
+            );
+
+          var geographicLat =
+            Math.asin(
+              geographicLatArgument
+            );
+
+          var geographicLon =
+            rotation.lon0 +
+            geographicLonRelative;
+
+          while (
+            geographicLon >
+            Math.PI
+          ) {
+            geographicLon -= TWO_PI;
+          }
+
+          while (
+            geographicLon <=
+            -Math.PI
+          ) {
+            geographicLon += TWO_PI;
+          }
+
+          return [
+            geographicLat *
+              R2D,
+
+            geographicLon *
+              R2D
+          ];
+        }
+
+        var lonlat =
+          proj4(
+            this._proj4,
+            WrfProjection._wrf_proj,
+            [i, j]
+          );
+
+        return [
+          lonlat[1],
+          lonlat[0]
+        ];
       }
     }]);
   }();
@@ -25845,6 +27016,8 @@
           truelat1: this._proj_truelat1,
           truelat2: this._proj_truelat2,
           stand_lon: this._proj_stand_lon,
+          pole_lat: this._wps.pole_lat,
+          pole_lon: this._wps.pole_lon,
           dx: this._proj_dx,
           dy: this._proj_dy,
           e_we: this._proj_e_we,
@@ -26045,12 +27218,25 @@
       return out;
     },
     _getPrimaryWorldShift: function _getPrimaryWorldShift() {
+      // Repeated 360-degree world copies are a Web Mercator display feature.
+      // A polar browser CRS has one physical pole-centered map and must never
+      // shift WRF domains by +/-360 degrees for display.
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        return 0;
+      }
+
       if (!this._map || !this.geogrid) {
         return 0;
       }
+
       var basePath = this._canonicalPathPairs(this.geogrid.polygonPath);
       var meanLng = this._pathMeanLng(basePath);
       var centerLng = this._map.getCenter().lng;
+
       return Math.round((centerLng - meanLng) / 360) * 360;
     },
     _getDisplayPath: function _getDisplayPath(extraShift) {
@@ -26060,9 +27246,6 @@
       var basePath = this._canonicalPathPairs(this.geogrid.polygonPath);
       var shift = this._getPrimaryWorldShift() + (extraShift || 0);
       return this._shiftPath(basePath, shift);
-    },
-    _getWrappedPolygonPath: function _getWrappedPolygonPath() {
-      return this._getDisplayPath(0);
     },
     _getWorldCopyStyle: function _getWorldCopyStyle() {
       return {
@@ -26091,21 +27274,43 @@
       }
     },
     _updateWorldCopyLayers: function _updateWorldCopyLayers() {
+      // World-copy rendering exists only for the standard repeated Web
+      // Mercator map. Polar map projections do not wrap horizontally and
+      // map.getBounds() can request inverse-projection points outside the
+      // finite polar display CRS. Do not create world copies in polar mode.
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        this._removeWorldCopyLayers();
+        return;
+      }
+
       if (!this._map || !this.geogrid) {
         return;
       }
+
       this._ensureWorldCopyLayers();
       this._worldCopyLayers.clearLayers();
+
       var mapBounds = this._map.getBounds().pad(0.25);
       var offsets = [-720, -360, 360, 720];
+
       for (var i = 0; i < offsets.length; i++) {
         var path = this._getDisplayPath(offsets[i]);
+
         if (!path || !path.length) {
           continue;
         }
+
         var copyBounds = L.latLngBounds(path);
+
         if (mapBounds.intersects(copyBounds)) {
-          L.polygon(path, this._getWorldCopyStyle()).addTo(this._worldCopyLayers);
+          L.polygon(
+            path,
+            this._getWorldCopyStyle()
+          ).addTo(this._worldCopyLayers);
         }
       }
     },
@@ -26140,6 +27345,8 @@
         truelat1: this.domain.truelat1,
         truelat2: this.domain.truelat2,
         stand_lon: this.domain.stand_lon,
+        pole_lat: this.domain.pole_lat,
+        pole_lon: this.domain.pole_lon,
         dx: this.domain.dx,
         dy: this.domain.dy,
         e_we: this.e_we,
@@ -26149,12 +27356,33 @@
         j_parent_start: this.j_parent_start
       }, (_this$parent = this.parent) === null || _this$parent === void 0 ? void 0 : _this$parent.geogrid);
     },
+
     _getCurrentWorldShift: function _getCurrentWorldShift(referenceLng) {
+      /*
+       * Repeated +/-360-degree worlds are a Web Mercator display feature.
+       *
+       * A polar browser CRS represents one physical pole-centered plane.
+       * Near the pole, geographic longitude can change dramatically from a
+       * very small movement across a meridian. It must never be used to
+       * select a repeated display world.
+       */
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        return 0;
+      }
+
       if (!this._map || !isFinite(referenceLng)) {
         return 0;
       }
+
       var centerLng = this._map.getCenter().lng;
-      return Math.round((centerLng - referenceLng) / 360) * 360;
+
+      return Math.round(
+        (centerLng - referenceLng) / 360
+      ) * 360;
     },
     _toLatLngPair: function _toLatLngPair(point) {
       return Array.isArray(point) ? [point[0], point[1]] : [point.lat, point.lng];
@@ -26175,15 +27403,67 @@
       }
       return wrapped;
     },
+
     _wrapPathToCurrentWorld: function _wrapPathToCurrentWorld(path) {
-      if (!this.geogrid || !path || !path.length) {
+      if (
+        !this.geogrid ||
+        !path ||
+        !path.length
+      ) {
         return path;
       }
+
       var pairs = [];
-      for (var i = 0; i < path.length; i++) {
-        pairs.push(this._toLatLngPair(path[i]));
+
+      for (
+        var i = 0;
+        i < path.length;
+        i++
+      ) {
+        pairs.push(
+          this._toLatLngPair(
+            path[i]
+          )
+        );
       }
-      return this._wrapUnwrappedPairsToCurrentWorld(this.geogrid._unwrapLongitudes(pairs));
+
+      /*
+       * Standard Web Mercator needs longitude unwrapping and repeated-world
+       * selection so domains crossing +/-180 degrees remain continuous.
+       *
+       * Polar projections must not use that logic. EPSG:3575 and EPSG:3031
+       * already represent the geometry in one continuous pole-centered map.
+       * Applying longitude world wrapping here can make a nest appear on the
+       * opposite side of the pole as the viewport crosses a meridian.
+       */
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        var polarPath = [];
+
+        for (
+          var j = 0;
+          j < pairs.length;
+          j++
+        ) {
+          polarPath.push(
+            L.latLng(
+              pairs[j][0],
+              pairs[j][1]
+            )
+          );
+        }
+
+        return polarPath;
+      }
+
+      return this._wrapUnwrappedPairsToCurrentWorld(
+        this.geogrid._unwrapLongitudes(
+          pairs
+        )
+      );
     },
     _getWrappedPolygonPath: function _getWrappedPolygonPath() {
       return this._wrapPathToCurrentWorld(this.geogrid.polygonPath);
@@ -26224,8 +27504,49 @@
         this.geogrid.unstaggered_ij_to_latlon(0, (this.geogrid.e_sn - 1) / 2),
         this.geogrid.corners.sw
       ];
-      var base = this._canonicalPathPairs(handlePath);
-      var shifted = this._shiftPath(base, this._getPrimaryWorldShift());
+      var base;
+
+      /*
+       * The standard Web Mercator map needs canonical longitude unwrapping
+       * for domains that cross the +/-180-degree seam.
+       *
+       * Polar maps do not. Their geometry already lives in one continuous
+       * pole-centered projected plane. Running the handle locations through
+       * _canonicalPathPairs() can choose a different longitude branch than
+       * the actual polar domain polygon, causing the dashed selection/helper
+       * geometry to diverge from the red WRF domain.
+       */
+      if (
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode()
+      ) {
+        base = [];
+
+        for (
+          var i = 0;
+          i < handlePath.length;
+          i++
+        ) {
+          base.push(
+            this._toLatLngPair(
+              handlePath[i]
+            )
+          );
+        }
+      } else {
+        base =
+          this._canonicalPathPairs(
+            handlePath
+          );
+      }
+
+      var shifted =
+        this._shiftPath(
+          base,
+          this._getPrimaryWorldShift()
+        );
+
       return {
         sw: shifted[0],
         s: shifted[1],
@@ -26385,6 +27706,268 @@
       }
     },
     // resize context object
+    /*
+     * A regional latitude-longitude domain must remain a simple polygon.
+     *
+     * In particular, its east and west sides must never cross or fold over
+     * one another. Near a geographic/polar singularity an interactive resize
+     * can otherwise produce a visually self-intersecting domain even though
+     * e_we/e_sn themselves remain numerically valid.
+     *
+     * Test the actual WRF-generated perimeter in the active browser CRS.
+     * Date-line continuity has already been handled by the Geogrid longitude
+     * unwrapping logic before this test.
+     */
+    _latLonPathSelfIntersects: function _latLonPathSelfIntersects(
+      geogrid
+    ) {
+      if (
+        !this._map ||
+        !geogrid ||
+        !geogrid.polygonPath ||
+        geogrid.polygonPath.length < 4
+      ) {
+        return false;
+      }
+
+      var path =
+        geogrid._unwrapLongitudes(
+          geogrid.polygonPath
+        );
+
+      var points = [];
+
+      for (
+        var pointIndex = 0;
+        pointIndex < path.length;
+        pointIndex++
+      ) {
+        var pair =
+          path[pointIndex];
+
+        var point =
+          this._map.project(
+            L.latLng(
+              Number(pair[0]),
+              Number(pair[1])
+            ),
+            0
+          );
+
+        if (
+          !point ||
+          !Number.isFinite(point.x) ||
+          !Number.isFinite(point.y)
+        ) {
+          /*
+           * Non-finite projected geometry is never a valid interactive
+           * regional lat-lon domain.
+           */
+          return true;
+        }
+
+        points.push(point);
+      }
+
+
+      function orientation(
+        a,
+        b,
+        c
+      ) {
+        var value =
+          (
+            b.y - a.y
+          ) *
+          (
+            c.x - b.x
+          ) -
+          (
+            b.x - a.x
+          ) *
+          (
+            c.y - b.y
+          );
+
+        if (Math.abs(value) < 1e-9) {
+          return 0;
+        }
+
+        return value > 0
+          ? 1
+          : 2;
+      }
+
+
+      function onSegment(
+        a,
+        b,
+        c
+      ) {
+        var epsilon =
+          1e-9;
+
+        return (
+          b.x <=
+            Math.max(a.x, c.x) +
+              epsilon &&
+          b.x >=
+            Math.min(a.x, c.x) -
+              epsilon &&
+          b.y <=
+            Math.max(a.y, c.y) +
+              epsilon &&
+          b.y >=
+            Math.min(a.y, c.y) -
+              epsilon
+        );
+      }
+
+
+      function segmentsIntersect(
+        p1,
+        q1,
+        p2,
+        q2
+      ) {
+        var o1 =
+          orientation(
+            p1,
+            q1,
+            p2
+          );
+
+        var o2 =
+          orientation(
+            p1,
+            q1,
+            q2
+          );
+
+        var o3 =
+          orientation(
+            p2,
+            q2,
+            p1
+          );
+
+        var o4 =
+          orientation(
+            p2,
+            q2,
+            q1
+          );
+
+
+        if (
+          o1 !== o2 &&
+          o3 !== o4
+        ) {
+          return true;
+        }
+
+
+        if (
+          o1 === 0 &&
+          onSegment(
+            p1,
+            p2,
+            q1
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o2 === 0 &&
+          onSegment(
+            p1,
+            q2,
+            q1
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o3 === 0 &&
+          onSegment(
+            p2,
+            p1,
+            q2
+          )
+        ) {
+          return true;
+        }
+
+        if (
+          o4 === 0 &&
+          onSegment(
+            p2,
+            q1,
+            q2
+          )
+        ) {
+          return true;
+        }
+
+        return false;
+      }
+
+
+      var segmentCount =
+        points.length - 1;
+
+      for (
+        var firstIndex = 0;
+        firstIndex < segmentCount;
+        firstIndex++
+      ) {
+        for (
+          var secondIndex =
+            firstIndex + 1;
+          secondIndex < segmentCount;
+          secondIndex++
+        ) {
+          /*
+           * Adjacent perimeter segments legitimately share one endpoint.
+           */
+          if (
+            secondIndex ===
+            firstIndex + 1
+          ) {
+            continue;
+          }
+
+          /*
+           * The first and last perimeter segments also share the polygon's
+           * closing endpoint.
+           */
+          if (
+            firstIndex === 0 &&
+            secondIndex ===
+              segmentCount - 1
+          ) {
+            continue;
+          }
+
+          if (
+            segmentsIntersect(
+              points[firstIndex],
+              points[firstIndex + 1],
+              points[secondIndex],
+              points[secondIndex + 1]
+            )
+          ) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    },
+
+
     _resizeContext: null,
     // end resizing
     _resizeEnd: function _resizeEnd(e) {
@@ -26476,7 +28059,7 @@
           this._removeGridLines();
         }
         if (this.parent) {
-          // show parent's grid lines 
+          // show parent's grid lines
           this.parent.showGridLines();
         }
         return;
@@ -26552,6 +28135,55 @@
         }
         this.update();
       } else {
+        /*
+         * Preserve the last valid regional lat-lon state for this mousemove.
+         * If the proposed resize causes the perimeter to intersect itself,
+         * restore this state and leave the edge at its previous valid limit.
+         */
+        var previousLatLonState =
+          null;
+
+        if (
+          this.domain.map_proj ===
+          WrfProjections.latlon
+        ) {
+          previousLatLonState = {
+            ref_lat:
+              this.domain.ref_lat,
+
+            ref_lon:
+              this.domain.ref_lon,
+
+            pole_lat:
+              this.domain.pole_lat,
+
+            pole_lon:
+              this.domain.pole_lon,
+
+            stand_lon:
+              this.domain.stand_lon,
+
+            e_we:
+              this.e_we,
+
+            e_sn:
+              this.e_sn,
+
+            nests:
+              this.nests.map(
+                function (nest) {
+                  return {
+                    grid: nest,
+                    i_parent_start:
+                      nest.i_parent_start,
+                    j_parent_start:
+                      nest.j_parent_start
+                  };
+                }
+              )
+          };
+        }
+
         var center_i = (this.e_we - 1) / 2,
           center_j = (this.e_sn - 1) / 2,
           _e_we = this.e_we,
@@ -26581,8 +28213,33 @@
           center_j = (_e_sn - 1) / 2;
         }
         var center = this.geogrid.unstaggered_ij_to_latlon(center_i, center_j);
-        this.domain.ref_lat = center[0];
-        this.domain.ref_lon = center[1];
+
+        this.domain.ref_lat =
+          center[0];
+
+        this.domain.ref_lon =
+          wrfNormalizeLongitudeForWps(
+            center[1]
+          );
+
+        /*
+         * A regional WPS latitude-longitude domain uses a rotated
+         * computational grid. Moving the MOAD center during resize must keep
+         * pole_lat, pole_lon, and stand_lon synchronized with ref_lat/ref_lon.
+         *
+         * New-domain creation and center dragging already maintain this
+         * relationship through setDefaultValues()/drag(). Historically the
+         * main-grid resize path changed ref_lat/ref_lon directly and left the
+         * rotation parameters stale, which could make a high-latitude
+         * lat-lon domain fold or draw across itself.
+         */
+        if (
+          this.domain.map_proj ===
+          WrfProjections.latlon
+        ) {
+          this.domain._setDefaultProjValues();
+        }
+
         //this.domain.stand_lon = this.domain.ref_lon + this._resizeContext.stand_lon_delta;
         //this.domain.truelat1 = this.domain.ref_lat + this._resizeContext.truelat1_delta;
         //this.domain.truelat2 = this.domain.ref_lat + this._resizeContext.truelat2_delta;
@@ -26603,6 +28260,100 @@
         } else if (this._resizeContext.jAxisOpt == WRFDomainGrid.JAxisOpt.E_SN) {
           this.e_sn = _e_sn;
         }
+
+
+        /*
+         * Regional latitude-longitude domains may cross the Date Line, but
+         * their perimeter must remain topologically simple. The east and west
+         * sides are never allowed to cross, touch, or fold over one another.
+         */
+        if (previousLatLonState) {
+          /*
+           * A regional latitude-longitude grid may approach a complete
+           * revolution, but its west and east edges must never become the
+           * same geographic edge or pass through one another.
+           *
+           * e_we is a grid-point count, so there are e_we - 1 longitudinal
+           * grid intervals.
+           */
+          var latLonDx =
+            Number(
+              this.domain.dx
+            );
+
+          var longitudeSpanInvalid =
+            false;
+
+          if (
+            Number.isFinite(latLonDx) &&
+            Math.abs(latLonDx) > 0
+          ) {
+            var longitudeSpanDegrees =
+              (
+                this.e_we - 1
+              ) *
+              Math.abs(latLonDx);
+
+            longitudeSpanInvalid =
+              longitudeSpanDegrees >=
+              360 - 1e-9;
+          }
+
+
+          var candidateGeogrid =
+            this._initGeogrid();
+
+          var geometryInvalid =
+            this._latLonPathSelfIntersects(
+              candidateGeogrid
+            );
+
+
+          if (
+            longitudeSpanInvalid ||
+            geometryInvalid
+          ) {
+            this.domain.ref_lat =
+              previousLatLonState.ref_lat;
+
+            this.domain.ref_lon =
+              previousLatLonState.ref_lon;
+
+            this.domain.pole_lat =
+              previousLatLonState.pole_lat;
+
+            this.domain.pole_lon =
+              previousLatLonState.pole_lon;
+
+            this.domain.stand_lon =
+              previousLatLonState.stand_lon;
+
+            this.e_we =
+              previousLatLonState.e_we;
+
+            this.e_sn =
+              previousLatLonState.e_sn;
+
+            for (
+              var restoreIndex = 0;
+              restoreIndex <
+                previousLatLonState.nests.length;
+              restoreIndex++
+            ) {
+              var savedNest =
+                previousLatLonState
+                  .nests[restoreIndex];
+
+              savedNest.grid.i_parent_start =
+                savedNest.i_parent_start;
+
+              savedNest.grid.j_parent_start =
+                savedNest.j_parent_start;
+            }
+          }
+        }
+
+
         this.domain.update();
       }
     },
@@ -26670,6 +28421,64 @@
         i_parent_start: this.i_parent_start,
         j_parent_start: this.j_parent_start
       };
+      /*
+       * The standard map can translate a MOAD by geographic latitude/
+       * longitude deltas. A polar map cannot safely do that because
+       * longitude is angular around the pole and becomes discontinuous
+       * across meridians, especially near +/-180 degrees.
+       *
+       * Freeze the WRF projection that exists at the beginning of the drag.
+       * All pointer motion during this drag will be measured in that single
+       * continuous projected X/Y coordinate system.
+       */
+      if (
+        this.parent == null &&
+        typeof window !== 'undefined' &&
+        window.WRFPolarDomainMode &&
+        window.WRFPolarDomainMode.isPolarMode() &&
+        this.geogrid &&
+        this.geogrid._projection &&
+        typeof this.geogrid._projection.latlon_to_ij === 'function' &&
+        typeof this.geogrid._projection.ij_to_latlon === 'function'
+      ) {
+        var polarDragProjection =
+          this.geogrid._projection;
+
+        var polarDragStartXY =
+          polarDragProjection.latlon_to_ij(
+            e.latlng.lat,
+            e.latlng.lng
+          );
+
+        var polarDragRefXY =
+          polarDragProjection.latlon_to_ij(
+            this.domain.ref_lat,
+            this.domain.ref_lon
+          );
+
+        if (
+          polarDragStartXY &&
+          polarDragRefXY &&
+          isFinite(polarDragStartXY[0]) &&
+          isFinite(polarDragStartXY[1]) &&
+          isFinite(polarDragRefXY[0]) &&
+          isFinite(polarDragRefXY[1])
+        ) {
+          this._dragContext.polarDragProjection =
+            polarDragProjection;
+
+          this._dragContext.polarDragStartXY = [
+            polarDragStartXY[0],
+            polarDragStartXY[1]
+          ];
+
+          this._dragContext.polarDragRefXY = [
+            polarDragRefXY[0],
+            polarDragRefXY[1]
+          ];
+        }
+      }
+
       this._map.on('mousemove touchmove pointermove', this._drag, this);
     },
     _drag: function _drag(e) {
@@ -26687,14 +28496,121 @@
         }
       }
       if (this.parent == null) {
-        // for MOAD move ref point by drag distance.
-        // Repeated-world display longitudes are normalized before writing back to WPS/editor fields.
-        this.domain.ref_lat = e.latlng.lat - this._dragContext.startLatLng.lat + this.domain.ref_lat;
-        this.domain.ref_lon = wrfNormalizeLongitudeForWps(e.latlng.lng - this._dragContext.startLatLng.lng + this.domain.ref_lon);
+        var usedPolarProjectedDrag = false;
 
-        // adjust projection parameters
-        this.domain.drag(this._dragContext);
-        this._dragContext.startLatLng = L.latLng(e.latlng.lat, wrfNormalizeLongitudeForWps(e.latlng.lng));
+        /*
+         * Polar MOAD movement is calculated in the fixed WRF projected plane
+         * captured at drag start. This keeps motion continuous across every
+         * geographic meridian, including +/-180 degrees, and avoids treating
+         * longitude as a Cartesian X coordinate near the pole.
+         */
+        if (
+          this._dragContext.polarDragProjection &&
+          this._dragContext.polarDragStartXY &&
+          this._dragContext.polarDragRefXY
+        ) {
+          var polarProjection =
+            this._dragContext.polarDragProjection;
+
+          var currentPolarXY =
+            polarProjection.latlon_to_ij(
+              e.latlng.lat,
+              e.latlng.lng
+            );
+
+          if (
+            currentPolarXY &&
+            isFinite(currentPolarXY[0]) &&
+            isFinite(currentPolarXY[1])
+          ) {
+            var targetPolarX =
+              this._dragContext.polarDragRefXY[0] +
+              currentPolarXY[0] -
+              this._dragContext.polarDragStartXY[0];
+
+            var targetPolarY =
+              this._dragContext.polarDragRefXY[1] +
+              currentPolarXY[1] -
+              this._dragContext.polarDragStartXY[1];
+
+            var targetLatLon =
+              polarProjection.ij_to_latlon(
+                targetPolarX,
+                targetPolarY
+              );
+
+            /*
+             * WrfProjection normally returns [lat, lon], but accept a
+             * Leaflet-like object as well so the drag code remains defensive.
+             */
+            var targetLat =
+              Array.isArray(targetLatLon)
+                ? targetLatLon[0]
+                : targetLatLon && targetLatLon.lat;
+
+            var targetLon =
+              Array.isArray(targetLatLon)
+                ? targetLatLon[1]
+                : targetLatLon && targetLatLon.lng;
+
+            if (
+              isFinite(targetLat) &&
+              isFinite(targetLon)
+            ) {
+              this.domain.ref_lat =
+                targetLat;
+
+              this.domain.ref_lon =
+                wrfNormalizeLongitudeForWps(
+                  targetLon
+                );
+
+              usedPolarProjectedDrag = true;
+            }
+          }
+        }
+
+        if (!usedPolarProjectedDrag) {
+          /*
+           * Original standard Web Mercator behavior remains unchanged.
+           */
+          this.domain.ref_lat =
+            e.latlng.lat -
+            this._dragContext.startLatLng.lat +
+            this.domain.ref_lat;
+
+          this.domain.ref_lon =
+            wrfNormalizeLongitudeForWps(
+              e.latlng.lng -
+              this._dragContext.startLatLng.lng +
+              this.domain.ref_lon
+            );
+        }
+
+        /*
+         * Preserve the existing WRF projection-parameter relationships.
+         */
+        this.domain.drag(
+          this._dragContext
+        );
+
+        /*
+         * The standard implementation works incrementally and therefore
+         * advances its geographic drag anchor on every mouse event.
+         *
+         * Polar projected dragging intentionally retains the original fixed
+         * projected anchor for the entire gesture.
+         */
+        if (!usedPolarProjectedDrag) {
+          this._dragContext.startLatLng =
+            L.latLng(
+              e.latlng.lat,
+              wrfNormalizeLongitudeForWps(
+                e.latlng.lng
+              )
+            );
+        }
+
         this.domain.update();
       } else {
         var ij = this.geogrid.latlon_to_unstaggered_ij(e.latlng.lat, e.latlng.lng);
@@ -26861,7 +28777,7 @@
     },
     /**
      * initializes grid object
-     * 
+     *
      * @param {WRFDomain} domain
      * @param {WRFDomainGrid} parent
      * @param {number} id
@@ -28128,7 +30044,7 @@
       this._setDefaultProjValues();
     },
     /**
-     * 
+     *
      * @param {WPSNamelist} wpsNamelist
      * @param {object} options
      */
@@ -28518,7 +30434,8 @@
         case 'polar':
           showInputGroup(inputTrueLat1, true);
           showStandLon(true);
-          showPoleLatLon(true);
+          // pole_lat and pole_lon are WPS lat-lon parameters, not polar-stereographic parameters.
+          hideInputGroup(inputPoleLat);
           break;
         case 'lat-lon':
           showStandLon(true, formatFloat(domain.stand_lon));
@@ -28567,6 +30484,120 @@
       selectMapProj.tooltip({ container: 'body', trigger: 'hover', html: false });
     }
 
+    /*
+     * A Leaflet map cannot change CRS after construction. When an existing
+     * domain is changed to WPS Polar Stereographic, determine the required
+     * polar browser hemisphere from the domain itself, preserve the complete
+     * current namelist.wps in sessionStorage, and reopen it after the
+     * CRS-changing reload.
+     *
+     * The transition is deferred until the current JavaScript turn finishes.
+     * This is important because WPS helper tools may respond to the same
+     * map_proj change by filling truelat1/stand_lon and applying those values.
+     */
+    function queueAutomaticPolarMapTransition() {
+      if (
+        domain == null ||
+        domain.map_proj !==
+          WrfProjections.polar ||
+        typeof window ===
+          'undefined' ||
+        !window.WRFPolarDomainMode
+      ) {
+        return;
+      }
+
+      window.setTimeout(
+        function () {
+          if (
+            domain == null ||
+            domain.map_proj !==
+              WrfProjections.polar
+          ) {
+            return;
+          }
+
+          try {
+            var currentWps =
+              domain.getWPSNamelist();
+
+            var desiredMode =
+              window.WRFPolarDomainMode
+                .inferModeFromWps(
+                  currentWps
+                );
+
+            /*
+             * A missing/zero latitude is not enough information to choose a
+             * hemisphere safely. In that exceptional case, retain the current
+             * browser map and leave the hemisphere selector available.
+             */
+            if (
+              desiredMode !== 'north' &&
+              desiredMode !== 'south'
+            ) {
+              return;
+            }
+
+            var currentMode =
+              window.WRFPolarDomainMode
+                .getMode();
+
+            if (
+              desiredMode ===
+              currentMode
+            ) {
+              return;
+            }
+
+            /*
+             * Use the same WPS serialization path as Save namelist.wps so
+             * start/end dates, interval_seconds, geog_data_path, root dx/dy,
+             * and the current grid hierarchy survive the reload.
+             */
+            var rawWps =
+              patchWpsNamelistTextWithCustomFields(
+                currentWps.toString()
+              );
+
+            if (
+              !window.WRFPolarDomainMode
+                .queueWpsForReload(
+                  rawWps,
+                  'namelist.wps',
+                  desiredMode
+                )
+            ) {
+              console.error(
+                'Unable to preserve namelist.wps ' +
+                'for automatic polar-map transition.'
+              );
+              return;
+            }
+
+            if (
+              !window.WRFPolarDomainMode
+                .navigateToMode(
+                  desiredMode
+                )
+            ) {
+              console.error(
+                'Unable to switch automatically ' +
+                'to the required polar browser map.'
+              );
+            }
+          } catch (error) {
+            console.error(
+              'Automatic polar-map transition failed:',
+              error
+            );
+          }
+        },
+        0
+      );
+    }
+
+
     // map projection dropdown change
     selectMapProj.on('change', function (e) {
       var map_proj = selectMapProj.val();
@@ -28579,6 +30610,13 @@
           return;
         }
         setGridValues();
+
+        if (
+          map_proj ===
+          WrfProjections.polar
+        ) {
+          queueAutomaticPolarMapTransition();
+        }
       } else {
         configureDxDyFields(map_proj);
         initializeDxDyFields(map_proj);
@@ -28801,7 +30839,7 @@
       return newDomain;
     }
 
-    // hide all fields 
+    // hide all fields
     // called when a user clicks New domain button
     this.showNewDomain = function () {
       domain = null;
@@ -28819,6 +30857,14 @@
       // enable map proj
       enableMapProjectionSelect();
       var map_proj = localStorage.getItem(localStorageKey + 'map_proj') || 'lambert';
+      // A polar browser view intentionally limits new domains to the two WPS
+      // projections supported by this workflow. Do not let a previously saved
+      // Lambert/Mercator preference re-enter through localStorage.
+      if (typeof window !== 'undefined' && window.WRFPolarDomainMode && window.WRFPolarDomainMode.isPolarMode()) {
+        if (map_proj !== WrfProjections.polar && map_proj !== WrfProjections.latlon) {
+          map_proj = WrfProjections.polar;
+        }
+      }
       selectMapProj.val(map_proj);
       configureDxDyFields(map_proj);
       initializeDxDyFields(map_proj);
@@ -28921,17 +30967,120 @@
       refreshWpsHelperTooltips();
     }
 
-    this.show = function (obj) {
+    /*
+     * Restore the Studio's extended WPS fields from an opened or queued
+     * namelist.wps. These fields live outside the legacy domain object, so
+     * simply reconstructing WRFDomain is not enough to restore them after a
+     * CRS-changing reload.
+     */
+    function populateAdvancedWpsFieldsFromNamelist(
+      sourceWpsNamelist
+    ) {
+      if (!sourceWpsNamelist) {
+        return;
+      }
+
+      var share =
+        sourceWpsNamelist.share || {};
+
+      var geogrid =
+        sourceWpsNamelist.geogrid || {};
+
+      function firstValue(value) {
+        if (Array.isArray(value)) {
+          return value.length > 0
+            ? value[0]
+            : null;
+        }
+
+        return value;
+      }
+
+      var startDate =
+        firstValue(
+          share.start_date
+        );
+
+      var endDate =
+        firstValue(
+          share.end_date
+        );
+
+      var intervalSeconds =
+        firstValue(
+          share.interval_seconds
+        );
+
+      var geogDataPath =
+        firstValue(
+          geogrid.geog_data_path
+        );
+
+      if (
+        startDate !== null &&
+        typeof startDate !==
+          'undefined'
+      ) {
+        $('#wps-start-date').val(
+          String(startDate)
+        );
+      }
+
+      if (
+        endDate !== null &&
+        typeof endDate !==
+          'undefined'
+      ) {
+        $('#wps-end-date').val(
+          String(endDate)
+        );
+      }
+
+      if (
+        intervalSeconds !== null &&
+        typeof intervalSeconds !==
+          'undefined'
+      ) {
+        $('#wps-share-interval-seconds')
+          .val(
+            String(intervalSeconds)
+          );
+      }
+
+      if (
+        geogDataPath !== null &&
+        typeof geogDataPath !==
+          'undefined'
+      ) {
+        $('#wps-geog-data-path').val(
+          String(geogDataPath)
+        );
+      }
+    }
+
+
+    this.show = function (
+      obj,
+      sourceWpsNamelist
+    ) {
       if (obj && obj != domain) {
         domain = obj;
         initializedForDomain = false;
       }
+
       if (!initializedForDomain) {
         initDomain();
       }
+
       buttonUpdate.parent().show();
       headerGrids.show();
+
       ensureAdvancedWpsFields();
+
+      populateAdvancedWpsFieldsFromNamelist(
+        sourceWpsNamelist
+      );
+
       container.show();
       setGridsContainerHeight();
     };
@@ -29067,7 +31216,7 @@
   	(function (module, exports) {
   		(function(a,b){b();})(FileSaver_min,function(){function b(a,b){return "undefined"==typeof b?b={autoBom:!1}:"object"!=typeof b&&(console.warn("Deprecated: Expected third argument to be a object"),b={autoBom:!b}),b.autoBom&&/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(a.type)?new Blob(["\uFEFF",a],{type:a.type}):a}function c(a,b,c){var d=new XMLHttpRequest;d.open("GET",a),d.responseType="blob",d.onload=function(){g(d.response,b,c);},d.onerror=function(){console.error("could not download file");},d.send();}function d(a){var b=new XMLHttpRequest;b.open("HEAD",a,!1);try{b.send();}catch(a){}return 200<=b.status&&299>=b.status}function e(a){try{a.dispatchEvent(new MouseEvent("click"));}catch(c){var b=document.createEvent("MouseEvents");b.initMouseEvent("click",!0,!0,window,0,0,0,80,20,!1,!1,!1,!1,0,null),a.dispatchEvent(b);}}var f="object"==typeof window&&window.window===window?window:"object"==typeof self&&self.self===self?self:"object"==typeof commonjsGlobal&&commonjsGlobal.global===commonjsGlobal?commonjsGlobal:void 0,a=f.navigator&&/Macintosh/.test(navigator.userAgent)&&/AppleWebKit/.test(navigator.userAgent)&&!/Safari/.test(navigator.userAgent),g=f.saveAs||("object"!=typeof window||window!==f?function(){}:"download"in HTMLAnchorElement.prototype&&!a?function(b,g,h){var i=f.URL||f.webkitURL,j=document.createElement("a");g=g||b.name||"download",j.download=g,j.rel="noopener","string"==typeof b?(j.href=b,j.origin===location.origin?e(j):d(j.href)?c(b,g,h):e(j,j.target="_blank")):(j.href=i.createObjectURL(b),setTimeout(function(){i.revokeObjectURL(j.href);},4E4),setTimeout(function(){e(j);},0));}:"msSaveOrOpenBlob"in navigator?function(f,g,h){if(g=g||f.name||"download","string"!=typeof f)navigator.msSaveOrOpenBlob(b(f,h),g);else if(d(f))c(f,g,h);else {var i=document.createElement("a");i.href=f,i.target="_blank",setTimeout(function(){e(i);});}}:function(b,d,e,g){if(g=g||open("","_blank"),g&&(g.document.title=g.document.body.innerText="downloading..."),"string"==typeof b)return c(b,d,e);var h="application/octet-stream"===b.type,i=/constructor/i.test(f.HTMLElement)||f.safari,j=/CriOS\/[\d]+/.test(navigator.userAgent);if((j||h&&i||a)&&"undefined"!=typeof FileReader){var k=new FileReader;k.onloadend=function(){var a=k.result;a=j?a:a.replace(/^data:[^;]*;/,"data:attachment/file;"),g?g.location.href=a:location=a,g=null;},k.readAsDataURL(b);}else {var l=f.URL||f.webkitURL,m=l.createObjectURL(b);g?g.location=m:location.href=m,g=null,setTimeout(function(){l.revokeObjectURL(m);},4E4);}});f.saveAs=g.saveAs=g,(module.exports=g);});
 
-  		
+
   	} (FileSaver_min$1));
   	return FileSaver_min$1.exports;
   }
@@ -30067,7 +32216,7 @@
     }, {
       key: "_initVariableGroup",
       value:
-      // create group variables 
+      // create group variables
       function _initVariableGroup(groupName, groupVariables, editorOptions) {
         var _this$view$groups,
           _this$view$groups$gro,
@@ -31050,7 +33199,10 @@
       function createDomainFromNamelist(zoom) {
         domain = new WRFDomain(wpsNamelist);
         domain.addTo(map);
-        wpsPanel.show(domain);
+        wpsPanel.show(
+          domain,
+          wpsNamelist
+        );
         domain.grid.select();
         if (zoom) {
           zoomToDomain();
@@ -31110,6 +33262,20 @@
             } else {
               wpsNamelist = new WPSNamelist(e.target.result);
             }
+
+            // A Leaflet map cannot change CRS after construction. If an opened WPS file belongs
+            // on a different browser map, preserve the raw file in sessionStorage, switch the
+            // browser-map mode, reload, and then reopen it automatically below. The WPS namelist
+            // itself is not modified by this display-mode transition.
+            if (typeof window !== 'undefined' && window.WRFPolarDomainMode && filename != 'wrfsi.nl') {
+              var desiredMapMode = window.WRFPolarDomainMode.inferModeFromWps(wpsNamelist);
+              var currentMapMode = window.WRFPolarDomainMode.getMode();
+              if (desiredMapMode !== currentMapMode && window.WRFPolarDomainMode.queueWpsForReload(e.target.result, filename, desiredMapMode)) {
+                window.WRFPolarDomainMode.navigateToMode(desiredMapMode);
+                return;
+              }
+            }
+
             createDomainFromNamelist(true);
           } catch (error) {
             _handleWPSNamelistError(error);
@@ -31219,23 +33385,202 @@
           center,
           e_we,
           e_sn;
+        var polarNewDomainPreview =
+          typeof window !== 'undefined' &&
+          window.WRFPolarDomainMode &&
+          window.WRFPolarDomainMode.isPolarMode();
+
         if (newDomainContext.drawPolygon == null) {
-          newDomainContext.drawPolygon = L.polygon([bounds.getSouthWest(), bounds.getSouthEast(), bounds.getNorthEast(), bounds.getNorthWest()], {
-            stroke: true,
-            color: '#3388ff',
-            weight: 1,
-            opacity: 1.0,
-            dashArray: '3',
-            fill: false
-          }).addTo(map);
-        } else {
-          newDomainContext.drawPolygon.setLatLngs([bounds.getSouthWest(), bounds.getSouthEast(), bounds.getNorthEast(), bounds.getNorthWest()]);
+          /*
+           * The standard Web Mercator workflow uses a geographic LatLngBounds
+           * rectangle as the temporary New-domain rubber band.
+           *
+           * That geometry is not valid as a visual representation of a WRF
+           * domain on a pole-centered projection. Create the layer here, but
+           * in polar mode its coordinates will be replaced below with the
+           * actual WRF-generated domain polygon.
+           */
+          newDomainContext.drawPolygon = L.polygon(
+            polarNewDomainPreview
+              ? []
+              : [
+                  bounds.getSouthWest(),
+                  bounds.getSouthEast(),
+                  bounds.getNorthEast(),
+                  bounds.getNorthWest()
+                ],
+            {
+              stroke: true,
+              color: '#3388ff',
+              weight: 1,
+              opacity: 1.0,
+              dashArray: '3',
+              fill: false
+            }
+          ).addTo(map);
+        } else if (!polarNewDomainPreview) {
+          /*
+           * Preserve the original rectangular preview behavior on the
+           * standard map.
+           */
+          newDomainContext.drawPolygon.setLatLngs([
+            bounds.getSouthWest(),
+            bounds.getSouthEast(),
+            bounds.getNorthEast(),
+            bounds.getNorthWest()
+          ]);
         }
         newDomainContext.endMarker.setLatLng(e.latlng);
-        center = bounds.getCenter();
-        domain.setDefaultValues(center.lat, center.lng);
-        e_we = Math.round(map.distance(newDomainContext.startLatlng, [newDomainContext.startLatlng.lat, e.latlng.lng]) / domain.dxInMeters);
-        e_sn = Math.round(map.distance(newDomainContext.startLatlng, [e.latlng.lat, newDomainContext.startLatlng.lng]) / domain.dyInMeters);
+
+        if (polarNewDomainPreview) {
+          /*
+           * A geographic LatLngBounds rectangle is not a Cartesian rectangle
+           * in a pole-centered map. Find the visual midpoint in the active
+           * Leaflet polar CRS instead.
+           */
+          var startLayerPoint =
+            map.latLngToLayerPoint(
+              newDomainContext.startLatlng
+            );
+
+          var endLayerPoint =
+            map.latLngToLayerPoint(
+              e.latlng
+            );
+
+          var centerLayerPoint =
+            L.point(
+              (
+                startLayerPoint.x +
+                endLayerPoint.x
+              ) * 0.5,
+              (
+                startLayerPoint.y +
+                endLayerPoint.y
+              ) * 0.5
+            );
+
+          center =
+            map.layerPointToLatLng(
+              centerLayerPoint
+            );
+
+          domain.setDefaultValues(
+            center.lat,
+            wrfNormalizeLongitudeForWps(
+              center.lng
+            )
+          );
+
+          /*
+           * Measure the rubber-band dimensions in the actual WRF projection,
+           * not as independent geographic latitude/longitude distances.
+           *
+           * This is especially important near the pole and across +/-180,
+           * where longitude is angular and discontinuous.
+           */
+          var newDomainProjection =
+            new WrfProjection({
+              map_proj:
+                domain.map_proj,
+
+              ref_lat:
+                domain.ref_lat,
+
+              ref_lon:
+                domain.ref_lon,
+
+              truelat1:
+                domain.truelat1,
+
+              truelat2:
+                domain.truelat2,
+
+              stand_lon:
+                domain.stand_lon,
+
+              pole_lat:
+                domain.pole_lat,
+
+              pole_lon:
+                domain.pole_lon,
+
+              dx:
+                domain.dx,
+
+              dy:
+                domain.dy
+            });
+
+          var startProjectedXY =
+            newDomainProjection.latlon_to_ij(
+              newDomainContext.startLatlng.lat,
+              wrfNormalizeLongitudeForWps(
+                newDomainContext.startLatlng.lng
+              )
+            );
+
+          var endProjectedXY =
+            newDomainProjection.latlon_to_ij(
+              e.latlng.lat,
+              wrfNormalizeLongitudeForWps(
+                e.latlng.lng
+              )
+            );
+
+          e_we =
+            Math.round(
+              Math.abs(
+                endProjectedXY[0] -
+                startProjectedXY[0]
+              ) /
+              domain.dxInMeters
+            );
+
+          e_sn =
+            Math.round(
+              Math.abs(
+                endProjectedXY[1] -
+                startProjectedXY[1]
+              ) /
+              domain.dyInMeters
+            );
+        } else {
+          /*
+           * Preserve the original Standard Map New-domain behavior exactly.
+           */
+          center =
+            bounds.getCenter();
+
+          domain.setDefaultValues(
+            center.lat,
+            center.lng
+          );
+
+          e_we =
+            Math.round(
+              map.distance(
+                newDomainContext.startLatlng,
+                [
+                  newDomainContext.startLatlng.lat,
+                  e.latlng.lng
+                ]
+              ) /
+              domain.dxInMeters
+            );
+
+          e_sn =
+            Math.round(
+              map.distance(
+                newDomainContext.startLatlng,
+                [
+                  e.latlng.lat,
+                  newDomainContext.startLatlng.lng
+                ]
+              ) /
+              domain.dyInMeters
+            );
+        }
         if (e_we < WRFDomainGrid.minGridSize || e_sn < WRFDomainGrid.minGridSize) {
           domain.remove();
           wpsPanel.hide();
@@ -31249,6 +33594,26 @@
             domain.addTo(map);
             newDomainContext.domainOnMap = true;
             wpsPanel.show();
+          }
+
+          /*
+           * On a polar browser map the blue dashed New-domain preview must use
+           * the same WRF-generated projected polygon as the red domain.
+           *
+           * Do not reconstruct it from geographic SW/SE/NE/NW bounds because
+           * those geographic axes do not describe a rectangle in a
+           * pole-centered projection.
+           */
+          if (
+            polarNewDomainPreview &&
+            newDomainContext.drawPolygon &&
+            domain.grid &&
+            domain.grid.geogrid &&
+            domain.grid._getWrappedPolygonPath
+          ) {
+            newDomainContext.drawPolygon.setLatLngs(
+              domain.grid._getWrappedPolygonPath()
+            );
           }
         }
       }
@@ -31284,7 +33649,27 @@
 
       // a list of leaflet feature groups containing markers for sample geogrid outpput files
       this._geogridCornerMarkerGroups = [];
-      if (location.hash) {
+
+      // Complete an automatic map-CRS switch initiated while opening namelist.wps.
+      var pendingWpsPayload = typeof window !== 'undefined' && window.WRFPolarDomainMode ? window.WRFPolarDomainMode.consumePendingWps() : null;
+      if (pendingWpsPayload) {
+        try {
+          removeDomain();
+          wpsNamelist = new WPSNamelist(pendingWpsPayload.rawText);
+          sidebar.open('domains');
+          createDomainFromNamelist(true);
+        } catch (error) {
+          _handleWPSNamelistError(error);
+        }
+      }
+
+      var pendingNewDomain = !pendingWpsPayload && typeof window !== 'undefined' && window.WRFPolarDomainMode ? window.WRFPolarDomainMode.consumePendingNewDomain() : false;
+      if (pendingNewDomain) {
+        sidebar.open('domains');
+        initNewDomain();
+      }
+
+      if (!pendingWpsPayload && !pendingNewDomain && location.hash) {
         var sample = location.hash.substring(1),
           sampleRoute = sample.toLowerCase(),
           ignoredSampleRoutes = {
@@ -31427,6 +33812,15 @@
       map.off('baselayerchange');
     },
     initialize: function initialize(layers, overlays, options) {
+      // Keep the stable map's saved base-layer preference separate from the
+      // experimental north/south polar tile selections. Otherwise a saved
+      // "Polar Street" key can leak into the standard Web Mercator map, or a
+      // standard Esri/OpenStreetMap key can leak into a polar map.
+      if (options && options.storageKey) {
+        this._localStorageKey = options.storageKey;
+        options = Object.assign({}, options);
+        delete options.storageKey;
+      }
       this._layers = layers;
       this._overlays = overlays;
       this._currentBaseLayer = this.getCurrentLayer();
@@ -31866,38 +34260,56 @@
       throw "invalid div option";
     }
     var tileLayerOptions = {
-      // Keep wrapped world copies when zoomed far out so the map view stays visually continuous
-      // around the international date line. We will handle domain-edge geometry separately.
+      // Keep wrapped world copies when zoomed far out so the standard map view stays visually
+      // continuous around the international date line. Polar tile schemes do not wrap.
       noWrap: false
     };
 
-    var openStreetMapLayer = L.tileLayer.provider('OpenStreetMap', tileLayerOptions);
-    var esriWorldTopoLayer = L.tileLayer.provider('Esri.WorldTopoMap', tileLayerOptions);
-    var esriWorldStreetLayer = L.tileLayer.provider('Esri.WorldStreetMap', tileLayerOptions);
-    var esriNatGeoLayer = L.tileLayer.provider('Esri.NatGeoWorldMap', tileLayerOptions);
-    var esriWorldImageryLayer = L.tileLayer.provider('Esri.WorldImagery', tileLayerOptions);
-    var openTopoMapLayer = L.tileLayer.provider('OpenTopoMap', tileLayerOptions);
+    // Browser-map CRS is independent from WPS map_proj. The existing Studio uses Web Mercator
+    // for ordinary domain design. The experimental polar branch can instead initialize Leaflet
+    // with an Arctic or Antarctic CRS while preserving the same sidebar, domain objects, WPS
+    // validation, nesting logic, and namelist.wps export path.
+    var polarMapMode = typeof window !== 'undefined' ? window.WRFPolarDomainMode : null;
+    var polarMapConfig = polarMapMode && polarMapMode.getActiveConfig ? polarMapMode.getActiveConfig() : null;
+    var persistentLayersControl;
+    var initialBaseLayer;
 
-    // create a list of online base layer tile providers. OpenStreetMap is intentionally first.
-    var persistentLayersControl = persistentLayers({
-      "Open Street Map": openStreetMapLayer,
-      "Esri World Topo": esriWorldTopoLayer,
-      "Esri World Street": esriWorldStreetLayer,
-      "Esri NatGeo": esriNatGeoLayer,
-      "Esri World Imagery": esriWorldImageryLayer,
-      "Open Topo Map": openTopoMapLayer
-    }, null, {
-      position: 'topright'
-    });
+    if (polarMapConfig) {
+      var polarBaseLayers = polarMapMode.polarTileLayers();
+      persistentLayersControl = persistentLayers(polarBaseLayers, null, {
+        position: 'topright',
+        storageKey: '_leaflet_persistent_layers_polar_' + polarMapConfig.mode
+      });
+      initialBaseLayer =
+        persistentLayersControl.getCurrentLayer() ||
+        polarBaseLayers['Polar World Street'];
+    } else {
+      var openStreetMapLayer = L.tileLayer.provider('OpenStreetMap', tileLayerOptions);
+      var esriWorldTopoLayer = L.tileLayer.provider('Esri.WorldTopoMap', tileLayerOptions);
+      var esriWorldStreetLayer = L.tileLayer.provider('Esri.WorldStreetMap', tileLayerOptions);
+      var esriNatGeoLayer = L.tileLayer.provider('Esri.NatGeoWorldMap', tileLayerOptions);
+      var esriWorldImageryLayer = L.tileLayer.provider('Esri.WorldImagery', tileLayerOptions);
+      var openTopoMapLayer = L.tileLayer.provider('OpenTopoMap', tileLayerOptions);
 
-    var initialBaseLayer = esriWorldStreetLayer;
+      // Standard-map layer ordering remains identical to the stable application.
+      persistentLayersControl = persistentLayers({
+        "Open Street Map": openStreetMapLayer,
+        "Esri World Topo": esriWorldTopoLayer,
+        "Esri World Street": esriWorldStreetLayer,
+        "Esri NatGeo": esriNatGeoLayer,
+        "Esri World Imagery": esriWorldImageryLayer,
+        "Open Topo Map": openTopoMapLayer
+      }, null, {
+        position: 'topright'
+      });
+      initialBaseLayer = esriWorldStreetLayer;
+    }
 
-    // initialize map object
-    var map = L.map(settings['div'][0], {
+    var mapOptions = {
       layers: [initialBaseLayer],
-      center: [0, 0],
+      center: polarMapConfig ? polarMapConfig.center : [0, 0],
       zoomControl: false,
-      zoom: Math.max((initialBaseLayer.options && initialBaseLayer.options.minZoom) || 1, 3),
+      zoom: polarMapConfig ? polarMapConfig.zoom : Math.max((initialBaseLayer.options && initialBaseLayer.options.minZoom) || 1, 3),
       dragging: true,
       touchZoom: true,
       doubleClickZoom: true,
@@ -31910,7 +34322,52 @@
       wheelDebounceTime: 40,
       wheelPxPerZoomLevel: 120,
       bounceAtZoomLimits: false
-    });
+    };
+
+    if (polarMapConfig) {
+      mapOptions.crs = polarMapMode.createLeafletCrs();
+    }
+
+    // initialize map object
+    var map = L.map(settings['div'][0], mapOptions);
+    if (typeof document !== 'undefined' && document.documentElement) {
+      document.documentElement.setAttribute('data-wrf-map-mode', polarMapConfig ? polarMapConfig.mode : 'standard');
+    }
+
+    /*
+     * Polar reference cartography is a browser-display overlay only.
+     *
+     * It does not participate in WRF/WPS projection calculations, domain
+     * geometry, nesting, dragging, resizing, or namelist generation.
+     *
+     * The overlay is intentionally attached only when a polar browser CRS is
+     * active. Standard Web Mercator behavior remains unchanged.
+     */
+    if (
+      polarMapConfig &&
+      typeof window !== 'undefined' &&
+      window.WRFPolarReferenceOverlay &&
+      typeof window.WRFPolarReferenceOverlay.attach === 'function'
+    ) {
+      window.WRFPolarReferenceOverlay.attach(
+        map,
+        polarMapConfig.mode
+      );
+    }
+
+    /*
+     * Hide background cartography equatorward of the configured polar
+     * workspace boundary. The CRS and WPS projection remain unchanged.
+     */
+    if (
+      polarMapConfig &&
+      polarMapMode &&
+      typeof polarMapMode.createPolarBoundaryMask === 'function'
+    ) {
+      polarMapMode.createPolarBoundaryMask(
+        map
+      );
+    }
 
     var mapModeStatus = L.control({ position: 'bottomleft' });
     mapModeStatus.onAdd = function () {
@@ -31920,7 +34377,7 @@
       div.style.borderRadius = '4px';
       div.style.fontSize = '11px';
       div.style.boxShadow = '0 1px 4px rgba(0,0,0,0.2)';
-      div.innerHTML = 'Map: Online';
+      div.innerHTML = polarMapConfig ? 'Map: ' + polarMapConfig.shortLabel : 'Map: Online';
       this._container = div;
       return div;
     };
@@ -31932,7 +34389,7 @@
     mapModeStatus.addTo(map);
 
     map.on('baselayerchange', function () {
-      mapModeStatus.setText('Map: Online');
+      mapModeStatus.setText(polarMapConfig ? 'Map: ' + polarMapConfig.shortLabel : 'Map: Online');
     });
 
     // add layers control to map
@@ -31951,7 +34408,7 @@
     // activate tooltips on tab icons
     sidebarTabs.tooltip('dispose').tooltip({ container: 'body', trigger: 'hover', html: false });
     sidebar.on('content', function (e) {
-      // close tooltips manually because when a tab panel is opened 
+      // close tooltips manually because when a tab panel is opened
       // any displayed tooltip remains opened
       sidebarTabs.tooltip('hide');
     });

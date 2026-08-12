@@ -36,6 +36,26 @@
 
   // Seed scalar and per-domain array values from catalog defaults.
   function seedValueForField(field, maxDom) {
+    /*
+     * WRF Registry uses a bare "-" for domains.time_step in sources where
+     * no numeric default is supplied. Preserve that marker in metadata, but
+     * do not seed it into the editable namelist value.
+     *
+     * Leaving time_step blank allows the WPS-aware suggestion below to
+     * calculate the normal 6 x d01 DX(km) starting value.
+     */
+    if (
+      field &&
+      field.key === 'domains.time_step' &&
+      String(
+        field.defaultValue == null
+          ? ''
+          : field.defaultValue
+      ).trim() === '-'
+    ) {
+      return '';
+    }
+
     var count = resolveEntries(field.entries, maxDom);
     if (count > 1) {
       var arr = [];
@@ -72,6 +92,26 @@
 
   function isBlankValue(value) {
     return value === '' || value === null || typeof value === 'undefined';
+  }
+
+  /*
+   * domains.time_step is unusual because the WRF Registry may use a bare
+   * "-" where no numeric default exists. Treat that marker as unset only
+   * for the time-step suggestion path rather than globally changing the
+   * meaning of "-" for every Registry-backed variable.
+   */
+  function isUnsetTimeStepValue(value) {
+    if (Array.isArray(value)) {
+      return value.every(
+        isUnsetTimeStepValue
+      );
+    }
+
+    if (isBlankValue(value)) {
+      return true;
+    }
+
+    return String(value).trim() === '-';
   }
 
   function getFirstNumeric(value) {
@@ -256,7 +296,7 @@
       if (!field || !snapshot || !snapshot.values) return;
       if (state.userEditedFields && state.userEditedFields[key]) return;
       var current = state.values[key];
-      if (!isBlankValue(current)) return;
+      if (!isUnsetTimeStepValue(current)) return;
       var dx = getFirstNumeric(snapshot.values['domains.dx']);
       var suggested = suggestTimeStepFromDx(dx);
       if (suggested === '') return;

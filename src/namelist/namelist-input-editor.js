@@ -1637,6 +1637,23 @@
   };
 
   HybridNamelistInputEditor.prototype.buildSeedValueForField = function (field) {
+    /*
+     * WRF Registry may publish a bare "-" for domains.time_step when no
+     * numeric default exists. Do not expose that Registry marker as an
+     * editable namelist value.
+     */
+    if (
+      field &&
+      field.key === 'domains.time_step' &&
+      String(
+        field.defaultValue == null
+          ? ''
+          : field.defaultValue
+      ).trim() === '-'
+    ) {
+      return '';
+    }
+
     var count = resolveEntries(field.entries, this.maxDom);
     if (count > 1) {
       var arr = [];

@@ -32,6 +32,13 @@
     return round3(x);
   }
   function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+  function getPolarBrowserMode() {
+    try {
+      return window.WRFPolarDomainMode ? window.WRFPolarDomainMode.getMode() : 'standard';
+    } catch (e) {
+      return 'standard';
+    }
+  }
   function ensureCameraStyleTooltip(el) {
     if (!el || !window.jQuery || typeof window.jQuery.fn.tooltip !== 'function') return;
     try {
@@ -109,6 +116,15 @@
   }
   function getProjectionRecommendation(state) {
     const mapProj = state.mapProj;
+    if (state.polarMode === 'north' || state.polarMode === 'south') {
+      if (mapProj !== 'polar' && mapProj !== 'lat-lon') {
+        return {
+          suggested: 'polar',
+          reason: 'polar browser view supports only polar stereographic or latitude-longitude domains'
+        };
+      }
+      return null;
+    }
     const suggested = recommendedProjection(state.refLat, state.rootEwe, state.rootEsn);
     const hasRegionalDxDy = isFinite(state.dx) && isFinite(state.dy) && state.dx > 0 && state.dy > 0;
     const maybeGlobal = mapProj === 'lat-lon' && !hasRegionalDxDy;
@@ -130,7 +146,13 @@
     const hasRegionalDxDy = isFinite(state.dx) && isFinite(state.dy) && state.dx > 0 && state.dy > 0;
     const looksGlobalLatLon = mapProj === 'lat-lon' && !hasRegionalDxDy;
     const suggested = recommendedProjection(refLat, eWe, eSn);
-    if (mapProj !== 'lat-lon' && mapProj !== suggested) {
+    if (state.polarMode === 'north' || state.polarMode === 'south') {
+      if (mapProj === 'polar' || mapProj === 'lat-lon') {
+        advice.push({ level: 'valid', text: 'Projection is permitted in the polar browser workflow.' });
+      } else {
+        advice.push({ level: 'error', text: 'Polar browser view permits only polar or lat-lon map projection.' });
+      }
+    } else if (mapProj !== 'lat-lon' && mapProj !== suggested) {
       advice.push({ level: 'warning', text: 'Projection fit: ' + suggested + ' is usually a better match for ref_lat=' + round3(refLat) + '°.' });
     } else {
       advice.push({ level: 'valid', text: 'Projection fit looks reasonable for the current domain latitude.' });
@@ -142,7 +164,9 @@
         advice.push({ level: 'valid', text: 'lat-lon regional mode is supported. dx and dy are in degrees, and ref_lat/ref_lon should be set.' });
       }
       advice.push({ level: 'info', text: 'lat-lon is the only ARW projection that supports global domains.' });
-      if (!looksGlobalLatLon && Math.abs(refLat) > 35) {
+      if (!looksGlobalLatLon && state.polarMode !== 'standard') {
+        advice.push({ level: 'valid', text: 'Polar browser view keeps regional lat-lon available; pole_lat, pole_lon, and stand_lon control the rotated computational grid.' });
+      } else if (!looksGlobalLatLon && Math.abs(refLat) > 35) {
         advice.push({ level: 'warning', text: 'Regional lat-lon away from the computational equator can increase map-scale distortion.' });
       }
     } else {
@@ -173,7 +197,8 @@
       dy: num(q('input[name="dy"]', form)),
       rootEwe: first.e_we,
       rootEsn: first.e_sn,
-      rootGeog: first.geog || ''
+      rootGeog: first.geog || '',
+      polarMode: getPolarBrowserMode()
     };
   }
   function applyChanges() {
@@ -343,14 +368,19 @@
       truelat1Input.value = round3(clamp(refLat, -80, 80));
       standLonInput.value = refLon;
     } else if (mapProj === 'polar') {
-      const targetLat = Math.abs(refLat) < 45 ? (refLat >= 0 ? 60 : -60) : refLat;
+      const polarMode = getPolarBrowserMode();
+      const hemiSign = polarMode === 'south' ? -1 : polarMode === 'north' ? 1 : (refLat >= 0 ? 1 : -1);
+      const targetMagnitude = Math.abs(refLat) < 45 ? 60 : Math.abs(refLat);
+      const targetLat = hemiSign * targetMagnitude;
       truelat1Input.value = round3(clamp(targetLat, -89, 89));
       standLonInput.value = refLon;
     } else if (mapProj === 'lat-lon') {
-      const poleLat = refLat >= 0 ? 90 - refLat : 90 + refLat;
+      const polarMode = getPolarBrowserMode();
+      const northern = polarMode === 'north' || (polarMode === 'standard' && refLat >= 0);
+      const poleLat = northern ? 90 - refLat : 90 + refLat;
       poleLatInput.value = round3(clamp(poleLat, -90, 90));
-      poleLonInput.value = refLat >= 0 ? 180 : 0;
-      standLonInput.value = round3(refLat >= 0 ? -refLon : 180 - refLon);
+      poleLonInput.value = northern ? 180 : 0;
+      standLonInput.value = round3(northern ? -refLon : 180 - refLon);
     }
     lambertModePendingApply = false;
     if (showToast) {
@@ -361,6 +391,29 @@
   }
   function buildValidation(state) {
     const issues = [];
+
+    if (state.polarMode === 'north' || state.polarMode === 'south') {
+      const expectedNorth = state.polarMode === 'north';
+      if (state.mapProj !== 'polar' && state.mapProj !== 'lat-lon') {
+        issues.push({ level: 'error', text: 'Polar browser view supports only map_proj=polar or map_proj=lat-lon.' });
+      }
+      if (isFinite(state.refLat)) {
+        if (expectedNorth && state.refLat <= 0) {
+          issues.push({ level: 'error', text: 'Northern polar browser view requires a positive ref_lat for a regional polar domain.' });
+        } else if (!expectedNorth && state.refLat >= 0) {
+          issues.push({ level: 'error', text: 'Southern polar browser view requires a negative ref_lat for a regional polar domain.' });
+        } else {
+          issues.push({ level: 'valid', text: (expectedNorth ? 'Northern' : 'Southern') + ' polar browser hemisphere matches ref_lat.' });
+        }
+      }
+      if (state.mapProj === 'polar') {
+        const t1 = num(q('input[name="truelat1"]', state.form));
+        if (isFinite(t1) && ((expectedNorth && t1 <= 0) || (!expectedNorth && t1 >= 0))) {
+          issues.push({ level: 'error', text: 'truelat1 must use the same hemisphere sign as the selected polar browser view.' });
+        }
+      }
+    }
+
     state.rows.forEach((row, idx) => {
       const g = getGridData(row);
       if (idx > 0) {
@@ -419,7 +472,9 @@
     btn.id = 'tools-suggest-projection-inline';
     btn.className = 'btn btn-sm btn-outline-primary ml-1';
     btn.textContent = 'Suggest';
-    btn.title = 'Check whether this domain would work better with Lambert, Mercator, or Polar based on latitude and shape.';
+    btn.title = getPolarBrowserMode() === 'standard'
+      ? 'Check whether this domain would work better with Lambert, Mercator, or Polar based on latitude and shape.'
+      : 'Check the current polar-domain projection. Polar browser view allows Polar Stereographic or Latitude-Longitude.';
     mapProjSelect.insertAdjacentElement('afterend', btn);
     ensureCameraStyleTooltip(btn);
     btn.addEventListener('click', function () {

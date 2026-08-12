@@ -1957,3 +1957,104 @@ div#map .leaflet-interactive,
   vertical-align: middle;
   cursor: help;
 }
+
+/* ==========================================================
+ * Polar reference cartography
+ * ========================================================== */
+
+.polar-reference-label-icon {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+.polar-reference-label {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  display: block;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+
+  color: #3f4852;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+
+  text-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.95),
+     1px -1px 0 rgba(255, 255, 255, 0.95),
+    -1px  1px 0 rgba(255, 255, 255, 0.95),
+     1px  1px 0 rgba(255, 255, 255, 0.95),
+     0     0   3px rgba(255, 255, 255, 0.95);
+
+  transform: translateY(-50%);
+}
+
+
+.polar-reference-label-capital {
+  color: #202830;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.polar-reference-label-world-city {
+  color: #2e3740;
+  font-weight: 500;
+}
+
+.polar-reference-label-station {
+  color: #3f4852;
+  font-size: 10px;
+  font-style: italic;
+}
+
+/*
+ * Polar marine geographic labels.
+ *
+ * These intentionally sit below populated-place and scientific-station
+ * labels in the visual hierarchy.
+ */
+.polar-reference-marine-label-icon {
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+
+.polar-reference-marine-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+
+  color: #687a89;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.4px;
+
+  text-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.78),
+     1px -1px 0 rgba(255, 255, 255, 0.78),
+    -1px  1px 0 rgba(255, 255, 255, 0.78),
+     1px  1px 0 rgba(255, 255, 255, 0.78),
+     0     0   3px rgba(255, 255, 255, 0.75);
+
+  transform: translate(-50%, -50%);
+}
+
+.polar-reference-marine-label-major {
+  color: #596d7d;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
