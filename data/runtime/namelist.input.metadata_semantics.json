@@ -1,0 +1,280 @@
+{
+  "_meta": {
+    "version": "v3.2.3.6-beta-save-dialog-isolation-and-index-fix",
+    "description": "Semantics layer for namelist metadata. Distinguishes published defaults from blank/no-default fields and carries reference notes for recommendation/help logic.",
+    "rules": {
+      "blankUsersGuideDefaultMeans": "user_required_choice",
+      "nonblankUsersGuideDefaultMeans": "published_default",
+      "optionListsIndependentOfDefaults": true,
+      "blankOptionMustBeRenderable": true,
+      "blankSelectionMeaning": "no_user_selection_or_user_required_choice"
+    },
+    "pdfDefaultRuleApplied": "v4.0.0.0-namelist-pdf-defaults"
+  },
+  "shared": {
+    "requiresUserValue": false,
+    "conditionallyRequired": false
+  },
+  "fields": {
+    "domains.e_we": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.e_sn": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.grid_id": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.parent_id": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.i_parent_start": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.j_parent_start": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.parent_grid_ratio": {
+      "defaultSource": "wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "domains.parent_time_step_ratio": {
+      "defaultSource": "derived_from_wps",
+      "defaultSemantics": "published_default",
+      "requiresUserValue": false,
+      "hasPublishedDefault": true,
+      "conditionallyRequired": false
+    },
+    "physics.mp_physics": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "optionMetadataPresent": true,
+      "recommendationSource": [
+        "users_guide_best_practices",
+        "physics_reference"
+      ],
+      "renderBlankOption": true,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "physics.sf_sfclay_physics": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "optionMetadataPresent": true,
+      "recommendationSource": [
+        "users_guide_best_practices",
+        "physics_reference"
+      ],
+      "renderBlankOption": true,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "physics.cu_physics": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "optionMetadataPresent": true,
+      "recommendationSource": [
+        "users_guide_best_practices",
+        "physics_reference"
+      ],
+      "renderBlankOption": true,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "dynamics.diff_opt": {
+      "hasPublishedDefault": true,
+      "defaultSemantics": "published_default",
+      "optionMetadataPresent": true,
+      "recommendationSource": [
+        "dynamics_reference"
+      ],
+      "renderBlankOption": true,
+      "requiresUserValue": false,
+      "conditionallyRequired": false
+    },
+    "dynamics.km_opt": {
+      "hasPublishedDefault": true,
+      "defaultSemantics": "published_default",
+      "optionMetadataPresent": true,
+      "recommendationSource": [
+        "dynamics_reference"
+      ],
+      "renderBlankOption": true,
+      "requiresUserValue": false,
+      "conditionallyRequired": false
+    },
+    "dynamics.radt": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "no_published_default",
+      "optionMetadataPresent": false,
+      "recommendationSource": [
+        "physics_reference"
+      ]
+    },
+    "domains.time_step": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "optionMetadataPresent": false,
+      "recommendationSource": [
+        "users_guide_best_practices",
+        "dynamics_reference"
+      ],
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "renderBlankOption": true,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "domains.ocean_z": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "shapeSource": "ocean_levels",
+      "helpSource": [
+        "users_guide_pdf"
+      ],
+      "renderBlankOption": true
+    },
+    "domains.ocean_t": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "shapeSource": "ocean_levels",
+      "helpSource": [
+        "users_guide_pdf"
+      ],
+      "renderBlankOption": true
+    },
+    "domains.ocean_s": {
+      "hasPublishedDefault": false,
+      "defaultSemantics": "user_required_choice",
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "shapeSource": "ocean_levels",
+      "helpSource": [
+        "users_guide_pdf"
+      ],
+      "renderBlankOption": true
+    },
+    "physics.ra_lw_physics": {
+      "hasPublishedDefault": true,
+      "defaultSemantics": "published_default",
+      "optionMetadataPresent": true,
+      "renderBlankOption": true,
+      "requiresUserValue": false,
+      "conditionallyRequired": false
+    },
+    "physics.ra_sw_physics": {
+      "hasPublishedDefault": true,
+      "defaultSemantics": "published_default",
+      "optionMetadataPresent": true,
+      "renderBlankOption": true,
+      "requiresUserValue": false,
+      "conditionallyRequired": false
+    },
+    "time_control.io_form_auxhist2": {
+      "hasPublishedDefault": false,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "defaultSemantics": "user_required_choice",
+      "renderBlankOption": true,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "domains.time_step_dfi": {
+      "hasPublishedDefault": false,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "defaultSemantics": "user_required_choice",
+      "renderBlankOption": true,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "physics.sf_surface_physics": {
+      "hasPublishedDefault": false,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "defaultSemantics": "user_required_choice",
+      "renderBlankOption": true,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    },
+    "physics.bl_pbl_physics": {
+      "hasPublishedDefault": false,
+      "requiresUserValue": true,
+      "conditionallyRequired": false,
+      "defaultSemantics": "user_required_choice",
+      "renderBlankOption": true,
+      "helpSource": [
+        "users_guide_pdf"
+      ]
+    }
+  },
+  "recommendations": {
+    "domains.time_step": {
+      "summary": "Typical best-practice starting point is roughly 5-6 x DX in kilometers, with smaller values for stability-sensitive setups."
+    },
+    "physics.radt": {
+      "summary": "Typical best-practice starting point is about 1 minute per kilometer of grid spacing."
+    },
+    "physics.cu_physics": {
+      "summary": "Cumulus is usually needed for domains >= 10 km, usually not needed for <= 3 km, and is gray-zone dependent in between."
+    },
+    "dynamics.diff_opt": {
+      "summary": "Simple diffusion and full diffusion have different terrain-metric behavior; scheme pairing matters."
+    },
+    "dynamics.km_opt": {
+      "summary": "When a PBL scheme is used, constant and 2D deformation options are the usual compatible choices."
+    }
+  },
+  "metadata": {
+    "publicAppName": "WRF Config Studio",
+    "publicVersion": "v1.0.0",
+    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
+    "rebrandGenerated": "2026-05-01T12:49:32Z",
+    "generated": "2026-05-04T23:20:07Z",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor"
+  }
+}

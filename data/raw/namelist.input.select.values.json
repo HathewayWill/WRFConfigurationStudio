@@ -1,0 +1,1052 @@
+{
+  "domains": {
+    "auto_levels_opt": {
+      "values": {
+        "1": "assumes a known first several layers, then generates equi-height spaced levels up to the model top",
+        "2": "set 'dzstretch_s,' 'dzstretch_u,' 'dzbot,' and 'max_dz' to stretch levels according to logP, up to where it reaches max thickness (max_dz) and starting from thickness dzbot"
+      }
+    },
+    "extrap_type": {
+      "values": {
+        "1": "using the two lowest levels",
+        "2": "using the lowest level as a constant below ground"
+      }
+    },
+    "force_sfc_in_vinterp": {
+      "range": {
+        "end": "eta_levels",
+        "start": "0"
+      }
+    },
+    "hypsometric_opt": {
+      "values": {
+        "1": "use a form of the hydrostatic equation that depends on air density",
+        "2": "computes height in real.exe and pressure in the model by using the hypsometric equation (less biased when compared against input data)"
+      }
+    },
+    "ideal_init_method": {
+      "values": {
+        "1": "albedo from phb",
+        "2": "albedo from t_init"
+      }
+    },
+    "interp_method_type": {
+      "values": {
+        "1": "bi-linear",
+        "12": "uses SINT, and same scheme for computation of fine-grid lateral boundaries",
+        "2": "Smolarkiewicz (SINT) method",
+        "3": "nearest-neighbor",
+        "4": "overlapping quadratic"
+      }
+    },
+    "interp_type": {
+      "values": {
+        "1": "vertical interpolation is linear in pressure",
+        "2": "vertical interpolation is linear in log(pressure)"
+      }
+    },
+    "lagrange_order": {
+      "values": {
+        "1": "linear",
+        "2": "quadratic",
+        "9": "cubic spline"
+      }
+    },
+    "rh2qv_method": {
+      "values": {
+        "1": "old MM5 method",
+        "2": "WMO-recommended method"
+      }
+    },
+    "smooth_option": {
+      "values": {
+        "0": "off",
+        "1": "1-2-1 smoothing",
+        "2": "smoothing-desmoothing"
+      }
+    },
+    "t_extrap_type": {
+      "values": {
+        "1": "isothermal",
+        "2": "-6.5 K/km lapse rate for temp",
+        "3": "constant theta"
+      }
+    },
+    "use_trop_level": {
+      "values": {
+        "0": "off",
+        "1": "use tropopause level data"
+      }
+    },
+    "vert_refine_method": {
+      "values": {
+        "0": "no vertical refinement",
+        "1": "integer vertical refinement",
+        "2": " use specified or computed eta levels for vertical refinement"
+      }
+    },
+    "wif_input_opt": {
+      "values": {
+        "0": "none",
+        "1": "process the Water Ice Friendly Aerosol input from metgrid",
+        "2": "use black carbon aerosol category and its radiative effect"
+      }
+    }
+  },
+  "dynamics": {
+    "hybrid_opt": {
+      "values": {
+        "0": "Original WRF coordinate",
+        "1": "Terrain-following using hybrid formulation",
+        "2": "Klemp cubic form with etac"
+      }
+    }
+  },
+  "physics": {
+    "aer_angexp_opt": {
+      "values": {
+        "1": "constant value from aer_angexp_val",
+        "2": "time-varying 2D grid from auxiliary input 5",
+        "3": "estimate from aer_type and relative humidity"
+      }
+    },
+    "aer_aod550_opt": {
+      "values": {
+        "1": "constant value from aer_aod550_val",
+        "2": "time-varying 2D grid from auxiliary input 15"
+      }
+    },
+    "aer_asy_opt": {
+      "values": {
+        "1": "constant value from aer_asy_val",
+        "2": "time-varying 2D grid from auxiliary input 5",
+        "3": "estimate from aer_type and relative humidity"
+      }
+    },
+    "aer_opt": {
+      "values": {
+        "0": "off",
+        "1": "use Tegen (1997) climatology",
+        "2": "use J. A. Ruiz-Arias method",
+        "3": "use Thompson water/ice-friendly climatological aerosol"
+      }
+    },
+    "aer_ssa_opt": {
+      "values": {
+        "1": "constant value from aer_ssa_val",
+        "2": "time-varying 2D grid from auxiliary input 5",
+        "3": "estimate from aer_type and relative humidity"
+      }
+    },
+    "aer_type": {
+      "values": {
+        "1": "rural",
+        "2": "urban",
+        "3": "maritime"
+      }
+    },
+    "aercu_opt": {
+      "values": {
+        "0": "no aerosol interaction",
+        "1": "aerosol interaction with only MSKF",
+        "2": "aerosol interaction with both MSKF and Morrison"
+      }
+    },
+    "bl_mynn_cloudmix": {
+      "values": {
+        "0": "off",
+        "1": "activate mixing of qc and qi in MYNN"
+      }
+    },
+    "bl_mynn_cloudpdf": {
+      "values": {
+        "0": "Sommeria and Deardorff (1977)",
+        "1": "Kuwano et al. (2010)",
+        "2": "Chaboureau and Bechtold (2002) with modifications"
+      }
+    },
+    "bl_mynn_edmf": {
+      "values": {
+        "0": "regular MYNN",
+        "1": "StEM",
+        "2": "TEMF"
+      }
+    },
+    "bl_mynn_edmf_mom": {
+      "values": {
+        "0": "off",
+        "1": "activate momentum transport in MYNN EDMF"
+      }
+    },
+    "bl_mynn_edmf_tke": {
+      "values": {
+        "0": "off",
+        "1": "activate TKE transport in MYNN EDMF"
+      }
+    },
+    "bl_mynn_mixlength": {
+      "values": {
+        "0": "original Nakanishi and Niino (2009)",
+        "1": "RAP/HRRR including BouLac in free atmosphere",
+        "2": "experimental cloud-specific and scale-aware length"
+      }
+    },
+    "bl_mynn_tkeadvect": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "bl_pbl_physics": {
+      "values": {
+        "0": "no boundary layer",
+        "1": "YSU",
+        "10": "TEMF",
+        "11": "Shin-Hong scale-aware",
+        "12": "GBM TKE",
+        "16": "EEPS",
+        "17": "KEPS",
+        "2": "MYJ (Eta) TKE",
+        "4": "QNSE-EDMF",
+        "5": "MYNN 2.5 level TKE",
+        "6": "MYNN 3rd level TKE",
+        "7": "ACM2 (Pleim)",
+        "8": "BouLac TKE",
+        "9": "Bretherton-Park/UW TKE",
+        "99": "MRF"
+      }
+    },
+    "cellcount_method": {
+      "values": {
+        "0": "model determines method",
+        "1": "tile-wide",
+        "2": "domain-wide"
+      }
+    },
+    "cldovrlp": {
+      "values": {
+        "1": "random",
+        "2": "maximum random",
+        "3": "maximum",
+        "4": "exponential",
+        "5": "exponential-random"
+      }
+    },
+    "co2tf": {
+      "values": {
+        "0": "do not generate CO2 function internally",
+        "1": "generate CO2 function internally for GFDL radiation"
+      }
+    },
+    "cu_diag": {
+      "values": {
+        "0": "off",
+        "1": "compute time-averaged rainfall and cloud water/ice diagnostics"
+      }
+    },
+    "cu_physics": {
+      "values": {
+        "0": "no cumulus",
+        "1": "Kain-Fritsch",
+        "10": "KF-CuP",
+        "11": "multi-scale Kain-Fritsch",
+        "14": "scale-aware SAS",
+        "16": "Newer Tiedtke",
+        "2": "BMJ",
+        "3": "Grell-Freitas ensemble",
+        "4": "scale-aware GFS SAS",
+        "5": "Grell-3",
+        "6": "Tiedtke",
+        "7": "Zhang-McFarlane",
+        "93": "Grell-Devenyi ensemble",
+        "96": "GFS SAS from YSU",
+        "99": "old Kain-Fritsch"
+      }
+    },
+    "cu_rad_feedback": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "cugd_avedx": {
+      "values": {
+        "1": "NSAS grid-distance dependent / large grid distances",
+        "3": "small grid distances (DX < 5 km)"
+      }
+    },
+    "do_radar_ref": {
+      "values": {
+        "0": "off",
+        "1": "allow radar reflectivity to be computed using mp-scheme-specific parameters"
+      }
+    },
+    "dust_emis": {
+      "values": {
+        "0": "off",
+        "1": "turn on surface dust emission scheme"
+      }
+    },
+    "fractional_seaice": {
+      "values": {
+        "0": "binary sea ice flag",
+        "1": "treat sea ice as a fractional field"
+      }
+    },
+    "ghg_input": {
+      "values": {
+        "0": "constant greenhouse gases for backward compatibility",
+        "1": "read time-dependent greenhouse gas data"
+      }
+    },
+    "grav_settling": {
+      "values": {
+        "0": "no settling",
+        "1": "Dyunkerke (1991) settling at surface/atmosphere",
+        "2": "Fogdes at surface and Dyunkerke in atmosphere"
+      }
+    },
+    "hail_opt": {
+      "values": {
+        "0": "graupel",
+        "1": "hail"
+      }
+    },
+    "hailcast_opt": {
+      "values": {
+        "0": "off",
+        "1": "turn on hailcasting option"
+      }
+    },
+    "iccg_method": {
+      "values": {
+        "0": "uses default of option 2",
+        "1": "constant everywhere using prescribed IC:CG ratio",
+        "2": "1995-1999 NLDN/OTD climatology",
+        "3": "Price and Rind (1993)",
+        "4": "gridded input via iccg_in_num/iccg_in_den"
+      }
+    },
+    "icloud": {
+      "values": {
+        "0": "no cloud effect",
+        "1": "cloud effect with Xu-Randall cloud fraction",
+        "2": "cloud effect with 0/1 threshold cloud fraction",
+        "3": "cloud effect with Sundqvist et al. cloud fraction"
+      }
+    },
+    "idcor": {
+      "values": {
+        "0": "constant decorrelation length 2500 m",
+        "1": "latitude-varying decorrelation length"
+      }
+    },
+    "ideal_xland": {
+      "values": {
+        "1": "land",
+        "2": "water"
+      }
+    },
+    "ifsnow": {
+      "values": {
+        "0": "off",
+        "1": "use snow-cover effects"
+      }
+    },
+    "insert_init_cloud": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "irr_ph": {
+      "values": {
+        "0": "in phase",
+        "1": "not in phase"
+      }
+    },
+    "isfflx": {
+      "values": {
+        "0": "constant fluxes or fluxes on depending on PBL mode",
+        "1": "model-computed u* and heat/moisture fluxes or fluxes off depending on PBL mode",
+        "2": "model-computed u* with specified heat flux (when bl_pbl_physics=0 and diff_opt=2, km_opt=3)"
+      }
+    },
+    "isftcflx": {
+      "values": {
+        "0": "off for Ck",
+        "1": "Donelan Cd + constant Z0q for Ck",
+        "2": "Donelan Cd + Garratt Ck"
+      }
+    },
+    "ishallow": {
+      "values": {
+        "0": "off",
+        "1": "turn on shallow convection"
+      }
+    },
+    "iz0tlnd": {
+      "values": {
+        "0": "old or non-vegetation-dependent thermal roughness length over land",
+        "1": "vegetation-dependent thermal roughness length over land"
+      }
+    },
+    "kf_edrates": {
+      "values": {
+        "0": "off",
+        "1": "output entrainment/detrainment rates and convective timescale variables"
+      }
+    },
+    "kfeta_trigger": {
+      "values": {
+        "1": "original",
+        "2": "moisture-advection-based trigger",
+        "3": "relative-humidity-dependent trigger"
+      }
+    },
+    "lightning_option": {
+      "values": {
+        "0": "off",
+        "1": "PR92 based on maximum w",
+        "11": "PR92 based on level of neutral buoyancy from cumulus parameterization",
+        "2": "PR92 based on 20 dBZ top",
+        "3": "Yair et al. lightning potential"
+      }
+    },
+    "mfshconv": {
+      "values": {
+        "0": "turn off day-time EDMF for QNSE",
+        "1": "use day-time EDMF for QNSE"
+      }
+    },
+    "morr_rimed_ice": {
+      "values": {
+        "0": "graupel",
+        "1": "hail"
+      }
+    },
+    "mosaic_lu": {
+      "values": {
+        "0": "off",
+        "1": "specify landuse parameters using mosaic approach"
+      }
+    },
+    "mosaic_soil": {
+      "values": {
+        "0": "off",
+        "1": "specify soil parameters using mosaic approach"
+      }
+    },
+    "mp_physics": {
+      "values": {
+        "0": "no microphysics",
+        "1": "Kessler scheme",
+        "10": "Morrison 2-moment",
+        "11": "CAM 5.1 5-class",
+        "13": "SBU_YLin 5-class",
+        "14": "WDM 5-class",
+        "15": "High-res Ferrier with advection",
+        "16": "WDM 6-class",
+        "18": "NSSL 2-moment 4-ice with predicted (unactivated) CCN (or activated CCN)",
+        "2": "Purdue Lin scheme",
+        "24": "WSM7; like WSM6, but with hail",
+        "26": "WDM7; like WDM6, but with hail",
+        "28": "aerosol-aware Thompson with water- and ice-friendly aerosol climatology",
+        "3": "WSM 3-class ice scheme",
+        "30": "HUJI spectral bin, fast version",
+        "38": "Thompson hail/graupel/aerosol",
+        "4": "WSM 5-class scheme",
+        "40": "Morrison double-moment with CESM aerosol",
+        "5": "Ferrier (Eta) scheme",
+        "50": "P3 1-ice category, 1-moment cloud water",
+        "51": "P3 1-ice category, 2-moment cloud water",
+        "52": "P3 2-ice categories, 2-moment cloud water",
+        "53": "P3 1-ice category, 3-moment ice, 2-moment cloud water",
+        "55": "Jensen ISHMAEL",
+        "56": "NTU multi-moment",
+        "6": "WSM 6-class graupel scheme",
+        "7": "Goddard 4-ice scheme; also uses \"gsfcgce_hail\" and \"gsfcgce_2ice\"",
+        "8": "Thompson graupel scheme",
+        "9": "Milbrandt-Yau 2-moment scheme"
+      }
+    },
+    "mp_zero_out": {
+      "values": {
+        "0": "no action/adjustment to moisture fields",
+        "1": "except for Qv, moisture arrays below threshold are set to zero",
+        "2": "Qv and all moisture arrays below threshold are set to zero"
+      }
+    },
+    "no_mp_heating": {
+      "values": {
+        "0": "latent heating from microphysics active",
+        "1": "turn off latent heating from microphysics"
+      }
+    },
+    "nsas_dx_factor": {
+      "values": {
+        "0": "off",
+        "1": "turn on NSAS grid-distance-dependent option"
+      }
+    },
+    "num_land_cat": {
+      "values": {
+        "20": "MODIS",
+        "21": "MODIS with lake category (WPS default)",
+        "24": "USGS",
+        "28": "USGS with lake category",
+        "40": "NLCD2006 (North America only)"
+      }
+    },
+    "num_soil_layers": {
+      "values": {
+        "10": "CLM4",
+        "2": "Pleim-Xiu",
+        "3": "SSiB",
+        "4": "Noah",
+        "5": "thermal diffusion scheme",
+        "6": "RUC",
+        "9": "RUC"
+      }
+    },
+    "opt_thcnd": {
+      "values": {
+        "1": "original",
+        "2": "McCumber and Pielke for silt loam and sandy loam"
+      }
+    },
+    "physics_suite": {
+      "values": {
+        "CONUS": "approved NCAR CONUS physics suite",
+        "conus": "approved NCAR CONUS physics suite",
+        "none": "do not apply a packaged suite",
+        "tropical": "approved NCAR tropical physics suite"
+      }
+    },
+    "progn": {
+      "values": {
+        "0": "off",
+        "1": "use mix-activate scheme"
+      }
+    },
+    "pxlsm_smois_init": {
+      "values": {
+        "0": "initialize from analysis",
+        "1": "initialize from LANDUSE.TBL / moisture availability"
+      }
+    },
+    "ra_call_offset": {
+      "values": {
+        "0": "off",
+        "1": "call radiation just before output time"
+      }
+    },
+    "ra_lw_physics": {
+      "values": {
+        "0": "no longwave radiation",
+        "1": "RRTM",
+        "14": "RRTMG-K",
+        "24": "fast RRTMG for GPU and MIC",
+        "3": "CAM",
+        "31": "Earth Held-Suarez forcing",
+        "4": "RRTMG",
+        "5": "Goddard",
+        "7": "FLG (UCLA)",
+        "99": "GFDL (Eta)"
+      }
+    },
+    "ra_sw_eclipse": {
+      "values": {
+        "0": "off",
+        "1": "turn on eclipse effect on shortwave radiation"
+      }
+    },
+    "ra_sw_physics": {
+      "values": {
+        "0": "no shortwave radiation",
+        "1": "Dudhia",
+        "14": "RRTMG-K",
+        "2": "old Goddard",
+        "24": "fast RRTMG for GPU and MIC",
+        "3": "CAM",
+        "31": "Earth Held-Suarez forcing",
+        "4": "RRTMG",
+        "5": "Goddard",
+        "7": "FLG (UCLA)",
+        "99": "GFDL (Eta)"
+      }
+    },
+    "rdlai2d": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "rdmaxalb": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "scalar_pblmix": {
+      "values": {
+        "0": "off",
+        "1": "mix scalar fields consistent with PBL option"
+      }
+    },
+    "seaice_albedo_opt": {
+      "values": {
+        "0": "constant value from seaice_albedo_default",
+        "1": "function of air temperature, skin temperature, and snow",
+        "2": "read from ALBSI input"
+      }
+    },
+    "seaice_snowdepth_opt": {
+      "values": {
+        "0": "bounded by min/max namelist limits",
+        "1": "read SNOWSI input bounded by min/max limits"
+      }
+    },
+    "seaice_thickness_opt": {
+      "values": {
+        "0": "uniform value from seaice_thickness_default",
+        "1": "read from ICEDEPTH input"
+      }
+    },
+    "sf_lake_physics": {
+      "values": {
+        "0": "off",
+        "1": "turn on lake model"
+      }
+    },
+    "sf_ocean_physics": {
+      "values": {
+        "0": "off",
+        "1": "simple ocean mixed layer (OML) model",
+        "2": "3D Price-Weller-Pinkel (PWP) ocean model"
+      }
+    },
+    "sf_sfclay_physics": {
+      "values": {
+        "0": "no surface layer physics",
+        "1": "revised MM5 Monin-Obukhov",
+        "10": "TEMF",
+        "2": "Monin-Obukhov (Janjic Eta Similarity)",
+        "4": "QNSE",
+        "5": "MYNN",
+        "7": "Pleim-Xiu",
+        "91": "old MM5"
+      }
+    },
+    "sf_surf_irr_scheme": {
+      "values": {
+        "0": "off",
+        "1": "surface evapotranspiration",
+        "2": "leaves/canopy interception and surface evapotranspiration",
+        "3": "microphysics process plus canopy interception and surface evapotranspiration"
+      }
+    },
+    "sf_surface_mosaic": {
+      "values": {
+        "0": "off",
+        "1": "use mosaic landuse categories for Noah LSM"
+      }
+    },
+    "sf_surface_physics": {
+      "values": {
+        "0": "no surface temperature prediction",
+        "1": "5-layer thermal diffusion (SLAB)",
+        "2": "unified Noah",
+        "3": "RUC",
+        "4": "Noah-MP",
+        "5": "CLM4",
+        "7": "Pleim-Xiu",
+        "8": "SSiB"
+      }
+    },
+    "sf_urban_physics": {
+      "values": {
+        "0": "off",
+        "1": "single-layer UCM",
+        "2": "multi-layer BEP",
+        "3": "multi-layer BEM"
+      }
+    },
+    "shalwater_z0": {
+      "values": {
+        "0": "off",
+        "1": "turn on shallow water roughness scheme"
+      }
+    },
+    "shcu_physics": {
+      "values": {
+        "0": "no independent shallow cumulus",
+        "2": "Park and Bretherton from CAM5",
+        "3": "GRIMS",
+        "5": "Deng"
+      }
+    },
+    "shinhong_tke_diag": {
+      "values": {
+        "0": "off",
+        "1": "use diagnostic TKE and mixing length from Shin-Hong PBL"
+      }
+    },
+    "slope_rad": {
+      "values": {
+        "0": "off",
+        "1": "turn on slope-dependent radiation"
+      }
+    },
+    "sst_skin": {
+      "values": {
+        "0": "off",
+        "1": "calculate skin SST"
+      }
+    },
+    "sst_update": {
+      "values": {
+        "0": "off",
+        "1": "update SST, sea ice, vegetation fraction, and albedo during wrf.exe"
+      }
+    },
+    "surface_input_source": {
+      "values": {
+        "1": "WPS/geogrid with dominant categories recomputed in real",
+        "2": "GRIB data from another model if VEGCAT/SOILCAT arrays exist",
+        "3": "use dominant land and soil categories from WPS/geogrid"
+      }
+    },
+    "swint_opt": {
+      "values": {
+        "0": "off",
+        "1": "interpolate shortwave radiation using updated solar zenith angle",
+        "2": "activate FARMS broadband solar every time step"
+      }
+    },
+    "tmn_update": {
+      "values": {
+        "0": "off",
+        "1": "update deep layer soil temperature"
+      }
+    },
+    "topo_shading": {
+      "values": {
+        "0": "off",
+        "1": "apply neighboring-point shadow effects"
+      }
+    },
+    "topo_wind": {
+      "values": {
+        "0": "off",
+        "1": "Jimenez method",
+        "2": "UW method"
+      }
+    },
+    "tracer_pblmix": {
+      "values": {
+        "0": "off",
+        "1": "mix tracer fields consistent with PBL option"
+      }
+    },
+    "traj_opt": {
+      "values": {
+        "0": "off",
+        "1": "activate forward trajectories"
+      }
+    },
+    "ua_phys": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "use_lakedepth": {
+      "values": {
+        "0": "do not use geogrid lake depth data",
+        "1": "use geogrid lake depth data"
+      }
+    },
+    "use_mp_re": {
+      "values": {
+        "0": "do not use effective radii from microphysics in RRTMG",
+        "1": "use effective radii from microphysics in RRTMG"
+      }
+    },
+    "use_wudapt_lcz": {
+      "values": {
+        "0": "use traditional 31-33 categories",
+        "1": "use WUDAPT LCZ 31-41 categories"
+      }
+    },
+    "usemonalb": {
+      "values": {
+        "false": "False",
+        "true": "True"
+      }
+    },
+    "windfarm_ij": {
+      "values": {
+        "0": "lat-lon turbine coordinates",
+        "1": "grid-point (i,j) turbine coordinates",
+        "2": "lat-lon coordinates with windfarm_wake_model=2 and windturbines-ll.txt"
+      }
+    },
+    "windfarm_opt": {
+      "values": {
+        "0": "off",
+        "1": "Fitch et al. wind farm parameterization",
+        "2": "Ma et al. MAV wind farm scheme"
+      }
+    },
+    "windfarm_overlap_method": {
+      "values": {
+        "1": "linear superposition",
+        "2": "squared superposition",
+        "3": "modified squared superposition",
+        "4": "superposition of hub-height wind speed"
+      }
+    },
+    "windfarm_wake_model": {
+      "values": {
+        "1": "Jensen model",
+        "2": "XA model",
+        "3": "GM model",
+        "4": "Jensen and XA ensemble",
+        "5": "Jensen, XA, and GM ensemble"
+      }
+    },
+    "ysu_topdown_pblmix": {
+      "values": {
+        "0": "off",
+        "1": "turn on top-down radiation-driven mixing"
+      }
+    },
+    "o3input": {
+      "values": {
+        "0": "use the profile inside RRTMG scheme",
+        "2": "use CAM ozone data from ozone.formatted"
+      }
+    }
+  },
+  "time_control": {
+    "diag_print": {
+      "values": {
+        "0": "no print",
+        "1": "domain-averaged 3-hourly hydrostatic surface pressure tendency (Dpsfc/Dt), and dry-hydrostatic column pressure tendency (Dmu/Dt) added to standard output file",
+        "2": "option 1, plus domain-averaged rainfall, sfc evaporation, and sensible and latent heat fluxes"
+      }
+    },
+    "fine_input_stream": {
+      "values": {
+        "0": "all fields are used",
+        "2": "only input specified from input stream 2"
+      }
+    },
+    "io_form_auxhist2": {
+      "values": {
+        "10": "GRIB2",
+        "11": "parallel netCDF",
+        "2": "netCDF",
+        "4": "PHDF5",
+        "5": "GRIB1"
+      }
+    },
+    "io_form_auxinput2": {
+      "values": {
+        "10": "GRIB2",
+        "11": "parallel netCDF",
+        "2": "netCDF",
+        "4": "PHDF5",
+        "5": "GRIB1"
+      }
+    },
+    "io_form_auxinput4": {
+      "values": {
+        "2": "netCDF"
+      }
+    },
+    "io_form_boundary": {
+      "values": {
+        "10": "GRIB2",
+        "11": "parallel netCDF",
+        "2": "netCDF",
+        "4": "PHDF5",
+        "5": "GRIB1"
+      }
+    },
+    "io_form_history": {
+      "values": {
+        "1": "binary format",
+        "10": "GRIB2",
+        "102": "split netCDF files, one per processor",
+        "11": "parallel netCDF",
+        "2": "netCDF",
+        "4": "PHDF5",
+        "5": "GRIB1"
+      }
+    },
+    "io_form_input": {
+      "values": {
+        "102": "split netCDF files, one per processor",
+        "11": "parallel netCDF",
+        "2": "netCDF"
+      }
+    },
+    "io_form_restart": {
+      "values": {
+        "102": "split netCDF files, one per processor",
+        "11": "parallel netCDF",
+        "2": "netCDF"
+      }
+    },
+    "nwp_diagnostics": {
+      "values": {
+        "0": "none",
+        "1": "add 'history_interval' diagnostic fileds (10m wind sp, 2-5 km max helicity, max vert. velocity in updraft and downdraft below 400mb, 2-5 km mean vert. velocity, max column graupel; must also turn on 'do_radar_ref'"
+      }
+    },
+    "output_diagnostics": {
+      "values": {
+        "0": "none",
+        "1": "add 48 sfc diagnostic arrays (max/min/mean/std) in the specified time interval"
+      }
+    }
+  },
+  "fire": {
+    "fire_advection": {
+      "values": {
+        "0": "compute fire spread from normal wind speed and slope",
+        "1": "project fireline particle speed onto the normal direction"
+      }
+    },
+    "fire_fmc_read": {
+      "values": {
+        "0": "fuel moisture from wrfinput",
+        "1": "user-prescribed fuel moisture",
+        "2": "read fuel moisture from file"
+      }
+    },
+    "fire_fuel_left_method": {
+      "values": {
+        "1": "fuel_left computation method 1",
+        "2": "fuel_left computation method 2"
+      }
+    },
+    "fire_fuel_read": {
+      "values": {
+        "-1": "registry default / not explicitly selected",
+        "0": "uniform fuel category",
+        "1": "user-prescribed fuel categories",
+        "2": "read fuel categories from file"
+      }
+    },
+    "fire_grows_only": {
+      "values": {
+        "0": "off",
+        "1": "on, fire can only grow"
+      }
+    },
+    "fire_mountain_type": {
+      "values": {
+        "0": "none",
+        "1": "COS hill",
+        "2": "east-west ridge",
+        "3": "north-south ridge"
+      }
+    },
+    "fire_sfc_flx": {
+      "values": {
+        "0": "exponential decay heat-flux distribution",
+        "1": "Truncated Gaussian heat-flux distribution"
+      }
+    },
+    "fire_smk_scheme": {
+      "values": {
+        "0": "smoke tracers at first model level",
+        "1": "Truncated Gaussian smoke-release distribution"
+      }
+    },
+    "fire_sprd_mdl": {
+      "values": {
+        "0": "MacArthur spread-rate formula",
+        "1": "BEHAVE spread-rate formula"
+      }
+    },
+    "fire_topo_from_atm": {
+      "values": {
+        "0": "do not populate fire terrain from atmosphere",
+        "1": "populate ZSF by interpolating from atmosphere"
+      }
+    },
+    "fire_upwind_split": {
+      "values": {
+        "0": "off",
+        "1": "upwind advection separately from normal-direction spread"
+      }
+    },
+    "fire_upwinding": {
+      "values": {
+        "1": "standard",
+        "2": "Godunov",
+        "3": "ENO",
+        "4": "Sethian",
+        "5": "second-order",
+        "6": "WENO3",
+        "7": "WENO5",
+        "8": "hybrid WENO3/ENO1",
+        "9": "hybrid WENO5/ENO1"
+      }
+    },
+    "fire_upwinding_reinit": {
+      "values": {
+        "1": "WENO3",
+        "2": "WENO5",
+        "3": "hybrid WENO3/ENO1",
+        "4": "hybrid WENO5/ENO1"
+      }
+    },
+    "fire_lfn_ext_up": {
+      "values": {
+        "0": "extend level-set function at boundary by reflection",
+        "1": "always extend level-set function upward"
+      }
+    },
+    "fire_read_atm_grad": {
+      "values": {
+        ".false.": "do not read terrain gradient on atmosphere mesh from file",
+        ".true.": "read terrain gradient on atmosphere mesh from file"
+      }
+    },
+    "fire_read_atm_ht": {
+      "values": {
+        ".false.": "do not read terrain height on atmosphere mesh from file",
+        ".true.": "read terrain height on atmosphere mesh from file"
+      }
+    },
+    "fire_read_fire_grad": {
+      "values": {
+        ".false.": "do not read terrain gradient on fire mesh from file",
+        ".true.": "read terrain gradient on fire mesh from file"
+      }
+    },
+    "fire_read_fire_ht": {
+      "values": {
+        ".false.": "do not read terrain height on fire mesh from file",
+        ".true.": "read terrain height on fire mesh from file"
+      }
+    },
+    "fire_read_lu": {
+      "values": {
+        ".false.": "do not read land-use data from input_lu",
+        ".true.": "read land-use data from input_lu"
+      }
+    },
+    "fire_lsm_zcoupling": {
+      "values": {
+        ".false.": "use reference velocity at fire_wind_height",
+        ".true.": "activate reference velocity at a different height from fire_wind_height"
+      }
+    }
+  }
+}

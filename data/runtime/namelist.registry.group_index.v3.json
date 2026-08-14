@@ -1,0 +1,223 @@
+{
+  "groups": [
+    {
+      "count": 14,
+      "group": "afwa"
+    },
+    {
+      "count": 22,
+      "group": "bdy_control"
+    },
+    {
+      "count": 118,
+      "group": "chem"
+    },
+    {
+      "count": 35,
+      "group": "cordex"
+    },
+    {
+      "count": 19,
+      "group": "dfi_control"
+    },
+    {
+      "count": 14,
+      "group": "diags"
+    },
+    {
+      "count": 132,
+      "group": "domains"
+    },
+    {
+      "count": 91,
+      "group": "dynamics"
+    },
+    {
+      "count": 126,
+      "group": "fdda"
+    },
+    {
+      "count": 164,
+      "group": "fire"
+    },
+    {
+      "count": 4,
+      "group": "grib2"
+    },
+    {
+      "count": 1,
+      "group": "ideal"
+    },
+    {
+      "count": 3,
+      "group": "namelist_adios2"
+    },
+    {
+      "count": 41,
+      "group": "noah_mp"
+    },
+    {
+      "count": 17,
+      "group": "obs_opt"
+    },
+    {
+      "count": 24,
+      "group": "perturbation"
+    },
+    {
+      "count": 306,
+      "group": "physics"
+    },
+    {
+      "count": 5,
+      "group": "pio_control"
+    },
+    {
+      "count": 17,
+      "group": "radar_da"
+    },
+    {
+      "count": 25,
+      "group": "scm"
+    },
+    {
+      "count": 96,
+      "group": "stoch"
+    },
+    {
+      "count": 9,
+      "group": "tc"
+    },
+    {
+      "count": 129,
+      "group": "time_control"
+    },
+    {
+      "count": 5,
+      "group": "wrf_cmaq"
+    },
+    {
+      "count": 30,
+      "group": "wrfvar1"
+    },
+    {
+      "count": 6,
+      "group": "wrfvar10"
+    },
+    {
+      "count": 19,
+      "group": "wrfvar11"
+    },
+    {
+      "count": 18,
+      "group": "wrfvar12"
+    },
+    {
+      "count": 24,
+      "group": "wrfvar13"
+    },
+    {
+      "count": 67,
+      "group": "wrfvar14"
+    },
+    {
+      "count": 8,
+      "group": "wrfvar15"
+    },
+    {
+      "count": 14,
+      "group": "wrfvar16"
+    },
+    {
+      "count": 4,
+      "group": "wrfvar17"
+    },
+    {
+      "count": 1,
+      "group": "wrfvar18"
+    },
+    {
+      "count": 1,
+      "group": "wrfvar19"
+    },
+    {
+      "count": 20,
+      "group": "wrfvar2"
+    },
+    {
+      "count": 1,
+      "group": "wrfvar20"
+    },
+    {
+      "count": 1,
+      "group": "wrfvar21"
+    },
+    {
+      "count": 1,
+      "group": "wrfvar22"
+    },
+    {
+      "count": 4,
+      "group": "wrfvar3"
+    },
+    {
+      "count": 82,
+      "group": "wrfvar4"
+    },
+    {
+      "count": 64,
+      "group": "wrfvar5"
+    },
+    {
+      "count": 14,
+      "group": "wrfvar6"
+    },
+    {
+      "count": 35,
+      "group": "wrfvar7"
+    },
+    {
+      "count": 5,
+      "group": "wrfvar8"
+    },
+    {
+      "count": 15,
+      "group": "wrfvar9"
+    },
+    {
+      "count": 8,
+      "group": "wrfvarchem"
+    }
+  ],
+  "metadata": {
+    "generated": "2026-05-04T23:20:07Z",
+    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor",
+    "publicAppName": "WRF Config Studio",
+    "publicVersion": "v1.0.0",
+    "rebrandGenerated": "2026-05-01T12:49:32Z",
+    "wrfCompatibilityMerge": {
+      "baseline": "4.7.1",
+      "generated": "2026-07-31T04:51:37.417309+00:00",
+      "legacy471OnlyVariablesCanonical": 52,
+      "mergedVariablesCanonical": 1859,
+      "new48xVariablesCanonical": 81,
+      "overlay": "4.8.1-dev",
+      "policy": "Merged 4.7.1 stable options with 4.8.x options. Older 4.7.1-only options are preserved as legacy-compatible."
+    }
+  },
+  "policy": {
+    "compatibilityValidation": "inactive",
+    "obsprocMergedIntoMainCatalog": true,
+    "requiredSaveWarnings": "active",
+    "suggestions": [
+      "time_step",
+      "radt",
+      "run_*",
+      "cudt"
+    ],
+    "uiFiltering": "inactive",
+    "userControl": "all registry variables and metadata are for user-controlled configuration and reference"
+  },
+  "version": "V3.1.0-beta-full-catalog-merged-fixes"
+}

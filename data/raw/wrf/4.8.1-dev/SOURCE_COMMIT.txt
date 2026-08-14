@@ -1,0 +1,16 @@
+WRF source: https://github.com/wrf-model/WRF
+Version label: 4.8.1-dev
+Source branch: release-v4.8.1
+Source type: development branch, not stable release tag
+
+Branch:
+release-v4.8.1
+
+Full commit:
+06d4240ae989cc3e50af412bb472df3d9048783c
+
+Short commit:
+06d4240
+
+Commit date and subject:
+2026-06-08 13:20:55 -0700 Merge remote-tracking branch 'origin/release-v4.8.0'

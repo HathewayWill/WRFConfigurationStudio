@@ -1,0 +1,2993 @@
+{
+  "metadata": {
+    "title": "WRF namelist compatibility rules for editor",
+    "ruleCount": 69,
+    "variableCount": 80,
+    "patched_version": "v0.7.3",
+    "patched_date": "2026-04-15",
+    "notes": "Expanded curated-core compatibility coverage, fixed isftcflx parsing, and added explicit allowed-off cumulus/shallow-cumulus states."
+  },
+  "rules": [
+    {
+      "id": "PBL-1",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=1 only works with sf_sfclay_physics=1",
+      "notes": null
+    },
+    {
+      "id": "PBL-2",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 2",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 2",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=2 only works with sf_sfclay_physics=2",
+      "notes": null
+    },
+    {
+      "id": "PBL-4",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "4"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 4",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 4",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=4 only works with sf_sfclay_physics=4",
+      "notes": null
+    },
+    {
+      "id": "PBL-5",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 5",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 2, 5",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "5"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=5 only works with sf_sfclay_physics=1,2,5",
+      "notes": null
+    },
+    {
+      "id": "PBL-6",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "6"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 5",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 5",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "5"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=6 only works with sf_sfclay_physics=5",
+      "notes": null
+    },
+    {
+      "id": "PBL-7",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 7",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 7",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "7"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=7 only works with sf_sfclay_physics=1,7",
+      "notes": null
+    },
+    {
+      "id": "PBL-8",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "8"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 2",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=8 only works with sf_sfclay_physics=1,2",
+      "notes": null
+    },
+    {
+      "id": "PBL-9",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "9"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 2",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=9 only works with sf_sfclay_physics=1,2",
+      "notes": null
+    },
+    {
+      "id": "PBL-10",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "10"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 10",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 10",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "10"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=10 only works with sf_sfclay_physics=10",
+      "notes": null
+    },
+    {
+      "id": "PBL-12",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "12"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=12 only works with sf_sfclay_physics=1",
+      "notes": null
+    },
+    {
+      "id": "PBL-16",
+      "category": "PBL \u2194 Surface Layer",
+      "strength": "Hard",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "16"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 5, 91",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 5, 91",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "5",
+            "91"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bl_pbl_physics=16 only works with sf_sfclay_physics=1,5,91",
+      "notes": null
+    },
+    {
+      "id": "LSM-7",
+      "category": "Land Surface",
+      "strength": "Hard",
+      "triggerVariable": "sf_surface_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be 7 | bl_pbl_physics must be 7",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be 7",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "7"
+          ]
+        },
+        {
+          "raw": "bl_pbl_physics must be 7",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "7"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_surface_physics=7 Pleim-Xiu; use with Pleim-Xiu surface layer and ACM2 PBL",
+      "notes": null
+    },
+    {
+      "id": "LSM-8-RAD",
+      "category": "Land Surface \u2194 Radiation",
+      "strength": "Hard",
+      "triggerVariable": "sf_surface_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "8"
+        ]
+      },
+      "requirementsRaw": "ra_lw_physics must be one of 1, 3, 4 | ra_sw_physics must be one of 1, 3, 4",
+      "requirements": [
+        {
+          "raw": "ra_lw_physics must be one of 1, 3, 4",
+          "checkable": true,
+          "variable": "ra_lw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "raw": "ra_sw_physics must be one of 1, 3, 4",
+          "checkable": true,
+          "variable": "ra_sw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "3",
+            "4"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_surface_physics=8 SSiB; only works with ra_lw/sw_physics=1,3,4",
+      "notes": null
+    },
+    {
+      "id": "URBAN-NOAH",
+      "category": "Urban",
+      "strength": "Hard",
+      "triggerVariable": "sf_urban_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "requirementsRaw": "sf_surface_physics must be 2",
+      "requirements": [
+        {
+          "raw": "sf_surface_physics must be 2",
+          "checkable": true,
+          "variable": "sf_surface_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_urban_physics ... use with Noah LSM only",
+      "notes": null
+    },
+    {
+      "id": "URBAN-BEP",
+      "category": "Urban \u2194 PBL",
+      "strength": "Hard",
+      "triggerVariable": "sf_urban_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+      "requirements": [
+        {
+          "raw": "bl_pbl_physics must be one of 1, 2, 8",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "8"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_urban_physics=2 only works with bl_pbl_physics=1,2,8",
+      "notes": null
+    },
+    {
+      "id": "URBAN-BEM",
+      "category": "Urban \u2194 PBL",
+      "strength": "Hard",
+      "triggerVariable": "sf_urban_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "requirementsRaw": "bl_pbl_physics must be one of 1, 2, 8",
+      "requirements": [
+        {
+          "raw": "bl_pbl_physics must be one of 1, 2, 8",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "8"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_urban_physics=3 only works with bl_pbl_physics=1,2,8",
+      "notes": null
+    },
+    {
+      "id": "SLUCM-DRAG",
+      "category": "Urban Extra Input",
+      "strength": "Workflow",
+      "triggerVariable": "slucm_distributed_drag",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "sf_urban_physics must be 1 | use_wudapt_lcz must be off / 0 0, False | wrfinput_extra requires 3 additional urban input variables",
+      "requirements": [
+        {
+          "raw": "sf_urban_physics must be 1",
+          "checkable": true,
+          "variable": "sf_urban_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        },
+        {
+          "raw": "use_wudapt_lcz must be off / 0 0, False",
+          "checkable": true,
+          "variable": "use_wudapt_lcz",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "0",
+            "False",
+            ".false.",
+            "off"
+          ]
+        },
+        {
+          "raw": "wrfinput_extra requires 3 additional urban input variables",
+          "checkable": false,
+          "variable": "wrfinput_extra",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "slucm_distributed_drag does not work with LCZ; only works with urban_physics=1; need additional input variables in wrfinput",
+      "notes": null
+    },
+    {
+      "id": "AHE-INPUT",
+      "category": "Urban Extra Input",
+      "strength": "Workflow",
+      "triggerVariable": "distributed_ahe_opt",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "requirementsRaw": "wrfinput_extra requires anthropogenic heat input variables",
+      "requirements": [
+        {
+          "raw": "wrfinput_extra requires anthropogenic heat input variables",
+          "checkable": false,
+          "variable": "wrfinput_extra",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "distributed_ahe_opt requires additional input to wrfinput",
+      "notes": null
+    },
+    {
+      "id": "TOPO-WIND",
+      "category": "Topographic Wind",
+      "strength": "Workflow",
+      "triggerVariable": "topo_wind",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "requirementsRaw": "bl_pbl_physics must be 1 | geogrid_extra requires extra topographic wind inputs",
+      "requirements": [
+        {
+          "raw": "bl_pbl_physics must be 1",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        },
+        {
+          "raw": "geogrid_extra requires extra topographic wind inputs",
+          "checkable": false,
+          "variable": "geogrid_extra",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "topo_wind requires extra input from geogrid; only works with bl_pbl_physics=1",
+      "notes": null
+    },
+    {
+      "id": "SEAICE-THRESH",
+      "category": "Sea Ice",
+      "strength": "Hard",
+      "triggerVariable": "seaice_threshold",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "sf_surface_physics must be one of 1, 2, 3, 4, 8",
+      "requirements": [
+        {
+          "raw": "sf_surface_physics must be one of 1, 2, 3, 4, 8",
+          "checkable": true,
+          "variable": "sf_surface_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "8"
+          ]
+        }
+      ],
+      "sourceExcerpt": "seaice_threshold only works with sf_surface_physics=1,2,3,4,8",
+      "notes": null
+    },
+    {
+      "id": "FRAC-SEAICE",
+      "category": "Sea Ice",
+      "strength": "Hard",
+      "triggerVariable": "fractional_seaice",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be one of 1, 2, 3, 4, 5, 7, 91 | seaice_threshold must be 0",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 2, 3, 4, 5, 7, 91",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "7",
+            "91"
+          ]
+        },
+        {
+          "raw": "seaice_threshold must be 0",
+          "checkable": true,
+          "variable": "seaice_threshold",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "0"
+          ]
+        }
+      ],
+      "sourceExcerpt": "fractional_seaice=1 only works with sf_sfclay_physics=1,2,3,4,5,7,91; must also set seaice_threshold=0",
+      "notes": null
+    },
+    {
+      "id": "SURF-IRR",
+      "category": "Irrigation",
+      "strength": "Hard",
+      "triggerVariable": "sf_surf_irr_scheme",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "sf_surface_physics must be 2",
+      "requirements": [
+        {
+          "raw": "sf_surface_physics must be 2",
+          "checkable": true,
+          "variable": "sf_surface_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sf_surf_irr_scheme=1 only works with sf_surface_physics=2",
+      "notes": null
+    },
+    {
+      "id": "NOAHMP-PEDO",
+      "category": "Noah-MP",
+      "strength": "Workflow",
+      "triggerVariable": "opt_pedo",
+      "triggerGroup": "noah_mp",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "opt_soil must be 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "requirements": [
+        {
+          "raw": "opt_soil must be 3",
+          "checkable": true,
+          "variable": "opt_soil",
+          "group": "noah_mp",
+          "mode": "one_of",
+          "values": [
+            "3"
+          ]
+        },
+        {
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "checkable": false,
+          "variable": "geogrid_tbl",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "opt_pedo only works when opt_soil=3; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "notes": null
+    },
+    {
+      "id": "NOAHMP-IRR",
+      "category": "Noah-MP",
+      "strength": "Workflow",
+      "triggerVariable": "opt_irr",
+      "triggerGroup": "noah_mp",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "requirementsRaw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "requirements": [
+        {
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "checkable": false,
+          "variable": "geogrid_tbl",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "opt_irr geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "notes": null
+    },
+    {
+      "id": "NOAHMP-IRRM",
+      "category": "Noah-MP",
+      "strength": "Hard",
+      "triggerVariable": "opt_irrm",
+      "triggerGroup": "noah_mp",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "requirementsRaw": "opt_irr must be > 0 1, 2, 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "requirements": [
+        {
+          "raw": "opt_irr must be > 0 1, 2, 3",
+          "checkable": true,
+          "variable": "opt_irr",
+          "group": "noah_mp",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "checkable": false,
+          "variable": "geogrid_tbl",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "opt_irrm only works when opt_irr>0; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "notes": null
+    },
+    {
+      "id": "NOAHMP-TDRN",
+      "category": "Noah-MP",
+      "strength": "Workflow",
+      "triggerVariable": "opt_tdrn",
+      "triggerGroup": "noah_mp",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "requirementsRaw": "opt_run only confirmed with 3 | geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+      "requirements": [
+        {
+          "raw": "opt_run only confirmed with 3",
+          "checkable": false,
+          "variable": "opt_run",
+          "group": "noah_mp",
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "geogrid_tbl requires GEOGRID.TBL.ARW.noahmp",
+          "checkable": false,
+          "variable": "geogrid_tbl",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "opt_tdrn only confirmed to work with opt_run=3; geogrid must have been run with GEOGRID.TBL.ARW.noahmp",
+      "notes": null
+    },
+    {
+      "id": "CU-7-PBL",
+      "category": "Cumulus \u2194 PBL",
+      "strength": "Hard",
+      "triggerVariable": "cu_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "7"
+        ]
+      },
+      "requirementsRaw": "bl_pbl_physics must be one of 2, 9",
+      "requirements": [
+        {
+          "raw": "bl_pbl_physics must be one of 2, 9",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "2",
+            "9"
+          ]
+        }
+      ],
+      "sourceExcerpt": "cu_physics=7 only works with bl_pbl_physics=2,9",
+      "notes": null
+    },
+    {
+      "id": "CU-14-SHCU",
+      "category": "Cumulus \u2194 Shallow",
+      "strength": "Soft",
+      "triggerVariable": "cu_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "14"
+        ]
+      },
+      "requirementsRaw": "shcu_physics use with 4",
+      "requirements": [
+        {
+          "raw": "shcu_physics use with 4",
+          "checkable": true,
+          "variable": "shcu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "4"
+          ]
+        }
+      ],
+      "sourceExcerpt": "cu_physics=14 Scale-aware SAS; use with shcu_physics=4",
+      "notes": null
+    },
+    {
+      "id": "KFETA",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "kfeta_trigger",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 1",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 1",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        }
+      ],
+      "sourceExcerpt": "kfeta_trigger only works with cu_physics=1",
+      "notes": null
+    },
+    {
+      "id": "ISHALLOW",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "ishallow",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5"
+          ]
+        }
+      ],
+      "sourceExcerpt": "ishallow=1 only works with cu_physics=3 or 5",
+      "notes": null
+    },
+    {
+      "id": "SHCU-DENG",
+      "category": "Shallow Cumulus \u2194 PBL",
+      "strength": "Hard",
+      "triggerVariable": "shcu_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "requirementsRaw": "bl_pbl_physics only works with 2, 5, 6",
+      "requirements": [
+        {
+          "raw": "bl_pbl_physics only works with 2, 5, 6",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "2",
+            "5",
+            "6"
+          ]
+        }
+      ],
+      "sourceExcerpt": "shcu_physics=5 only works with bl_pbl_physics=2,5,6",
+      "notes": null
+    },
+    {
+      "id": "CUGD-AVEDX",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "cugd_avedx",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 5",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 5",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "5"
+          ]
+        }
+      ],
+      "sourceExcerpt": "cugd_avedx=3 only works with cu_physics=5",
+      "notes": null
+    },
+    {
+      "id": "KF-EDRATES",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "kf_edrates",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 1, 11, 99",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 1, 11, 99",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "11",
+            "99"
+          ]
+        }
+      ],
+      "sourceExcerpt": "kf_edrates=1 only works with cu_physics=1,11,99",
+      "notes": null
+    },
+    {
+      "id": "CONVTRANS",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "convtrans_avglen_m",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "convtrans_avglen_m only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "CU-DIAG",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "cu_diag",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "cu_physics for use with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics for use with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "cu_diag=1 ... when using cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "CU-RAD",
+      "category": "Cumulus \u2194 Radiation",
+      "strength": "Hard",
+      "triggerVariable": "cu_rad_feedback",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 1, 3, 5, 10, 11, 93, 99 | cu_diag required if cu_physics in 3,5,93 1",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 1, 3, 5, 10, 11, 93, 99",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "3",
+            "5",
+            "10",
+            "11",
+            "93",
+            "99"
+          ]
+        },
+        {
+          "raw": "cu_diag required if cu_physics in 3,5,93 1",
+          "checkable": true,
+          "variable": "cu_diag",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        }
+      ],
+      "sourceExcerpt": "cu_rad_feedback only works with cu_physics=1,3,5,10,11,93,99; if using cu_physics=3,5,93 must set cu_diag=1",
+      "notes": null
+    },
+    {
+      "id": "MAXIENS",
+      "category": "Cumulus Ensemble Controls",
+      "strength": "Hard",
+      "triggerVariable": "maxiens",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "maxiens only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "MAXENS",
+      "category": "Cumulus Ensemble Controls",
+      "strength": "Hard",
+      "triggerVariable": "maxens",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "maxens only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "MAXENS2",
+      "category": "Cumulus Ensemble Controls",
+      "strength": "Hard",
+      "triggerVariable": "maxens2",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "maxens2 only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "MAXENS3",
+      "category": "Cumulus Ensemble Controls",
+      "strength": "Hard",
+      "triggerVariable": "maxens3",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "maxens3 only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "ENSDIM",
+      "category": "Cumulus Ensemble Controls",
+      "strength": "Hard",
+      "triggerVariable": "ensdim",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "cu_physics only works with 3, 5, 93",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 3, 5, 93",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "5",
+            "93"
+          ]
+        }
+      ],
+      "sourceExcerpt": "ensdim only works with cu_physics=3,5,93",
+      "notes": null
+    },
+    {
+      "id": "LIGHTNING-RADAR",
+      "category": "Lightning",
+      "strength": "Hard",
+      "triggerVariable": "lightning_option",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "do_radar_ref must be 1, True",
+      "requirements": [
+        {
+          "raw": "do_radar_ref must be 1, True",
+          "checkable": true,
+          "variable": "do_radar_ref",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "True"
+          ]
+        }
+      ],
+      "sourceExcerpt": "lightning_option must set do_radar_ref=1",
+      "notes": null
+    },
+    {
+      "id": "LIGHTNING-11",
+      "category": "Lightning",
+      "strength": "Workflow",
+      "triggerVariable": "lightning_option",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "11"
+        ]
+      },
+      "requirementsRaw": "dx intended range 10 km < dx < 50 km | cu_physics intended use parameterized-convection scales",
+      "requirements": [
+        {
+          "raw": "dx intended range 10 km < dx < 50 km",
+          "checkable": false,
+          "variable": "dx",
+          "group": "domains",
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "cu_physics intended use parameterized-convection scales",
+          "checkable": false,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "lightning_option=11 intended for use at 10<dx<50km with cumulus parameterization",
+      "notes": null
+    },
+    {
+      "id": "ICCG-1",
+      "category": "Lightning",
+      "strength": "Hard",
+      "triggerVariable": "iccg_method",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "iccg_prescribed_num must also set set | iccg_prescribed_den must also set set",
+      "requirements": [
+        {
+          "raw": "iccg_prescribed_num must also set set",
+          "checkable": true,
+          "variable": "iccg_prescribed_num",
+          "group": "physics",
+          "mode": "set",
+          "values": []
+        },
+        {
+          "raw": "iccg_prescribed_den must also set set",
+          "checkable": true,
+          "variable": "iccg_prescribed_den",
+          "group": "physics",
+          "mode": "set",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "iccg_method=1 must also set iccg_prescribed_num and iccg_prescribed_den",
+      "notes": null
+    },
+    {
+      "id": "RADARREF-MP",
+      "category": "Radar Reflectivity",
+      "strength": "Hard",
+      "triggerVariable": "do_radar_ref",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
+      "requirements": [
+        {
+          "raw": "mp_physics works with 2, 4, 6, 7, 8, 10, 14, 16, 17, 18, 19, 21, 24, 26, 28",
+          "checkable": false,
+          "variable": "mp_physics",
+          "group": "physics",
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "do_radar_ref works with mp_physics=2,4,6,7,8,10,14,16,17,18,19,21,24,26,28",
+      "notes": null
+    },
+    {
+      "id": "NWPDIAG",
+      "category": "Diagnostics",
+      "strength": "Hard",
+      "triggerVariable": "nwp_diagnostics",
+      "triggerGroup": "time_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "do_radar_ref must be 1, True",
+      "requirements": [
+        {
+          "raw": "do_radar_ref must be 1, True",
+          "checkable": true,
+          "variable": "do_radar_ref",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "True"
+          ]
+        }
+      ],
+      "sourceExcerpt": "nwp_diagnostics=1 and do_radar_ref=1",
+      "notes": null
+    },
+    {
+      "id": "USE-MP-RE",
+      "category": "Radiation \u2194 MP",
+      "strength": "Hard",
+      "triggerVariable": "use_mp_re",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
+      "requirements": [
+        {
+          "raw": "mp_physics only works with 3, 4, 6, 7, 8, 10, 14, 16, 18, 24, 26, 28, 50, 51, 52, 53, 55",
+          "checkable": true,
+          "variable": "mp_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "4",
+            "6",
+            "7",
+            "8",
+            "10",
+            "14",
+            "16",
+            "18",
+            "24",
+            "26",
+            "28",
+            "50",
+            "51",
+            "52",
+            "53",
+            "55"
+          ]
+        }
+      ],
+      "sourceExcerpt": "use_mp_re=1 only works with mp_physics=3,4,6,7,8,10,14,16,18,24,26,28,50-53,55",
+      "notes": null
+    },
+    {
+      "id": "RA-SW-ECLIPSE",
+      "category": "Radiation",
+      "strength": "Hard",
+      "triggerVariable": "ra_sw_eclipse",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "ra_sw_physics only works with 1, 2, 4, 5",
+      "requirements": [
+        {
+          "raw": "ra_sw_physics only works with 1, 2, 4, 5",
+          "checkable": true,
+          "variable": "ra_sw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "2",
+            "4",
+            "5"
+          ]
+        }
+      ],
+      "sourceExcerpt": "ra_sw_eclipse=1 only works with ra_sw_physics 1,2,4,5",
+      "notes": null
+    },
+    {
+      "id": "ICLOUD",
+      "category": "Radiation",
+      "strength": "Hard",
+      "triggerVariable": "icloud",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "ra_lw_physics requires 1, 4 | ra_sw_physics requires 1, 4",
+      "requirements": [
+        {
+          "raw": "ra_lw_physics requires 1, 4",
+          "checkable": true,
+          "variable": "ra_lw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "4"
+          ]
+        },
+        {
+          "raw": "ra_sw_physics requires 1, 4",
+          "checkable": true,
+          "variable": "ra_sw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "4"
+          ]
+        }
+      ],
+      "sourceExcerpt": "icloud only works with ra_sw/lw_physics=1 or 4",
+      "notes": null
+    },
+    {
+      "id": "BUCKET-J",
+      "category": "Accumulation Budgets",
+      "strength": "Hard",
+      "triggerVariable": "bucket_j",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "ra_lw_physics only works with 3, 4, 14, 24 | ra_sw_physics only works with 3, 4, 14, 24",
+      "requirements": [
+        {
+          "raw": "ra_lw_physics only works with 3, 4, 14, 24",
+          "checkable": true,
+          "variable": "ra_lw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "4",
+            "14",
+            "24"
+          ]
+        },
+        {
+          "raw": "ra_sw_physics only works with 3, 4, 14, 24",
+          "checkable": true,
+          "variable": "ra_sw_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "3",
+            "4",
+            "14",
+            "24"
+          ]
+        }
+      ],
+      "sourceExcerpt": "bucket_J only works with CAM and RRTMG radiation options (ra_lw/sw_physics = 3,4,14,24)",
+      "notes": null
+    },
+    {
+      "id": "AER-OPT-3",
+      "category": "Aerosol \u2194 MP",
+      "strength": "Hard",
+      "triggerVariable": "aer_opt",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "3"
+        ]
+      },
+      "requirementsRaw": "mp_physics only works with 28",
+      "requirements": [
+        {
+          "raw": "mp_physics only works with 28",
+          "checkable": true,
+          "variable": "mp_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "28"
+          ]
+        }
+      ],
+      "sourceExcerpt": "aer_opt=3 only works with Thompson aerosol-aware microphysics (option 28)",
+      "notes": null
+    },
+    {
+      "id": "KM-5",
+      "category": "Dynamics",
+      "strength": "Hard",
+      "triggerVariable": "km_opt",
+      "triggerGroup": "dynamics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "5"
+        ]
+      },
+      "requirementsRaw": "diff_opt must be 2 | bl_pbl_physics must be 0 | sf_sfclay_physics must be one of 1, 5, 91",
+      "requirements": [
+        {
+          "raw": "diff_opt must be 2",
+          "checkable": true,
+          "variable": "diff_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        },
+        {
+          "raw": "bl_pbl_physics must be 0",
+          "checkable": true,
+          "variable": "bl_pbl_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "0"
+          ]
+        },
+        {
+          "raw": "sf_sfclay_physics must be one of 1, 5, 91",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1",
+            "5",
+            "91"
+          ]
+        }
+      ],
+      "sourceExcerpt": "km_opt=5 only works with diff_opt=2, bl_pbl_physics=0, sf_sfclay_physics=1,5,91",
+      "notes": null
+    },
+    {
+      "id": "SFS-1",
+      "category": "Dynamics",
+      "strength": "Soft",
+      "triggerVariable": "sfs_opt",
+      "triggerGroup": "dynamics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2, 3",
+      "requirements": [
+        {
+          "raw": "diff_opt should be used with 2",
+          "checkable": true,
+          "variable": "diff_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        },
+        {
+          "raw": "km_opt should be used with 2, 3",
+          "checkable": true,
+          "variable": "km_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sfs_opt=1 should be used with diff_opt=2 and km_opt=2 or 3",
+      "notes": null
+    },
+    {
+      "id": "SFS-2",
+      "category": "Dynamics",
+      "strength": "Soft",
+      "triggerVariable": "sfs_opt",
+      "triggerGroup": "dynamics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "2"
+        ]
+      },
+      "requirementsRaw": "diff_opt should be used with 2 | km_opt should be used with 2",
+      "requirements": [
+        {
+          "raw": "diff_opt should be used with 2",
+          "checkable": true,
+          "variable": "diff_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        },
+        {
+          "raw": "km_opt should be used with 2",
+          "checkable": true,
+          "variable": "km_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        }
+      ],
+      "sourceExcerpt": "sfs_opt=2 should be used with diff_opt=2 and km_opt=2",
+      "notes": null
+    },
+    {
+      "id": "LES-PBL",
+      "category": "Dynamics / LES",
+      "strength": "Soft",
+      "triggerVariable": "bl_pbl_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "requirementsRaw": "isfflx template uses 1 | sf_sfclay_physics template uses any non-zero | sf_surface_physics template uses any non-zero | diff_opt template uses 2 | km_opt template uses 2, 3",
+      "requirements": [
+        {
+          "raw": "isfflx template uses 1",
+          "checkable": true,
+          "variable": "isfflx",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        },
+        {
+          "raw": "sf_sfclay_physics template uses any non-zero",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "nonzero",
+          "values": []
+        },
+        {
+          "raw": "sf_surface_physics template uses any non-zero",
+          "checkable": true,
+          "variable": "sf_surface_physics",
+          "group": "physics",
+          "mode": "nonzero",
+          "values": []
+        },
+        {
+          "raw": "diff_opt template uses 2",
+          "checkable": true,
+          "variable": "diff_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2"
+          ]
+        },
+        {
+          "raw": "km_opt template uses 2, 3",
+          "checkable": true,
+          "variable": "km_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "sourceExcerpt": "LES PBL settings: bl_pbl_physics=0, isfflx=1, sf_sfclay_physics any except 0, sf_surface_physics any except 0, diff_opt=2, km_opt=2 or 3",
+      "notes": null
+    },
+    {
+      "id": "ISFTCFLX",
+      "category": "Surface Flux",
+      "strength": "Hard",
+      "triggerVariable": "isftcflx",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "requirementsRaw": "sf_sfclay_physics must be 1",
+      "requirements": [
+        {
+          "raw": "sf_sfclay_physics must be 1",
+          "checkable": true,
+          "variable": "sf_sfclay_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "1"
+          ]
+        }
+      ],
+      "sourceExcerpt": "isftcflx=1,2 must be used with sf_sfclay_physics=1",
+      "notes": null
+    },
+    {
+      "id": "SST-UPDATE",
+      "category": "Time Control",
+      "strength": "Workflow",
+      "triggerVariable": "sst_update",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "auxinput4_inname requires wrflowinp_d<domain> | auxinput4_interval requires set | io_form_auxinput4 requires set",
+      "requirements": [
+        {
+          "raw": "auxinput4_inname requires wrflowinp_d<domain>",
+          "checkable": true,
+          "variable": "auxinput4_inname",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        },
+        {
+          "raw": "auxinput4_interval requires set",
+          "checkable": true,
+          "variable": "auxinput4_interval",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        },
+        {
+          "raw": "io_form_auxinput4 requires set",
+          "checkable": true,
+          "variable": "io_form_auxinput4",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "sst_update=1 requires auxinput4_inname, auxinput4_interval, io_form_auxinput4",
+      "notes": null
+    },
+    {
+      "id": "OBS-NUDGE",
+      "category": "FDDA",
+      "strength": "Workflow",
+      "triggerVariable": "obs_nudge_opt",
+      "triggerGroup": "fdda",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "1"
+        ]
+      },
+      "requirementsRaw": "auxinput11_interval must also set set | auxinput11_end_h must also set set",
+      "requirements": [
+        {
+          "raw": "auxinput11_interval must also set set",
+          "checkable": true,
+          "variable": "auxinput11_interval",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        },
+        {
+          "raw": "auxinput11_end_h must also set set",
+          "checkable": true,
+          "variable": "auxinput11_end_h",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "obs_nudge_opt=1 must also set auxinput11_interval and auxinput11_end_h",
+      "notes": null
+    },
+    {
+      "id": "MULTI-BDY",
+      "category": "Boundary Files",
+      "strength": "Workflow",
+      "triggerVariable": "multi_bdy_files",
+      "triggerGroup": "bdy_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "bdy_inname requires wrfbdy_d<domain>_<date>",
+      "requirements": [
+        {
+          "raw": "bdy_inname requires wrfbdy_d<domain>_<date>",
+          "checkable": false,
+          "variable": "bdy_inname",
+          "group": "time_control",
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "multi_bdy_files=.true. with bdy_inname='wrfbdy_d<domain>_<date>'",
+      "notes": null
+    },
+    {
+      "id": "NESTED-TRUE",
+      "category": "Boundary Control",
+      "strength": "Workflow",
+      "triggerVariable": "nested",
+      "triggerGroup": "bdy_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "domain_role must be set for nest",
+      "requirements": [
+        {
+          "raw": "domain role should indicate a nested domain",
+          "checkable": false,
+          "variable": "domain_role",
+          "group": null,
+          "mode": "note",
+          "values": [
+            "set for nest"
+          ]
+        }
+      ],
+      "sourceExcerpt": "nested=.true. must be set for nests",
+      "notes": null
+    },
+    {
+      "id": "SPECIFIED-D01",
+      "category": "Boundary Control",
+      "strength": "Hard",
+      "triggerVariable": "specified",
+      "triggerGroup": "bdy_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "domain_role for domain 1",
+      "requirements": [
+        {
+          "raw": "domain_role for domain 1",
+          "checkable": false,
+          "variable": "domain_role",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "specified=.true. for outer domain in real-data cases",
+      "notes": null
+    },
+    {
+      "id": "NUM-LAND-CAT",
+      "category": "WPS \u2194 WRF",
+      "strength": "Hard",
+      "triggerVariable": "num_land_cat",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "set"
+        ]
+      },
+      "requirementsRaw": "metgrid_NUM_LAND_CAT must match must match | MODIS default typical value 21 | USGS typical value 24",
+      "requirements": [
+        {
+          "raw": "metgrid_NUM_LAND_CAT must match must match",
+          "checkable": false,
+          "variable": "metgrid_NUM_LAND_CAT",
+          "group": null,
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "MODIS default typical value 21",
+          "checkable": false,
+          "variable": "MODIS",
+          "group": null,
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "USGS typical value 24",
+          "checkable": false,
+          "variable": "USGS",
+          "group": null,
+          "mode": "note",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "num_land_cat must match metgrid NUM_LAND_CAT; 21 for MODIS, 24 for USGS",
+      "notes": null
+    },
+    {
+      "id": "WPS-HIRES",
+      "category": "Moving Nest / Hi-Res",
+      "strength": "Workflow",
+      "triggerVariable": "input_from_hires",
+      "triggerGroup": "time_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "compile_env requires TERRAIN_AND_LANDUSE=1 | geog_data_res requires usgs_30s+default or matching hi-res | rsmas_data_path requires set",
+      "requirements": [
+        {
+          "raw": "compile_env requires TERRAIN_AND_LANDUSE=1",
+          "checkable": false,
+          "variable": "compile_env",
+          "group": null,
+          "mode": "note",
+          "values": []
+        },
+        {
+          "raw": "geog_data_res requires usgs_30s+default or matching hi-res",
+          "checkable": false,
+          "variable": "geog_data_res",
+          "group": null,
+          "mode": "note",
+          "values": [
+            "usgs_30s+default or matching hi-res"
+          ]
+        },
+        {
+          "raw": "rsmas_data_path requires set",
+          "checkable": true,
+          "variable": "rsmas_data_path",
+          "group": "time_control",
+          "mode": "set",
+          "values": []
+        }
+      ],
+      "sourceExcerpt": "input_from_hires requires TERRAIN_AND_LANDUSE=1, hi-res geog_data_res, and rsmas_data_path",
+      "notes": null
+    },
+    {
+      "id": "OLD-FILES",
+      "category": "Backward Compatibility",
+      "strength": "Workflow",
+      "triggerVariable": "force_use_old_data",
+      "triggerGroup": "time_control",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "True"
+        ]
+      },
+      "requirementsRaw": "use_theta_m must be 0 | hybrid_opt must be 0",
+      "requirements": [
+        {
+          "raw": "use_theta_m must be 0",
+          "checkable": true,
+          "variable": "use_theta_m",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "0"
+          ]
+        },
+        {
+          "raw": "hybrid_opt must be 0",
+          "checkable": true,
+          "variable": "hybrid_opt",
+          "group": "dynamics",
+          "mode": "one_of",
+          "values": [
+            "0"
+          ]
+        }
+      ],
+      "sourceExcerpt": "To use pre-V4 wrfinput/wrfbdy, set use_theta_m=0, hybrid_opt=0, force_use_old_data=.true.",
+      "notes": null
+    },
+    {
+      "id": "CU-OFF",
+      "category": "Cumulus Parameterization",
+      "strength": "Soft",
+      "triggerVariable": "cu_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "requirementsRaw": "cu_physics=0 means no cumulus parameterization and is allowed",
+      "requirements": [],
+      "sourceExcerpt": "cu_physics=0 means no cumulus parameterization; turning cumulus off for a domain is allowed",
+      "notes": "Explicitly marks off-state as allowed so the UI does not imply conflict."
+    },
+    {
+      "id": "SHCU-OFF",
+      "category": "Shallow Cumulus",
+      "strength": "Soft",
+      "triggerVariable": "shcu_physics",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "one_of",
+        "values": [
+          "0"
+        ]
+      },
+      "requirementsRaw": "shcu_physics=0 means no shallow cumulus and is allowed",
+      "requirements": [],
+      "sourceExcerpt": "shcu_physics is an independent shallow cumulus option; 0 means off and is allowed",
+      "notes": "Explicitly marks off-state as allowed."
+    },
+    {
+      "id": "CUP-THBIN",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "thBinSize",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "cu_physics only works with 10",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 10",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "10"
+          ]
+        }
+      ],
+      "sourceExcerpt": "thBinSize is a CuP PDF bin-size option and only works with cu_physics=10",
+      "notes": null
+    },
+    {
+      "id": "CUP-MINDEEP",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "minDeepFreq",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "cu_physics only works with 10",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 10",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "10"
+          ]
+        }
+      ],
+      "sourceExcerpt": "minDeepFreq is a CuP frequency threshold option and only works with cu_physics=10",
+      "notes": null
+    },
+    {
+      "id": "CUP-MINSHALLOW",
+      "category": "Cumulus Option",
+      "strength": "Hard",
+      "triggerVariable": "minShallowFreq",
+      "triggerGroup": "physics",
+      "trigger": {
+        "mode": "active",
+        "values": []
+      },
+      "requirementsRaw": "cu_physics only works with 10",
+      "requirements": [
+        {
+          "raw": "cu_physics only works with 10",
+          "checkable": true,
+          "variable": "cu_physics",
+          "group": "physics",
+          "mode": "one_of",
+          "values": [
+            "10"
+          ]
+        }
+      ],
+      "sourceExcerpt": "minShallowFreq is a CuP frequency threshold option and only works with cu_physics=10",
+      "notes": null
+    }
+  ],
+  "variableIndex": {
+    "bl_pbl_physics": {
+      "group": "physics",
+      "triggerRules": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        54
+      ],
+      "requirementRules": [
+        11,
+        14,
+        15,
+        18,
+        26,
+        30,
+        51
+      ],
+      "summary": "bl_pbl_physics=0 \u21d2 isfflx=1; diff_opt=2; km_opt=2; km_opt=3 || bl_pbl_physics=1 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=10 \u21d2 sf_sfclay_physics=10 || bl_pbl_physics=12 \u21d2 sf_sfclay_physics=1 || bl_pbl_physics=16 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91 || bl_pbl_physics=2 \u21d2 sf_sfclay_physics=2 || bl_pbl_physics=4 \u21d2 sf_sfclay_physics=4 || bl_pbl_physics=5 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=5 || bl_pbl_physics=6 \u21d2 sf_sfclay_physics=5 || bl_pbl_physics=7 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=7 ..."
+    },
+    "sf_sfclay_physics": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        20,
+        51,
+        54,
+        55
+      ],
+      "summary": null
+    },
+    "sf_surface_physics": {
+      "group": "physics",
+      "triggerRules": [
+        11,
+        12
+      ],
+      "requirementRules": [
+        13,
+        19,
+        21,
+        54
+      ],
+      "summary": "sf_surface_physics=7 \u21d2 sf_sfclay_physics=7; bl_pbl_physics=7 || sf_surface_physics=8 \u21d2 ra_lw_physics=1; ra_lw_physics=3; ra_lw_physics=4; ra_sw_physics=1; ra_sw_physics=3; ra_sw_physics=4"
+    },
+    "ra_lw_physics": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        12,
+        48,
+        49
+      ],
+      "summary": null
+    },
+    "ra_sw_physics": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        12,
+        47,
+        48,
+        49
+      ],
+      "summary": null
+    },
+    "sf_urban_physics": {
+      "group": "physics",
+      "triggerRules": [
+        13,
+        14,
+        15
+      ],
+      "requirementRules": [
+        16
+      ],
+      "summary": "sf_urban_physics=1 \u21d2 sf_surface_physics=2 || sf_urban_physics=2 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8 || sf_urban_physics=3 \u21d2 sf_surface_physics=2; bl_pbl_physics=1; bl_pbl_physics=2; bl_pbl_physics=8"
+    },
+    "slucm_distributed_drag": {
+      "group": "physics",
+      "triggerRules": [
+        16
+      ],
+      "requirementRules": [],
+      "summary": "slucm_distributed_drag=True \u21d2 sf_urban_physics=1; use_wudapt_lcz=0; use_wudapt_lcz=False"
+    },
+    "use_wudapt_lcz": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        16
+      ],
+      "summary": null
+    },
+    "wrfinput_extra": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        16,
+        17
+      ],
+      "summary": null
+    },
+    "distributed_ahe_opt": {
+      "group": "physics",
+      "triggerRules": [
+        17
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "topo_wind": {
+      "group": "physics",
+      "triggerRules": [
+        18
+      ],
+      "requirementRules": [],
+      "summary": "topo_wind=1 \u21d2 bl_pbl_physics=1 || topo_wind=2 \u21d2 bl_pbl_physics=1"
+    },
+    "geogrid_extra": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        18
+      ],
+      "summary": null
+    },
+    "seaice_threshold": {
+      "group": "physics",
+      "triggerRules": [
+        19
+      ],
+      "requirementRules": [
+        20
+      ],
+      "summary": null
+    },
+    "fractional_seaice": {
+      "group": "physics",
+      "triggerRules": [
+        20
+      ],
+      "requirementRules": [],
+      "summary": "fractional_seaice=1 \u21d2 sf_sfclay_physics=1; sf_sfclay_physics=2; sf_sfclay_physics=3; sf_sfclay_physics=4; sf_sfclay_physics=5; sf_sfclay_physics=7; sf_sfclay_physics=91; seaice_threshold=0"
+    },
+    "sf_surf_irr_scheme": {
+      "group": "physics",
+      "triggerRules": [
+        21
+      ],
+      "requirementRules": [],
+      "summary": "sf_surf_irr_scheme=1 \u21d2 sf_surface_physics=2"
+    },
+    "opt_pedo": {
+      "group": "noah_mp",
+      "triggerRules": [
+        22
+      ],
+      "requirementRules": [],
+      "summary": "opt_pedo=1 \u21d2 opt_soil=3"
+    },
+    "opt_soil": {
+      "group": "noah_mp",
+      "triggerRules": [],
+      "requirementRules": [
+        22
+      ],
+      "summary": null
+    },
+    "geogrid_tbl": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "summary": null
+    },
+    "opt_irr": {
+      "group": "noah_mp",
+      "triggerRules": [
+        23
+      ],
+      "requirementRules": [
+        24
+      ],
+      "summary": null
+    },
+    "opt_irrm": {
+      "group": "noah_mp",
+      "triggerRules": [
+        24
+      ],
+      "requirementRules": [],
+      "summary": "opt_irrm=1 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=2 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3 || opt_irrm=3 \u21d2 opt_irr=1; opt_irr=2; opt_irr=3"
+    },
+    "opt_tdrn": {
+      "group": "noah_mp",
+      "triggerRules": [
+        25
+      ],
+      "requirementRules": [],
+      "summary": "opt_tdrn=1 \u21d2 opt_run=3 || opt_tdrn=2 \u21d2 opt_run=3"
+    },
+    "opt_run": {
+      "group": "noah_mp",
+      "triggerRules": [],
+      "requirementRules": [
+        25
+      ],
+      "summary": null
+    },
+    "cu_physics": {
+      "group": "physics",
+      "triggerRules": [
+        26,
+        27,
+        64
+      ],
+      "requirementRules": [
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        42,
+        66,
+        67,
+        68
+      ],
+      "summary": "cu_physics=0 \u21d2 no cumulus parameterization (allowed) || cu_physics=7 \u21d2 bl_pbl_physics=2 or 9 || cu_physics=14 \u21d2 shcu_physics=4"
+    },
+    "shcu_physics": {
+      "group": "physics",
+      "triggerRules": [
+        30,
+        65
+      ],
+      "requirementRules": [
+        27
+      ],
+      "summary": "shcu_physics=0 \u21d2 no shallow cumulus (allowed) || shcu_physics=5 \u21d2 bl_pbl_physics=2, 5, or 6"
+    },
+    "kfeta_trigger": {
+      "group": "physics",
+      "triggerRules": [
+        28
+      ],
+      "requirementRules": [],
+      "summary": "kfeta_trigger=1 \u21d2 cu_physics=1 || kfeta_trigger=2 \u21d2 cu_physics=1 || kfeta_trigger=3 \u21d2 cu_physics=1"
+    },
+    "ishallow": {
+      "group": "physics",
+      "triggerRules": [
+        29
+      ],
+      "requirementRules": [],
+      "summary": "ishallow=1 \u21d2 cu_physics=3; cu_physics=5"
+    },
+    "cugd_avedx": {
+      "group": "physics",
+      "triggerRules": [
+        31
+      ],
+      "requirementRules": [],
+      "summary": "cugd_avedx=3 \u21d2 cu_physics=5"
+    },
+    "kf_edrates": {
+      "group": "physics",
+      "triggerRules": [
+        32
+      ],
+      "requirementRules": [],
+      "summary": "kf_edrates=1 \u21d2 cu_physics=1; cu_physics=11; cu_physics=99"
+    },
+    "convtrans_avglen_m": {
+      "group": "physics",
+      "triggerRules": [
+        33
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "cu_diag": {
+      "group": "physics",
+      "triggerRules": [
+        34
+      ],
+      "requirementRules": [
+        35
+      ],
+      "summary": "cu_diag=1 \u21d2 cu_physics=3; cu_physics=5; cu_physics=93"
+    },
+    "cu_rad_feedback": {
+      "group": "physics",
+      "triggerRules": [
+        35
+      ],
+      "requirementRules": [],
+      "summary": "cu_rad_feedback=True \u21d2 cu_physics=1; cu_physics=3; cu_physics=5; cu_physics=10; cu_physics=11; cu_physics=93; cu_physics=99; cu_diag=1"
+    },
+    "maxiens": {
+      "group": "physics",
+      "triggerRules": [
+        36
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "maxens": {
+      "group": "physics",
+      "triggerRules": [
+        37
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "maxens2": {
+      "group": "physics",
+      "triggerRules": [
+        38
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "maxens3": {
+      "group": "physics",
+      "triggerRules": [
+        39
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "ensdim": {
+      "group": "physics",
+      "triggerRules": [
+        40
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "lightning_option": {
+      "group": "physics",
+      "triggerRules": [
+        41,
+        42
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "do_radar_ref": {
+      "group": "physics",
+      "triggerRules": [
+        44
+      ],
+      "requirementRules": [
+        41,
+        45
+      ],
+      "summary": "do_radar_ref=1 \u21d2 mp_physics=2; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=17; mp_physics=18; mp_physics=19; mp_physics=21; mp_physics=24; mp_physics=26; mp_physics=28"
+    },
+    "dx": {
+      "group": "domains",
+      "triggerRules": [],
+      "requirementRules": [
+        42
+      ],
+      "summary": null
+    },
+    "iccg_method": {
+      "group": "physics",
+      "triggerRules": [
+        43
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "iccg_prescribed_num": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        43
+      ],
+      "summary": null
+    },
+    "iccg_prescribed_den": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        43
+      ],
+      "summary": null
+    },
+    "mp_physics": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        44,
+        46,
+        50
+      ],
+      "summary": null
+    },
+    "nwp_diagnostics": {
+      "group": "time_control",
+      "triggerRules": [
+        45
+      ],
+      "requirementRules": [],
+      "summary": "nwp_diagnostics=1 \u21d2 do_radar_ref=1; do_radar_ref=True"
+    },
+    "use_mp_re": {
+      "group": "physics",
+      "triggerRules": [
+        46
+      ],
+      "requirementRules": [],
+      "summary": "use_mp_re=1 \u21d2 mp_physics=3; mp_physics=4; mp_physics=6; mp_physics=7; mp_physics=8; mp_physics=10; mp_physics=14; mp_physics=16; mp_physics=18; mp_physics=24; mp_physics=26; mp_physics=28; mp_physics=50; mp_physics=51; mp_physics=52; mp_physics=53; mp_physics=55"
+    },
+    "ra_sw_eclipse": {
+      "group": "physics",
+      "triggerRules": [
+        47
+      ],
+      "requirementRules": [],
+      "summary": "ra_sw_eclipse=1 \u21d2 ra_sw_physics=1; ra_sw_physics=2; ra_sw_physics=4; ra_sw_physics=5"
+    },
+    "icloud": {
+      "group": "physics",
+      "triggerRules": [
+        48
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "bucket_j": {
+      "group": "physics",
+      "triggerRules": [
+        49
+      ],
+      "requirementRules": [],
+      "summary": "Requires CAM or RRTMG radiation families: ra_lw_physics and ra_sw_physics in 3, 4, 14, or 24."
+    },
+    "aer_opt": {
+      "group": "physics",
+      "triggerRules": [
+        50
+      ],
+      "requirementRules": [],
+      "summary": "aer_opt=3 \u21d2 mp_physics=28"
+    },
+    "km_opt": {
+      "group": "dynamics",
+      "triggerRules": [
+        51
+      ],
+      "requirementRules": [
+        52,
+        53,
+        54
+      ],
+      "summary": "km_opt=5 \u21d2 diff_opt=2; bl_pbl_physics=0; sf_sfclay_physics=1; sf_sfclay_physics=5; sf_sfclay_physics=91"
+    },
+    "diff_opt": {
+      "group": "dynamics",
+      "triggerRules": [],
+      "requirementRules": [
+        51,
+        52,
+        53,
+        54
+      ],
+      "summary": null
+    },
+    "sfs_opt": {
+      "group": "dynamics",
+      "triggerRules": [
+        52,
+        53
+      ],
+      "requirementRules": [],
+      "summary": "sfs_opt=1 \u21d2 diff_opt=2; km_opt=2; km_opt=3 || sfs_opt=2 \u21d2 diff_opt=2; km_opt=2"
+    },
+    "isfflx": {
+      "group": "physics",
+      "triggerRules": [],
+      "requirementRules": [
+        54
+      ],
+      "summary": null
+    },
+    "isftcflx": {
+      "group": "physics",
+      "triggerRules": [
+        55
+      ],
+      "requirementRules": [],
+      "summary": "isftcflx=1 or 2 requires sf_sfclay_physics=1."
+    },
+    "sst_update": {
+      "group": "physics",
+      "triggerRules": [
+        56
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "auxinput4_inname": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        56
+      ],
+      "summary": null
+    },
+    "auxinput4_interval": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; requires companion auxinput4 lower-boundary settings."
+    },
+    "io_form_auxinput4": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        56
+      ],
+      "summary": "Used with sst_update=1; typically set to 2 for netCDF lower-boundary files."
+    },
+    "obs_nudge_opt": {
+      "group": "fdda",
+      "triggerRules": [
+        57
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "auxinput11_interval": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
+    },
+    "auxinput11_end_h": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        57
+      ],
+      "summary": "Observation nudging companion setting; should be set when obs_nudge_opt=1."
+    },
+    "multi_bdy_files": {
+      "group": "bdy_control",
+      "triggerRules": [
+        58
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "bdy_inname": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        58
+      ],
+      "summary": null
+    },
+    "nested": {
+      "group": "bdy_control",
+      "triggerRules": [
+        59
+      ],
+      "requirementRules": [],
+      "summary": "nested=.true. is for nested domains only."
+    },
+    "domain_role": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        59,
+        60
+      ],
+      "summary": null
+    },
+    "specified": {
+      "group": "bdy_control",
+      "triggerRules": [
+        60
+      ],
+      "requirementRules": [],
+      "summary": "specified=.true. is for the outer real-data domain only."
+    },
+    "num_land_cat": {
+      "group": "physics",
+      "triggerRules": [
+        61
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "metgrid_NUM_LAND_CAT": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
+    },
+    "MODIS": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
+    },
+    "USGS": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        61
+      ],
+      "summary": null
+    },
+    "input_from_hires": {
+      "group": "time_control",
+      "triggerRules": [
+        62
+      ],
+      "requirementRules": [],
+      "summary": null
+    },
+    "compile_env": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        62
+      ],
+      "summary": null
+    },
+    "geog_data_res": {
+      "group": null,
+      "triggerRules": [],
+      "requirementRules": [
+        62
+      ],
+      "summary": null
+    },
+    "rsmas_data_path": {
+      "group": "time_control",
+      "triggerRules": [],
+      "requirementRules": [
+        62
+      ],
+      "summary": null
+    },
+    "force_use_old_data": {
+      "group": "time_control",
+      "triggerRules": [
+        63
+      ],
+      "requirementRules": [],
+      "summary": "force_use_old_data=True \u21d2 use_theta_m=0; hybrid_opt=0"
+    },
+    "use_theta_m": {
+      "group": "dynamics",
+      "triggerRules": [],
+      "requirementRules": [
+        63
+      ],
+      "summary": null
+    },
+    "hybrid_opt": {
+      "group": "dynamics",
+      "triggerRules": [],
+      "requirementRules": [
+        63
+      ],
+      "summary": null
+    },
+    "thBinSize": {
+      "group": "physics",
+      "triggerRules": [
+        66
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
+    },
+    "minDeepFreq": {
+      "group": "physics",
+      "triggerRules": [
+        67
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
+    },
+    "minShallowFreq": {
+      "group": "physics",
+      "triggerRules": [
+        68
+      ],
+      "requirementRules": [],
+      "summary": "Only works with cu_physics=10 (CuP)."
+    }
+  }
+}

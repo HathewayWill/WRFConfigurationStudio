@@ -1,0 +1,531 @@
+{
+  "metadata": {
+    "title": "ARW Technical Note v4 Scientific Context",
+    "sourceTitle": "A Description of the Advanced Research WRF Model Version 4",
+    "sourceId": "NCAR/TN-556+STR",
+    "sourceAuthors": [
+      "William C. Skamarock",
+      "Joseph B. Klemp",
+      "Jimy Dudhia",
+      "David O. Gill",
+      "Zhiquan Liu",
+      "Judith Berner",
+      "Wei Wang",
+      "Jordan G. Powers",
+      "Michael G. Duda",
+      "Dale M. Barker",
+      "Xiang-Yu Huang"
+    ],
+    "sourceYear": 2019,
+    "pdfPath": "docs/references/v4_technote.pdf",
+    "policy": "Scientific context only. Do not enforce, auto-fix, hide variables, or block saves.",
+    "generated": "2026-05-04T23:20:07Z",
+    "publicVersion": "v1.0.0",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor"
+  },
+  "topics": {
+    "temporal_discretization": {
+      "label": "Temporal Discretization",
+      "chapter": "3.1",
+      "pageHint": "Technical note chapter 3",
+      "badges": [
+        "Numerics",
+        "RK3",
+        "Time Step"
+      ],
+      "summary": "Explains the RK time-split integration sequence, acoustic substeps, diabatic forcing, and hydrostatic option."
+    },
+    "stability": {
+      "label": "Stability Constraints",
+      "chapter": "3.3",
+      "pageHint": "Technical note chapter 3.3",
+      "badges": [
+        "Stability",
+        "CFL",
+        "Adaptive timestep"
+      ],
+      "summary": "Context for RK3 time-step constraints, acoustic time-step constraints, adaptive timestep behavior, and map-projection timestep considerations."
+    },
+    "vertical_coordinate": {
+      "label": "Hybrid Vertical Coordinate",
+      "chapter": "2.1",
+      "pageHint": "Technical note chapter 2.1",
+      "badges": [
+        "Dynamics",
+        "Vertical coordinate",
+        "Hybrid sigma-pressure"
+      ],
+      "summary": "ARW v4 uses a terrain-following, mass-based hybrid sigma-pressure vertical coordinate that transitions toward pressure surfaces aloft."
+    },
+    "map_projections": {
+      "label": "Map Projections and Map Factors",
+      "chapter": "2.3",
+      "pageHint": "Technical note chapter 2.3",
+      "badges": [
+        "Projection",
+        "Map factors",
+        "Coriolis"
+      ],
+      "summary": "Context for Lambert, polar stereographic, Mercator, and latitude-longitude projections and their map-scale factors."
+    },
+    "mixing_filters": {
+      "label": "Turbulent Mixing and Filters",
+      "chapter": "4",
+      "pageHint": "Technical note chapter 4",
+      "badges": [
+        "Diffusion",
+        "Filters",
+        "Damping"
+      ],
+      "summary": "Context for diffusion choices, eddy viscosity, sixth-order filtering, divergence damping, acoustic filters, and gravity-wave absorbing layers."
+    },
+    "initialization": {
+      "label": "Initialization",
+      "chapter": "5",
+      "pageHint": "Technical note chapter 5",
+      "badges": [
+        "Initialization",
+        "WPS",
+        "DFI"
+      ],
+      "summary": "Context for idealized and real-data initialization, WPS data flow, vertical interpolation, lateral boundary data generation, and digital filtering initialization."
+    },
+    "boundary_conditions": {
+      "label": "Lateral Boundary Conditions",
+      "chapter": "6",
+      "pageHint": "Technical note chapter 6",
+      "badges": [
+        "Boundary",
+        "Regional",
+        "Global"
+      ],
+      "summary": "Context for periodic, open, symmetric, specified, polar, and nested boundary-condition behavior."
+    },
+    "nesting": {
+      "label": "Nesting",
+      "chapter": "7",
+      "pageHint": "Technical note chapter 7",
+      "badges": [
+        "Nesting",
+        "Feedback",
+        "Parent/child"
+      ],
+      "summary": "Context for horizontal nesting, parent-child staggering, one-way and two-way nesting, feedback, nested boundary conditions, and nest generation."
+    },
+    "physics": {
+      "label": "Physics",
+      "chapter": "8",
+      "pageHint": "Technical note chapter 8",
+      "badges": [
+        "Physics",
+        "Parameterizations"
+      ],
+      "summary": "Context for microphysics, cumulus, shallow cumulus, surface layer, land-surface models, PBL, radiation, and physics interactions."
+    },
+    "stochastic": {
+      "label": "Stochastic Parameterization Suite",
+      "chapter": "9",
+      "pageHint": "Technical note chapter 9",
+      "badges": [
+        "Stochastic",
+        "Ensemble"
+      ],
+      "summary": "Context for SPPT, SKEBS, SPP, RPT, and stochastic perturbations to lateral boundary conditions."
+    },
+    "nudging": {
+      "label": "Nudging",
+      "chapter": "10",
+      "pageHint": "Technical note chapter 10",
+      "badges": [
+        "Nudging",
+        "FDDA"
+      ],
+      "summary": "Context for grid nudging, surface analysis nudging, flux-adjusting surface analysis nudging, observational nudging, and spectral nudging."
+    },
+    "wrfda": {
+      "label": "Data Assimilation",
+      "chapter": "11",
+      "pageHint": "Technical note chapter 11",
+      "badges": [
+        "WRFDA",
+        "3DVAR/4DVAR",
+        "Hybrid EnVar"
+      ],
+      "summary": "Context for WRFDA algorithms, background-error covariances, 3DVAR, 4DVAR, hybrid EnVar, satellite radiance assimilation, radar data assimilation, and control variables."
+    }
+  },
+  "groups": {
+    "time_control": {
+      "topicIds": [
+        "initialization"
+      ],
+      "summary": "Run timing controls affect initialization windows, boundary data timing, output intervals, and restart behavior."
+    },
+    "domains": {
+      "topicIds": [
+        "temporal_discretization",
+        "stability",
+        "map_projections",
+        "vertical_coordinate",
+        "nesting"
+      ],
+      "summary": "Domain controls connect grid spacing, timestep choices, map projection, vertical coordinate setup, and parent-child nesting."
+    },
+    "dynamics": {
+      "topicIds": [
+        "vertical_coordinate",
+        "mixing_filters",
+        "temporal_discretization",
+        "stability"
+      ],
+      "summary": "Dynamics controls affect ARW numerics, diffusion, damping, advection, hydrostatic/nonhydrostatic behavior, and hybrid-coordinate behavior."
+    },
+    "bdy_control": {
+      "topicIds": [
+        "boundary_conditions",
+        "nesting"
+      ],
+      "summary": "Boundary controls describe regional specified boundaries, nest boundaries, relaxation zones, and global/idealized lateral-condition options."
+    },
+    "physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Physics controls organize atmospheric process parameterizations, including microphysics, cumulus, surface, land-surface, PBL, radiation, and urban physics."
+    },
+    "fdda": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "FDDA controls grid, surface, spectral, and observation nudging behavior."
+    },
+    "stoch": {
+      "topicIds": [
+        "stochastic"
+      ],
+      "summary": "Stochastic parameterization controls perturb tendencies, kinetic-energy backscatter, parameterization schemes, and boundary perturbations."
+    },
+    "wrfvar*": {
+      "topicIds": [
+        "wrfda"
+      ],
+      "summary": "WRFDA groups control data-assimilation workflows, observation handling, background errors, minimization, control variables, radiance, radar, and hybrid-EnVar settings."
+    }
+  },
+  "fields": {
+    "domains.time_step": {
+      "topicIds": [
+        "stability",
+        "temporal_discretization"
+      ],
+      "summary": "Primary RK timestep. This beta displays stability context but does not change the current user-editable suggestion policy.",
+      "related": [
+        "domains.time_step_fract_num",
+        "domains.time_step_fract_den",
+        "domains.parent_time_step_ratio"
+      ]
+    },
+    "domains.time_step_fract_num": {
+      "topicIds": [
+        "stability",
+        "temporal_discretization"
+      ],
+      "summary": "Fractional timestep component used with time_step_fract_den.",
+      "related": [
+        "domains.time_step",
+        "domains.time_step_fract_den"
+      ]
+    },
+    "domains.time_step_fract_den": {
+      "topicIds": [
+        "stability",
+        "temporal_discretization"
+      ],
+      "summary": "Fractional timestep denominator used with time_step_fract_num.",
+      "related": [
+        "domains.time_step",
+        "domains.time_step_fract_num"
+      ]
+    },
+    "domains.parent_time_step_ratio": {
+      "topicIds": [
+        "nesting",
+        "stability"
+      ],
+      "summary": "Controls child-domain timestep ratio relative to the parent domain.",
+      "related": [
+        "domains.parent_grid_ratio",
+        "domains.time_step"
+      ]
+    },
+    "domains.parent_grid_ratio": {
+      "topicIds": [
+        "nesting"
+      ],
+      "summary": "Controls the parent-to-child horizontal grid-spacing ratio.",
+      "related": [
+        "domains.parent_time_step_ratio",
+        "domains.i_parent_start",
+        "domains.j_parent_start"
+      ]
+    },
+    "domains.i_parent_start": {
+      "topicIds": [
+        "nesting"
+      ],
+      "summary": "Defines the nested domain start index in the parent grid in the west-east direction.",
+      "related": [
+        "domains.j_parent_start",
+        "domains.parent_id",
+        "domains.parent_grid_ratio"
+      ]
+    },
+    "domains.j_parent_start": {
+      "topicIds": [
+        "nesting"
+      ],
+      "summary": "Defines the nested domain start index in the parent grid in the south-north direction.",
+      "related": [
+        "domains.i_parent_start",
+        "domains.parent_id",
+        "domains.parent_grid_ratio"
+      ]
+    },
+    "domains.feedback": {
+      "topicIds": [
+        "nesting"
+      ],
+      "summary": "Controls whether child-domain information feeds back to the parent domain in two-way nesting."
+    },
+    "domains.smooth_option": {
+      "topicIds": [
+        "nesting"
+      ],
+      "summary": "Related to smoothing behavior around nested-domain feedback and topographic blending."
+    },
+    "domains.p_top_requested": {
+      "topicIds": [
+        "vertical_coordinate"
+      ],
+      "summary": "Controls the requested model top pressure used with the ARW vertical coordinate."
+    },
+    "domains.e_vert": {
+      "topicIds": [
+        "vertical_coordinate"
+      ],
+      "summary": "Controls the number of vertical levels used by the ARW vertical coordinate."
+    },
+    "dynamics.hybrid_opt": {
+      "topicIds": [
+        "vertical_coordinate"
+      ],
+      "summary": "Connects directly to ARW v4 hybrid sigma-pressure vertical-coordinate behavior."
+    },
+    "dynamics.use_theta_m": {
+      "topicIds": [
+        "vertical_coordinate",
+        "temporal_discretization"
+      ],
+      "summary": "Related to moist potential temperature treatment in the ARW governing equations."
+    },
+    "dynamics.diff_opt": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Selects explicit diffusion formulation context, including coordinate-surface and physical-space diffusion."
+    },
+    "dynamics.km_opt": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Controls eddy viscosity / mixing behavior in ARW turbulence and diffusion formulations."
+    },
+    "dynamics.diff_6th_opt": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Controls sixth-order spatial filtering context."
+    },
+    "dynamics.diff_6th_factor": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Scaling factor for sixth-order filter behavior."
+    },
+    "dynamics.w_damping": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Vertical-velocity damping context."
+    },
+    "dynamics.damp_opt": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Controls damping-layer formulation, including absorbing-layer and Rayleigh-damping context."
+    },
+    "dynamics.zdamp": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Height/depth control associated with damping-layer behavior."
+    },
+    "dynamics.dampcoef": {
+      "topicIds": [
+        "mixing_filters"
+      ],
+      "summary": "Damping coefficient associated with absorbing-layer or Rayleigh-damping behavior."
+    },
+    "dynamics.non_hydrostatic": {
+      "topicIds": [
+        "temporal_discretization"
+      ],
+      "summary": "ARW is a fully compressible nonhydrostatic solver with a run-time hydrostatic option."
+    },
+    "dynamics.moist_adv_opt": {
+      "topicIds": [
+        "temporal_discretization"
+      ],
+      "summary": "Advection option context for moisture scalars."
+    },
+    "dynamics.scalar_adv_opt": {
+      "topicIds": [
+        "temporal_discretization"
+      ],
+      "summary": "Advection option context for scalar fields."
+    },
+    "bdy_control.spec_bdy_width": {
+      "topicIds": [
+        "boundary_conditions"
+      ],
+      "summary": "Width of the specified boundary zone used for regional real-data lateral-boundary conditions."
+    },
+    "bdy_control.spec_zone": {
+      "topicIds": [
+        "boundary_conditions"
+      ],
+      "summary": "Specified lateral boundary zone control."
+    },
+    "bdy_control.relax_zone": {
+      "topicIds": [
+        "boundary_conditions"
+      ],
+      "summary": "Relaxation zone control used together with specified boundaries."
+    },
+    "bdy_control.specified": {
+      "topicIds": [
+        "boundary_conditions"
+      ],
+      "summary": "Regional real-data parent domains commonly use specified lateral boundaries."
+    },
+    "bdy_control.nested": {
+      "topicIds": [
+        "boundary_conditions",
+        "nesting"
+      ],
+      "summary": "Nested child domains use nested lateral boundary data from their parent domains."
+    },
+    "physics.mp_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Microphysics family: cloud, precipitation, and hydrometeor processes."
+    },
+    "physics.cu_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Cumulus parameterization family: parameterized deep and shallow convection behavior."
+    },
+    "physics.bl_pbl_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Planetary boundary layer family: vertical turbulent mixing and boundary-layer evolution."
+    },
+    "physics.ra_lw_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Longwave radiation family: atmospheric longwave radiative-transfer parameterization."
+    },
+    "physics.ra_sw_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Shortwave radiation family: atmospheric shortwave radiative-transfer parameterization."
+    },
+    "physics.radt": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Radiation call interval. The existing v1.0.0 suggestion remains user-editable and uses innermost grid spacing as a starting point."
+    },
+    "physics.sf_sfclay_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Surface-layer family: near-surface similarity and flux-exchange behavior."
+    },
+    "physics.sf_surface_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Land-surface model family: soil, vegetation, snow, sea ice, and surface-state behavior."
+    },
+    "physics.sf_urban_physics": {
+      "topicIds": [
+        "physics"
+      ],
+      "summary": "Urban physics family: urban canopy and building-related parameterizations."
+    },
+    "fdda.grid_fdda": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "Grid-analysis nudging context."
+    },
+    "fdda.obs_nudge_opt": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "Observation/station nudging context."
+    },
+    "fdda.guv": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "Wind-component nudging coefficient context."
+    },
+    "fdda.gt": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "Temperature nudging coefficient context."
+    },
+    "fdda.gq": {
+      "topicIds": [
+        "nudging"
+      ],
+      "summary": "Moisture nudging coefficient context."
+    },
+    "wrfvar*": {
+      "topicIds": [
+        "wrfda"
+      ],
+      "summary": "WRFDA scientific context from ARW technical note chapter 11."
+    },
+    "radar_da*": {
+      "topicIds": [
+        "wrfda"
+      ],
+      "summary": "Radar data assimilation context."
+    },
+    "obs_opt*": {
+      "topicIds": [
+        "wrfda"
+      ],
+      "summary": "Observation handling and data-assimilation option context."
+    }
+  }
+}

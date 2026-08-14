@@ -1,0 +1,2383 @@
+{
+  "metadata": {
+    "title": "OBSPROC namelist record catalog",
+    "version": "V3.1.0-beta-full-catalog",
+    "generated": "2026-05-04T23:20:07Z",
+    "visibilityPolicy": "everything_visible_no_filtering",
+    "notes": [
+      "Extracted from uploaded WRFVAR tutorial namelist.obsproc files.",
+      "Types are marked unknown unless inferred later.",
+      "Record groups are preserved as namelist groups and exposed as visible metadata."
+    ],
+    "source_files": [
+      "namelist.obsproc.3dvar.wrfvar-tut",
+      "namelist.obsproc.4dvar.wrfvar-tut"
+    ],
+    "group_count": 9,
+    "variable_count": 76,
+    "publicAppName": "WRF Config Studio",
+    "publicVersion": "v1.0.0",
+    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
+    "rebrandGenerated": "2026-05-01T12:49:32Z",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor"
+  },
+  "groups": {
+    "record1": {
+      "obs_gts_filename": {
+        "name": "obs_gts_filename",
+        "group": "record1",
+        "key": "record1.obs_gts_filename",
+        "type": "character",
+        "entries": "1",
+        "defaultValue": "'obs.2008020512'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 2,
+            "raw": " obs_gts_filename = 'obs.2008020512',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 2,
+            "raw": " obs_gts_filename = 'obs.2008020512',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC GTS observation filename"
+      },
+      "obs_err_filename": {
+        "name": "obs_err_filename",
+        "group": "record1",
+        "key": "record1.obs_err_filename",
+        "type": "character",
+        "entries": "1",
+        "defaultValue": "'obserr.txt'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 3,
+            "raw": " obs_err_filename = 'obserr.txt',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 3,
+            "raw": " obs_err_filename = 'obserr.txt',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC observation-error filename"
+      },
+      "gts_from_mmm_archive": {
+        "name": "gts_from_mmm_archive",
+        "group": "record1",
+        "key": "record1.gts_from_mmm_archive",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 4,
+            "raw": " gts_from_mmm_archive = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 4,
+            "raw": " gts_from_mmm_archive = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "gts from mmm archive flag"
+      }
+    },
+    "record2": {
+      "time_window_min": {
+        "name": "time_window_min",
+        "group": "record2",
+        "key": "record2.time_window_min",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "'2008-02-05_11:00:00'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 8,
+            "raw": " time_window_min  = '2008-02-05_11:00:00',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 8,
+            "raw": " time_window_min  = '2008-02-05_12:00:00',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "time_analysis": {
+        "name": "time_analysis",
+        "group": "record2",
+        "key": "record2.time_analysis",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "'2008-02-05_12:00:00'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 9,
+            "raw": " time_analysis    = '2008-02-05_12:00:00',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 9,
+            "raw": " time_analysis    = '2008-02-05_15:00:00',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "time_window_max": {
+        "name": "time_window_max",
+        "group": "record2",
+        "key": "record2.time_window_max",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "'2008-02-05_13:00:00'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 10,
+            "raw": " time_window_max  = '2008-02-05_13:00:00',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 10,
+            "raw": " time_window_max  = '2008-02-05_18:00:00',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      }
+    },
+    "record3": {
+      "max_number_of_obs": {
+        "name": "max_number_of_obs",
+        "group": "record3",
+        "key": "record3.max_number_of_obs",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "400000",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 14,
+            "raw": " max_number_of_obs        = 400000,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 14,
+            "raw": " max_number_of_obs        = 400000,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "fatal_if_exceed_max_obs": {
+        "name": "fatal_if_exceed_max_obs",
+        "group": "record3",
+        "key": "record3.fatal_if_exceed_max_obs",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 15,
+            "raw": " fatal_if_exceed_max_obs  = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 15,
+            "raw": " fatal_if_exceed_max_obs  = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "fatal if exceed max obs flag"
+      }
+    },
+    "record4": {
+      "qc_test_vert_consistency": {
+        "name": "qc_test_vert_consistency",
+        "group": "record4",
+        "key": "record4.qc_test_vert_consistency",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 19,
+            "raw": " qc_test_vert_consistency = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 19,
+            "raw": " qc_test_vert_consistency = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for qc test vert consistency"
+      },
+      "qc_test_convective_adj": {
+        "name": "qc_test_convective_adj",
+        "group": "record4",
+        "key": "record4.qc_test_convective_adj",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 20,
+            "raw": " qc_test_convective_adj   = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 20,
+            "raw": " qc_test_convective_adj   = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for qc test convective adj"
+      },
+      "qc_test_above_lid": {
+        "name": "qc_test_above_lid",
+        "group": "record4",
+        "key": "record4.qc_test_above_lid",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 21,
+            "raw": " qc_test_above_lid        = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 21,
+            "raw": " qc_test_above_lid        = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for qc test above lid"
+      },
+      "remove_above_lid": {
+        "name": "remove_above_lid",
+        "group": "record4",
+        "key": "record4.remove_above_lid",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".false.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 22,
+            "raw": " remove_above_lid         = .false.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 22,
+            "raw": " remove_above_lid         = .false.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "remove above lid flag"
+      },
+      "domain_check_h": {
+        "name": "domain_check_h",
+        "group": "record4",
+        "key": "record4.domain_check_h",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 23,
+            "raw": " domain_check_h           = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 23,
+            "raw": " domain_check_h           = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "domain check h flag"
+      },
+      "thining_satob": {
+        "name": "thining_satob",
+        "group": "record4",
+        "key": "record4.thining_satob",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".false.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 24,
+            "raw": " Thining_SATOB            = .false.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 24,
+            "raw": " Thining_SATOB            = .false.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for thining satob"
+      },
+      "thining_ssmi": {
+        "name": "thining_ssmi",
+        "group": "record4",
+        "key": "record4.thining_ssmi",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".false.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 25,
+            "raw": " Thining_SSMI             = .false.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 25,
+            "raw": " Thining_SSMI             = .false.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for thining ssmi"
+      },
+      "thining_qscat": {
+        "name": "thining_qscat",
+        "group": "record4",
+        "key": "record4.thining_qscat",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".false.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 26,
+            "raw": " Thining_QSCAT            = .false.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 26,
+            "raw": " Thining_QSCAT            = .false.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for thining qscat"
+      },
+      "calc_psfc_from_qnh": {
+        "name": "calc_psfc_from_qnh",
+        "group": "record4",
+        "key": "record4.calc_psfc_from_qnh",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 27,
+            "raw": " calc_psfc_from_qnh       = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 27,
+            "raw": " calc_psfc_from_qnh       = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "calc psfc from qnh flag"
+      }
+    },
+    "record5": {
+      "print_gts_read": {
+        "name": "print_gts_read",
+        "group": "record5",
+        "key": "record5.print_gts_read",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 31,
+            "raw": " print_gts_read           = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 31,
+            "raw": " print_gts_read           = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing gts read"
+      },
+      "print_gpspw_read": {
+        "name": "print_gpspw_read",
+        "group": "record5",
+        "key": "record5.print_gpspw_read",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 32,
+            "raw": " print_gpspw_read         = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 32,
+            "raw": " print_gpspw_read         = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing gpspw read"
+      },
+      "print_recoverp": {
+        "name": "print_recoverp",
+        "group": "record5",
+        "key": "record5.print_recoverp",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 33,
+            "raw": " print_recoverp           = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 33,
+            "raw": " print_recoverp           = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing recoverp"
+      },
+      "print_duplicate_loc": {
+        "name": "print_duplicate_loc",
+        "group": "record5",
+        "key": "record5.print_duplicate_loc",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 34,
+            "raw": " print_duplicate_loc      = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 34,
+            "raw": " print_duplicate_loc      = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing duplicate loc"
+      },
+      "print_duplicate_time": {
+        "name": "print_duplicate_time",
+        "group": "record5",
+        "key": "record5.print_duplicate_time",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 35,
+            "raw": " print_duplicate_time     = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 35,
+            "raw": " print_duplicate_time     = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing duplicate time"
+      },
+      "print_recoverh": {
+        "name": "print_recoverh",
+        "group": "record5",
+        "key": "record5.print_recoverh",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 36,
+            "raw": " print_recoverh           = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 36,
+            "raw": " print_recoverh           = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing recoverh"
+      },
+      "print_qc_vert": {
+        "name": "print_qc_vert",
+        "group": "record5",
+        "key": "record5.print_qc_vert",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 37,
+            "raw": " print_qc_vert            = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 37,
+            "raw": " print_qc_vert            = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing qc vert"
+      },
+      "print_qc_conv": {
+        "name": "print_qc_conv",
+        "group": "record5",
+        "key": "record5.print_qc_conv",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 38,
+            "raw": " print_qc_conv            = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 38,
+            "raw": " print_qc_conv            = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing qc conv"
+      },
+      "print_qc_lid": {
+        "name": "print_qc_lid",
+        "group": "record5",
+        "key": "record5.print_qc_lid",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 39,
+            "raw": " print_qc_lid             = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 39,
+            "raw": " print_qc_lid             = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing qc lid"
+      },
+      "print_uncomplete": {
+        "name": "print_uncomplete",
+        "group": "record5",
+        "key": "record5.print_uncomplete",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".TRUE.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 40,
+            "raw": " print_uncomplete         = .TRUE.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 40,
+            "raw": " print_uncomplete         = .TRUE.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for printing uncomplete"
+      }
+    },
+    "record6": {
+      "ptop": {
+        "name": "ptop",
+        "group": "record6",
+        "key": "record6.ptop",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1000.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 44,
+            "raw": " ptop =  1000.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 44,
+            "raw": " ptop =  1000.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "base_pres": {
+        "name": "base_pres",
+        "group": "record6",
+        "key": "record6.base_pres",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "100000.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 45,
+            "raw": " base_pres       = 100000.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 45,
+            "raw": " base_pres       = 100000.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "base_temp": {
+        "name": "base_temp",
+        "group": "record6",
+        "key": "record6.base_temp",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "290.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 46,
+            "raw": " base_temp       = 290.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 46,
+            "raw": " base_temp       = 290.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "base_lapse": {
+        "name": "base_lapse",
+        "group": "record6",
+        "key": "record6.base_lapse",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "50.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 47,
+            "raw": " base_lapse      = 50.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 47,
+            "raw": " base_lapse      = 50.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "base_strat_temp": {
+        "name": "base_strat_temp",
+        "group": "record6",
+        "key": "record6.base_strat_temp",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "215.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 48,
+            "raw": " base_strat_temp = 215.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 48,
+            "raw": " base_strat_temp = 215.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "base_tropo_pres": {
+        "name": "base_tropo_pres",
+        "group": "record6",
+        "key": "record6.base_tropo_pres",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "20000.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 49,
+            "raw": " base_tropo_pres = 20000.0"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 49,
+            "raw": " base_tropo_pres = 20000.0"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      }
+    },
+    "record7": {
+      "iproj": {
+        "name": "iproj",
+        "group": "record7",
+        "key": "record7.iproj",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 53,
+            "raw": " IPROJ = 1,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 53,
+            "raw": " IPROJ = 1,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "phic": {
+        "name": "phic",
+        "group": "record7",
+        "key": "record7.phic",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "40.00001",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 54,
+            "raw": " PHIC  = 40.00001,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 54,
+            "raw": " PHIC  = 40.00001,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "xlonc": {
+        "name": "xlonc",
+        "group": "record7",
+        "key": "record7.xlonc",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "-95.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 55,
+            "raw": " XLONC = -95.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 55,
+            "raw": " XLONC = -95.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "truelat1": {
+        "name": "truelat1",
+        "group": "record7",
+        "key": "record7.truelat1",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "30.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 56,
+            "raw": " TRUELAT1= 30.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 56,
+            "raw": " TRUELAT1= 30.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "truelat2": {
+        "name": "truelat2",
+        "group": "record7",
+        "key": "record7.truelat2",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "60.0",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 57,
+            "raw": " TRUELAT2= 60.0,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 57,
+            "raw": " TRUELAT2= 60.0,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "moad_cen_lat": {
+        "name": "moad_cen_lat",
+        "group": "record7",
+        "key": "record7.moad_cen_lat",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "40.00001",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 58,
+            "raw": " MOAD_CEN_LAT = 40.00001,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 58,
+            "raw": " MOAD_CEN_LAT = 40.00001,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "standard_lon": {
+        "name": "standard_lon",
+        "group": "record7",
+        "key": "record7.standard_lon",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "-95.00",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 59,
+            "raw": " STANDARD_LON = -95.00,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 59,
+            "raw": " STANDARD_LON = -95.00,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      }
+    },
+    "record8": {
+      "idd": {
+        "name": "idd",
+        "group": "record8",
+        "key": "record8.idd",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 63,
+            "raw": " IDD    =   1,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 63,
+            "raw": " IDD    =   1,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "maxnes": {
+        "name": "maxnes",
+        "group": "record8",
+        "key": "record8.maxnes",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 64,
+            "raw": " MAXNES =   1,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 64,
+            "raw": " MAXNES =   1,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "nestix": {
+        "name": "nestix",
+        "group": "record8",
+        "key": "record8.nestix",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "60,  200,  136,  181,  211",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 65,
+            "raw": " NESTIX =  60,  200,  136,  181,  211,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 65,
+            "raw": " NESTIX =  60,  200,  136,  181,  211,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "nestjx": {
+        "name": "nestjx",
+        "group": "record8",
+        "key": "record8.nestjx",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "90,  200,  181,  196,  211",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 66,
+            "raw": " NESTJX =  90,  200,  181,  196,  211,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 66,
+            "raw": " NESTJX =  90,  200,  181,  196,  211,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "dis": {
+        "name": "dis",
+        "group": "record8",
+        "key": "record8.dis",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "60,  10.,  3.3,  1.1,  1.1",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 67,
+            "raw": " DIS    =  60,  10.,  3.3,  1.1,  1.1,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 67,
+            "raw": " DIS    =  60,  10.,  3.3,  1.1,  1.1,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "numc": {
+        "name": "numc",
+        "group": "record8",
+        "key": "record8.numc",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1,    1,   2,     3,    4",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 68,
+            "raw": " NUMC   =    1,    1,   2,     3,    4,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 68,
+            "raw": " NUMC   =    1,    1,   2,     3,    4,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "nesti": {
+        "name": "nesti",
+        "group": "record8",
+        "key": "record8.nesti",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1,   40,  28,    35,   45",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 69,
+            "raw": " NESTI  =    1,   40,  28,    35,   45,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 69,
+            "raw": " NESTI  =    1,   40,  28,    35,   45,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "nestj": {
+        "name": "nestj",
+        "group": "record8",
+        "key": "record8.nestj",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "1,   60,  25,    65,   55",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 70,
+            "raw": " NESTJ  =    1,   60,  25,    65,   55,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 70,
+            "raw": " NESTJ  =    1,   60,  25,    65,   55,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      }
+    },
+    "record9": {
+      "prepbufr_output_filename": {
+        "name": "prepbufr_output_filename",
+        "group": "record9",
+        "key": "record9.prepbufr_output_filename",
+        "type": "character",
+        "entries": "1",
+        "defaultValue": "'prepbufr_output_filename'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 74,
+            "raw": " PREPBUFR_OUTPUT_FILENAME = 'prepbufr_output_filename',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 74,
+            "raw": " PREPBUFR_OUTPUT_FILENAME = 'prepbufr_output_filename',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC PREPBUFR output filename"
+      },
+      "prepbufr_table_filename": {
+        "name": "prepbufr_table_filename",
+        "group": "record9",
+        "key": "record9.prepbufr_table_filename",
+        "type": "character",
+        "entries": "1",
+        "defaultValue": "'prepbufr_table_filename'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 75,
+            "raw": " PREPBUFR_TABLE_FILENAME = 'prepbufr_table_filename',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 75,
+            "raw": " PREPBUFR_TABLE_FILENAME = 'prepbufr_table_filename',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "description": "OBSPROC PREPBUFR table filename"
+      },
+      "output_ob_format": {
+        "name": "output_ob_format",
+        "group": "record9",
+        "key": "record9.output_ob_format",
+        "type": "selection",
+        "entries": "1",
+        "defaultValue": "2",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 76,
+            "raw": " OUTPUT_OB_FORMAT = 2"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 76,
+            "raw": " OUTPUT_OB_FORMAT = 2"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "enumValues": {
+          "1": "PREPBUFR only",
+          "2": "ASCII only",
+          "3": "PREPBUFR and ASCII"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": "PREPBUFR only"
+          },
+          {
+            "value": "2",
+            "label": "ASCII only"
+          },
+          {
+            "value": "3",
+            "label": "PREPBUFR and ASCII"
+          }
+        ],
+        "description": "Controls OBSPROC record9 output type. 1 = PREPBUFR only; 2 = ASCII only; 3 = both PREPBUFR and ASCII.",
+        "typeInferred": false
+      },
+      "use_for": {
+        "name": "use_for",
+        "group": "record9",
+        "key": "record9.use_for",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "'3DVAR'",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 77,
+            "raw": " use_for          = '3DVAR',"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 77,
+            "raw": " use_for          = '4DVAR',"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "num_slots_past": {
+        "name": "num_slots_past",
+        "group": "record9",
+        "key": "record9.num_slots_past",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "3",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 78,
+            "raw": " num_slots_past   = 3,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 78,
+            "raw": " num_slots_past   = 3,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "num_slots_ahead": {
+        "name": "num_slots_ahead",
+        "group": "record9",
+        "key": "record9.num_slots_ahead",
+        "type": "unknown",
+        "entries": "1",
+        "defaultValue": "3",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 79,
+            "raw": " num_slots_ahead  = 3,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 79,
+            "raw": " num_slots_ahead  = 3,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none"
+      },
+      "write_synop": {
+        "name": "write_synop",
+        "group": "record9",
+        "key": "record9.write_synop",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 80,
+            "raw": " write_synop = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 80,
+            "raw": " write_synop = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out synop"
+      },
+      "write_ship": {
+        "name": "write_ship",
+        "group": "record9",
+        "key": "record9.write_ship",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 81,
+            "raw": " write_ship  = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 81,
+            "raw": " write_ship  = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out ship"
+      },
+      "write_metar": {
+        "name": "write_metar",
+        "group": "record9",
+        "key": "record9.write_metar",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 82,
+            "raw": " write_metar = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 82,
+            "raw": " write_metar = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out metar"
+      },
+      "write_buoy": {
+        "name": "write_buoy",
+        "group": "record9",
+        "key": "record9.write_buoy",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 83,
+            "raw": " write_buoy  = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 83,
+            "raw": " write_buoy  = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out buoy"
+      },
+      "write_pilot": {
+        "name": "write_pilot",
+        "group": "record9",
+        "key": "record9.write_pilot",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 84,
+            "raw": " write_pilot = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 84,
+            "raw": " write_pilot = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out pilot"
+      },
+      "write_sound": {
+        "name": "write_sound",
+        "group": "record9",
+        "key": "record9.write_sound",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 85,
+            "raw": " write_sound = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 85,
+            "raw": " write_sound = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out sound"
+      },
+      "write_amdar": {
+        "name": "write_amdar",
+        "group": "record9",
+        "key": "record9.write_amdar",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 86,
+            "raw": " write_amdar = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 86,
+            "raw": " write_amdar = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out amdar"
+      },
+      "write_satem": {
+        "name": "write_satem",
+        "group": "record9",
+        "key": "record9.write_satem",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 87,
+            "raw": " write_satem = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 87,
+            "raw": " write_satem = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out satem"
+      },
+      "write_satob": {
+        "name": "write_satob",
+        "group": "record9",
+        "key": "record9.write_satob",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 88,
+            "raw": " write_satob = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 88,
+            "raw": " write_satob = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out satob"
+      },
+      "write_airep": {
+        "name": "write_airep",
+        "group": "record9",
+        "key": "record9.write_airep",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 89,
+            "raw": " write_airep = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 89,
+            "raw": " write_airep = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out airep"
+      },
+      "write_gpspw": {
+        "name": "write_gpspw",
+        "group": "record9",
+        "key": "record9.write_gpspw",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 90,
+            "raw": " write_gpspw = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 90,
+            "raw": " write_gpspw = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out gpspw"
+      },
+      "write_gpsztd": {
+        "name": "write_gpsztd",
+        "group": "record9",
+        "key": "record9.write_gpsztd",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 91,
+            "raw": " write_gpsztd= .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 91,
+            "raw": " write_gpsztd= .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out gpsztd"
+      },
+      "write_gpsref": {
+        "name": "write_gpsref",
+        "group": "record9",
+        "key": "record9.write_gpsref",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 92,
+            "raw": " write_gpsref= .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 92,
+            "raw": " write_gpsref= .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out gpsref"
+      },
+      "write_gpseph": {
+        "name": "write_gpseph",
+        "group": "record9",
+        "key": "record9.write_gpseph",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 93,
+            "raw": " write_gpseph= .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 93,
+            "raw": " write_gpseph= .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out gpseph"
+      },
+      "write_ssmt1": {
+        "name": "write_ssmt1",
+        "group": "record9",
+        "key": "record9.write_ssmt1",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 94,
+            "raw": " write_ssmt1 = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 94,
+            "raw": " write_ssmt1 = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out ssmt1"
+      },
+      "write_ssmt2": {
+        "name": "write_ssmt2",
+        "group": "record9",
+        "key": "record9.write_ssmt2",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 95,
+            "raw": " write_ssmt2 = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 95,
+            "raw": " write_ssmt2 = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out ssmt2"
+      },
+      "write_ssmi": {
+        "name": "write_ssmi",
+        "group": "record9",
+        "key": "record9.write_ssmi",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 96,
+            "raw": " write_ssmi  = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 96,
+            "raw": " write_ssmi  = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out ssmi"
+      },
+      "write_tovs": {
+        "name": "write_tovs",
+        "group": "record9",
+        "key": "record9.write_tovs",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 97,
+            "raw": " write_tovs  = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 97,
+            "raw": " write_tovs  = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out tovs"
+      },
+      "write_qscat": {
+        "name": "write_qscat",
+        "group": "record9",
+        "key": "record9.write_qscat",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 98,
+            "raw": " write_qscat = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 98,
+            "raw": " write_qscat = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out qscat"
+      },
+      "write_profl": {
+        "name": "write_profl",
+        "group": "record9",
+        "key": "record9.write_profl",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 99,
+            "raw": " write_profl = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 99,
+            "raw": " write_profl = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out profl"
+      },
+      "write_bogus": {
+        "name": "write_bogus",
+        "group": "record9",
+        "key": "record9.write_bogus",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 100,
+            "raw": " write_bogus = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 100,
+            "raw": " write_bogus = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out bogus"
+      },
+      "write_airs": {
+        "name": "write_airs",
+        "group": "record9",
+        "key": "record9.write_airs",
+        "type": "logical",
+        "entries": "1",
+        "defaultValue": ".true.",
+        "sources": [
+          "namelist.obsproc.3dvar.wrfvar-tut",
+          "namelist.obsproc.4dvar.wrfvar-tut"
+        ],
+        "rawDefinitions": [
+          {
+            "sourceFile": "namelist.obsproc.3dvar.wrfvar-tut",
+            "line": 101,
+            "raw": " write_airs  = .true.,"
+          },
+          {
+            "sourceFile": "namelist.obsproc.4dvar.wrfvar-tut",
+            "line": 101,
+            "raw": " write_airs  = .true.,"
+          }
+        ],
+        "uiStatus": "visible",
+        "visibility": "visible",
+        "filterPolicy": "none",
+        "typeInferred": false,
+        "enumValues": {
+          "true": "true",
+          "false": "false"
+        },
+        "description": "switch for writing out airs"
+      }
+    }
+  }
+}

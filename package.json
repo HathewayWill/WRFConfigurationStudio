@@ -1,0 +1,11 @@
+{
+  "name": "WRFConfigurationStudio",
+  "version": "1.0.0",
+  "repositoryNameRecommendation": "WRFConfigurationStudio",
+  "description": "Browser-based WRF domain, namelist, WRFDA, OBSPROC, Registry, and compatibility-rule configuration tool.",
+  "legacyName": "WRF Domain Wizard",
+  "generated": "2026-05-04T23:20:07Z",
+  "channel": "stable-main-public-release-review",
+  "feature": "WRF domain design, namelist.input editor, namelist.obsproc export, WRFDA/OBSPROC presets, and validated compatibility rules",
+  "lineageDocumentation": "docs/PROJECT_LINEAGE.md"
+}

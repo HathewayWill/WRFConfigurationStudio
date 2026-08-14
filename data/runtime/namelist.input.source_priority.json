@@ -1,0 +1,1159 @@
+{
+  "_meta": {
+    "version": "v3.2.3.6-beta-save-dialog-isolation-and-index-fix",
+    "description": "Seed source-priority map for core namelist groups. namelist.wps is authoritative for WPS-mastered values; Users Guide provides primary defaults; run/README.namelist provides gap-fill defaults and advanced notes; Registry provides structural authority.",
+    "valuePriorityWpsMastered": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "valuePriorityNonWpsMastered": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "notes": [
+      "This file is a baseline source-priority map and is not yet fully wired into the runtime.",
+      "Compatibility rules should be applied after defaults and structure resolution.",
+      "Blank Users Guide default cells must be treated as no published default, not numeric zero.",
+      "Option enumerations and description metadata may still be present even when no published default exists.",
+      "Conditional and user-required fields should be resolved using semantics metadata before startup seeding."
+    ]
+  },
+  "time_control.run_days": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.run_hours": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.run_minutes": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.run_seconds": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.input_from_file": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.history_interval": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.frames_per_outfile": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.restart": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.restart_interval": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.io_form_history": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.io_form_restart": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.io_form_input": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.io_form_boundary": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.debug_level": {
+    "group": "time_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.start_year": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.start_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.start_month": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.start_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.start_day": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.start_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.start_hour": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.start_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.end_year": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.end_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.end_month": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.end_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.end_day": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.end_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.end_hour": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.end_date",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "time_control.interval_seconds": {
+    "group": "time_control",
+    "wpsMastered": true,
+    "wpsSource": "share.interval_seconds",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.max_dom": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "share.max_dom",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.e_we": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.e_we",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.e_sn": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.e_sn",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.dx": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.dx",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.dy": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.dy",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.grid_id": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.grid_id",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.parent_id": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.parent_id",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.i_parent_start": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.i_parent_start",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.j_parent_start": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.j_parent_start",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.parent_grid_ratio": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "geogrid.parent_grid_ratio",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.parent_time_step_ratio": {
+    "group": "domains",
+    "wpsMastered": true,
+    "wpsSource": "derived_from_parent_grid_ratio",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.time_step": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.time_step_fract_num": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.time_step_fract_den": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.e_vert": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.p_top_requested": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.num_metgrid_levels": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.num_metgrid_soil_levels": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.feedback": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "domains.smooth_option": {
+    "group": "domains",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.mp_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.ra_lw_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.ra_sw_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.radt": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.sf_sfclay_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.sf_surface_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.sf_urban_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.bl_pbl_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.bldt": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.cu_physics": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.cudt": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.surface_input_source": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.num_soil_layers": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "physics.num_land_cat": {
+    "group": "physics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.w_damping": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.diff_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.mix_full_fields": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.tke_drag_coefficient": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.tke_heat_flux": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.km_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.diff_6th_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.diff_6th_factor": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.base_temp": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.damp_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.zdamp": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.dampcoef": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.khdif": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.kvdif": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.non_hydrostatic": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.epssm": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.moist_adv_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.scalar_adv_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.use_theta_m": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.hybrid_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "dynamics.gwd_opt": {
+    "group": "dynamics",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "bdy_control.spec_bdy_width": {
+    "group": "bdy_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "bdy_control.spec_zone": {
+    "group": "bdy_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "bdy_control.relax_zone": {
+    "group": "bdy_control",
+    "wpsMastered": false,
+    "valuePriority": [
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide"
+  },
+  "bdy_control.specified": {
+    "group": "bdy_control",
+    "wpsMastered": true,
+    "wpsSource": "derived_from_domain_role",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide",
+    "compatibilitySource": "compatibility_json"
+  },
+  "bdy_control.nested": {
+    "group": "bdy_control",
+    "wpsMastered": true,
+    "wpsSource": "derived_from_domain_role",
+    "valuePriority": [
+      "namelist.wps",
+      "user",
+      "users_guide",
+      "readme_namelist",
+      "registry"
+    ],
+    "defaultSource": "users_guide",
+    "structureSource": "registry",
+    "entryTypeSource": "users_guide",
+    "compatibilitySource": "compatibility_json"
+  },
+  "metadata": {
+    "publicAppName": "WRF Config Studio",
+    "publicVersion": "v1.0.0",
+    "legacyLineage": "WRF Domain Wizard V3.1.0 beta full-catalog build",
+    "rebrandGenerated": "2026-05-01T12:49:32Z",
+    "generated": "2026-05-04T23:20:07Z",
+    "mainlineFeature": "ARW Technical Note scientific context for namelist editor"
+  }
+}
