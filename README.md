@@ -1,5 +1,7 @@
 # 🌎 WRF Configuration Studio
 
+**Hatheway, W., Benik, J.T. & Richter, J. WRF configuration studio: a browser-based configuration environment for WRF domains, namelists, data assimilation workflows, and registry metadata. Earth Sci Inform 19, 174 (2026). https://doi.org/10.1007/s12145-026-02237-0**
+
 **WRF Configuration Studio** is a browser-based configuration environment for designing Weather Research and Forecasting Model domains, editing `namelist.wps`, editing `namelist.input`, exporting `namelist.obsproc`, and reviewing WRF, WRFDA, OBSPROC, Registry, and compatibility-rule metadata.
 
 WRF Configuration Studio is distributed as a static browser application and can be used through a local HTTP server or a static website host such as GitHub Pages.
